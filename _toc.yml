@@ -8,19 +8,28 @@ parts:
     numbered: 1
     chapters:
     - file: physics/intro
-    - file: physics/wigner_function
+    - file: physics/quantum-mechanics/quantum_mechanics
+      sections:
+      - file: physics/quantum-mechanics/pure_mixed_states
+      - file: physics/quantum-mechanics/wigner_function
+      - file: physics/quantum-mechanics/homodyne_detection
+      - file: physics/quantum-mechanics/gaussian_quantum_physics
+  
   - caption: Computer Science
     numbered: 1
     chapters:
     - file: computerscience/intro
+  
   - caption: Mathematics
     numbered: 1
     chapters:
     - file: mathematics/intro
+  
   - caption: Statistics
     numbered: 1
     chapters:
     - file: statistics/intro
+  
   - caption: Back Matter
     numbered: 1
     chapters:

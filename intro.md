@@ -1,11 +1,16 @@
 # Introduction
+This is a Jupyter Book of notes I create when self-studying topics related to physics, computer science, mathematics and statistic. 
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+## Purpose
 
-Check out the content pages bundled with this sample book to see more.
+When I'm trying to learn about a new topic for research work or just out of interest I've often found it useful to both solve problems analytically as well as code up the solution to make visualizations or just verify my calculations. Jupyter notebooks are an excellent resource for this style of self teaching. I'm therefore making these notebooks to serve as a reference for myself (and others).
+
+This website was largely inspired by Aaron Reding's website for the graduate [**Bayesian Statistics course ISYE 6420**](https://areding.github.io/6420-pymc/intro.html) I took while studying at Georgia Tech.
+
+## Site structure
+This site was created with [Jupyter Book](https://jupyterbook.org/en/stable/intro.html).
+
+## Table of contents
 
 ```{tableofcontents}
 ```
