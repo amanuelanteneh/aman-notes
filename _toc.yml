@@ -1,0 +1,27 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Physics
+    numbered: 1
+    chapters:
+    - file: physics/intro
+    - file: physics/wigner_function
+  - caption: Computer Science
+    numbered: 1
+    chapters:
+    - file: computerscience/intro
+  - caption: Mathematics
+    numbered: 1
+    chapters:
+    - file: mathematics/intro
+  - caption: Statistics
+    numbered: 1
+    chapters:
+    - file: statistics/intro
+  - caption: Back Matter
+    numbered: 1
+    chapters:
+    - glob: backmatter/*
