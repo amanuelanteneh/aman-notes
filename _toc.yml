@@ -11,6 +11,7 @@ parts:
     - file: physics/quantum-mechanics/quantum_mechanics
       sections:
       - file: physics/quantum-mechanics/pure_mixed_states
+      - file: physics/quantum-mechanics/partial_trace
       - file: physics/quantum-mechanics/wigner_function
       - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/gaussian_quantum_physics
