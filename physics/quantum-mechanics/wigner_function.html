@@ -451,18 +451,20 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \left\langle q+\frac{x}{2
 \[
 \left\langle \psi \bigg| q-\frac{x}{2} \right\rangle \equiv \psi^*\left(q-\frac{x}{2}\right)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(*\)</span> denotes the complex conjugate. So now we just need the analytic expression for the wave function of the Fock state.
-Since the Fock states are the energy states of the harmonic oscillator their wave function is derived as</p>
+<p>where <span class="math notranslate nohighlight">\(*\)</span> denotes the complex conjugate. So we now need the analytic expression for the wave function of the Fock state.
+Since the Fock state <span class="math notranslate nohighlight">\(\ket{n}\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th energy eigenstate of the harmonic oscillator it’s wave function is (see <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id9" title="Mark Beck. Quantum mechanics: theory and experiment. Oxford University Press, USA, 2012.">Beck, 2012</a>]</span> and <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span> for detailed derivation)</p>
 <div class="math notranslate nohighlight">
 \[
-\psi(x) = 
+\psi_n(q) =  \left( \frac{m\omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^nn!}} H_n(\xi)e^{-\xi^2/2}
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi = \sqrt{\frac{m\omega}{\hbar}}q = \frac{1}{\sqrt{2}}q\)</span> and <span class="math notranslate nohighlight">\(H_n(\cdot)\)</span> is the the <span class="math notranslate nohighlight">\(n\)</span>-th physicist’s Hermite polynomial.</p>
 <p>The Wigner function is now given by</p>
 <div class="math notranslate nohighlight">
-\[
-W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\right)  \psi^*\left(q-\frac{x}{2}\right) dx.
-\]</div>
-<p>So we’ve gotten rid of the vector-matrix-vector multiplcation in the integrand and now only have products of (complex) scalar functions.</p>
+\[\begin{split}
+W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\right)  \psi^*\left(q-\frac{x}{2}\right) dx \\
+ = \frac{1}{2\pi}  \sqrt{ \frac{1}{\pi} } \int^{\infty}_{-\infty} e^{ipx} \frac{1}{2^n n!} H_n\left(\frac{1}{\sqrt{2}}q-\frac{x}{2}\right) H_n\left(\frac{1}{\sqrt{2}}q+\frac{x}{2}\right) e^{-(\frac{1}{\sqrt{2}}q+\frac{x}{2})^2/2} e^{-(\frac{1}{\sqrt{2}}q-\frac{x}{2})^2/2} dx
+\end{split}\]</div>
+<p>So we’ve gotten rid of the vector-matrix-vector multiplcation in the integrand and now only have products of scalar functions. However this function does not look pretty…</p>
 <section id="computing-and-plotting-the-wigner-function">
 <h2>Computing and plotting the Wigner function<a class="headerlink" href="#computing-and-plotting-the-wigner-function" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -487,7 +489,8 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 <p>Here we will use the analytic expression we derived above for the Wigner function of the Fock state and we’ll use Matplotlib to plot it as a 2D contour plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">40</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># Hilbert space truncation</span>
+<span class="n">max_quad</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
@@ -498,9 +501,7 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 <p>Let’s use QuTiP’s function <code class="docutils literal notranslate"><span class="pre">wigner</span></code> to compute the Wigner function to verify our results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">max_quad</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">psi</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">points</span> <span class="o">=</span> <span class="mi">400</span>
 <span class="n">x_points</span> <span class="o">=</span> <span class="n">y_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
 <span class="n">W</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">x_points</span><span class="p">,</span> <span class="n">y_points</span><span class="p">)</span>
@@ -521,12 +522,12 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 </section>
 <section id="properties-of-the-wigner-function">
 <h2>Properties of the Wigner function<a class="headerlink" href="#properties-of-the-wigner-function" title="Link to this heading">#</a></h2>
-<p>The Wigner function has many interesting properties <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id8" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leonhardt, 1997</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
+<p>The Wigner function has many interesting properties <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id11" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leonhardt, 1997</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
 <div class="math notranslate nohighlight">
 \[
 \int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W(q,p)dpdq = 1. 
 \]</div>
-<p>The Wigner function seems like it could be interpreted as a probability distribution. This is not true in general however since the Wigner function can take on negative values as we saw in the plot for the Wigner function of the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span>. However the <em>marginals</em> of the Wigner function give the probability distribution of the state over the values of the quadratures. That is</p>
+<p>The Wigner function seems like it could be interpreted as a probability distribution. This is not true in general however since the Wigner function can take on negative values as we saw in the plot for the Wigner function of the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span>. However the <em>marginals</em> of the Wigner function give the probability distribution (PDF) of the state over the values of the quadratures. That is</p>
 <div class="math notranslate nohighlight">
 \[
 \int^{\infty}_{-\infty}W(q,p)dp = |\psi(q)|^2
@@ -535,6 +536,16 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 <div class="math notranslate nohighlight">
 \[
 \int^{\infty}_{-\infty}W(q,p)dq = |\phi(p)|^2.
+\]</div>
+<p>The overlap between two pure state <span class="math notranslate nohighlight">\(\ket{\psi}\)</span> and <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> can also be computed in terms of their Wigner functions given by</p>
+<div class="math notranslate nohighlight">
+\[
+|\braket{\psi|\phi}|^2 = 2\pi\int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W_\phi(q,p)W_\psi(q,p)dpdq.
+\]</div>
+<p>The Wigner function is also bounded such that</p>
+<div class="math notranslate nohighlight">
+\[
+-\frac{1}{\pi} \leq W(q,p) \leq \frac{1}{\pi}.
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
