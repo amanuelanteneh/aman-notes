@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Homodyne detection" href="homodyne_detection.html" />
-    <link rel="prev" title="Pure and mixed quantum states" href="pure_mixed_states.html" />
+    <link rel="prev" title="Partial trace operator" href="partial_trace.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pure_mixed_states.html">Pure and mixed quantum states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">The Wigner function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_physics.html">Gaussian quantum mechanics</a></li>
@@ -406,6 +407,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
             </nav>
         </div>
@@ -419,7 +421,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-wigner-function">
 <h1>The Wigner function<a class="headerlink" href="#the-wigner-function" title="Link to this heading">#</a></h1>
-<p>The Wigner function, denoted here as <span class="math notranslate nohighlight">\(W(q,p)\)</span>, is a function of the quadrature operators <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, position and momentum respectively, of the quantum harmonic oscillator.
+<p>The Wigner function, denoted here as <span class="math notranslate nohighlight">\(W(q,p)\)</span>, is a quasiprobability distribution or function of the quadrature operators <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, position and momentum respectively, of the quantum harmonic oscillator.
 For a quantum state with density matrix <span class="math notranslate nohighlight">\(\rho\)</span> the Wigner function is defined as <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id2" title="Christopher C Gerry and Peter L Knight. Introductory quantum optics. Cambridge university press, 2023.">GK23</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
@@ -511,6 +513,24 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 <img alt="../../_images/bcdd245149c50ddb9cd99a7e0d739acd4865c11f67a9e9488538c04ca095805d.png" src="../../_images/bcdd245149c50ddb9cd99a7e0d739acd4865c11f67a9e9488538c04ca095805d.png" />
 </div>
 </div>
+</section>
+<section id="properties-of-the-wigner-function">
+<h2>Properties of the Wigner function<a class="headerlink" href="#properties-of-the-wigner-function" title="Link to this heading">#</a></h2>
+<p>The Wigner function has many interesting properties <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leo97</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
+<div class="math notranslate nohighlight">
+\[
+\int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W(q,p)dpdq = 1. 
+\]</div>
+<p>The Wigner function seems like it could be interpreted as a probability distribution. This is not true in general however since the Wigner function can take on negative values as we saw in the plot for the Wigner function of the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span>. However the <em>marginals</em> of the Wigner function give the probability distribution of the state over the values of the quadratures. That is</p>
+<div class="math notranslate nohighlight">
+\[
+\int^{\infty}_{-\infty}W(q,p)dp = |\psi(q)|^2
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\int^{\infty}_{-\infty}W(q,p)dq = |\phi(p)|^2.
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -566,12 +586,12 @@ matplotlib: 3.7.4
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pure_mixed_states.html"
+       href="partial_trace.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pure and mixed quantum states</p>
+        <p class="prev-next-title">Partial trace operator</p>
       </div>
     </a>
     <a class="right-next"
@@ -602,6 +622,7 @@ matplotlib: 3.7.4
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
   </nav></div>
 
