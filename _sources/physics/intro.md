@@ -1,5 +1,5 @@
 # Introduction
-I will be assuming that the reader has and undergraduate level understanding of quantum mechanics but I may go over some fundamentals when appropriate. 
+I will be assuming that the reader has an undergraduate level understanding of quantum mechanics but I may go over some fundamentals when appropriate. 
 
 ## Conventions
 When working with the position and momentum (quadrature) operators, $q$ and $p$ respectively, we will define them as 
