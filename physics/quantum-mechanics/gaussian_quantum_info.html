@@ -63,7 +63,7 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. Introduction" href="../../computerscience/intro.html" />
+    <link rel="next" title="3. Introduction" href="../../computerscience/intro.html" />
     <link rel="prev" title="Homodyne detection" href="homodyne_detection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -196,19 +196,19 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">3. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">4. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">5. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">1. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">6. Bibliography</a></li>
 </ul>
 
     </div>
@@ -428,8 +428,8 @@ However we wish to study systems of arbitrarily many particles and for a quantum
 </section>
 <section id="not-all-quantum-systems-are-classically-hard-to-simulate">
 <h2>Not all quantum systems are classically hard to simulate<a class="headerlink" href="#not-all-quantum-systems-are-classically-hard-to-simulate" title="Link to this heading">#</a></h2>
-<p>Remarkably there are some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">BSBN02</a>]</span>. These are systems of quantum harmonic oscillators whose states are all initially Gaussian states and evolve under Gaussian operations and measurement. In this context Gaussian states are quantum states whose Wigner function is a Gaussian and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">WPGarciaPatron+12</a>]</span>.</p>
-<p>These processes can be simulated classically because the covariances of the position and momentum of the harmonic oscillators, which can be compactly written as a covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, and the expectation values of position and momentum of the harmonic oscillators, which can be compactly written as a vector of means <span class="math notranslate nohighlight">\(\mu\)</span>, provide <em>complete information</em> about the system. For a system of <span class="math notranslate nohighlight">\(M\)</span> oscillators <span class="math notranslate nohighlight">\(\Sigma\)</span> is of size <span class="math notranslate nohighlight">\(2M \times 2M\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is of size <span class="math notranslate nohighlight">\(2M\)</span>. The evolution of this system under Gaussian operations is described by <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrices and given by the evolution rules <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id6" title="Gerardo Adesso, Sammy Ragy, and Antony R Lee. Continuous variable quantum information: gaussian states and beyond. Open Systems &amp; Information Dynamics, 21(01n02):1440001, 2014.">ARL14</a>]</span></p>
+<p>Remarkably there are some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">Bartlett <em>et al.</em>, 2002</a>]</span>. These are systems of quantum harmonic oscillators whose states are all initially Gaussian states and evolve under Gaussian operations and measurement. In this context Gaussian states are quantum states whose Wigner function is a Gaussian and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
+<p>These processes can be simulated classically because the covariances of the position and momentum of the harmonic oscillators, which can be compactly written as a covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, and the expectation values of position and momentum of the harmonic oscillators, which can be compactly written as a vector of means <span class="math notranslate nohighlight">\(\mu\)</span>, provide <em>complete information</em> about the system. For a system of <span class="math notranslate nohighlight">\(M\)</span> oscillators <span class="math notranslate nohighlight">\(\Sigma\)</span> is of size <span class="math notranslate nohighlight">\(2M \times 2M\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is of size <span class="math notranslate nohighlight">\(2M\)</span>. The evolution of this system under Gaussian operations is described by <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrices and given by the evolution rules <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id6" title="Gerardo Adesso, Sammy Ragy, and Antony R Lee. Continuous variable quantum information: gaussian states and beyond. Open Systems &amp; Information Dynamics, 21(01n02):1440001, 2014.">Adesso <em>et al.</em>, 2014</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
 \Sigma \rightarrow S\Sigma S^T, \quad \mu \rightarrow S\mu + d
@@ -487,7 +487,7 @@ A^T \Omega A = \Omega
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
