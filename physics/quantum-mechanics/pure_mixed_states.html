@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pure and mixed quantum states &#8212; Amanuel&#39;s Notes</title>
+    <title>Density matrix &#8212; Amanuel&#39;s Notes</title>
   
   
   
@@ -186,7 +186,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Pure and mixed quantum states</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Density matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wigner_function.html">The Wigner function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
@@ -381,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -392,11 +394,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pure and mixed quantum states</h1>
+    <h1>Density matrix</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -406,8 +416,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pure-and-mixed-quantum-states">
-<h1>Pure and mixed quantum states<a class="headerlink" href="#pure-and-mixed-quantum-states" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="density-matrix">
+<h1>Density matrix<a class="headerlink" href="#density-matrix" title="Link to this heading">#</a></h1>
 <p>In quantum mechanics the state of a system can be specified by a column vector in a complex Hilbert space called a ket and denoted in Dirac notation as
 <span class="math notranslate nohighlight">\(\ket{\psi}\)</span>. The unitary evolution of this state is given by the famous Schrödinger equation</p>
 <div class="math notranslate nohighlight">
@@ -420,7 +430,10 @@ i\hbar \frac{d}{dt}\ket{\psi} = H \ket{\psi}.
 i\hbar \frac{d\rho}{dt} = [H, \rho].
 \]</div>
 <p>The density matrix is useful when one wants to study quantum systems in which we do not have complete information about the system <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>.</p>
+<section id="pure-and-mixed-quantum-states">
+<h2>Pure and mixed quantum states<a class="headerlink" href="#pure-and-mixed-quantum-states" title="Link to this heading">#</a></h2>
 <p>Mixed states: classical ignorance due to unwanted interactions between the quantum system and the environment.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -477,6 +490,21 @@ i\hbar \frac{d\rho}{dt} = [H, \rho].
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
