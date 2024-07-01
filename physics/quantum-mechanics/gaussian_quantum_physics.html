@@ -57,6 +57,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/gaussian_quantum_physics';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -185,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pure_mixed_states.html">Pure and mixed quantum states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wigner_function.html">The Wigner function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Gaussian quantum mechanics</a></li>
@@ -378,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -394,6 +399,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard">Why simulating arbitrary quantum systems is classically hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate">Why not all quantum systems are classically hard to simulate</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -405,6 +419,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="gaussian-quantum-mechanics">
 <h1>Gaussian quantum mechanics<a class="headerlink" href="#gaussian-quantum-mechanics" title="Link to this heading">#</a></h1>
+<section id="why-simulating-arbitrary-quantum-systems-is-classically-hard">
+<h2>Why simulating arbitrary quantum systems is classically hard<a class="headerlink" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard" title="Link to this heading">#</a></h2>
+<p>Those that are familiar with the field of quantum computing know that the goal of building a quantum computer
+is to have a computer capable of performing computations that are intractable for a classical computer, modeled as a deterministic Turing machine, to compute. This is due to the exponential size of the matrices required to
+describe the dynamics of quantum systems. For instance for a two-level quantum system (a qubit) such as the polarization of a photon the states of the photon are described by <span class="math notranslate nohighlight">\(2\)</span>-dimensional vectors and the evolution of the state of the photon is described by matrices of size <span class="math notranslate nohighlight">\(2 \times 2\)</span>.
+However we wish to study systems of arbitrarily many particles and for a quantum system of <span class="math notranslate nohighlight">\(N\)</span> qubits the state of the system is now described by a <span class="math notranslate nohighlight">\(2^N\)</span>-dimensional vectors and their evolution is described by matrices of size <span class="math notranslate nohighlight">\(2^N \times 2^N\)</span>. Clearly this implies the overhead of classically simulating such a system is <span class="math notranslate nohighlight">\(\omega(2^N)\)</span> which is exponential in the size of the system.</p>
+</section>
+<section id="why-not-all-quantum-systems-are-classically-hard-to-simulate">
+<h2>Why not all quantum systems are classically hard to simulate<a class="headerlink" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate" title="Link to this heading">#</a></h2>
+<p>Remarkably there are, however, some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">BSBN02</a>]</span>. These are systems of quantum harmonic oscillators that are all initially Gaussian states and evolve under Gaussian unitary operations and measurement. In this context Gaussian states are quantum states whose Wigner function is a Gaussian and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on.</p>
+<p>These processes can be simulated classically because the covariances of the position and momentum of the harmonic oscillators, which can be compactly written as a covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, and the expectation values of position and momentum of the harmonic oscillators, which can be compactly written as a vector of means <span class="math notranslate nohighlight">\(\mu\)</span>, provide <em>complete information</em> about the system. For a system of <span class="math notranslate nohighlight">\(M\)</span> oscillators <span class="math notranslate nohighlight">\(\Sigma\)</span> is of size <span class="math notranslate nohighlight">\(2M \times 2M\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is of size <span class="math notranslate nohighlight">\(2M\)</span>. The evolution of this system under Gaussian operations is described by <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrices  [^1] and given by the evolution rules</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma \rightarrow S\Sigma S^T, \quad \mu \rightarrow S\mu
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrix representing the Gaussian operation. Since the size of these matrices scales like <span class="math notranslate nohighlight">\(O(M^2)\)</span> the computation is <em>polynomial</em> in the size of the system which is tractable. Note that a symplectic matrix is a real <span class="math notranslate nohighlight">\(2n \times 2n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> that satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+A^T \Omega A = \Omega
+\]</div>
+<p>where  <span class="math notranslate nohighlight">\(\Omega = \begin{bmatrix} 0 &amp; I_n \\\ I_n &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(I_n\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> identity matrix.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -461,6 +497,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard">Why simulating arbitrary quantum systems is classically hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate">Why not all quantum systems are classically hard to simulate</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
