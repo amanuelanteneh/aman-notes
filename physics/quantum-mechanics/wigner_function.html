@@ -415,53 +415,88 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="the-wigner-function">
 <h1>The Wigner function<a class="headerlink" href="#the-wigner-function" title="Link to this heading">#</a></h1>
-<p>The Wigner function, denoted here as <span class="math notranslate nohighlight">\(W(q,p)\)</span>, is a quasiprobability distribution or function of the quadrature operators <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, position and momentum respectively, of the quantum harmonic oscillator.
-For a quantum state with density matrix <span class="math notranslate nohighlight">\(\rho\)</span> the Wigner function is defined as <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id2" title="Christopher C Gerry and Peter L Knight. Introductory quantum optics. Cambridge university press, 2023.">Gerry and Knight, 2023</a>]</span></p>
+<p>The Wigner function, denoted here as <span class="math notranslate nohighlight">\(W(q,p)\)</span>, is a quasiprobability distribution or function of the quadratures <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, position and momentum respectively.
+For a quantum state with density matrix <span class="math notranslate nohighlight">\(\rho\)</span> the Wigner function is defined as <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id2" title="Akira Furusawa. Quantum states of light. Springer, 2015.">Furusawa, 2015</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
-W(q,p) = \frac{1}{2\pi\hbar}\int^{\infty}_{-\infty} e^{ipx/\hbar} \left\langle q+\frac{x}{2} \right\vert \rho  \left\vert q-\frac{x}{2} \right\rangle dx.
+W(q,p) = \frac{1}{2\pi\hbar}\int^{\infty}_{-\infty} e^{-ipy/\hbar} \left\langle q+\frac{y}{2} \right\vert \rho  \left\vert q-\frac{y}{2} \right\rangle dy.
 \]</div>
 <p>With our convention that <span class="math notranslate nohighlight">\(\hbar=1\)</span> this reduces to</p>
 <div class="math notranslate nohighlight">
 \[
-W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \left\langle q+\frac{x}{2} \right\vert \rho  \left\vert q-\frac{x}{2} \right\rangle dx.
+W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \left\langle q+\frac{y}{2} \right\vert \rho  \left\vert q-\frac{y}{2} \right\rangle dy.
 \]</div>
-<p>This expression looks a bit daunting. For instance I was confused at first about how to compute the vector-matrix-vector product <span class="math notranslate nohighlight">\(\left\langle q+\frac{x}{2} \right\vert \rho  \left\vert q-\frac{x}{2} \right\rangle\)</span>.</p>
+<p>This expression looks a bit daunting. For instance I was confused at first about how to compute the vector-matrix-vector product <span class="math notranslate nohighlight">\(\left\langle q+\frac{y}{2} \right\vert \rho  \left\vert q-\frac{y}{2} \right\rangle\)</span>.</p>
 <p>It would be helpful to actually compute this integral for a particular quantum state.
-Let’s pick the Fock state <span class="math notranslate nohighlight">\(\rho = \ket{1}\bra{1}\)</span> and see if we can do the derivation.
-First let’s begin by recognizing that the <span class="math notranslate nohighlight">\(\left\langle q+\frac{x}{2} \right\vert\)</span> and <span class="math notranslate nohighlight">\(\left\vert q-\frac{x}{2} \right\rangle\)</span> are the eigenstates of the <span class="math notranslate nohighlight">\(q\)</span> quadrature (position operator).</p>
-<p>Firstly if we assume that our state is a pure state <span class="math notranslate nohighlight">\(\rho = \ket{\psi}\bra{\psi}\)</span> our Wigner function can be written as</p>
+Let’s pick the Fock state <span class="math notranslate nohighlight">\(\rho = \ket{n}\bra{n}\)</span> and see if we can do the derivation. A similar derivation to the one that follows can be found in <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id12" title="Wolfgang P Schleich. Quantum optics in phase space. John Wiley &amp; Sons, 2011.">Schleich, 2011</a>]</span>.</p>
+<p>First let’s begin by recognizing that the <span class="math notranslate nohighlight">\(\left\langle q+\frac{y}{2} \right\vert\)</span> and <span class="math notranslate nohighlight">\(\left\vert q-\frac{y}{2} \right\rangle\)</span> are the eigenstates of the <span class="math notranslate nohighlight">\(q\)</span> quadrature (position operator).
+Since our state is a pure state <span class="math notranslate nohighlight">\(\rho = \ket{\psi}\bra{\psi}\)</span> our Wigner function can be written as</p>
 <div class="math notranslate nohighlight">
 \[
-W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \left\langle q+\frac{x}{2} \bigg| \psi \right\rangle  \left\langle \psi \bigg| q-\frac{x}{2} \right\rangle dx.
+W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \left\langle q+\frac{y}{2} \bigg| \psi \right\rangle  \left\langle \psi \bigg| q-\frac{y}{2} \right\rangle dy.
 \]</div>
-<p>We now have these inner products between eigenstates of the position operator and our quantum state ket <span class="math notranslate nohighlight">\(\ket{\psi}\)</span>. In a first course on quantum mechanics <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id3" title="John S Townsend. A modern approach to quantum mechanics. University Science Books, 2000.">Townsend, 2000</a>]</span> we learned that such an inner product is given by</p>
+<p>We now have these inner products between eigenstates of the position operator and our quantum state ket <span class="math notranslate nohighlight">\(\ket{\psi}\)</span>. In a first course on quantum mechanics <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id3" title="John S Townsend. A modern approach to quantum mechanics. University Science Books, 2000.">Townsend, 2000</a>]</span> we learned that such an inner product is given by</p>
 <div class="math notranslate nohighlight">
 \[
-\left\langle q+\frac{x}{2} \bigg| \psi \right\rangle \equiv \psi\left(q+\frac{x}{2}\right)
+\left\langle q+\frac{y}{2} \bigg| \psi \right\rangle \equiv \psi\left(q+\frac{y}{2}\right)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\psi\left(q+\frac{x}{2}\right)\)</span> is the <em><strong>wave function</strong></em> of the ket state <span class="math notranslate nohighlight">\(\ket{\psi}\)</span>. Naturally the other inner product is given by</p>
+<p>where <span class="math notranslate nohighlight">\(\psi\left(q+\frac{y}{2}\right)\)</span> is the <em><strong>wave function</strong></em> of the state <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{n}\)</span>. Naturally the other inner product is given by</p>
 <div class="math notranslate nohighlight">
 \[
-\left\langle \psi \bigg| q-\frac{x}{2} \right\rangle \equiv \psi^*\left(q-\frac{x}{2}\right)
+\left\langle \psi \bigg| q-\frac{y}{2} \right\rangle \equiv \psi^*\left(q-\frac{y}{2}\right)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(*\)</span> denotes the complex conjugate. So we now need the analytic expression for the wave function of the Fock state.
-Since the Fock state <span class="math notranslate nohighlight">\(\ket{n}\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th energy eigenstate of the harmonic oscillator it’s wave function is (see <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id9" title="Mark Beck. Quantum mechanics: theory and experiment. Oxford University Press, USA, 2012.">Beck, 2012</a>]</span> and <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span> for detailed derivation)</p>
+Since the Fock state <span class="math notranslate nohighlight">\(\ket{n}\)</span> is the <span class="math notranslate nohighlight">\(n\)</span>-th energy eigenstate of the harmonic oscillator it’s wave function is (see <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id9" title="Mark Beck. Quantum mechanics: theory and experiment. Oxford University Press, USA, 2012.">Beck, 2012</a>]</span> and <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span> for detailed derivation)</p>
 <div class="math notranslate nohighlight">
 \[
 \psi_n(q) =  \left( \frac{m\omega}{\pi \hbar} \right)^{1/4} \frac{1}{\sqrt{2^nn!}} H_n(\xi)e^{-\xi^2/2}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\xi = \sqrt{\frac{m\omega}{\hbar}}q = \frac{1}{\sqrt{2}}q\)</span> and <span class="math notranslate nohighlight">\(H_n(\cdot)\)</span> is the the <span class="math notranslate nohighlight">\(n\)</span>-th physicist’s Hermite polynomial.</p>
+<p>where <span class="math notranslate nohighlight">\(\xi = \sqrt{\frac{m\omega}{\hbar}}q = q\)</span>, because we are using “natural units” where energy is measured in units of <span class="math notranslate nohighlight">\(\hbar\omega\)</span> and distance in units of <span class="math notranslate nohighlight">\(\sqrt{\frac{\hbar}{m\omega}}\)</span>, and <span class="math notranslate nohighlight">\(H_n(\cdot)\)</span> is the the <span class="math notranslate nohighlight">\(n\)</span>-th physicist’s Hermite polynomial.</p>
 <p>The Wigner function is now given by</p>
 <div class="math notranslate nohighlight">
 \[
-W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\right)  \psi^*\left(q-\frac{x}{2}\right) dx 
+W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \psi\left(q+\frac{y}{2}\right)  \psi^*\left(q-\frac{y}{2}\right) dy 
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-= \frac{1}{2\pi}  \sqrt{ \frac{1}{\pi} } \int^{\infty}_{-\infty} e^{ipx} \frac{1}{2^n n!} H_n\left(\frac{1}{\sqrt{2}}q-\frac{x}{2}\right) H_n\left(\frac{1}{\sqrt{2}}q+\frac{x}{2}\right) e^{-(\frac{1}{\sqrt{2}}q+\frac{x}{2})^2/2} e^{-(\frac{1}{\sqrt{2}}q-\frac{x}{2})^2/2} dx
+= \frac{1}{2\pi}  \sqrt{ \frac{1}{\pi} } \int^{\infty}_{-\infty} e^{-ipy} \frac{1}{2^n n!} H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) e^{-(q+\frac{y}{2})^2/2} e^{-(q-\frac{y}{2})^2/2} dy
 \]</div>
-<p>So we’ve gotten rid of the vector-matrix-vector multiplcation in the integrand and now only have products of scalar functions. However this function does not look pretty and we still have <span class="math notranslate nohighlight">\(e^{ipx}\)</span> operator to deal with.</p>
+<p>So we’ve gotten rid of the vector-matrix-vector multiplication in the integrand and now only have products of scalar functions. However this function does not look pretty so lets try to simplify it a little. First we can simplify and rearrange the two exponents involving <span class="math notranslate nohighlight">\(q\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+W(q,p) = \frac{1}{2\pi}  \frac{1}{ \sqrt{\pi} } \frac{1}{2^n n!} \int^{\infty}_{-\infty} e^{-ipy} e^{-(q^2+y^2/4)}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{e^{-q^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-ipy-\frac{y^2}{4}}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy.
+\]</div>
+<p>Now  lets take <span class="math notranslate nohighlight">\(e^{-ipy-\frac{y^2}{4}}\)</span> and complete the square of the exponent
+$$</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;-ipy-\frac{y^2}{4} \\
+&amp;=-\frac{1}{4}(y^2 + 4ipy) \\
+&amp;=-\frac{1}{4}\left(\left(y+ \frac{4ip}{2}\right)^2 - \left(\frac{4ip}{2}\right)^2\right) \\
+&amp;=-\frac{1}{4}\left((y+2ip)^2 - (2ip)^2\right)\\ 
+&amp;=-\frac{1}{4}\left((y+2ip)^2 + 4p^2\right)\\
+&amp;=-\frac{1}{4}(y+2ip)^2 - p^2
+\end{align*}\]</div>
+<div class="math notranslate nohighlight">
+\[Our expression is now\]</div>
+<p>W(q,p) = \frac{e^{-q^2}}{2\pi^{3/2}2^n n!} \int^{\infty}<em>{-\infty} e^{-\frac{1}{4}(y+2ip)^2 - p^2}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy \
+= \frac{e^{-q^2}e^{-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}</em>{-\infty} e^{-\frac{1}{4}(y+2ip)^2}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy \
+= \frac{e^{-q^2-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-(\frac{y}{2}+ip)^2}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy
+$$</p>
+<p>Now we will perform a the <span class="math notranslate nohighlight">\(u\)</span>-substitution <span class="math notranslate nohighlight">\(u = \frac{y}{2} + ip\)</span> and thus <span class="math notranslate nohighlight">\(\frac{du}{dy}=\frac{1}{2} \rightarrow dy=2du\)</span> which changes our expression to</p>
+<div class="math notranslate nohighlight">
+\[
+W(q,p) = \frac{e^{-q^2-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-u^2}  H_n\left(q-u+ip\right) H_n\left(q+u-ip\right) 2du.
+\]</div>
+<p>The Hermite polynomials have the property that <span class="math notranslate nohighlight">\(H_n(-x)= (-1)^nH_n(x)\)</span> so lets use that to simplify this some more</p>
+<div class="math notranslate nohighlight">
+\[
+W(q,p) = \frac{e^{-q^2-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-u^2}  H_n\left(q-u+ip\right) H_n\left(q+u-ip\right) 2 du.
+\]</div>
 <section id="computing-and-plotting-the-wigner-function">
 <h2>Computing and plotting the Wigner function<a class="headerlink" href="#computing-and-plotting-the-wigner-function" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -495,7 +530,7 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 </section>
 <section id="qutip-wigner-function-of-ket-psi-ket-1">
 <h2>QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span><a class="headerlink" href="#qutip-wigner-function-of-ket-psi-ket-1" title="Link to this heading">#</a></h2>
-<p>Let’s use QuTiP’s function <code class="docutils literal notranslate"><span class="pre">wigner</span></code> to compute the Wigner function to verify our results.</p>
+<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">QuTiP</span></code> function <code class="docutils literal notranslate"><span class="pre">wigner</span></code> to compute the Wigner function to verify our results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -519,7 +554,7 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 </section>
 <section id="properties-of-the-wigner-function">
 <h2>Properties of the Wigner function<a class="headerlink" href="#properties-of-the-wigner-function" title="Link to this heading">#</a></h2>
-<p>The Wigner function has many interesting properties <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id11" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leonhardt, 1997</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
+<p>The Wigner function has many interesting properties <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id11" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leonhardt, 1997</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
 <div class="math notranslate nohighlight">
 \[
 \int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W(q,p)dpdq = 1. 
@@ -532,7 +567,7 @@ W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{ipx} \psi\left(q+\frac{x}{2}\r
 <p>and</p>
 <div class="math notranslate nohighlight">
 \[
-\int^{\infty}_{-\infty}W(q,p)dq = |\phi(p)|^2.
+\int^{\infty}_{-\infty}W(q,p)dq = |\varphi(p)|^2.
 \]</div>
 <p>The overlap between two pure state <span class="math notranslate nohighlight">\(\ket{\psi}\)</span> and <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> can also be computed in terms of their Wigner functions given by</p>
 <div class="math notranslate nohighlight">
