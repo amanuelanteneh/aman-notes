@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -433,10 +433,13 @@ i\hbar \frac{d\rho}{dt} = [H, \rho].
 <h2>Pure and mixed quantum states<a class="headerlink" href="#pure-and-mixed-quantum-states" title="Link to this heading">#</a></h2>
 <p>But what exactly does it mean to not have complete information about the system? I think the following example is useful in explaining what is meant by this. Suppose we have a pair of qubits, qubit <span class="math notranslate nohighlight">\(A\)</span> and qubit <span class="math notranslate nohighlight">\(B\)</span>, that we prepare in the Bell state</p>
 <div class="math notranslate nohighlight">
-\[
-\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{0}_A \otimes \ket{0}_B ) + \frac{1}{\sqrt{2}}(\ket{1}_A \otimes \ket{1}_B ) = \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} 
-\]</div>
-<p>which we know is an entangled state. Suppose we were to take qubit <span class="math notranslate nohighlight">\(B\)</span> and simply “throw it away” or ignore it (and assume it does not interact with anything moving forward) and only consider qubit <span class="math notranslate nohighlight">\(A, this is equivalent to taking the partial trace of the system over qubit \)</span>B<span class="math notranslate nohighlight">\( which is covered in the next page. How can we specicy the state of qubit \)</span>A<span class="math notranslate nohighlight">\( now? In this case we are working with *incomplete* information of the new system (qubit \)</span>A<span class="math notranslate nohighlight">\() because since it is entangled with qubit \)</span>B$ and thus is correlated with it</p>
+\[\begin{split}
+\begin{align*}
+\ket{\Phi^+} &amp;= \frac{1}{\sqrt{2}}(\ket{0}_A \otimes \ket{0}_B ) + \frac{1}{\sqrt{2}}(\ket{1}_A \otimes \ket{1}_B ) \\
+&amp;= \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} 
+\end{align*}
+\end{split}\]</div>
+<p>which we know is an entangled state. Suppose we were to take qubit <span class="math notranslate nohighlight">\(B\)</span> and simply “throw it away” or ignore it (and assume it does not interact with anything moving forward) and only consider qubit <span class="math notranslate nohighlight">\(A\)</span>, this is equivalent to taking the partial trace of the system over qubit <span class="math notranslate nohighlight">\(B\)</span> which is covered in the next page. How can we specicy the state of qubit <span class="math notranslate nohighlight">\(A\)</span> now? In this case we are working with <em>incomplete</em> information of the new system (qubit <span class="math notranslate nohighlight">\(A\)</span>) because since it is entangled with qubit <span class="math notranslate nohighlight">\(B\)</span> and thus is correlated with it</p>
 <p>Mixed states: classical ignorance due to unwanted interactions between the quantum system and the environment.</p>
 </section>
 </section>
