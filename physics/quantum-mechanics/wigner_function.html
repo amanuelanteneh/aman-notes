@@ -454,11 +454,12 @@ Since the Fock state <span class="math notranslate nohighlight">\(\ket{n}\)</spa
 <p>where <span class="math notranslate nohighlight">\(\xi = \sqrt{\frac{m\omega}{\hbar}}q = q\)</span> and <span class="math notranslate nohighlight">\(\left(\frac{m\omega}{\pi \hbar} \right)^{1/4} = \left(\frac{1}{\pi} \right)^{1/4}\)</span>, because we are using “natural units” where energy is measured in units of <span class="math notranslate nohighlight">\(\hbar\omega\)</span> and distance in units of <span class="math notranslate nohighlight">\(\sqrt{\frac{\hbar}{m\omega}}\)</span>, and <span class="math notranslate nohighlight">\(H_n(\cdot)\)</span> is the the <span class="math notranslate nohighlight">\(n\)</span>-th physicist’s Hermite polynomial.</p>
 <p>The Wigner function is now given by</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}
+\[\begin{split}
 \begin{align*}
-W(q,p) &amp;= \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \psi\left(q+\frac{y}{2}\right)  \psi^*\left(q-\frac{y}{2}\right) dy \\&amp;= \frac{1}{2\pi}  \sqrt{ \frac{1}{\pi} } \int^{\infty}_{-\infty} e^{-ipy} \frac{1}{2^n n!} H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) e^{-(q+\frac{y}{2})^2/2} e^{-(q-\frac{y}{2})^2/2} dy
+W(q,p) &amp;= \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \psi\left(q+\frac{y}{2}\right)  \psi^*\left(q-\frac{y}{2}\right) dy \\
+&amp;= \frac{1}{2\pi}  \sqrt{ \frac{1}{\pi} } \int^{\infty}_{-\infty} e^{-ipy} \frac{1}{2^n n!} H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) e^{-(q+\frac{y}{2})^2/2} e^{-(q-\frac{y}{2})^2/2} dy
 \end{align*}
-\end{aligned}\end{align} \]</div>
+\end{split}\]</div>
 <p>So we’ve gotten rid of the vector-matrix-vector multiplication in the integrand and now only have products of scalar functions. However this function does not look pretty so lets try to simplify it a little. First we can simplify and rearrange the two exponents involving <span class="math notranslate nohighlight">\(q\)</span></p>
 <div class="math notranslate nohighlight">
 \[
