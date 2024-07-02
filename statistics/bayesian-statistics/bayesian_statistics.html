@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Partial trace operator &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
+    <title>6. Bayesian Statistics &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
   
   
   
@@ -57,12 +57,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/partial_trace';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'statistics/bayesian-statistics/bayesian_statistics';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Wigner function" href="wigner_function.html" />
-    <link rel="prev" title="Density matrix" href="pure_mixed_states.html" />
+    <link rel="next" title="1. Hierarchical Models" href="hierarchical_models.html" />
+    <link rel="prev" title="5. Introduction" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,15 +177,15 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="pure_mixed_states.html">Density matrix</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Partial trace operator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_info.html">Gaussian quantum information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="photon_number_detection.html">Photon number detection</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/pure_mixed_states.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
 </ul>
 </details></li>
 </ul>
@@ -196,10 +198,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">4. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">5. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">6. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">5. Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">6. Bayesian Statistics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="hierarchical_models.html">1. Hierarchical Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -277,7 +279,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/partial_trace.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fstatistics/bayesian-statistics/bayesian_statistics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +309,7 @@
       
       
       
-      <li><a href="../../_sources/physics/quantum-mechanics/partial_trace.ipynb" target="_blank"
+      <li><a href="../../_sources/statistics/bayesian-statistics/bayesian_statistics.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -317,7 +319,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -389,7 +391,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Partial trace operator</h1>
+    <h1>Bayesian Statistics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -403,9 +405,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="partial-trace-operator">
-<h1>Partial trace operator<a class="headerlink" href="#partial-trace-operator" title="Link to this heading">#</a></h1>
-<p>The partial trace is a operation that appears in many places in quantum information and computing.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-statistics">
+<h1><span class="section-number">6. </span>Bayesian Statistics<a class="headerlink" href="#bayesian-statistics" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -421,7 +424,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./physics/quantum-mechanics"
+            path: "./statistics/bayesian-statistics"
         },
         predefinedOutput: true
     }
@@ -439,20 +442,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pure_mixed_states.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Density matrix</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Introduction</p>
       </div>
     </a>
     <a class="right-next"
-       href="wigner_function.html"
+       href="hierarchical_models.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Wigner function</p>
+        <p class="prev-next-title">1. Hierarchical Models</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
