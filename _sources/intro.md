@@ -9,8 +9,3 @@ This website was largely inspired by Aaron Reding's website for the graduate [**
 
 ## Site structure
 This site was created with [Jupyter Book](https://jupyterbook.org/en/stable/intro.html).
-
-## Table of contents
-
-```{tableofcontents}
-```

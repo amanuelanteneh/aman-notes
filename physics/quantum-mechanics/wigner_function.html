@@ -398,9 +398,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-specfic-example">A specfic example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
             </nav>
@@ -427,6 +430,8 @@ W(q,p) = \frac{1}{2\pi\hbar}\int^{\infty}_{-\infty} e^{-ipy/\hbar} \left\langle 
 W(q,p) = \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \left\langle q+\frac{y}{2} \right\vert \rho  \left\vert q-\frac{y}{2} \right\rangle dy.
 \]</div>
 <p>This expression looks a bit daunting. For instance I was confused at first about how to compute the vector-matrix-vector product <span class="math notranslate nohighlight">\(\left\langle q+\frac{y}{2} \right\vert \rho  \left\vert q-\frac{y}{2} \right\rangle\)</span>.</p>
+<section id="a-specfic-example">
+<h2>A specfic example<a class="headerlink" href="#a-specfic-example" title="Link to this heading">#</a></h2>
 <p>It would be helpful to actually compute this integral for a particular quantum state.
 Let’s pick the Fock state <span class="math notranslate nohighlight">\(\rho = \ket{n}\bra{n}\)</span> and see if we can do the derivation. A similar derivation to the one that follows can be found in <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id12" title="Wolfgang P Schleich. Quantum optics in phase space. John Wiley &amp; Sons, 2011.">Schleich, 2011</a>]</span>.</p>
 <p>First let’s begin by recognizing that the <span class="math notranslate nohighlight">\(\left\langle q+\frac{y}{2} \right\vert\)</span> and <span class="math notranslate nohighlight">\(\left\vert q-\frac{y}{2} \right\rangle\)</span> are the eigenstates of the <span class="math notranslate nohighlight">\(q\)</span> quadrature (position operator).
@@ -511,9 +516,15 @@ W(q,p) = \frac{e^{-q^2-p^2}}{\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-u^2}  
 W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 \]</div>
 <p>as the Winger function for the Fock state <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{n}\)</span>.</p>
+</section>
 <section id="computing-and-plotting-the-wigner-function">
 <h2>Computing and plotting the Wigner function<a class="headerlink" href="#computing-and-plotting-the-wigner-function" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -546,16 +557,16 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
     
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p$&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q$&quot;</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Wigner function of &#39;</span> <span class="o">+</span> <span class="n">state_name</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</section>
 <section id="our-derivation-wigner-function-of-ket-psi-ket-1">
-<h2>Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span><a class="headerlink" href="#our-derivation-wigner-function-of-ket-psi-ket-1" title="Link to this heading">#</a></h2>
+<h3>Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span><a class="headerlink" href="#our-derivation-wigner-function-of-ket-psi-ket-1" title="Link to this heading">#</a></h3>
 <p>Here we will use the analytic expression we derived above for the Wigner function of the Fock state and we’ll use Matplotlib to plot it as a 2D contour plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -576,12 +587,12 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/73799cf006e3707457aa44a2074136bec0c7275a3c08a1e6a339ad51dd354f23.png" src="../../_images/73799cf006e3707457aa44a2074136bec0c7275a3c08a1e6a339ad51dd354f23.png" />
+<img alt="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" src="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" />
 </div>
 </div>
 </section>
 <section id="qutip-wigner-function-of-ket-psi-ket-1">
-<h2>QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span><a class="headerlink" href="#qutip-wigner-function-of-ket-psi-ket-1" title="Link to this heading">#</a></h2>
+<h3>QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span><a class="headerlink" href="#qutip-wigner-function-of-ket-psi-ket-1" title="Link to this heading">#</a></h3>
 <p>Let’s use the <code class="docutils literal notranslate"><span class="pre">QuTiP</span></code> function <code class="docutils literal notranslate"><span class="pre">wigner</span></code> to compute the Wigner function to verify our results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -594,9 +605,10 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/73799cf006e3707457aa44a2074136bec0c7275a3c08a1e6a339ad51dd354f23.png" src="../../_images/73799cf006e3707457aa44a2074136bec0c7275a3c08a1e6a339ad51dd354f23.png" />
+<img alt="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" src="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="properties-of-the-wigner-function">
 <h2>Properties of the Wigner function<a class="headerlink" href="#properties-of-the-wigner-function" title="Link to this heading">#</a></h2>
@@ -635,7 +647,7 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/69933ee38586636c5d789d9dd27f5ddc499e437a138c1301d738f2f3984104cd.png" src="../../_images/69933ee38586636c5d789d9dd27f5ddc499e437a138c1301d738f2f3984104cd.png" />
+<img alt="../../_images/653e175695288a7265926cfd2f2103188bb39e21ebdc5dff6fd1b40a99a73b64.png" src="../../_images/653e175695288a7265926cfd2f2103188bb39e21ebdc5dff6fd1b40a99a73b64.png" />
 </div>
 </div>
 <p>We can see that this is looks like a Gaussian (normal) distribution and more interestingly has no negative values unlike the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span>.</p>
@@ -730,9 +742,12 @@ scipy     : 1.12.0
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-specfic-example">A specfic example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-and-plotting-the-wigner-function">Computing and plotting the Wigner function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#our-derivation-wigner-function-of-ket-psi-ket-1">Our derivation: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
   </nav></div>
