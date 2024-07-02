@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -635,12 +635,12 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <p>The overlap between two pure state <span class="math notranslate nohighlight">\(\ket{\psi}\)</span> and <span class="math notranslate nohighlight">\(\ket{\phi}\)</span> can also be computed in terms of their Wigner functions given by</p>
 <div class="math notranslate nohighlight">
 \[
-|\braket{\psi|\phi}|^2 = 2\pi\int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W_\phi(q,p)W_\psi(q,p)dpdq.
+|\braket{\psi|\phi}|^2 = 2\pi\hbar\int^{\infty}_{-\infty}\int^{\infty}_{-\infty}W_\phi(q,p)W_\psi(q,p)dpdq.
 \]</div>
 <p>The Wigner function is also bounded such that</p>
 <div class="math notranslate nohighlight">
 \[
--\frac{1}{\pi} \leq W(q,p) \leq \frac{1}{\pi}.
+-\frac{1}{\hbar\pi} \leq W(q,p) \leq \frac{1}{\hbar\pi}.
 \]</div>
 <p>Lastly let’s look at what the Wigner function of the Fock state <span class="math notranslate nohighlight">\(\ket{0}\)</span>, called the vacuum or ground state, looks like.</p>
 <div class="cell docutils container">
