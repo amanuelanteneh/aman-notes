@@ -14,7 +14,7 @@ parts:
       - file: physics/quantum-mechanics/partial_trace
       - file: physics/quantum-mechanics/wigner_function
       - file: physics/quantum-mechanics/homodyne_detection
-      - file: physics/quantum-mechanics/gaussian_quantum_physics
+      - file: physics/quantum-mechanics/gaussian_quantum_info
   
   - caption: Computer Science
     numbered: 1
