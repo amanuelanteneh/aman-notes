@@ -13,8 +13,9 @@ parts:
       - file: physics/quantum-mechanics/pure_mixed_states
       - file: physics/quantum-mechanics/partial_trace
       - file: physics/quantum-mechanics/wigner_function
-      - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/gaussian_quantum_info
+      - file: physics/quantum-mechanics/homodyne_detection
+      - file: physics/quantum-mechanics/photon_number_detection
   
   - caption: Computer Science
     numbered: 1
@@ -30,6 +31,9 @@ parts:
     numbered: 1
     chapters:
     - file: statistics/intro
+    - file: statistics/bayesian-statistics/bayesian_statistics
+      sections:
+      - file: statistics/bayesian-statistics/hierarchical_models
   
   - caption: Back Matter
     numbered: 1
