@@ -490,7 +490,7 @@ W(q,p) &amp;= \frac{e^{-q^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-\fra
 &amp;= \frac{e^{-q^2-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-(\frac{y}{2}+ip)^2}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy
 \end{align*}
 \end{split}\]</div>
-<p>Now we will perform a the <span class="math notranslate nohighlight">\(u\)</span>-substitution <span class="math notranslate nohighlight">\(u = \frac{y}{2} + ip\)</span> and thus <span class="math notranslate nohighlight">\(\frac{du}{dy}=\frac{1}{2} \rightarrow dy=2du\)</span> which changes our expression to</p>
+<p>Now we will perform a <span class="math notranslate nohighlight">\(u\)</span>-substitution <span class="math notranslate nohighlight">\(u = \frac{y}{2} + ip\)</span> and thus <span class="math notranslate nohighlight">\(\frac{du}{dy}=\frac{1}{2} \rightarrow dy=2du\)</span> which changes our expression to</p>
 <div class="math notranslate nohighlight">
 \[
 W(q,p) = \frac{e^{-q^2-p^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-u^2}  H_n\left(q-u+ip\right) H_n\left(q+u-ip\right) 2du.
@@ -510,7 +510,7 @@ W(q,p) = \frac{e^{-q^2-p^2}}{\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-u^2}  
 \[
 W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 \]</div>
-<p>as the Winger function for the Fock state <span class="math notranslate nohighlight">\(\psi=\ket{n}\)</span>.</p>
+<p>as the Winger function for the Fock state <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{n}\)</span>.</p>
 <section id="computing-and-plotting-the-wigner-function">
 <h2>Computing and plotting the Wigner function<a class="headerlink" href="#computing-and-plotting-the-wigner-function" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -541,15 +541,20 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
     <span class="n">W</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">Ln</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">W</span>
 
+<span class="k">def</span> <span class="nf">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
 <span class="n">max_quad</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># maximum quadrature value to plot</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Fock state number</span>
 <span class="n">points</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1"># number of points in each quadrature</span>
-<span class="n">x_points</span> <span class="o">=</span> <span class="n">y_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_points</span><span class="p">,</span> <span class="n">y_points</span><span class="p">)</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">fock_wigner</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s1">&#39;RdBu&#39;</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Q&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="n">q_points</span> <span class="o">=</span> <span class="n">p_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">q_points</span><span class="p">,</span> <span class="n">q_points</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">fock_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="s1">&#39;RdBu&#39;</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wigner function of $|\psi\rangle=|1\rangle$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -557,7 +562,7 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7d53d62bcec80b778a5f6d80ac3b4ff848c006e18f5456345dd59090f0dfe511.png" src="../../_images/7d53d62bcec80b778a5f6d80ac3b4ff848c006e18f5456345dd59090f0dfe511.png" />
+<img alt="../../_images/7eec16e6ae0183630600d264758f86964a4b625908fe2f95020c26db25f6ef5d.png" src="../../_images/7eec16e6ae0183630600d264758f86964a4b625908fe2f95020c26db25f6ef5d.png" />
 </div>
 </div>
 </section>
