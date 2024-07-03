@@ -472,13 +472,12 @@ W(q,p) &amp;= \frac{1}{2\pi}\int^{\infty}_{-\infty} e^{-ipy} \psi\left(q+\frac{y
 \end{split}\]</div>
 <p>So we’ve gotten rid of the vector-matrix-vector multiplication in the integrand and now only have products of scalar functions. However this function does not look pretty so lets try to simplify it a little. First we can simplify and rearrange the two exponents involving <span class="math notranslate nohighlight">\(q\)</span></p>
 <div class="math notranslate nohighlight">
-\[
-W(q,p) = \frac{1}{2\pi}  \frac{1}{ \sqrt{\pi} } \frac{1}{2^n n!} \int^{\infty}_{-\infty} e^{-ipy} e^{-(q^2+y^2/4)}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-= \frac{e^{-q^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-ipy-\frac{y^2}{4}}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy.
-\]</div>
+\[\begin{split}
+\begin{align*}
+W(q,p) &amp;= \frac{1}{2\pi}  \frac{1}{ \sqrt{\pi} } \frac{1}{2^n n!} \int^{\infty}_{-\infty} e^{-ipy} e^{-(q^2+y^2/4)}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy \\
+&amp;= \frac{e^{-q^2}}{2\pi^{3/2}2^n n!} \int^{\infty}_{-\infty} e^{-ipy-\frac{y^2}{4}}  H_n\left(q-\frac{y}{2}\right) H_n\left(q+\frac{y}{2}\right) dy.
+\end{align*}
+\end{split}\]</div>
 <p>Now lets take <span class="math notranslate nohighlight">\(e^{-ipy-\frac{y^2}{4}}\)</span> and complete the square of the exponent</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
