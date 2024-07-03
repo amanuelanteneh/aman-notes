@@ -10,7 +10,7 @@ parts:
     - file: physics/intro
     - file: physics/quantum-mechanics/quantum_mechanics
       sections:
-      - file: physics/quantum-mechanics/pure_mixed_states
+      - file: physics/quantum-mechanics/density_matrix
       - file: physics/quantum-mechanics/partial_trace
       - file: physics/quantum-mechanics/wigner_function
       - file: physics/quantum-mechanics/gaussian_quantum_info

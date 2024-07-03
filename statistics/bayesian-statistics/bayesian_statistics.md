@@ -1,1 +1,4 @@
 # Bayesian Statistics
+
+```{tableofcontents}
+```
