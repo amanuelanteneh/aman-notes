@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Partial trace operator &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
+    <title>Density matrix &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
   
   
   
@@ -57,12 +57,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/partial_trace';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/density_matrix';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Wigner function" href="wigner_function.html" />
-    <link rel="prev" title="Density matrix" href="density_matrix.html" />
+    <link rel="next" title="Partial trace operator" href="partial_trace.html" />
+    <link rel="prev" title="2. Quantum Mechanics" href="quantum_mechanics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,8 +180,8 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Partial trace operator</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_info.html">Gaussian quantum information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
@@ -277,7 +279,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/partial_trace.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/density_matrix.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +309,7 @@
       
       
       
-      <li><a href="../../_sources/physics/quantum-mechanics/partial_trace.ipynb" target="_blank"
+      <li><a href="../../_sources/physics/quantum-mechanics/density_matrix.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,7 +380,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -389,11 +393,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Partial trace operator</h1>
+    <h1>Density matrix</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -403,9 +416,67 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="partial-trace-operator">
-<h1>Partial trace operator<a class="headerlink" href="#partial-trace-operator" title="Link to this heading">#</a></h1>
-<p>The partial trace is a operation that appears in many places in quantum information and computing.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="density-matrix">
+<h1>Density matrix<a class="headerlink" href="#density-matrix" title="Link to this heading">#</a></h1>
+<p>In quantum mechanics the state of a system can be specified by a column vector in a complex Hilbert space called a ket and denoted in Dirac notation as
+<span class="math notranslate nohighlight">\(\ket{\psi}\)</span>. The unitary evolution of this state is given by the famous Schrödinger equation</p>
+<div class="math notranslate nohighlight">
+\[
+i\hbar \frac{d}{dt}\ket{\psi(t)} = H \ket{\psi(t)}.
+\]</div>
+<p>There is also another way of denoting the state of the system called the density matrix (also called the density operator) which is defined as <span class="math notranslate nohighlight">\(\rho = \ket{\psi}\bra{\psi}\)</span>. The unitary evolution of the state is now given by the von Neumann equation (also known as the Liouville–von Neumann equation) <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+i\hbar \frac{d}{dt}\rho(t) &amp;= [H, \rho(t)] \\
+                        &amp;= H\rho(t) - \rho(t) H.
+\end{align*}
+\end{split}\]</div>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h2>
+<p>The density matrix has several interesting properties. While it’s elements are in general complex numbers the diagonal elements are real with the <span class="math notranslate nohighlight">\(i\)</span>-th diagonal corresponding to the
+probability that the state is in the basis state <span class="math notranslate nohighlight">\(\ket{i}\)</span> when measured in the</p>
+<p>The density matrix is useful when one wants to study quantum systems in which we do not have complete information about the system <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>.</p>
+</section>
+<section id="pure-and-mixed-quantum-states">
+<h2>Pure and mixed quantum states<a class="headerlink" href="#pure-and-mixed-quantum-states" title="Link to this heading">#</a></h2>
+<p>But what exactly does it mean to not have complete information about the system? I think the following example is useful in explaining what is meant by this. Suppose we have a pair of qubits, qubit <span class="math notranslate nohighlight">\(A\)</span> and qubit <span class="math notranslate nohighlight">\(B\)</span>, that we prepare in the Bell state</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\ket{\Phi^+} &amp;= \frac{1}{\sqrt{2}}(\ket{0}_A \otimes \ket{0}_B ) + \frac{1}{\sqrt{2}}(\ket{1}_A \otimes \ket{1}_B ) \\
+&amp;= \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} 
+\end{align*}
+\end{split}\]</div>
+<p>which we know is an entangled state. Suppose we were to take qubit <span class="math notranslate nohighlight">\(B\)</span> and simply “throw it away” or ignore it (and assume it does not interact with anything moving forward) and only consider qubit <span class="math notranslate nohighlight">\(A\)</span>, this is equivalent to taking the partial trace of the system over qubit <span class="math notranslate nohighlight">\(B\)</span> which is covered in the next page. How can we specicy the state of qubit <span class="math notranslate nohighlight">\(A\)</span> now? In this case we are working with <em>incomplete</em> information of the new system (qubit <span class="math notranslate nohighlight">\(A\)</span>) because since it is entangled with qubit <span class="math notranslate nohighlight">\(B\)</span> and thus it is not possible to desribe the state of</p>
+<p>Mixed states: classical ignorance due to unwanted interactions between the quantum system and the environment.
+A question you might have is: What exactly is the difference between the pure state <span class="math notranslate nohighlight">\(\ket{\psi}= \frac{1}{\sqrt{2}}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\)</span> and the mixed state <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1}\)</span>? This was something that really confused me when I first learned about the density matrix formalism and it’s actually a another great way of explaining the difference between the pure and mixed states.
+This question came up for me because I was thinking about it from a measurement point of view. For example if you were to measure both state in the <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span> basis you would get one of the two basis states with equal probability i.e. <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.
+Lets look at the explicit density matrices to see what we can learn. The pure states density matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\rho_\psi &amp;= \ket{\psi}\bra{\psi}  \\
+&amp;= \left(\frac{1}{\sqrt{2}}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\right)\left(\frac{1}{\sqrt{2}}\bra{0}+\frac{1}{\sqrt{2}}\bra{1}\right) \\
+&amp;= \begin{bmatrix}
+1/2 &amp; 1/2\\
+1/2 &amp; 1/2
+\end{bmatrix}
+\end{align*}
+\end{split}\]</div>
+<p>and the mixed state density matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\rho &amp;= \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} \\
+&amp;= \begin{bmatrix}
+1/2 &amp; 0\\
+0 &amp; 1/2
+\end{bmatrix}.
+\end{align*}
+\end{split}\]</div>
+<p>We can see that while the occupation probabilities of the basis states <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span>, given by the diagonals, for both systems are the same the pure state has non-zero <em>off-diagonal</em> elements. This is because the off-diagonal elements <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> of the density matrix correspond to interference (superposition) between the basis states <span class="math notranslate nohighlight">\(\ket{i}\)</span> and <span class="math notranslate nohighlight">\(\ket{j}\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. Therefore the crucial distinction between these two states is that one is a <em>quantum superposition</em> while the other is not. This illustrates the fundamental difference I was trying to get at earlier. In the case of the pure state we have <em>complete</em> information about it’s state</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -439,20 +510,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="density_matrix.html"
+       href="quantum_mechanics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Density matrix</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Quantum Mechanics</p>
       </div>
     </a>
     <a class="right-next"
-       href="wigner_function.html"
+       href="partial_trace.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Wigner function</p>
+        <p class="prev-next-title">Partial trace operator</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -462,6 +533,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

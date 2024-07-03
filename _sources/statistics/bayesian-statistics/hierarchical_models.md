@@ -2,7 +2,7 @@
 
 This was originally contributed to [Aaron Reding's](https://github.com/areding) website for the graduate [Bayesian Statistics course ISYE 6420](https://areding.github.io/6420-pymc/intro.html) I took while studying at Georgia Tech.
 
-In his (amazing) introductory textbook *A Student’s Guide to Bayesian Statistics* {cite:t}`lambert2018student` Ben Lambert provides a great introduction to the concept of hierarchial models with an example. We will go over a modified version of this example here.
+In the excellent introductory textbook {cite:p}`lambert2018student` Ben Lambert provides a great introduction to the concept of hierarchial models with an example. We will go over a modified version of this example here.
 Hierarchical models can be seen as a compromise between two other types of models. The first is what Lambert calls 'fully pooled' models and the second are called 'heterogenous' models. Let's look to a specific example to compare and contrast the two models. 
 
 ## Fully pooled versus heterogenous models
