@@ -180,6 +180,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Partial trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
@@ -192,22 +193,30 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">3. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">4. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">5. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
+</ul>
+</details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">4. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">6. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">5. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">6. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">7. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">8. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">7. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">9. Bibliography</a></li>
 </ul>
 
     </div>
@@ -380,7 +389,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -396,6 +407,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">Mathematical definition</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -407,7 +427,21 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="partial-trace">
 <h1>Partial trace<a class="headerlink" href="#partial-trace" title="Link to this heading">#</a></h1>
-<p>The partial trace is a operation that appears in many places in quantum information and computing. It is used when one wants to examine a subsystem of a larger system. For example in a recent paper we published <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id16" title="Amanuel Anteneh, Léandre Brunel, and Olivier Pfister. Machine learning for efficient generation of universal photonic quantum computing resources. Optica Quantum, 2024.">Anteneh <em>et al.</em>, 2024</a>]</span> we performed the task of controlling the measurement-based quantum circuit shown below to generate squeezed Schrödinger cat states.</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<p>The partial trace is a operation that appears in many places in quantum information and computing. It is used when one wants to examine a subsystem of a larger system. In general if one has a quantum system <span class="math notranslate nohighlight">\(A\)</span> that is described by vectors in a Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> and another quantum system <span class="math notranslate nohighlight">\(B\)</span> whose state is described by vectors in a Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_B\)</span> then the joint or composite system of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, which resides in the joint Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>, is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\psi_{AB} = \psi_A \otimes \psi_B
+\]</div>
+<p>and for density matrices the joint density matrix is given similarly by</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{AB} = \rho_A \otimes \rho_B
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\otimes\)</span> denotes the Kronecker product between the matrices <span class="math notranslate nohighlight">\(\rho_A\)</span> and <span class="math notranslate nohighlight">\(\rho_B\)</span></p>
+<p>So we have a composite (bipartite) system. Now what if we want to study only one of the subsystems? We need an operation that will take the joint density matrix and return the density matrix of the system we are interested in.</p>
+<p>As a practical example in a recent paper we published <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id16" title="Amanuel Anteneh, Léandre Brunel, and Olivier Pfister. Machine learning for efficient generation of universal photonic quantum computing resources. Optica Quantum, 2024.">Anteneh <em>et al.</em>, 2024</a>]</span> we performed the task of controlling the measurement-based quantum circuit shown below to generate squeezed Schrödinger cat states.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -425,7 +459,13 @@ document.write(`
 <a class="reference internal image-reference" href="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png"><img alt="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" src="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" style="width: 600px;" /></a>
 </div>
 </div>
-<p>The circuit consists of two qumodes (quantum harmonic oscillators). The first mode is an arbitrary input state and the second mode is a squeezed vacuum state. The two modes are then acted on by the beam splitter operation <span class="math notranslate nohighlight">\(B(\tau_j)\)</span> and afterwards the first mode is measured in the photon number (Fock) basis.</p>
+<p>The circuit consists of two qumodes (essentially quantum harmonic oscillators). The first qumode is an arbitrary input state <span class="math notranslate nohighlight">\(\rho_j\)</span> and the second qumode is a vacuum state <span class="math notranslate nohighlight">\(\ket{0}\bra{0}\)</span> which is transformed into a squeezed vacuum state by the squeezing operation <span class="math notranslate nohighlight">\(S(r_j)\)</span>. The two qumodes are then acted on by the beam splitter operation <span class="math notranslate nohighlight">\(B(\tau_j)\)</span> and afterwards the first qumode is measured in the photon number (Fock) basis. After this we take the non-measured qumode denoted as <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> and feed it back into the circuit to do things all over again. The hope was that we could train an AI to learn what beam splitter and squeezing parameters, <span class="math notranslate nohighlight">\(\tau_j\)</span> and <span class="math notranslate nohighlight">\(r_j\)</span> respectively, to select such that the output qumode <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> would approximate a squeezed Schrödinger cat state over a finite number of iterations of the circuit.</p>
+<p>The partial trace is used here once we perform the photon number measurement and want to recover the reduced density matrix of the non-measured qumode <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span>.</p>
+<p>Note that the partial trace will always result in a density matrix. This is because the composite system is in general entangled and as we saw in the previous page considering only one subsystem of an entangled state always results in a statistical mixture/mixed state. Also note that the output state <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> of the circuit above is always a pure state, assuming the circuit is ideal/error free, despite the beam splitter operation which in general produces entangled states. This might be confusing at first but this is the case due to the photon number measurement which destroys the entanglement.</p>
+</section>
+<section id="mathematical-definition">
+<h2>Mathematical definition<a class="headerlink" href="#mathematical-definition" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -482,6 +522,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">Mathematical definition</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
