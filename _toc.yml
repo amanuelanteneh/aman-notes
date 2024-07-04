@@ -10,6 +10,7 @@ parts:
     - file: physics/intro
     - file: physics/quantum-mechanics/quantum_mechanics
       sections:
+      - file: physics/quantum-mechanics/entanglement
       - file: physics/quantum-mechanics/density_matrix
       - file: physics/quantum-mechanics/partial_trace
       - file: physics/quantum-mechanics/wigner_function
@@ -21,6 +22,12 @@ parts:
     numbered: 1
     chapters:
     - file: computerscience/intro
+    - file: computerscience/algorithms/algorithms
+      sections:
+      - file: computerscience/algorithms/dynamic_prog
+    - file: computerscience/machine-learning/machine_learning
+      sections:
+      - file: computerscience/machine-learning/attention
   
   - caption: Mathematics
     numbered: 1
