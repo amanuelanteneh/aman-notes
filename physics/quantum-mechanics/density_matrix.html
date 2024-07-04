@@ -532,26 +532,38 @@ probability that the state is in the basis state <span class="math notranslate n
 <p>This was something that really confused me when I first learned about the density matrix formalism and it’s actually another great way of explaining the difference between the pure and mixed states.
 This question came up for me because I was thinking about it from a measurement point of view. For example if you were to measure both states in the <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span> basis you would get one of the two basis states with equal probability i.e. <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>.
 Lets look at the explicit density matrices using <code class="docutils literal notranslate"><span class="pre">SymPy</span></code> to see what we can learn. The pure states density matrix is</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_pure</span> <span class="o">=</span> <span class="n">ket_p</span><span class="o">*</span><span class="n">bra_p</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\rho_\psi =\ket{\psi}\bra{\psi} = &#39;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">rho_pure</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\begin{split}\displaystyle \rho_\psi =\ket{\psi}\bra{\psi} = \left[\begin{matrix}\frac{1}{2} &amp; \frac{1}{2}\\\frac{1}{2} &amp; \frac{1}{2}\end{matrix}\right]\end{split}\]</div>
 </div>
 </div>
 <p>and the mixed state density matrix is</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_mixed</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ket_0</span><span class="o">*</span><span class="n">bra_0</span>  <span class="o">+</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ket_1</span><span class="o">*</span><span class="n">bra_1</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\rho_M = \frac</span><span class="si">{1}{2}</span><span class="s1">\ket</span><span class="si">{0}</span><span class="s1">\bra</span><span class="si">{0}</span><span class="s1"> + \frac</span><span class="si">{1}{2}</span><span class="s1">\ket</span><span class="si">{1}</span><span class="s1">\bra</span><span class="si">{1}</span><span class="s1"> = &#39;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">rho_mixed</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\begin{split}\displaystyle \rho_M = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \left[\begin{matrix}\frac{1}{2} &amp; 0\\0 &amp; \frac{1}{2}\end{matrix}\right]\end{split}\]</div>
