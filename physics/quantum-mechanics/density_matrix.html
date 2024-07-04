@@ -423,7 +423,7 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">Trace</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">Trace</span><span class="p">,</span> <span class="n">Rational</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">conjugate</span> <span class="k">as</span> <span class="n">conj</span>
 
@@ -547,14 +547,14 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 <p>and the mixed state density matrix is</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_mixed</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">ket_0</span><span class="o">*</span><span class="n">bra_0</span>  <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">ket_1</span><span class="o">*</span><span class="n">bra_1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_mixed</span> <span class="o">=</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ket_0</span><span class="o">*</span><span class="n">bra_0</span>  <span class="o">+</span> <span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ket_1</span><span class="o">*</span><span class="n">bra_1</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\rho_M = \frac</span><span class="si">{1}{2}</span><span class="s1">\ket</span><span class="si">{0}</span><span class="s1">\bra</span><span class="si">{0}</span><span class="s1"> + \frac</span><span class="si">{1}{2}</span><span class="s1">\ket</span><span class="si">{1}</span><span class="s1">\bra</span><span class="si">{1}</span><span class="s1"> = &#39;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">rho_mixed</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \rho_M = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \left[\begin{matrix}0.5 &amp; 0\\0 &amp; 0.5\end{matrix}\right]\end{split}\]</div>
+\[\begin{split}\displaystyle \rho_M = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \left[\begin{matrix}\frac{1}{2} &amp; 0\\0 &amp; \frac{1}{2}\end{matrix}\right]\end{split}\]</div>
 </div>
 </div>
 <p>We can see that while the occupation probabilities of the basis states <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span>, given by the diagonals, for both systems are the same the pure state has non-zero <em>off-diagonal</em> elements. This is because the off-diagonal elements <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> of the density matrix correspond to interference (superposition) between the basis states <span class="math notranslate nohighlight">\(\ket{i}\)</span> and <span class="math notranslate nohighlight">\(\ket{j}\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. Therefore the crucial distinction between these two states is that one is a <em>quantum superposition</em> while the other is not. This illustrates the fundamental difference I was trying to get at earlier. In the case of the pure state we have <em>complete</em> information about it’s state, since according to Bell’s theorem quantum mechanics excludes the possibility of ‘hidden variables’, but in the case of the mixed state the situation is more akin to <em>classical uncertainty/ignorance</em> as we do not have complete information about the system.</p>
@@ -575,9 +575,9 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \text{Tr}(\ket{+}\bra{+}\rho_M) = 0.5\]</div>
+\[\displaystyle \text{Tr}(\ket{+}\bra{+}\rho_M) = \frac{1}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \text{Tr}(\ket{-}\bra{-}\rho_M) = 0.5\]</div>
+\[\displaystyle \text{Tr}(\ket{-}\bra{-}\rho_M) = \frac{1}{2}\]</div>
 </div>
 </div>
 <p>so not only are these states different, but the mixed state results in the same occupation probabilities for two different measurement bases!</p>
