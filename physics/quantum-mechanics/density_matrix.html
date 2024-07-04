@@ -576,7 +576,12 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 \{\ket{+}, \ket{-}\} = \{\frac{1}{\sqrt{2}}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}, \frac{1}{\sqrt{2}}\ket{0}-\frac{1}{\sqrt{2}}\ket{1}\}
 \]</div>
 <p>we can tell that we will find the pure state is in the state <span class="math notranslate nohighlight">\(\ket{+}\)</span> with probability <span class="math notranslate nohighlight">\(1.0\)</span>. However, using <code class="docutils literal notranslate"><span class="pre">SymPy</span></code> again, for the mixed state we have</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr_p</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">(</span> <span class="n">ket_p</span><span class="o">*</span><span class="n">bra_p</span><span class="o">*</span><span class="n">rho_mixed</span> <span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 <span class="n">tr_m</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">(</span> <span class="n">ket_m</span><span class="o">*</span><span class="n">bra_m</span><span class="o">*</span><span class="n">rho_mixed</span> <span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
@@ -585,6 +590,7 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \text{Tr}(\ket{+}\bra{+}\rho_M) = \frac{1}{2}\]</div>
