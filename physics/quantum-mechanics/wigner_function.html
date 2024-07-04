@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Wigner function &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
+    <title>Wigner function &#8212; Amanuel&#39;s Notes</title>
   
   
   
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">Amanuel's Notes \(\nabla^2\)</p>
+    <p class="title logo__title">Amanuel's Notes</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -180,6 +180,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Wigner function</a></li>
@@ -619,8 +620,8 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># Hilbert space truncation</span>
 <span class="n">psi</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">x_points</span> <span class="o">=</span> <span class="n">y_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
-<span class="n">W_qt</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">x_points</span><span class="p">,</span> <span class="n">y_points</span><span class="p">)</span>
+<span class="n">q_points</span> <span class="o">=</span> <span class="n">p_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+<span class="n">W_qt</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">q_points</span><span class="p">,</span> <span class="n">p_points</span><span class="p">)</span>
 <span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W_qt</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -680,9 +681,7 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Wed Jul 03 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Jul 04 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
@@ -690,8 +689,8 @@ IPython version      : 8.22.2
 
 qutip     : 4.7.5
 matplotlib: 3.7.4
-scipy     : 1.12.0
 numpy     : 1.26.2
+scipy     : 1.12.0
 </pre></div>
 </div>
 </div>

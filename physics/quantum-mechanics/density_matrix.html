@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Density matrix &#8212; Amanuel&#39;s Notes \(\nabla^2\)</title>
+    <title>Density matrix &#8212; Amanuel&#39;s Notes</title>
   
   
   
@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Partial trace" href="partial_trace.html" />
-    <link rel="prev" title="2. Quantum Mechanics" href="quantum_mechanics.html" />
+    <link rel="prev" title="Entanglement" href="entanglement.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">Amanuel's Notes \(\nabla^2\)</p>
+    <p class="title logo__title">Amanuel's Notes</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -180,6 +180,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Density matrix</a></li>
 <li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
@@ -431,7 +432,8 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">Trace</span><span class="p">,</span> <span class="n">Rational</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">latex</span><span class="p">,</span> <span class="n">Trace</span><span class="p">,</span> <span class="n">Rational</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">conjugate</span> <span class="k">as</span> <span class="n">conj</span>
 
@@ -608,6 +610,27 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 <p>so not only are these states different, but the mixed state results in the same occupation probabilities for two different measurement bases!</p>
 <p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+Last updated: Thu Jul 04 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+sympy: 1.12
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -642,12 +665,12 @@ Lets look at the explicit density matrices using <code class="docutils literal n
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="quantum_mechanics.html"
+       href="entanglement.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Quantum Mechanics</p>
+        <p class="prev-next-title">Entanglement</p>
       </div>
     </a>
     <a class="right-next"
