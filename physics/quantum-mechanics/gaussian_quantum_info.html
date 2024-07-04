@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Gaussian quantum information &#8212; Amanuel&#39;s Notes</title>
+    <title>Gaussian quantum information &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">Amanuel's Notes</p>
+    <p class="title logo__title">Amanuel's Notebook</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -421,7 +421,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-measurements">Gaussian measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-measurements">Gaussian measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homodyne-detection">Homodyne detection</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-examples-of-gaussian-states">Other examples of Gaussian states</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-state">Thermal state</a></li>
 </ul>
@@ -446,8 +449,7 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cosh</span><span class="p">,</span> <span class="n">sinh</span>
@@ -578,7 +580,7 @@ p_M\\
 </section>
 <section id="vacuum-state">
 <h2>Vacuum state<a class="headerlink" href="#vacuum-state" title="Link to this heading">#</a></h2>
-<p>The simplest example of the Gaussian state is the vacuum state or the ground state of the quantum harmonic oscillator denoted <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{0}\)</span>. It’s Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of <span class="math notranslate nohighlight">\(0\)</span> in both variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. It also has variance <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>, since we set <span class="math notranslate nohighlight">\(\hbar=1\)</span>, for the variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>. It’s covariance matrix and vector of means are thus</p>
+<p>The simplest example of the Gaussian state is the vacuum state or the ground state of the quantum harmonic oscillator denoted <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{0}\)</span>. It’s Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of <span class="math notranslate nohighlight">\(0\)</span> in both variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. It also has variance <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>, since we set <span class="math notranslate nohighlight">\(\hbar=1\)</span>, for the variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span>. It’s covariance matrix and vector of means are thus</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \Sigma = \begin{bmatrix}
@@ -633,7 +635,7 @@ p_M\\
 D(\alpha) = e^{\alpha a^\dagger - \alpha^* a}.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the canonical annihilation and creation operators respectively.</p>
-<p>The a displacement operation can be realized in the Gaussian formalism by adding the vector</p>
+<p>The a displacement operation can be realized in the Gaussian formalism by adding the vector  <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 d = \sqrt{2}\begin{bmatrix}
@@ -683,7 +685,7 @@ The rotation operation has the form</p>
 R(\theta) = e^{i\theta N}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{n}\)</span> is the number operator <span class="math notranslate nohighlight">\(N = a^\dagger a\)</span>.</p>
-<p>The a rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix</p>
+<p>The a rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 R(\theta) = \begin{bmatrix}
@@ -691,7 +693,7 @@ R(\theta) = \begin{bmatrix}
 -\sin{(\theta)} &amp; \cos{(\theta)}
 \end{bmatrix}
 \end{split}\]</div>
-<p>to the (one mode) covariance matrix according to the evolution rule shown earlier. When applying rotations to systems with M modes we use the direct sum of these matrices given by</p>
+<p>to the (one mode) covariance matrix according to the evolution rule shown earlier. When applying rotations to systems with <span class="math notranslate nohighlight">\(M\)</span> modes we use the direct sum of these matrices given by</p>
 <div class="math notranslate nohighlight">
 \[
 U = \bigoplus_{k=1}^M R(\theta_k)
@@ -726,7 +728,27 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 </section>
 <section id="squeezing">
 <h3>Squeezing<a class="headerlink" href="#squeezing" title="Link to this heading">#</a></h3>
-<p>Another Gaussian operation is the squeezing operation which simply squeezes the Wigner function in phase space and thus reduces the variance (uncertainty) in one of the quadratures and increases the variance in another. For this operation we’ll look at how it transforms the vacuum.</p>
+<p>Another Gaussian operation is the squeezing operation which simply squeezes the Wigner function in phase space and thus reduces the variance (uncertainty) in one of the quadratures and increases the variance in another.</p>
+<p>The squeezing operation has the form</p>
+<div class="math notranslate nohighlight">
+\[
+S(z) = e^{\frac{1}{2}(z^* {a^\dagger}^2 - z a^2)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(z=re^{i\theta}\)</span>.</p>
+<p>The a squeezing operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+S(z) = \begin{bmatrix}
+\cosh{(r)} - \sinh{(r)}\cos{(\theta)} &amp; -\sinh{(r)}\sin{(\theta)}\\
+-\sinh{(r)}\sin{(\theta)} &amp; \cosh{(r)} + \cos{(\theta)}\sinh{(r)}
+\end{bmatrix}
+\end{split}\]</div>
+<p>to the (one mode) covariance matrix according to the evolution rule shown earlier. When applying rotations to systems with <span class="math notranslate nohighlight">\(M\)</span> modes we use the direct sum of these matrices given by</p>
+<div class="math notranslate nohighlight">
+\[
+U = \bigoplus_{k=1}^M S(z_k)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S(z_k)\)</span> denotes the squeezing applied to mode <span class="math notranslate nohighlight">\(k\)</span>. For this operation we’ll look at how it transforms the vacuum.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">squeeze</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
@@ -757,15 +779,18 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 </section>
 <section id="gaussian-measurements">
 <h2>Gaussian measurements<a class="headerlink" href="#gaussian-measurements" title="Link to this heading">#</a></h2>
+<section id="homodyne-detection">
+<h3>Homodyne detection<a class="headerlink" href="#homodyne-detection" title="Link to this heading">#</a></h3>
+</section>
 </section>
 <section id="other-examples-of-gaussian-states">
 <h2>Other examples of Gaussian states<a class="headerlink" href="#other-examples-of-gaussian-states" title="Link to this heading">#</a></h2>
 <section id="thermal-state">
 <h3>Thermal state<a class="headerlink" href="#thermal-state" title="Link to this heading">#</a></h3>
-<p>Another example of a Gaussian state is a thermal state which is a mixed state defined as <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span></p>
+<p>Another example of a Gaussian state is a thermal state which is a mixed state defined, in the Fock basis, as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
-\rho(\bar{n}) = \sum_{n=0}^{\infty} \frac{\bar{n}^n}{(\bar{n} + 1)^{n+1}}\ket{n}\bra{n}.
+\rho(\bar{n}) = \frac{1}{\bar{n}+1}\sum_{n=0}^{\infty} \left(\frac{\bar{n}}{\bar{n} + 1}\right)^n\ket{n}\bra{n}.
 \]</div>
 <p>These states are interesting since they are not pure states and like the vacuum state have 0 expectation value in both quadratures. However unlike the vacuum state they have a variance of <span class="math notranslate nohighlight">\(2\bar{n}+1\)</span> for the two quadratures as can be seen from the below Wigner plot which is a Gaussian with wider spread along both variables.</p>
 <div class="cell tag_hide-input docutils container">
@@ -775,8 +800,8 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\rho(\bar</span><span class="si">{n}</span><span class="s1">=0.5)$&#39;</span>
-<span class="n">nbar</span> <span class="o">=</span> <span class="mf">.5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\rho(\bar</span><span class="si">{n}</span><span class="s1">=0.75)$&#39;</span>
+<span class="n">nbar</span> <span class="o">=</span> <span class="mf">0.75</span>
 
 <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="n">nbar</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  
                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbar</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="p">]</span> <span class="p">)</span> <span class="c1"># covariance matrix of vacuum state</span>
@@ -790,7 +815,7 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/dde1e21204133111f057e48b57efcf9b2164781658f0760019781475bd4e7af6.png" src="../../_images/dde1e21204133111f057e48b57efcf9b2164781658f0760019781475bd4e7af6.png" />
+<img alt="../../_images/6160ca49a8dcd2016cee6e356476b639a4e5c66a57a250e3e2634353bc316eeb.png" src="../../_images/6160ca49a8dcd2016cee6e356476b639a4e5c66a57a250e3e2634353bc316eeb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -801,7 +826,9 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Jul 04 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+Last updated: Thu Jul 04 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
@@ -891,7 +918,10 @@ numpy     : 1.26.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-measurements">Gaussian measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-measurements">Gaussian measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homodyne-detection">Homodyne detection</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-examples-of-gaussian-states">Other examples of Gaussian states</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-state">Thermal state</a></li>
 </ul>
