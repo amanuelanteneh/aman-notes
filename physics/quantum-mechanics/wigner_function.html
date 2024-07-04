@@ -64,7 +64,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Gaussian quantum information" href="gaussian_quantum_info.html" />
-    <link rel="prev" title="Partial trace operator" href="partial_trace.html" />
+    <link rel="prev" title="Partial trace" href="partial_trace.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,8 +180,8 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="pure_mixed_states.html">Density matrix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Wigner function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_info.html">Gaussian quantum information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
@@ -538,11 +538,19 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <span class="c1"># ensure you install latex via: </span>
 <span class="c1"># sudo apt-get install texlive-latex-extra texlive-fonts-recommended dvipng cm-super</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
 <span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">}</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">font</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Q: q quadrature values</span>
+<span class="sd">    P: p quadrature values</span>
+<span class="sd">    W: Wigner function values</span>
+<span class="sd">    state_name: name to display for state</span>
+<span class="sd">    elev: elevation for 3D plot view</span>
+<span class="sd">    axim: azimuth angle for 3D plot view</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
     
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
@@ -550,9 +558,10 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
                        <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                        <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
     
+    <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="n">azim</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$p$&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$q$&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$W(q,p)$&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$W(q,p)$&quot;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Wigner function of &#39;</span> <span class="o">+</span> <span class="n">state_name</span><span class="p">)</span>
     
     <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -582,16 +591,16 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <span class="n">max_quad</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="c1"># maximum quadrature value to plot</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Fock state number</span>
 <span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$|\psi\rangle=|1\rangle$&#39;</span>
-<span class="n">points</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1"># number of points in each quadrature</span>
+<span class="n">points</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># number of points in each quadrature</span>
 <span class="n">q_points</span> <span class="o">=</span> <span class="n">p_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
 <span class="n">Q</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">q_points</span><span class="p">,</span> <span class="n">q_points</span><span class="p">)</span>
 <span class="n">W</span> <span class="o">=</span> <span class="n">fock_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
+<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" src="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" />
+<img alt="../../_images/4c699453653df3f9ce7240f6cf4e301e7e0a044c9c237e480e56dc43f255a4dd.png" src="../../_images/4c699453653df3f9ce7240f6cf4e301e7e0a044c9c237e480e56dc43f255a4dd.png" />
 </div>
 </div>
 </section>
@@ -604,12 +613,12 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <span class="n">psi</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="n">x_points</span> <span class="o">=</span> <span class="n">y_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">max_quad</span><span class="p">,</span> <span class="n">max_quad</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
 <span class="n">W_qt</span> <span class="o">=</span> <span class="n">qt</span><span class="o">.</span><span class="n">wigner</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">x_points</span><span class="p">,</span> <span class="n">y_points</span><span class="p">)</span>
-<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W_qt</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
+<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W_qt</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" src="../../_images/e9d7f1dc87d9fe70c272ae10331b8b557e8ace2b65cb01790ea3d99917f73588.png" />
+<img alt="../../_images/4c699453653df3f9ce7240f6cf4e301e7e0a044c9c237e480e56dc43f255a4dd.png" src="../../_images/4c699453653df3f9ce7240f6cf4e301e7e0a044c9c237e480e56dc43f255a4dd.png" />
 </div>
 </div>
 </section>
@@ -646,12 +655,12 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">fock_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$|\psi\rangle=|0\rangle$&#39;</span>
-<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
+<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/653e175695288a7265926cfd2f2103188bb39e21ebdc5dff6fd1b40a99a73b64.png" src="../../_images/653e175695288a7265926cfd2f2103188bb39e21ebdc5dff6fd1b40a99a73b64.png" />
+<img alt="../../_images/c57abe8a2eeb09af92c07eb53d3c4b6c7c497d5eac264fbfbbc45783f2a82949.png" src="../../_images/c57abe8a2eeb09af92c07eb53d3c4b6c7c497d5eac264fbfbbc45783f2a82949.png" />
 </div>
 </div>
 <p>We can see that this is looks like a Gaussian (normal) distribution and more interestingly has no negative values unlike the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span>.</p>
@@ -665,16 +674,16 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
   %reload_ext watermark
-Last updated: Tue Jul 02 2024
+Last updated: Wed Jul 03 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
-numpy     : 1.26.2
 qutip     : 4.7.5
 matplotlib: 3.7.4
 scipy     : 1.12.0
+numpy     : 1.26.2
 </pre></div>
 </div>
 </div>
@@ -718,7 +727,7 @@ scipy     : 1.12.0
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Partial trace operator</p>
+        <p class="prev-next-title">Partial trace</p>
       </div>
     </a>
     <a class="right-next"
