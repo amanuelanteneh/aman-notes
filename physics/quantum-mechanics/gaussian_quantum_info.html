@@ -580,9 +580,33 @@ p_M\\
 </section>
 <section id="vacuum-state">
 <h2>Vacuum state<a class="headerlink" href="#vacuum-state" title="Link to this heading">#</a></h2>
-<p>The simplest example of the Gaussian state is the vacuum state or the ground state of the quantum harmonic oscillator denoted <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{0}\)</span>. It’s Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of <span class="math notranslate nohighlight">\(0\)</span> in both variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>. It also has variance <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span>, since we set <span class="math notranslate nohighlight">\(\hbar=1\)</span>, for the variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span>. It’s covariance matrix and vector of means are thus</p>
+<p>The simplest example of the Gaussian state is the vacuum state or the ground state of the quantum harmonic oscillator denoted <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{0}\)</span>.
+Since the vacuum state has 0 photons we know it’s expectation values, <span class="math notranslate nohighlight">\(\langle q \rangle\)</span> and <span class="math notranslate nohighlight">\(\langle p \rangle\)</span> respectively, in the two quadratures, are both 0. Similarly we know that it has equal standard deviations,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_q = \sqrt{ \langle q^2 \rangle - \langle q \rangle^2 }
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_p = \sqrt{ \langle p^2 \rangle - \langle p \rangle^2 }
+\]</div>
+<p>respectively, in the two quadratures so <span class="math notranslate nohighlight">\(\sigma_p=\sigma_q\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\([q,p]=i\hbar\)</span> we know that the quadratures must obey Heisenberg’s uncertainty principle so we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
+\begin{align*}
+\sigma_q\sigma_p &amp;\geq \frac{\hbar}{2} \\
+\sigma_q^2 &amp;\geq \frac{\hbar}{2}  &amp;&amp; \text{Setting $\sigma_p=\sigma_q$ we have this}\\
+\sigma_q &amp;\geq \sqrt{\frac{\hbar}{2}} \\ 
+\sigma_q &amp;\geq \frac{1}{\sqrt{2}}  &amp;&amp; \text{Setting $\hbar=1$ we have this} \\
+\sigma_q &amp;= \frac{1}{\sqrt{2}}  &amp;&amp; \text{Since $\ket{0}$ saturates the lower bound of the inequality} \\
+\end{align*}
+\end{split}\]</div>
+<p>So we have that the standard deviation of both quadratures is equal to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> for <span class="math notranslate nohighlight">\(\hbar=1\)</span> and therefore the <em>variance</em> is <span class="math notranslate nohighlight">\(\sigma^2=\frac{1}{2}\)</span>.</p>
+ <!-- It's Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of $0$ in both variables $q$ and $p$. It also has variance $\frac{1}{2}$, since we set $\hbar=1$, for the variables $q$ and $p$ {cite:p}`brask2021gaussian`. It's covariance matrix and vector of means are thus -->
+<p>Thus the covariance matrix and the vector of means are, respectively,
+$<span class="math notranslate nohighlight">\(
 \Sigma = \begin{bmatrix}
 \frac{1}{2} &amp; 0 \\
 0 &amp; \frac{1}{2} 
@@ -590,7 +614,7 @@ p_M\\
 0 \\
 0 
 \end{bmatrix}.
-\end{split}\]</div>
+\)</span>$</p>
 <p>Below is some code to compute the Wigner function of an arbitrary single mode Gaussian state, in this case it will be the vacuum state. I used <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to vectorize some operations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -635,7 +659,7 @@ p_M\\
 D(\alpha) = e^{\alpha a^\dagger - \alpha^* a}.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the canonical annihilation and creation operators respectively.</p>
-<p>The a displacement operation can be realized in the Gaussian formalism by adding the vector  <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>The a displacement operation can be realized in the Gaussian formalism by adding the vector  <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 d = \sqrt{2}\begin{bmatrix}
@@ -685,7 +709,7 @@ The rotation operation has the form</p>
 R(\theta) = e^{i\theta N}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{n}\)</span> is the number operator <span class="math notranslate nohighlight">\(N = a^\dagger a\)</span>.</p>
-<p>The a rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>The a rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 R(\theta) = \begin{bmatrix}
@@ -735,7 +759,7 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 S(z) = e^{\frac{1}{2}(z^* {a^\dagger}^2 - z a^2)}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(z=re^{i\theta}\)</span>.</p>
-<p>The a squeezing operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>The a squeezing operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 S(z) = \begin{bmatrix}
@@ -787,7 +811,7 @@ U = \bigoplus_{k=1}^M S(z_k)
 <h2>Other examples of Gaussian states<a class="headerlink" href="#other-examples-of-gaussian-states" title="Link to this heading">#</a></h2>
 <section id="thermal-state">
 <h3>Thermal state<a class="headerlink" href="#thermal-state" title="Link to this heading">#</a></h3>
-<p>Another example of a Gaussian state is a thermal state which is a mixed state defined, in the Fock basis, as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>Another example of a Gaussian state is a thermal state which is a mixed state defined, in the Fock basis, as <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
 \rho(\bar{n}) = \frac{1}{\bar{n}+1}\sum_{n=0}^{\infty} \left(\frac{\bar{n}}{\bar{n} + 1}\right)^n\ket{n}\bra{n}.
