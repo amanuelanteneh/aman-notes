@@ -417,6 +417,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-exploration">Some exploration</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-calculation">Numerical calculation</a></li>
 </ul>
             </nav>
         </div>
@@ -430,8 +431,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="homodyne-detection">
 <h1>Homodyne detection<a class="headerlink" href="#homodyne-detection" title="Link to this heading">#</a></h1>
-<p>Homodyne detection is the most common Gaussian measurement used in continuous variable quantum information processing and it consists of
-measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span> or <span class="math notranslate nohighlight">\(p\)</span> <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
+<p>Homodyne detection is the most common Gaussian measurement used in continuous variable quantum information processing
+and it consists of
+measuring the position or momentum, <span class="math notranslate nohighlight">\(x\)</span> or <span class="math notranslate nohighlight">\(p\)</span> respectively, <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
 <section id="homodyne-detection-in-the-fock-basis">
 <h2>Homodyne detection in the Fock basis<a class="headerlink" href="#homodyne-detection-in-the-fock-basis" title="Link to this heading">#</a></h2>
 <section id="some-exploration">
@@ -449,7 +451,7 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
 \end{split}\]</div>
 <p>We can quickly verify that this wave function is normalized by computing</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}
+\[\begin{split}
 \begin{align}
 \int^{\infty}_{-\infty} |\Psi(x)|^2 &amp;=  \int^{\infty}_{-\infty} \left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2dx\\
 &amp;= \int^{\infty}_{-\infty} \left( \frac{1}{\sqrt{2}} \psi_0(x) + \frac{1}{\sqrt{2}} \psi_1(x)  \right)\left( \frac{1}{\sqrt{2}} \psi_0^*(x) + \frac{1}{\sqrt{2}} \psi_1^*(x)  \right) dx \quad \text{Since $|z|^2=zz^*$} \\
@@ -459,8 +461,9 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
 &amp;= \frac{1}{2} \left( \int^{\infty}_{-\infty} |\psi_0(x)|^2 dx + \int^{\infty}_{-\infty} \psi_0(x)\psi_1^*(x) dx + \int^{\infty}_{-\infty} \psi_1(x)\psi_0^*(x) dx + \int^{\infty}_{-\infty} |\psi_1(x)|^2 dx\right) \\
 &amp;= \frac{1}{2}(1 + \braket{1|0} + \braket{0|1} + 1)  \quad \text{Since $\int^{\infty}_{-\infty} \psi_n(x)\psi_m^*(x) dx \equiv \braket{m|n} = \braket{n|m}$ and $\psi_1(x)$ and $\psi_0(x)$ are normalized} \\
 &amp;= \frac{1}{2}(1 + 0 + 0 + 1) \quad \text{Since $\ket{0}$ and $\ket{1}$ are orthogonal} \\
-&amp;= 1.\end{split}\\\end{align}
-\end{aligned}\end{align} \]</div>
+&amp;= 1.
+\end{align}
+\end{split}\]</div>
 <p>Now what happens if we do</p>
 <div class="math notranslate nohighlight">
 \[
@@ -491,8 +494,27 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
 \rho = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \begin{bmatrix}1/2 &amp; 0 \\
                                  0 &amp; 1/2\end{bmatrix}
 \end{split}\]</div>
-<p>omg will this mean we get a <em>mixture</em> of gaussians/PDFs??</p>
+<p>we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\bra{x}\rho\ket{x} &amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x}\\
+&amp;= \frac{1}{2}\psi_0(x)\psi_0^*(x) + \frac{1}{2}\psi_1(x)\psi_1^*(x) \\
+&amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}|\psi_1(x)|^2 = p(x)
+\end{align*}
+\end{split}\]</div>
+<p>We get a <em><strong>mixture</strong></em> of two probability distributions, hence why mixed states are called also statistical mixtures I guess!</p>
 </section>
+</section>
+<section id="numerical-calculation">
+<h2>Numerical calculation<a class="headerlink" href="#numerical-calculation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -564,6 +586,7 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-exploration">Some exploration</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-calculation">Numerical calculation</a></li>
 </ul>
   </nav></div>
 
