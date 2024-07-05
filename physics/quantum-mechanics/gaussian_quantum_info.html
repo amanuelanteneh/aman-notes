@@ -605,8 +605,9 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 \end{split}\]</div>
 <p>So we have that the standard deviation of both quadratures is equal to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> for <span class="math notranslate nohighlight">\(\hbar=1\)</span> and therefore the <em>variance</em> is <span class="math notranslate nohighlight">\(\sigma^2=\frac{1}{2}\)</span>.</p>
  <!-- It's Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of $0$ in both variables $q$ and $p$. It also has variance $\frac{1}{2}$, since we set $\hbar=1$, for the variables $q$ and $p$ {cite:p}`brask2021gaussian`. It's covariance matrix and vector of means are thus -->
-<p>Thus the covariance matrix and the vector of means are, respectively,
-$<span class="math notranslate nohighlight">\(
+<p>Thus the covariance matrix and the vector of means are, respectively,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \Sigma = \begin{bmatrix}
 \frac{1}{2} &amp; 0 \\
 0 &amp; \frac{1}{2} 
@@ -614,7 +615,7 @@ $<span class="math notranslate nohighlight">\(
 0 \\
 0 
 \end{bmatrix}.
-\)</span>$</p>
+\end{split}\]</div>
 <p>Below is some code to compute the Wigner function of an arbitrary single mode Gaussian state, in this case it will be the vacuum state. I used <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to vectorize some operations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
