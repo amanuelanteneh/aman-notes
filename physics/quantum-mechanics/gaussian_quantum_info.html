@@ -638,6 +638,9 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 </div>
 <div class="cell_output docutils container">
 <img alt="../../_images/8ae4a9a86c5d4d78ea9f0df3b735d7c1e5e77a67ed2bd1846dc75353cee6fee3.png" src="../../_images/8ae4a9a86c5d4d78ea9f0df3b735d7c1e5e77a67ed2bd1846dc75353cee6fee3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 200)
+</pre></div>
+</div>
 </div>
 </div>
 <p>As we can see it’s Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of <span class="math notranslate nohighlight">\(0\)</span> in both variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> and it is also has equal spread along both quadratures.</p>
@@ -647,7 +650,7 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 <p>Note the use <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> vectorization by first using <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">np.stack()</span></code> and then using</p>
 <p><code class="docutils literal notranslate"><span class="pre">exp(-0.5</span> <span class="pre">*</span> <span class="pre">np.sum(</span> <span class="pre">(R</span> <span class="pre">-</span> <span class="pre">mu)</span> <span class="pre">&#64;</span> <span class="pre">inv_sig</span> <span class="pre">*</span> <span class="pre">(R</span> <span class="pre">-</span> <span class="pre">mu),</span> <span class="pre">axis=-1</span> <span class="pre">)</span> <span class="pre">)</span></code></p>
 <p>to compute the exponential involving matrix multiplication
-in a batched way.</p>
+in a batched way. This is because the inputs <code class="docutils literal notranslate"><span class="pre">q</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> are generally a 2D (in this case 200 by 200) grid of points where the Wigner function will be evaluated.</p>
 </section>
 </div></section>
 <section id="examples-of-gaussian-operations">
