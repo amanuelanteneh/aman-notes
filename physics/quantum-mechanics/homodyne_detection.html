@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -390,7 +390,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -406,6 +408,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homodyne-detection-in-the-fock-basis">Homodyne detection in the Fock basis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-exploration">Some exploration</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -419,6 +432,68 @@ document.write(`
 <h1>Homodyne detection<a class="headerlink" href="#homodyne-detection" title="Link to this heading">#</a></h1>
 <p>Homodyne detection is the most common Gaussian measurement used in continuous variable quantum information processing and it consists of
 measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span> or <span class="math notranslate nohighlight">\(p\)</span> <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
+<section id="homodyne-detection-in-the-fock-basis">
+<h2>Homodyne detection in the Fock basis<a class="headerlink" href="#homodyne-detection-in-the-fock-basis" title="Link to this heading">#</a></h2>
+<section id="some-exploration">
+<h3>Some exploration<a class="headerlink" href="#some-exploration" title="Link to this heading">#</a></h3>
+<p>Recall that in the Fock basis a general density matrix <span class="math notranslate nohighlight">\(\rho\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\rho = \sum_{n}^\infty\sum_m^\infty\rho_{nm}\ket{n}\bra{m}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_{nm}\)</span> denotes the element of <span class="math notranslate nohighlight">\(\rho\)</span> in row <span class="math notranslate nohighlight">\(n\)</span> column <span class="math notranslate nohighlight">\(m\)</span>. Also recall that if one has a superposition state <span class="math notranslate nohighlight">\(\ket{\Psi} = \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}\)</span> the corresponding position wave function is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Psi(x) =  \braket{x|\Psi} = \frac{1}{\sqrt{2}}\braket{x|0} + \frac{1}{\sqrt{2}}\braket{x|1} \\
+\equiv \frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x).
+\end{split}\]</div>
+<p>We can quickly verify that this wave function is normalized by computing</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\begin{align}
+\int^{\infty}_{-\infty} |\Psi(x)|^2 &amp;=  \int^{\infty}_{-\infty} \left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2dx\\
+&amp;= \int^{\infty}_{-\infty} \left( \frac{1}{\sqrt{2}} \psi_0(x) + \frac{1}{\sqrt{2}} \psi_1(x)  \right)\left( \frac{1}{\sqrt{2}} \psi_0^*(x) + \frac{1}{\sqrt{2}} \psi_1^*(x)  \right) dx \quad \text{Since $|z|^2=zz^*$} \\
+&amp;=  \int^{\infty}_{-\infty} \frac{1}{2} \left(  \psi_0(x) +  \psi_1(x)  \right)\left(  \psi_0^*(x) + \psi_1^*(x)  \right) dx \\
+&amp;= \frac{1}{2} \int^{\infty}_{-\infty}  \psi_0(x)\psi_0^*(x) + \psi_0(x)\psi_1^*(x) + \psi_1(x)\psi_0^*(x) + \psi_1(x)\psi_1^*(x)  dx \\
+&amp;= \frac{1}{2} \int^{\infty}_{-\infty} |\psi_0(x)|^2 + \psi_0(x)\psi_1^*(x) + \psi_1(x)\psi_0^*(x) + |\psi_1(x)|^2 dx \\
+&amp;= \frac{1}{2} \left( \int^{\infty}_{-\infty} |\psi_0(x)|^2 dx + \int^{\infty}_{-\infty} \psi_0(x)\psi_1^*(x) dx + \int^{\infty}_{-\infty} \psi_1(x)\psi_0^*(x) dx + \int^{\infty}_{-\infty} |\psi_1(x)|^2 dx\right) \\
+&amp;= \frac{1}{2}(1 + \braket{1|0} + \braket{0|1} + 1)  \quad \text{Since $\int^{\infty}_{-\infty} \psi_n(x)\psi_m^*(x) dx \equiv \braket{m|n} = \braket{n|m}$ and $\psi_1(x)$ and $\psi_0(x)$ are normalized} \\
+&amp;= \frac{1}{2}(1 + 0 + 0 + 1) \quad \text{Since $\ket{0}$ and $\ket{1}$ are orthogonal} \\
+&amp;= 1.\end{split}\\\end{align}
+\end{aligned}\end{align} \]</div>
+<p>Now what happens if we do</p>
+<div class="math notranslate nohighlight">
+\[
+\bra{x}\rho\ket{x} = \sum_{n}^\infty\sum_m^\infty\rho_{nm}\braket{x|n}\braket{m|x}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho = \ket{\Psi}\bra{\Psi}\)</span> and <span class="math notranslate nohighlight">\(\ket{\Psi}\)</span> is the same as above.</p>
+<p>Well the explicit density matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\rho = \ket{\Psi}\bra{\Psi} = \begin{bmatrix}1/2 &amp; 1/2 \\
+                                 1/2 &amp; 1/2\end{bmatrix}
+\end{split}\]</div>
+<p>so we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\bra{x}\rho\ket{x} &amp;= \sum_{n}^\infty\sum_m^\infty\rho_{nm}\braket{x|n}\braket{m|x} \\
+&amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|0}\braket{1|x} + \frac{1}{2}\braket{x|1}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x} \\
+&amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}\psi_0(x)\psi_1^*(x) + \frac{1}{2}\psi_1(x)\psi_0^*(x) + \frac{1}{2}|\psi_1(x)|^2 \\
+&amp;\text{We can see that this expression is the same as the one in the integrand of Equation 5 from above so we have:}\\
+\bra{x}\rho\ket{x}&amp;= \left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2 = |\Psi(x)|^2 = p(x)
+\end{align*}
+\end{split}\]</div>
+<p>So it seems like when we take the expectation value of the density operator <span class="math notranslate nohighlight">\(\rho\)</span> with respect to the position eigenstate <span class="math notranslate nohighlight">\(\ket{x}\)</span> we get the probability distribution (PDF) of the state represented by <span class="math notranslate nohighlight">\(\rho\)</span> over <span class="math notranslate nohighlight">\(x\)</span>!</p>
+<p>But what if <span class="math notranslate nohighlight">\(\rho\)</span> is a mixed state such as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\rho = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \begin{bmatrix}1/2 &amp; 0 \\
+                                 0 &amp; 1/2\end{bmatrix}
+\end{split}\]</div>
+<p>omg will this mean we get a <em>mixture</em> of gaussians/PDFs??</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -475,6 +550,24 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homodyne-detection-in-the-fock-basis">Homodyne detection in the Fock basis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-exploration">Some exploration</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

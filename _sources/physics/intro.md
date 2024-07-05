@@ -23,3 +23,7 @@ i\hbar=[q,p] &= qp - pq\\
 \end{align*}
 $$
 This means $i\hbar=i$ and so $\hbar=1$. I've seen others use conventions like $\hbar=2$, you can always check what value someone is working with by doing the above calculation with the definition of $q$ (or $x$) and $p$ that they give.
+
+## What is this $q$ thing?
+
+So this is a question I had when I first saw this being used to denote the position operator. I think it comes from 
