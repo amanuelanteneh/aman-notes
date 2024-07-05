@@ -530,8 +530,7 @@ W(\vec{r}) = \frac{1}{2^M\pi^M\sqrt{\textrm{det}(\Sigma)}}\exp\left({-\frac{1}{2
 \vec{r}=\begin{bmatrix}
 q_1\\
 p_1\\
-q_2\\
-p_2\\
+\vdots \\
 \vdots \\
 q_M\\
 p_M
@@ -543,36 +542,29 @@ p_M
 \[\begin{split}
 \vec{r}=\begin{bmatrix}
 q_1\\
-q_2\\
 \vdots \\
 q_M\\
 p_1\\
-p_2\\
 \vdots \\
 p_M\\
 \end{bmatrix} 
 \end{split}\]</div>
-<p>It is possible to switch to this convention from the first one by use of the change of basis matrix <span class="math notranslate nohighlight">\(B\)</span> which has elements <span class="math notranslate nohighlight">\(B_{ij} = \delta_{j,2i-1}+\delta_{j+2M,2i}\)</span> where <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> is the Kronecker delta. We may also switch from the the second convention to the first by applying the transpose <span class="math notranslate nohighlight">\(B^T\)</span> of the change of basis matrix <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id6" title="Gerardo Adesso, Sammy Ragy, and Antony R Lee. Continuous variable quantum information: gaussian states and beyond. Open Systems &amp; Information Dynamics, 21(01n02):1440001, 2014.">Adesso <em>et al.</em>, 2014</a>]</span>.
+<p>It is possible to switch to this convention from the first one by use of the change of basis matrix <span class="math notranslate nohighlight">\(B\)</span> which has elements <span class="math notranslate nohighlight">\(B_{ij} = \delta_{j,2i-1}+\delta_{j+2M,2i}\)</span> where <span class="math notranslate nohighlight">\(\delta_{ij}\)</span> is the Kronecker delta. We may also switch from the the second convention to the first by applying the inverse of the change of basis matrix which is <span class="math notranslate nohighlight">\(B^{-1}=B^T\)</span> <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id6" title="Gerardo Adesso, Sammy Ragy, and Antony R Lee. Continuous variable quantum information: gaussian states and beyond. Open Systems &amp; Information Dynamics, 21(01n02):1440001, 2014.">Adesso <em>et al.</em>, 2014</a>]</span>.
 Explicitly we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 B \begin{bmatrix}
 q_1\\
 p_1\\
-q_2\\
-p_2\\
 \vdots \\
-q_{M-1}\\
-p_{M-1} \\
+\vdots \\
 q_M\\
 p_M
 \end{bmatrix} = \begin{bmatrix}
 q_1\\
-q_2\\
 \vdots \\
 q_M\\
 p_1\\
-p_2\\
 \vdots \\
 p_M\\
 \end{bmatrix} 
