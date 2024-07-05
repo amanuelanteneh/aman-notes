@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Amanuel's Notes
+title: Amanuel's Notebook
 author: Amanuel Anteneh
 #logo: logo1.png
 copyright: "2024"
@@ -38,6 +38,9 @@ sphinx:
     html_show_copyright: true
     bibtex_reference_style: author_year
     language: en
+  
+  extra_extensions:
+    - sphinx_proof
     
 parse:
   myst_enable_extensions:
