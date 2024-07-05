@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -427,15 +427,29 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
-<p>To get the most out of these notes I suggest having an undergraduate level understanding of quantum mechanics but I may go over some fundamentals when appropriate.</p>
+<p>These are notes I made while learning about new aspects of quantum mechanics and information while doing my research work with the Quantum Fields and Quantum Information research lab. To get the most out of these notes I suggest having an undergraduate level understanding of quantum mechanics but I may go over some fundamentals when appropriate.</p>
 <section id="conventions">
 <h2>Conventions<a class="headerlink" href="#conventions" title="Link to this heading">#</a></h2>
-<p>When working with the position and momentum (quadrature) operators, <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> respectively, we will define them as</p>
+<p>When working with the position and momentum (quadrature) operators, <span class="math notranslate nohighlight">\(q\)</span> (or more commonly <span class="math notranslate nohighlight">\(x\)</span>) and <span class="math notranslate nohighlight">\(p\)</span> respectively, we will define them as</p>
 <div class="math notranslate nohighlight">
 \[
-q = \frac{1}{\sqrt{2}} (a+ a^\dagger), \quad p = \frac{1}{\sqrt{2}i}(a - a^\dagger)
+x = q = \frac{1}{\sqrt{2}} (a+ a^\dagger), \quad p = \frac{1}{\sqrt{2}i}(a - a^\dagger)
 \]</div>
-<p>solving for <span class="math notranslate nohighlight">\(\hbar\)</span> using the canonical commutation relation <span class="math notranslate nohighlight">\([q,p] = i\hbar\)</span> we get <span class="math notranslate nohighlight">\(\hbar=1\)</span>.</p>
+<p>solving for <span class="math notranslate nohighlight">\(\hbar\)</span> using the canonical commutation relations <span class="math notranslate nohighlight">\([q,p] = i\hbar\)</span> and <span class="math notranslate nohighlight">\([a, a^\dagger]=1\)</span> we get <span class="math notranslate nohighlight">\(\hbar=1\)</span> <span id="id1">[<a class="reference internal" href="../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span>. As a refresher let’s do this calculation.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+i\hbar=[q,p] &amp;= qp - pq\\
+&amp;= \left( \frac{-i}{2}(a+a^\dagger)(a-a^\dagger) + \frac{i}{2}(a-a^\dagger)(a+a^\dagger)  \right)\\ 
+&amp;=  \left(\frac{-i}{2}\left(a^2 -aa^\dagger + a^\dagger a - {a^\dagger}^2 )  + \frac{i}{2}(a^2+aa^\dagger - a^\dagger a - {a^\dagger}^2\right)\right) \\
+&amp;= \frac{i}{2}\left( -a^2 + aa^\dagger - a^\dagger a + {a^\dagger}^2 + a^2 +aa^\dagger - a^\dagger a - {a^{\dagger}}^2 \right) \\
+&amp;= \frac{i}{2}\left( 2aa^\dagger - 2a^\dagger a\right)\\
+&amp;= i\left( aa^\dagger - a^\dagger a\right)\\
+&amp;= i[a,a^\dagger] \\
+&amp;= i  \quad \text{Since we know $[a,a^\dagger]$=1}
+\end{align*}
+\end{split}\]</div>
+<p>This means <span class="math notranslate nohighlight">\(i\hbar=i\)</span> and so <span class="math notranslate nohighlight">\(\hbar=1\)</span>. I’ve seen others use conventions like <span class="math notranslate nohighlight">\(\hbar=2\)</span>, you can always check what value someone is working with by doing the above calculation with the definition of <span class="math notranslate nohighlight">\(q\)</span> (or <span class="math notranslate nohighlight">\(x\)</span>) and <span class="math notranslate nohighlight">\(p\)</span> that they give.</p>
 </section>
 </section>
 
