@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -589,7 +590,7 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 <p>and</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_p = \sqrt{ \langle p^2 \rangle - \langle p \rangle^2 }
+\sigma_p = \sqrt{ \langle p^2 \rangle - \langle p \rangle^2 },
 \]</div>
 <p>respectively, in the two quadratures so <span class="math notranslate nohighlight">\(\sigma_p=\sigma_q\)</span>.</p>
 <p>Since <span class="math notranslate nohighlight">\([q,p]=i\hbar\)</span> we know that the quadratures must obey Heisenberg’s uncertainty principle so we have</p>
@@ -604,7 +605,6 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 \end{align*}
 \end{split}\]</div>
 <p>So we have that the standard deviation of both quadratures is equal to <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span> for <span class="math notranslate nohighlight">\(\hbar=1\)</span> and therefore the <em>variance</em> is <span class="math notranslate nohighlight">\(\sigma^2=\frac{1}{2}\)</span>.</p>
- <!-- It's Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of $0$ in both variables $q$ and $p$. It also has variance $\frac{1}{2}$, since we set $\hbar=1$, for the variables $q$ and $p$ {cite:p}`brask2021gaussian`. It's covariance matrix and vector of means are thus -->
 <p>Thus the covariance matrix and the vector of means are, respectively,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -648,7 +648,16 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 <img alt="../../_images/8ae4a9a86c5d4d78ea9f0df3b735d7c1e5e77a67ed2bd1846dc75353cee6fee3.png" src="../../_images/8ae4a9a86c5d4d78ea9f0df3b735d7c1e5e77a67ed2bd1846dc75353cee6fee3.png" />
 </div>
 </div>
+<p>As we can see it’s Wigner function is a Gaussian centered at the origin of phase space meaning it has a mean of <span class="math notranslate nohighlight">\(0\)</span> in both variables <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> and it is also has equal spread along both quadratures.</p>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 2.1 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Note the use <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> vectorization by first using <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">=</span> <span class="pre">np.stack()</span></code> and then using</p>
+<p><code class="docutils literal notranslate"><span class="pre">exp(-0.5</span> <span class="pre">*</span> <span class="pre">np.sum(</span> <span class="pre">(R</span> <span class="pre">-</span> <span class="pre">mu)</span> <span class="pre">&#64;</span> <span class="pre">inv_sig</span> <span class="pre">*</span> <span class="pre">(R</span> <span class="pre">-</span> <span class="pre">mu),</span> <span class="pre">axis=-1</span> <span class="pre">)</span> <span class="pre">)</span></code></p>
+<p>to compute the exponential involving matrix multiplication
+in a batched way.</p>
 </section>
+</div></section>
 <section id="examples-of-gaussian-operations">
 <h2>Examples of Gaussian operations<a class="headerlink" href="#examples-of-gaussian-operations" title="Link to this heading">#</a></h2>
 <p>Now lets look at some Gaussian operations. We’ll examine how each of them transform the vacuum state.</p>
@@ -660,7 +669,7 @@ Since the vacuum state has 0 photons we know it’s expectation values, <span cl
 D(\alpha) = e^{\alpha a^\dagger - \alpha^* a}.
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the canonical annihilation and creation operators respectively.</p>
-<p>The a displacement operation can be realized in the Gaussian formalism by adding the vector  <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>The displacement operation can be realized in the Gaussian formalism by adding the vector  <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 d = \sqrt{2}\begin{bmatrix}
@@ -710,7 +719,7 @@ The rotation operation has the form</p>
 R(\theta) = e^{i\theta N}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{n}\)</span> is the number operator <span class="math notranslate nohighlight">\(N = a^\dagger a\)</span>.</p>
-<p>The a rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>The rotation operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 R(\theta) = \begin{bmatrix}
@@ -759,8 +768,8 @@ For this operation we’ll look at how it transforms the coherent state shown ab
 \[
 S(z) = e^{\frac{1}{2}(z^* {a^\dagger}^2 - z a^2)}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(z=re^{i\theta}\)</span>.</p>
-<p>The a squeezing operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>where <span class="math notranslate nohighlight">\(z=re^{i\theta}\)</span> and <span class="math notranslate nohighlight">\(r\)</span> controls the magnitude of the squeezing applied while <span class="math notranslate nohighlight">\(\theta\)</span> determines the angle along which to squeeze.</p>
+<p>The squeezing operation can be realized in the Gaussian formalism by applying the symplectic matrix <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 S(z) = \begin{bmatrix}
@@ -773,7 +782,7 @@ S(z) = \begin{bmatrix}
 \[
 U = \bigoplus_{k=1}^M S(z_k)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(S(z_k)\)</span> denotes the squeezing applied to mode <span class="math notranslate nohighlight">\(k\)</span>. For this operation we’ll look at how it transforms the vacuum.</p>
+<p>where <span class="math notranslate nohighlight">\(S(z_k)\)</span> denotes the squeezing applied to mode <span class="math notranslate nohighlight">\(k\)</span>. For this operation we’ll look at how it transforms the vacuum. Applying a squeezing operation to the vacuum state produced a squeezed vacuum state (sometimes simply called a squeezed state).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">squeeze</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
@@ -806,18 +815,20 @@ U = \bigoplus_{k=1}^M S(z_k)
 <h2>Gaussian measurements<a class="headerlink" href="#gaussian-measurements" title="Link to this heading">#</a></h2>
 <section id="homodyne-detection">
 <h3>Homodyne detection<a class="headerlink" href="#homodyne-detection" title="Link to this heading">#</a></h3>
+<p>Homodyne detection is the most common Gaussian measurement used in continuous variable quantum information processing and it consists of
+measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span> or <span class="math notranslate nohighlight">\(p\)</span> <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
 </section>
 </section>
 <section id="other-examples-of-gaussian-states">
 <h2>Other examples of Gaussian states<a class="headerlink" href="#other-examples-of-gaussian-states" title="Link to this heading">#</a></h2>
 <section id="thermal-state">
 <h3>Thermal state<a class="headerlink" href="#thermal-state" title="Link to this heading">#</a></h3>
-<p>Another example of a Gaussian state is a thermal state which is a mixed state defined, in the Fock basis, as <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
+<p>Another example of a Gaussian state is a thermal state which is a mixed state defined, in the Fock basis, as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
 \rho(\bar{n}) = \frac{1}{\bar{n}+1}\sum_{n=0}^{\infty} \left(\frac{\bar{n}}{\bar{n} + 1}\right)^n\ket{n}\bra{n}.
 \]</div>
-<p>These states are interesting since they are not pure states and like the vacuum state have 0 expectation value in both quadratures. However unlike the vacuum state they have a variance of <span class="math notranslate nohighlight">\(2\bar{n}+1\)</span> for the two quadratures as can be seen from the below Wigner plot which is a Gaussian with wider spread along both variables.</p>
+<p>These states are interesting since they are <em>mixed</em> states and like the vacuum state have 0 expectation value in both quadratures. However unlike the vacuum state they have a variance of <span class="math notranslate nohighlight">\(\bar{n}+\frac{1}{2}\)</span> for the two quadratures as can be seen from the below Wigner plot which is a Gaussian with wider spread along both variables.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -829,9 +840,9 @@ U = \bigoplus_{k=1}^M S(z_k)
 <span class="n">nbar</span> <span class="o">=</span> <span class="mf">0.75</span>
 
 <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="n">nbar</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  
-                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbar</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="p">]</span> <span class="p">)</span> <span class="c1"># covariance matrix of vacuum state</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">nbar</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">]</span> <span class="p">]</span> <span class="p">)</span> <span class="c1"># covariance matrix of thermal state</span>
 
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="c1"># mean vector of vacuum state</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="c1"># mean vector of thermal state</span>
 
 <span class="n">W</span> <span class="o">=</span> <span class="n">wigner</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
 <span class="n">plot_wigner</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">state_name</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
@@ -851,15 +862,12 @@ U = \bigoplus_{k=1}^M S(z_k)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Thu Jul 04 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jul 05 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
-qutip     : 4.7.5
 matplotlib: 3.7.4
 numpy     : 1.26.2
 </pre></div>
