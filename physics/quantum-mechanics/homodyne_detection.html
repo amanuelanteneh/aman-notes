@@ -210,14 +210,15 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">7. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">8. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/inv_trans_sampling.html">8. Inverse transform sampling</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">9. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">9. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">10. Bibliography</a></li>
 </ul>
 
     </div>
@@ -547,9 +548,13 @@ Well we would need the analytic expressions for the wave functions of each of th
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">scp</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">hermite</span> <span class="k">as</span> <span class="n">H</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span> <span class="k">as</span> <span class="n">fac</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simpson</span>
 <span class="kn">import</span> <span class="nn">qutip</span> <span class="k">as</span> <span class="nn">qt</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">175</span>
 <span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">13</span><span class="p">}</span>
@@ -575,8 +580,8 @@ Well we would need the analytic expressions for the wave functions of each of th
 <span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$|\psi\rangle=|&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fock</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\rangle$&quot;</span>
 <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">fock</span><span class="p">)</span> <span class="p">)</span>
 <span class="n">m_w_over_pi_hbar</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">hbar</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">num_points</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">x_max</span> <span class="o">=</span> <span class="mf">6.5</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">750</span>
+<span class="n">x_max</span> <span class="o">=</span> <span class="mi">7</span>
 
 <span class="n">points</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">x_max</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">num_points</span><span class="p">,)</span> <span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span> 
@@ -589,13 +594,18 @@ Well we would need the analytic expressions for the wave functions of each of th
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># imaginary parts should have all canceled but still need to cast to real data type</span>
 <span class="n">pdf</span><span class="p">[</span><span class="n">pdf</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># zero out any super small or negative probabilities</span>
 
-<span class="n">pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># normalize probability distribution </span>
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8f4642244be49bbf113004ae2276adf7e3c742d3e691f2acd4a8de166d2b8a63.png" src="../../_images/8f4642244be49bbf113004ae2276adf7e3c742d3e691f2acd4a8de166d2b8a63.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999822702\]</div>
+<img alt="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" src="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" />
 </div>
 </div>
 <p>Now lets check using the analytic expression of the probability density function for the Fock states i.e</p>
@@ -609,14 +619,18 @@ Well we would need the analytic expressions for the wave functions of each of th
     <span class="k">return</span> <span class="n">pdf</span>
 
 <span class="n">true_pdf</span> <span class="o">=</span> <span class="n">fock_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fock</span><span class="p">,</span> <span class="n">hbar</span><span class="p">)</span>
-<span class="n">true_pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8f4642244be49bbf113004ae2276adf7e3c742d3e691f2acd4a8de166d2b8a63.png" src="../../_images/8f4642244be49bbf113004ae2276adf7e3c742d3e691f2acd4a8de166d2b8a63.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999822702\]</div>
+<img alt="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" src="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" />
 </div>
 </div>
 <p>Looks like they match! Now just to be safe let’s check that this works for a super position state and a mixed state.</p>
@@ -639,13 +653,18 @@ Well we would need the analytic expressions for the wave functions of each of th
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># imaginary parts should have all canceled but still need to cast to real data type</span>
 <span class="n">pdf</span><span class="p">[</span><span class="n">pdf</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># zero out any super small or negative probabilities</span>
 
-<span class="n">pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># normalize probability distribution </span>
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d079732fea9eaa1b9d60ac9981e363dbacbe378b5049c4e3f371d919f2682ffd.png" src="../../_images/d079732fea9eaa1b9d60ac9981e363dbacbe378b5049c4e3f371d919f2682ffd.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999828573\]</div>
+<img alt="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" src="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" />
 </div>
 </div>
 <p>The true probability density function is given by</p>
@@ -666,14 +685,18 @@ p(x) = |\braket{x|\psi}|^2 = \frac{1}{2}\left(\psi_2(x)\psi_2^*(x) + \psi_2(x)\p
     <span class="k">return</span> <span class="n">pdf</span>
 
 <span class="n">true_pdf</span> <span class="o">=</span> <span class="n">fock_superpos_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fock1</span><span class="p">,</span> <span class="n">fock2</span><span class="p">,</span> <span class="n">hbar</span><span class="p">)</span>
-<span class="n">true_pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d079732fea9eaa1b9d60ac9981e363dbacbe378b5049c4e3f371d919f2682ffd.png" src="../../_images/d079732fea9eaa1b9d60ac9981e363dbacbe378b5049c4e3f371d919f2682ffd.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999828576\]</div>
+<img alt="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" src="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" />
 </div>
 </div>
 <p>Alright those match as well so now lets do the mixed state <span class="math notranslate nohighlight">\(\rho = \frac{1}{2}\ket{2}\bra{2} + \frac{1}{2}\ket{6}\bra{6}\)</span></p>
@@ -696,13 +719,19 @@ p(x) = |\braket{x|\psi}|^2 = \frac{1}{2}\left(\psi_2(x)\psi_2^*(x) + \psi_2(x)\p
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># imaginary parts should have all canceled but still need to cast to real data type</span>
 <span class="n">pdf</span><span class="p">[</span><span class="n">pdf</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># zero out any super small or negative probabilities</span>
 
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+
 <span class="n">pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># normalize probability distribution </span>
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a8c7975275d63fc81768612ea6c302f81c011739698f585837e66788016b5ba6.png" src="../../_images/a8c7975275d63fc81768612ea6c302f81c011739698f585837e66788016b5ba6.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999829643\]</div>
+<img alt="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" src="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" />
 </div>
 </div>
 <p>The true probability density function will be a mixture of the the PDF’s for <span class="math notranslate nohighlight">\(\ket{2}\)</span> and <span class="math notranslate nohighlight">\(\ket{6}\)</span> so</p>
@@ -723,14 +752,19 @@ p(x) = \frac{1}{2}|\psi_2(x)|^2 + \frac{1}{2}|\psi_6(x)|^2
     <span class="k">return</span> <span class="n">pdf</span>
 
 <span class="n">true_pdf</span> <span class="o">=</span> <span class="n">fock_mixture_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fock1</span><span class="p">,</span> <span class="n">fock2</span><span class="p">,</span> <span class="n">hbar</span><span class="p">)</span>
-<span class="n">true_pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
+
+<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a8c7975275d63fc81768612ea6c302f81c011739698f585837e66788016b5ba6.png" src="../../_images/a8c7975275d63fc81768612ea6c302f81c011739698f585837e66788016b5ba6.png" />
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999829644\]</div>
+<img alt="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" src="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" />
 </div>
 </div>
 <p>Boom. We have found a way to compute the probability distribution of the state over <span class="math notranslate nohighlight">\(x\)</span>. To find the probability distribution of the momentum <span class="math notranslate nohighlight">\(p\)</span> we can just rotate the initial state by <span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span></p>
@@ -740,6 +774,31 @@ p(x) = \frac{1}{2}|\psi_2(x)|^2 + \frac{1}{2}|\psi_6(x)|^2
 \]</div>
 <p>as this is the Fourier transform that will move into momentum space, before computing the pdf.</p>
 <p>Now that we have the pdf we may sample from it to simulate measurements of the desired quadrature!</p>
+<p>Oddly it seems like <code class="docutils literal notranslate"><span class="pre">strawberryfields</span></code> in it’s code treats the PDF that it computes <span class="math notranslate nohighlight">\(|\Psi(x)|^2\)</span> as a PMF which I don’t think works…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+Last updated: Fri Jul 05 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+qutip     : 4.7.5
+numpy     : 1.26.2
+matplotlib: 3.7.4
+scipy     : 1.12.0
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
