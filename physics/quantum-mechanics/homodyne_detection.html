@@ -630,6 +630,14 @@ Note that the sum of variable <code class="docutils literal notranslate"><span c
 <p>Note that we use <span class="math notranslate nohighlight">\(\approx\)</span> because we use a numerical method (simpsons rule) to compute these integrals and we are only working with discrete values of the function.</p>
 </div>
 <p>Now lets check using the analytic expression of the probability density function for the Fock states i.e</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+|\Psi(x)|^2 &amp;= |\psi_0(x)|^2  \\
+&amp;= \psi_0(x)\psi_0^*(x) \\
+&amp;=  \left( \frac{1}{\pi} \right)^{1/2} \frac{1}{2^00!} H_0^2(x)e^{-x^2}
+\end{align*}
+\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fock_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">hbar</span><span class="p">):</span>
