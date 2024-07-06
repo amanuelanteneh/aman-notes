@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/entanglement';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -416,7 +418,49 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="entanglement">
 <h1>Entanglement<a class="headerlink" href="#entanglement" title="Link to this heading">#</a></h1>
-<p>If two systems are entangled they are entangled in <em>every</em> basis. That’s kinda neat.</p>
+<p>Below is a simply circuit to generate an entagled state. Specdically the Bell state</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\ket{\Phi^+} &amp;= \frac{1}{\sqrt{2}}(\ket{0}_A \otimes \ket{0}_B ) + \frac{1}{\sqrt{2}}(\ket{1}_A \otimes \ket{1}_B ) \\
+&amp;= \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} 
+\end{align*}
+\end{split}\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/bell_circ.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/e94409b0b991aeef931da19f2bcb4e53a505d7905621004769b47c25f795ed94.png"><img alt="../../_images/e94409b0b991aeef931da19f2bcb4e53a505d7905621004769b47c25f795ed94.png" src="../../_images/e94409b0b991aeef931da19f2bcb4e53a505d7905621004769b47c25f795ed94.png" style="width: 600px;" /></a>
+</div>
+</div>
+<p>If two systems are entangled they are entangled in <em>every</em> basis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jul 06 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
