@@ -17,6 +17,7 @@ parts:
       - file: physics/quantum-mechanics/gaussian_quantum_info
       - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/photon_number_detection
+      - file: physics/quantum-mechanics/lindblad_eq
   
   - caption: Computer Science
     numbered: 1
@@ -33,11 +34,13 @@ parts:
     numbered: 1
     chapters:
     - file: mathematics/intro
+    - file: mathematics/group_theory
   
   - caption: Statistics
     numbered: 1
     chapters:
     - file: statistics/intro
+    - file: statistics/inv_trans_sampling
     - file: statistics/bayesian-statistics/bayesian_statistics
       sections:
       - file: statistics/bayesian-statistics/hierarchical_models
