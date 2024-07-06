@@ -581,7 +581,7 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 \[\begin{split}\displaystyle \rho_M = \frac{1}{2}\ket{0}\bra{0} + \frac{1}{2}\ket{1}\bra{1} = \left[\begin{matrix}\frac{1}{2} &amp; 0\\0 &amp; \frac{1}{2}\end{matrix}\right]\end{split}\]</div>
 </div>
 </div>
-<p>We can see that while the occupation probabilities of the basis states <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span>, given by the diagonals, for both systems are the same the pure state has non-zero <em>off-diagonal</em> elements. This is because the off-diagonal elements <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> of the density matrix correspond to interference (superposition) between the basis states <span class="math notranslate nohighlight">\(\ket{i}\)</span> and <span class="math notranslate nohighlight">\(\ket{j}\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. Therefore the crucial distinction between these two states is that one is a <em>quantum superposition</em> while the other is not. This illustrates the fundamental difference I was trying to get at earlier. In the case of the pure state we have <em>complete</em> information about it’s state, since according to Bell’s theorem quantum mechanics excludes the possibility of ‘hidden variables’, but in the case of the mixed state the situation is more akin to <em>classical uncertainty/ignorance</em> as we do not have complete information about the system.</p>
+<p>We can see that while the occupation probabilities of the basis states <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span>, given by the diagonals, for both systems are the same the pure state has non-zero <em>off-diagonal</em> elements. This is because the off-diagonal elements <span class="math notranslate nohighlight">\(\rho_{ij}\)</span>, called <em>coherences</em>, of the density matrix correspond to interference (superposition) between the basis states <span class="math notranslate nohighlight">\(\ket{i}\)</span> and <span class="math notranslate nohighlight">\(\ket{j}\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. Therefore the crucial distinction between these two states is that one is a <em>quantum superposition</em> while the other is not. This illustrates the fundamental difference I was trying to get at earlier. In the case of the pure state we have <em>complete</em> information about it’s state, since according to Bell’s theorem quantum mechanics excludes the possibility of ‘hidden variables’, but in the case of the mixed state the situation is more akin to <em>classical uncertainty/ignorance</em> as we do not have complete information about the system.</p>
 <p>Yet another interesting distinction between these states is related to measurement. While it is true that we can not distinguish them when measuring in the standard computational basis <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span> if we instead decide to measure in the Hadamard basis</p>
 <div class="math notranslate nohighlight">
 \[
@@ -611,6 +611,12 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 </div>
 <p>so not only are these states different, but the mixed state results in the same occupation probabilities for two different measurement bases!</p>
+<p>There is yet <em>another</em> way to examine the difference between mixed and pure states and that is by looking at the the position probability distributions of the two types of states.</p>
+<p>We can recover this distribution from the density matrix by computing</p>
+<div class="math notranslate nohighlight">
+\[
+\bra{x}\rho\ket{x}
+\]</div>
 <p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -620,9 +626,7 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Thu Jul 04 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jul 06 2024
 
 Python implementation: CPython
 Python version       : 3.10.12

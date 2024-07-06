@@ -504,8 +504,8 @@ measuring the position or momentum, <span class="math notranslate nohighlight">\
 &amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}|\psi_1(x)|^2 = p(x)
 \end{align*}
 \end{split}\]</div>
-<p>which is a <em><strong>mixture</strong></em> of two probability distributions, hence why mixed states are called also statistical mixtures I guess!</p>
-<p>So it seems like in general it seems like we have</p>
+<p>which is a <em><strong>mixture</strong></em> of two probability distributions, hence why mixed states are also called statistical mixtures I guess!</p>
+<p>So it seems like in general we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -537,7 +537,7 @@ Well we would need the analytic expressions for the wave functions of each of th
 </section>
 <section id="numerical-calculation">
 <h3>Numerical calculation<a class="headerlink" href="#numerical-calculation" title="Link to this heading">#</a></h3>
-<p>Now lets try to code this up and look at the distributions</p>
+<p>Now lets try to code this up and look at the distributions. We’ll numerically compute the mean and variance of the distributions to make sure they match the analytical value as a check.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -572,10 +572,15 @@ Well we would need the analytic expressions for the wave functions of each of th
 </div>
 </details>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Below we will be computing the probability distribution of a quantum state over the position observable <span class="math notranslate nohighlight">\(x\)</span>. It is important to note that since <span class="math notranslate nohighlight">\(x\)</span> is a continuous random variable what we will be computing is a probability <em>density</em> function meaning <span class="math notranslate nohighlight">\(p(x)\)</span> is the probability <em>density</em> at <span class="math notranslate nohighlight">\(x\)</span> not the probability of the random variable taking on the value of <span class="math notranslate nohighlight">\(x\)</span>. For discrete random variables like the photon number observable <span class="math notranslate nohighlight">\(N\)</span> what we would have is a probability <em>mass</em> function, <span class="math notranslate nohighlight">\(P(N)\)</span>, and <span class="math notranslate nohighlight">\(P(N)\)</span> in that case <em>does</em> correspond to the probability of the discrete random variable taking on the value of <span class="math notranslate nohighlight">\(N\)</span>.
+Note that the sum of variable <code class="docutils literal notranslate"><span class="pre">pdf</span></code> should <em>not</em> be equal to 1 in general since these are probability <em>densities</em> and therefore it is the integral of this function that should be equal to 1.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">fock</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">fock</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">hbar</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">state_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$|\psi\rangle=|&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fock</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;\rangle$&quot;</span>
 <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="n">qt</span><span class="o">.</span><span class="n">fock_dm</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">fock</span><span class="p">)</span> <span class="p">)</span>
@@ -594,9 +599,13 @@ Well we would need the analytic expressions for the wave functions of each of th
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># imaginary parts should have all canceled but still need to cast to real data type</span>
 <span class="n">pdf</span><span class="p">[</span><span class="n">pdf</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># zero out any super small or negative probabilities</span>
 
-<span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
-<span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="c1"># Note also that we should NOT have to normalize this unless the integral is much lower than 1</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
@@ -604,9 +613,13 @@ Well we would need the analytic expressions for the wave functions of each of th
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999822702\]</div>
-<img alt="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" src="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" />
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 1.0\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 0.5\end{split}\]</div>
+<img alt="../../_images/8eac3a462ddff7dd087d1e181f49eb692177ab516610b9da71e1def99ec0f5f9.png" src="../../_images/8eac3a462ddff7dd087d1e181f49eb692177ab516610b9da71e1def99ec0f5f9.png" />
 </div>
+</div>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that we use <span class="math notranslate nohighlight">\(\approx\)</span> because we use a numerical method (simpsons rule) to compute these integrals and we are only working with discrete values of the function.</p>
 </div>
 <p>Now lets check using the analytic expression of the probability density function for the Fock states i.e</p>
 <div class="cell docutils container">
@@ -621,7 +634,11 @@ Well we would need the analytic expressions for the wave functions of each of th
 <span class="n">true_pdf</span> <span class="o">=</span> <span class="n">fock_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fock</span><span class="p">,</span> <span class="n">hbar</span><span class="p">)</span>
 <span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
 <span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
@@ -629,8 +646,8 @@ Well we would need the analytic expressions for the wave functions of each of th
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999822702\]</div>
-<img alt="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" src="../../_images/b4a3a4fd0018917ed8bcb887f64c4dc545e077d9d72dcb24aa70d013747a8a07.png" />
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 0.9999999999811167\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 0.5\end{split}\]</div>
+<img alt="../../_images/8eac3a462ddff7dd087d1e181f49eb692177ab516610b9da71e1def99ec0f5f9.png" src="../../_images/8eac3a462ddff7dd087d1e181f49eb692177ab516610b9da71e1def99ec0f5f9.png" />
 </div>
 </div>
 <p>Looks like they match! Now just to be safe let’s check that this works for a super position state and a mixed state.</p>
@@ -655,7 +672,11 @@ Well we would need the analytic expressions for the wave functions of each of th
 
 <span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
 <span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
@@ -663,7 +684,7 @@ Well we would need the analytic expressions for the wave functions of each of th
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999828573\]</div>
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 0.9999999999828573\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 4.5\end{split}\]</div>
 <img alt="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" src="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" />
 </div>
 </div>
@@ -687,7 +708,11 @@ p(x) = |\braket{x|\psi}|^2 = \frac{1}{2}\left(\psi_2(x)\psi_2^*(x) + \psi_2(x)\p
 <span class="n">true_pdf</span> <span class="o">=</span> <span class="n">fock_superpos_prob_dist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fock1</span><span class="p">,</span> <span class="n">fock2</span><span class="p">,</span> <span class="n">hbar</span><span class="p">)</span>
 <span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
 <span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">true_pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
@@ -695,7 +720,7 @@ p(x) = |\braket{x|\psi}|^2 = \frac{1}{2}\left(\psi_2(x)\psi_2^*(x) + \psi_2(x)\p
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999828576\]</div>
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 0.9999999999828576\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 4.5\end{split}\]</div>
 <img alt="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" src="../../_images/cba37cb6b5c236b3c8a4f8ddf5131fb379c1e6192de3e71ebd2394dca5f111fb.png" />
 </div>
 </div>
@@ -721,16 +746,19 @@ p(x) = |\braket{x|\psi}|^2 = \frac{1}{2}\left(\psi_2(x)\psi_2^*(x) + \psi_2(x)\p
 
 <span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
 <span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
-<span class="n">pdf</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span> <span class="c1"># normalize probability distribution </span>
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999829643\]</div>
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 0.9999999999829643\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 4.5\end{split}\]</div>
 <img alt="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" src="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" />
 </div>
 </div>
@@ -755,7 +783,11 @@ p(x) = \frac{1}{2}|\psi_2(x)|^2 + \frac{1}{2}|\psi_6(x)|^2
 
 <span class="c1"># note that we should NOT have to normalize this unless the integral is much lower than 1</span>
 <span class="n">integral</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)))</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">(</span><span class="n">points</span><span class="o">*</span><span class="n">true_pdf</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span> <span class="n">simpson</span><span class="p">((</span> <span class="p">(</span><span class="n">points</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">true_pdf</span> <span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">points</span> <span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\int^{\infty}_{-\infty} p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1"> \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> \
+             <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1"> \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+             <span class="p">))</span>
 
 <span class="n">plot_pdf</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">true_pdf</span><span class="p">,</span> <span class="n">state_name</span><span class="p">)</span>
 </pre></div>
@@ -763,7 +795,7 @@ p(x) = \frac{1}{2}|\psi_2(x)|^2 + \frac{1}{2}|\psi_6(x)|^2
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \int^{\infty}_{-\infty} xp(x)dx \approx 0.9999999999829644\]</div>
+\[\begin{split}\displaystyle \int^{\infty}_{-\infty} p(x)dx \approx 0.9999999999829644\\ \mu_x = \int^{\infty}_{-\infty} xp(x)dx \approx -0.0 \\ \sigma_x^2 = \int^{\infty}_{-\infty} (x-\mu_x)^2p(x)dx \approx 4.5\end{split}\]</div>
 <img alt="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" src="../../_images/8a793e3d38149cb85c2aa5e0eaabbf9b0badc340f5d7716a96103824c0ff3495.png" />
 </div>
 </div>
@@ -785,16 +817,16 @@ p(x) = \frac{1}{2}|\psi_2(x)|^2 + \frac{1}{2}|\psi_6(x)|^2
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
   %reload_ext watermark
-Last updated: Fri Jul 05 2024
+Last updated: Sat Jul 06 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
-qutip     : 4.7.5
-numpy     : 1.26.2
-matplotlib: 3.7.4
 scipy     : 1.12.0
+numpy     : 1.26.2
+qutip     : 4.7.5
+matplotlib: 3.7.4
 </pre></div>
 </div>
 </div>
