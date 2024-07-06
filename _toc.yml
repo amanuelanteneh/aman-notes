@@ -23,9 +23,17 @@ parts:
     numbered: 1
     chapters:
     - file: computerscience/intro
+    - file: computerscience/data_structs
     - file: computerscience/algorithms/algorithms
       sections:
       - file: computerscience/algorithms/dynamic_prog
+      - file: computerscience/algorithms/divide_conquer
+      - file: computerscience/algorithms/randomized_algos
+      - file: computerscience/algorithms/graph_algos
+      - file: computerscience/algorithms/max_flow
+      - file: computerscience/algorithms/np_problems
+      - file: computerscience/algorithms/linear_prog
+
     - file: computerscience/machine-learning/machine_learning
       sections:
       - file: computerscience/machine-learning/attention
