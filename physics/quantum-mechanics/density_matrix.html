@@ -647,12 +647,11 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 <p>The proof for this is given in the note below.</p>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
-<p>Recall that we state earlier that for a projector <span class="math notranslate nohighlight">\(P_n=\ket{n}\bra{n}\)</span> the quantity <span class="math notranslate nohighlight">\(\textrm{Tr}(P_n\rho)\)</span> gives the the probability that the state <span class="math notranslate nohighlight">\(\rho\)</span> is found to be in the eigenstate <span class="math notranslate nohighlight">\(\ket{n}\)</span> when measured the observable corresponding to the projector is measured <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. So that means for the projector of the position eigenstate <span class="math notranslate nohighlight">\(\ket{x}\)</span>, i.e. <span class="math notranslate nohighlight">\(P_x=\ket{x}\bra{x}\)</span>, <span class="math notranslate nohighlight">\(\textrm{Tr}(\ket{x}\bra{x}\rho)\)</span> gives use the probability of finding the state is in the position eigenstate when measuring the position observable of <span class="math notranslate nohighlight">\(\rho\)</span>. So we have</p>
+<p>Recall that we stated earlier that for a projector <span class="math notranslate nohighlight">\(P_n=\ket{n}\bra{n}\)</span> the quantity <span class="math notranslate nohighlight">\(\textrm{Tr}(P_n\rho)\)</span> gives the the probability that the state <span class="math notranslate nohighlight">\(\rho\)</span> is found to be in the eigenstate <span class="math notranslate nohighlight">\(\ket{n}\)</span> when the observable corresponding to the projector is measured <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. So that means for the projector of the position eigenstate <span class="math notranslate nohighlight">\(\ket{x}\)</span>, i.e. <span class="math notranslate nohighlight">\(P_x=\ket{x}\bra{x}\)</span>, <span class="math notranslate nohighlight">\(\textrm{Tr}(\ket{x}\bra{x}\rho)\)</span> gives use the probability of finding the state in the position eigenstate when measuring the position observable of <span class="math notranslate nohighlight">\(\rho\)</span>. So we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\textrm{Tr}(\ket{x}\bra{x}\rho) &amp;= \textrm{Tr}(\ket{x}\bra{x}\rho)\\
-&amp;= \textrm{Tr}\left(\ket{x}\bra{x}\sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}\right) \\
+\textrm{Tr}(\ket{x}\bra{x}\rho) &amp;= \textrm{Tr}\left(\ket{x}\bra{x}\sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}\right) \\
 &amp;= \textrm{Tr}\left(\ket{x}\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\bra{m}\right)\right) \\
 &amp;= \textrm{Tr}\left(\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\bra{m}\right)\ket{x}\right)  \quad \text{Since Tr$(AB)=\text{Tr}(BA)$}  \\
 &amp;= \textrm{Tr}\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x}\right) \\
@@ -661,6 +660,7 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 \end{align*}
 \end{split}\]</div>
 <p>This is exactly the formula we got when we expanded the expression <span class="math notranslate nohighlight">\(\bra{x}\rho\ket{x}\)</span> above <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+<p>Note that since <span class="math notranslate nohighlight">\(x\)</span> is a continuos variable this actually gives the probability <em>density</em> function.</p>
 </div>
 <p>If we use this formula to derive the PDF over <span class="math notranslate nohighlight">\(x\)</span> for <span class="math notranslate nohighlight">\(\rho_\psi\)</span> we get</p>
 <div class="math notranslate nohighlight">
@@ -693,6 +693,7 @@ p(x) = \frac{1}{2}\mathcal{N}(\mu=5,\sigma=0.1) + \frac{1}{2}\mathcal{N}(\mu=10,
 <section id="an-experimental-example">
 <h2>An experimental example<a class="headerlink" href="#an-experimental-example" title="Link to this heading">#</a></h2>
 <p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss in quantum optical experiments. This is also a good way to think about mixed states.</p>
+<p>For example my group uses photon number detectors to measure the number of photons present in a given optical cavity (qumode) that can be modeled as a quantum harmonic oscillator. However the detectors do not have 100% efficiency, due to the technological limitations of the current state of the art, and thus when we measure the the number of photons in the qumode we do not always detect all of the photons. For example if the detector is only 50% efficient then we actually only measure 50% of the light present and the other 50% is lost (dissipated?).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
