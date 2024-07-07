@@ -425,6 +425,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experimental-example">An experimental example</a></li>
 </ul>
             </nav>
         </div>
@@ -485,6 +486,16 @@ i\hbar \frac{d}{dt}\rho(t) &amp;= [H, \rho(t)] \\
 \[
 \rho' = U\rho U^\dagger.
 \]</div>
+<p>This makes sense given the definition of the density matrix. If you evolve a ket under a unitary <span class="math notranslate nohighlight">\(U\)</span> you have</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\psi'} = U\ket{\psi}.
+\]</div>
+<p>The density matrix of this state is then given by</p>
+<div class="math notranslate nohighlight">
+\[
+\rho = \ket{\psi'}\bra{\psi'} = U\ket{\psi}\bra{\psi}U^\dagger.
+\]</div>
 <section id="properties">
 <h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h2>
 <p>The density matrix has several interesting properties. While it’s elements are in general complex numbers the diagonal elements are real with the <span class="math notranslate nohighlight">\(i\)</span>-th diagonal corresponding to the
@@ -506,9 +517,9 @@ probability that the state is in the basis state <span class="math notranslate n
 <p>The expectation value of an operator <span class="math notranslate nohighlight">\(O\)</span> that acts on the density matrix is given by</p>
 <div class="math notranslate nohighlight">
 \[
-\langle O \rangle = \textrm{Tr}(O\rho)
+\langle O \rangle = \textrm{Tr}(O\rho).
 \]</div>
-<p>and if <span class="math notranslate nohighlight">\(O\)</span> is a projector <span class="math notranslate nohighlight">\(P_n = \ket{n}\bra{n}\)</span> corresponding to an eigen state <span class="math notranslate nohighlight">\(\ket{n}\)</span> of an observable then <span class="math notranslate nohighlight">\(\langle O \rangle\)</span> corresponds to the probability that a measurement finds the state in the eigenstate <span class="math notranslate nohighlight">\(\ket{n}\)</span>. For example if one has a spin-<span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> particle in the state <span class="math notranslate nohighlight">\(\ket{\psi}=\frac{1}{\sqrt{2}}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\)</span> then <span class="math notranslate nohighlight">\(\textrm{Tr}(\ket{0}\bra{0}\rho)\)</span> gives the probability of the particle being in the state <span class="math notranslate nohighlight">\(\ket{0}\)</span> upon measurement in the <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span> basis. This is all analogous to the expression <span class="math notranslate nohighlight">\(\bra{\psi}O\ket{\psi}\)</span> when working with kets and bras.</p>
+<p>If <span class="math notranslate nohighlight">\(O\)</span> is a projector <span class="math notranslate nohighlight">\(P_n = \ket{n}\bra{n}\)</span> corresponding to an eigen state <span class="math notranslate nohighlight">\(\ket{n}\)</span> of an observable then <span class="math notranslate nohighlight">\(\langle O \rangle\)</span> corresponds to the probability that a measurement of that observable finds the state in the eigenstate <span class="math notranslate nohighlight">\(\ket{n}\)</span>. For example if one has a spin-<span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> particle in the state <span class="math notranslate nohighlight">\(\ket{\psi}=\frac{1}{\sqrt{2}}\ket{0}+\frac{1}{\sqrt{2}}\ket{1}\)</span> then <span class="math notranslate nohighlight">\(\textrm{Tr}(\ket{0}\bra{0}\rho)\)</span> gives the probability of the particle being in the state <span class="math notranslate nohighlight">\(\ket{0}\)</span> upon measurement in the <span class="math notranslate nohighlight">\(\{\ket{0}, \ket{1}\}\)</span> basis. This is all analogous to the expression <span class="math notranslate nohighlight">\(\bra{\psi}O\ket{\psi}\)</span> when working with kets and bras.</p>
 <p>Lastly the density matrix can be used to describe what are called ‘mixed’ state (also called statistical ensembles or statistical mixtures). That is to say we can write a state</p>
 <div class="math notranslate nohighlight">
 \[
@@ -524,13 +535,14 @@ probability that the state is in the basis state <span class="math notranslate n
 <p>I have also seen it be useful to write the density matrix in terms of outer products of basis states</p>
 <div class="math notranslate nohighlight">
 \[
-\rho = \sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}.
+\rho = \sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_{nm}\)</span> is the element of the density matrix at row <span class="math notranslate nohighlight">\(n\)</span> column <span class="math notranslate nohighlight">\(m\)</span>.</p>
 <p>The density matrix is useful when one wants to study quantum systems in which we do not have complete information about the system <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>.</p>
 </section>
 <section id="pure-and-mixed-quantum-states">
 <h2>Pure and mixed quantum states<a class="headerlink" href="#pure-and-mixed-quantum-states" title="Link to this heading">#</a></h2>
-<p>But what exactly does it mean to not have complete information about the system? I think the following example is useful in explaining what is meant by this. Suppose we have a pair of qubits, qubit <span class="math notranslate nohighlight">\(A\)</span> and qubit <span class="math notranslate nohighlight">\(B\)</span>, that we prepare in the Bell state</p>
+<p>But what exactly does it mean to not have complete information about the system? I think the following example is useful for explaining this. Suppose we have a pair of qubits (e.g. two spin-<span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> particles), qubit <span class="math notranslate nohighlight">\(A\)</span> and qubit <span class="math notranslate nohighlight">\(B\)</span>, that we prepare in the Bell state</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -538,7 +550,7 @@ probability that the state is in the basis state <span class="math notranslate n
 &amp;= \frac{1}{\sqrt{2}}\ket{00} + \frac{1}{\sqrt{2}}\ket{11} 
 \end{align*}
 \end{split}\]</div>
-<p>which we know is an entangled state. Suppose we were to take qubit <span class="math notranslate nohighlight">\(B\)</span> and simply “throw it away” or ignore it (and assume it does not interact with anything moving forward) and only consider qubit <span class="math notranslate nohighlight">\(A\)</span>, this is equivalent to taking the partial trace of the system over qubit <span class="math notranslate nohighlight">\(B\)</span> which is covered in the next page. How can we specify the state of qubit <span class="math notranslate nohighlight">\(A\)</span> now? In this case we are working with <em>incomplete</em> information of the new system (qubit <span class="math notranslate nohighlight">\(A\)</span>). This is because it is <em>entangled</em> with qubit <span class="math notranslate nohighlight">\(B\)</span> and thus it is not possible to <em>fully</em> describe the state of qubit <span class="math notranslate nohighlight">\(A\)</span> without making reference to the state of qubit <span class="math notranslate nohighlight">\(B\)</span>. The reduced density matrix of qubit <span class="math notranslate nohighlight">\(A\)</span>, which again results in performing a partial trace of the qubit <span class="math notranslate nohighlight">\(B\)</span>, would therefore be a mixed state.</p>
+<p>which we know is an entangled state. Suppose we were to take qubit <span class="math notranslate nohighlight">\(B\)</span> and simply “throw it away” or ignore it (and assume it does not interact with anything moving forward) and only consider qubit <span class="math notranslate nohighlight">\(A\)</span>, this is equivalent to taking the partial trace of the system over qubit <span class="math notranslate nohighlight">\(B\)</span> which is covered in the next page. How can we specify the state of qubit <span class="math notranslate nohighlight">\(A\)</span> now? In this case we are working with <em>incomplete</em> information about the new system (qubit <span class="math notranslate nohighlight">\(A\)</span>). This is because it is still <em>entangled</em> with qubit <span class="math notranslate nohighlight">\(B\)</span> and thus it is not possible to <em>fully</em> describe the state of qubit <span class="math notranslate nohighlight">\(A\)</span> without making reference to the state of qubit <span class="math notranslate nohighlight">\(B\)</span>. The reduced density matrix of qubit <span class="math notranslate nohighlight">\(A\)</span> would therefore be a mixed state.</p>
 <p>A question you might have is: If we have a pure state</p>
 <div class="math notranslate nohighlight">
 \[
@@ -620,13 +632,48 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 </div>
 <p>so not only are these states different, but the mixed state results in the same occupation probabilities for two different measurement bases!</p>
-<p>There is yet <em>another</em> way to examine the difference between mixed and pure states and that is by looking at the the position probability distributions of the two types of states.</p>
-<p>We can recover this distribution from the density matrix by computing</p>
+<p>There is yet <em>another</em> way to examine the difference between mixed and pure states and that is by looking at the position, <span class="math notranslate nohighlight">\(\hat{x}\)</span>, probability distributions, specifically the probability density functions (PDFs) since <span class="math notranslate nohighlight">\(x\)</span> is a continuos random variable, of the two types of states.</p>
+<p>We can recover this PDF from the density matrix by computing</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\bra{x}\rho\ket{x} &amp;= \bra{x}\left(\sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}\right)\ket{x} \\
+&amp;= \sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x} \\
+&amp;= \sum_{n}\sum_m\rho_{nm}\psi_n(x)\psi_m^*(x) \quad \text{Since $\braket{x|\psi} \equiv \psi(x)$ and $\braket{\psi|x} \equiv \psi^*(x)$} \\
+\end{align*}
+\end{split}\]</div>
+<p>I’ll come back and prove this rigorously later but let’s take it to be true for now.</p>
+<p>If we use this formula to derive the PDF over <span class="math notranslate nohighlight">\(x\)</span> for <span class="math notranslate nohighlight">\(\rho_M\)</span> and <span class="math notranslate nohighlight">\(\rho_\psi\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\bra{x}\rho_\psi\ket{x} &amp;= \sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x} \\
+&amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|0}\braket{1|x} + \frac{1}{2}\braket{x|1}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x} \\
+&amp;= \frac{1}{2}\psi_0(x)\psi_0^*(x) + \frac{1}{2}\psi_0(x)\psi_1^*(x) + \frac{1}{2}\psi_1(x)\psi_0^*(x) + \frac{1}{2}\psi_1(x)\psi_1^*(x) \\
+&amp;=\left(\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right)\left(\frac{1}{\sqrt{2}}\psi_0^*(x) + \frac{1}{\sqrt{2}}\psi_1^*(x)\right)\\
+&amp;=\left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2 = |\psi(x)|^2 = p_\psi(x)
+\end{align*}
+\end{split}\]</div>
+<p>and for <span class="math notranslate nohighlight">\(\rho_M\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\bra{x}\rho\ket{x} &amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x}\\
+&amp;= \frac{1}{2}\psi_0(x)\psi_0^*(x) + \frac{1}{2}\psi_1(x)\psi_1^*(x) \\
+&amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}|\psi_1(x)|^2 = p_M(x)
+\end{align*}
+\end{split}\]</div>
+<p>we can see from the expression of <span class="math notranslate nohighlight">\(p_M(x)\)</span> that it is a <strong>mixture</strong> of two PDFs i.e. the <span class="math notranslate nohighlight">\(x\)</span> PDF of the basis state <span class="math notranslate nohighlight">\(\ket{0}\)</span> and the basis state <span class="math notranslate nohighlight">\(\ket{1}\)</span> hence the names statistical mixture and mixed state. However <span class="math notranslate nohighlight">\(p_\psi(x)\)</span> is <em>not</em> a mixture of PDF’s. This really helps show how mixed states are really results of classical uncertainty or rather it maybe more accurate to say that mixed states have an added layer of uncertainty on top of the already <strong>inherent and intrinsic</strong> uncertainty of quantum systems i.e superpositions. The crucial distinction being, again, that this added layer of uncertainty is not something that is inherent and intrinsic to Nature but arises due to our own ignorance of the full dynamics/evolution of a quantum system.</p>
+<p>Another way to think about this is with respect to the definition of mixture distributions in probability and statistics. A mixture distribution arises when one has a probability distribution over multiple random variables. For example if one has</p>
 <div class="math notranslate nohighlight">
 \[
-\bra{x}\rho\ket{x}
+p(x) = \frac{1}{2}\mathcal{N}(\mu=5,\sigma=0.1) + \frac{1}{2}\mathcal{N}(\mu=10, \sigma=0.1),
 \]</div>
-<p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss.</p>
+<p>which is a mixture of two Gaussian PDFs with mean 5 and 10 respectively and standard deviation 0.1, this amounts to selecting one of the two random variables with equal probability and then being left with a random variable with the Gaussian PDF that was randomly chosen.</p>
+</section>
+<section id="an-experimental-example">
+<h2>An experimental example<a class="headerlink" href="#an-experimental-example" title="Link to this heading">#</a></h2>
+<p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss in quantum optical experiments.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -635,7 +682,7 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jul 06 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jul 07 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
@@ -715,6 +762,7 @@ sympy: 1.12
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pure-and-mixed-quantum-states">Pure and mixed quantum states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experimental-example">An experimental example</a></li>
 </ul>
   </nav></div>
 
