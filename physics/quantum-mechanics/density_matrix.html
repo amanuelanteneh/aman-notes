@@ -642,7 +642,24 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 &amp;= \sum_{n}\sum_m\rho_{nm}\psi_n(x)\psi_m^*(x) \quad \text{Since $\braket{x|\psi} \equiv \psi(x)$ and $\braket{\psi|x} \equiv \psi^*(x)$} \\
 \end{align*}
 \end{split}\]</div>
-<p>I’ll come back and prove this rigorously later but let’s take it to be true for now.</p>
+<p>The proof for this is given in the note below.</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Recall that we state earlier that for a projector <span class="math notranslate nohighlight">\(P_n=\ket{n}\bra{n}\)</span> the quantity <span class="math notranslate nohighlight">\(\textrm{Tr}(P_n\rho)\)</span> gives the the probability that the state <span class="math notranslate nohighlight">\(\rho\)</span> is found to be in the eigenstate <span class="math notranslate nohighlight">\(\ket{n}\)</span> when measured the observable corresponding to the projector is measured <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id10" title="Giuliano Benenti, Giulio Casati, Davide Rossini, and Giuliano Strini. Principles of quantum computation and information: a comprehensive textbook. World Scientific, 2019.">Benenti <em>et al.</em>, 2019</a>]</span>. So that means for the projector of the position eigenstate <span class="math notranslate nohighlight">\(\ket{x}\)</span>, i.e. <span class="math notranslate nohighlight">\(P_x=\ket{x}\bra{x}\)</span>, <span class="math notranslate nohighlight">\(\textrm{Tr}(\ket{x}\bra{x}\rho)\)</span> gives use the probability of finding the state is in the position eigenstate when measuring the position observable of <span class="math notranslate nohighlight">\(\rho\)</span>. So we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\textrm{Tr}(\ket{x}\bra{x}\rho) &amp;= \textrm{Tr}(\ket{x}\bra{x}\rho)\\
+&amp;= \textrm{Tr}\left(\ket{x}\bra{x}\sum_{n}\sum_m\rho_{nm}\ket{n}\bra{m}\right) \\
+&amp;= \textrm{Tr}\left(\ket{x}\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\bra{m}\right)\right) \\
+&amp;= \textrm{Tr}\left(\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\bra{m}\right)\ket{x}\right)  \quad \text{Since Tr$(AB)=\text{Tr}(BA)$}  \\
+&amp;= \textrm{Tr}\left(\sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x}\right) \\
+&amp;= \textrm{Tr}\left(\sum_{n}\sum_m\rho_{nm}\psi_n(x)\psi_m^*(x)\right) \\
+&amp;= \sum_{n}\sum_m\rho_{nm}\psi_n(x)\psi_m^*(x) \quad \text{Since Tr$(a) = a$ if $a$ is a scalar and we know $\rho_{nm}$, $\psi_n(x)$ and $\psi_x^*(x)$ are all (complex) scalars} \\
+\end{align*}
+\end{split}\]</div>
+<p>This is exactly the formula we got when we expanded the expression <span class="math notranslate nohighlight">\(\bra{x}\rho\ket{x}\)</span> above <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+</div>
 <p>If we use this formula to derive the PDF over <span class="math notranslate nohighlight">\(x\)</span> for <span class="math notranslate nohighlight">\(\rho_\psi\)</span> we get</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
