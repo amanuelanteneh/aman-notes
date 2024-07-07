@@ -643,24 +643,24 @@ Lets look at the explicit density matrices using <code class="docutils literal n
 \end{align*}
 \end{split}\]</div>
 <p>I’ll come back and prove this rigorously later but let’s take it to be true for now.</p>
-<p>If we use this formula to derive the PDF over <span class="math notranslate nohighlight">\(x\)</span> for <span class="math notranslate nohighlight">\(\rho_M\)</span> and <span class="math notranslate nohighlight">\(\rho_\psi\)</span>.</p>
+<p>If we use this formula to derive the PDF over <span class="math notranslate nohighlight">\(x\)</span> for <span class="math notranslate nohighlight">\(\rho_\psi\)</span> we get</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\bra{x}\rho_\psi\ket{x} &amp;= \sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x} \\
+p_\psi(x) = \bra{x}\rho_\psi\ket{x} &amp;= \sum_{n}\sum_m\rho_{nm}\braket{x|n}\braket{m|x} \\
 &amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|0}\braket{1|x} + \frac{1}{2}\braket{x|1}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x} \\
 &amp;= \frac{1}{2}\psi_0(x)\psi_0^*(x) + \frac{1}{2}\psi_0(x)\psi_1^*(x) + \frac{1}{2}\psi_1(x)\psi_0^*(x) + \frac{1}{2}\psi_1(x)\psi_1^*(x) \\
 &amp;=\left(\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right)\left(\frac{1}{\sqrt{2}}\psi_0^*(x) + \frac{1}{\sqrt{2}}\psi_1^*(x)\right)\\
-&amp;=\left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2 = |\psi(x)|^2 = p_\psi(x)
+&amp;=\left|\frac{1}{\sqrt{2}}\psi_0(x) + \frac{1}{\sqrt{2}}\psi_1(x)\right|^2 = |\psi(x)|^2
 \end{align*}
 \end{split}\]</div>
 <p>and for <span class="math notranslate nohighlight">\(\rho_M\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\bra{x}\rho\ket{x} &amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x}\\
+p_M(x) = \bra{x}\rho\ket{x} &amp;= \frac{1}{2}\braket{x|0}\braket{0|x} + \frac{1}{2}\braket{x|1}\braket{1|x}\\
 &amp;= \frac{1}{2}\psi_0(x)\psi_0^*(x) + \frac{1}{2}\psi_1(x)\psi_1^*(x) \\
-&amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}|\psi_1(x)|^2 = p_M(x)
+&amp;= \frac{1}{2}|\psi_0(x)|^2 + \frac{1}{2}|\psi_1(x)|^2
 \end{align*}
 \end{split}\]</div>
 <p>we can see from the expression of <span class="math notranslate nohighlight">\(p_M(x)\)</span> that it is a <strong>mixture</strong> of two PDFs i.e. the <span class="math notranslate nohighlight">\(x\)</span> PDF of the basis state <span class="math notranslate nohighlight">\(\ket{0}\)</span> and the basis state <span class="math notranslate nohighlight">\(\ket{1}\)</span> hence the names statistical mixture and mixed state. However <span class="math notranslate nohighlight">\(p_\psi(x)\)</span> is <em>not</em> a mixture of PDF’s. This really helps show how mixed states are really results of classical uncertainty or rather it maybe more accurate to say that mixed states have an added layer of uncertainty on top of the already <strong>inherent and intrinsic</strong> uncertainty of quantum systems i.e superpositions. The crucial distinction being, again, that this added layer of uncertainty is not something that is inherent and intrinsic to Nature but arises due to our own ignorance of the full dynamics/evolution of a quantum system.</p>
@@ -673,7 +673,7 @@ p(x) = \frac{1}{2}\mathcal{N}(\mu=5,\sigma=0.1) + \frac{1}{2}\mathcal{N}(\mu=10,
 </section>
 <section id="an-experimental-example">
 <h2>An experimental example<a class="headerlink" href="#an-experimental-example" title="Link to this heading">#</a></h2>
-<p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss in quantum optical experiments.</p>
+<p>In my research mixed states primarily come up when we are dealing with experimental imperfections i.e. photon loss in quantum optical experiments. This is also a good way to think about mixed states.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
