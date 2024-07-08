@@ -429,7 +429,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="group-theory">
 <h1><span class="section-number">8. </span>Group theory<a class="headerlink" href="#group-theory" title="Link to this heading">#</a></h1>
-<p>In mathematics a group is defined as a set with an operation defined on elements of that set that satisfies</p>
+<p>In mathematics a group <span class="math notranslate nohighlight">\(G := \{S,*\}\)</span> consists of a set <span class="math notranslate nohighlight">\(S\)</span> (such as the the set of all integers <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> ,  and a binary operation <span class="math notranslate nohighlight">\(*\)</span> (such as addition <span class="math notranslate nohighlight">\(+\)</span>) where the following 4 criteria are met <span id="id1">[<a class="reference internal" href="../backmatter/bibliography.html#id20" title="Joseph Gallian. Contemporary abstract algebra. Chapman and Hall/CRC, 2021.">Gallian, 2021</a>]</span>:</p>
+<p>Closure: For any (a,b \in G ) we have ( a*b \in G). So the result of doing the binary operation on any 2 elements from the group will return an element that is also in the group.</p>
+<p>Associativity: For any <span class="math notranslate nohighlight">\(a,b,c \in G\)</span> we have <span class="math notranslate nohighlight">\((a*b)*c  = a*(b*c)\)</span>.</p>
+<p>Identity: There exists an element <span class="math notranslate nohighlight">\(e \in G\)</span> such that for any <span class="math notranslate nohighlight">\(a \in G\)</span> we have
+<span class="math notranslate nohighlight">\(a*e = a\)</span>.</p>
+<p>Inverse: For any element <span class="math notranslate nohighlight">\(a \in G\)</span> there exists an element <span class="math notranslate nohighlight">\(a^{-1} \in G\)</span> such that
+<span class="math notranslate nohighlight">\(a*a^{-1} = e\)</span>.</p>
+<p>The group <span class="math notranslate nohighlight">\(G \coloneqq \{\mathbb{Z},+\}\)</span> satisfies all of these conditions where <span class="math notranslate nohighlight">\(e=0\)</span>, ( a^{-1} = -a ), the associative law holds for integers and the sum of two integers is also an integer.</p>
+<p>Group theory, particularly group theory for finite groups, has certain useful applications to condensed matter and quantum physics.</p>
 <p>What are <span class="math notranslate nohighlight">\(SU(2)\)</span> and <span class="math notranslate nohighlight">\(SU(3)\)</span>? What is Gottesman–Knill theorem?</p>
 </section>
 
