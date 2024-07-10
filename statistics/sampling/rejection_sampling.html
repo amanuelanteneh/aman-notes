@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Partial trace &#8212; Amanuel&#39;s Notebook</title>
+    <title>Rejection sampling &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,14 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/partial_trace';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'statistics/sampling/rejection_sampling';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Wigner function" href="wigner_function.html" />
-    <link rel="prev" title="Density matrix" href="density_matrix.html" />
+    <link rel="next" title="Markov chain monte carlo" href="mcmc.html" />
+    <link rel="prev" title="Inverse transform sampling" href="inv_trans_sampling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,17 +176,17 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Partial trace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_info.html">Gaussian quantum information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="photon_number_detection.html">Photon number detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lindblad_eq.html">Lindblad master equation</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/entanglement.html">Entanglement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
 </ul>
 </details></li>
 </ul>
@@ -218,21 +216,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../../mathematics/representation_theory.html">9. Representation theory</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">10. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling.html">11. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">10. Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sampling.html">11. Sampling Methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="inv_trans_sampling.html">Inverse transform sampling</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Rejection sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcmc.html">Markov chain monte carlo</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">12. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../high-dim-stats/high_dim.html">12. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../high-dim-stats/compress_sense.html">Compressed sensing</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">13. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../bayesian-statistics/bayesian_statistics.html">13. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -310,7 +308,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/partial_trace.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fstatistics/sampling/rejection_sampling.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -340,7 +338,7 @@
       
       
       
-      <li><a href="../../_sources/physics/quantum-mechanics/partial_trace.ipynb" target="_blank"
+      <li><a href="../../_sources/statistics/sampling/rejection_sampling.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -411,9 +409,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -424,21 +420,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Partial trace</h1>
+    <h1>Rejection sampling</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">Mathematical definition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-implementation">Computational implementation</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -448,56 +434,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="partial-trace">
-<h1>Partial trace<a class="headerlink" href="#partial-trace" title="Link to this heading">#</a></h1>
-<section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
-<p>The partial trace is a operation that appears in many places in quantum information and computing. It is used when one wants to examine a subsystem of a larger system. In general if one has a quantum system <span class="math notranslate nohighlight">\(A\)</span> that is described by vectors in a Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_A\)</span> and another quantum system <span class="math notranslate nohighlight">\(B\)</span> whose state is described by vectors in a Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_B\)</span> then the joint or composite system of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, which resides in the joint Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}_A \otimes \mathcal{H}_B\)</span>, is given by</p>
-<div class="math notranslate nohighlight">
-\[
-\psi_{AB} = \psi_A \otimes \psi_B
-\]</div>
-<p>and for density matrices the joint density matrix is given similarly by</p>
-<div class="math notranslate nohighlight">
-\[
-\rho_{AB} = \rho_A \otimes \rho_B
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\otimes\)</span> denotes the Kronecker product between the matrices <span class="math notranslate nohighlight">\(\rho_A\)</span> and <span class="math notranslate nohighlight">\(\rho_B\)</span>.</p>
-<p>So we have a composite (bipartite) system. Now what if we want to study only one of the subsystems? We need an operation that will take the joint density matrix and return the density matrix of the system we are interested in.</p>
-<p>As a practical example in a recent paper we published <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id16" title="Amanuel Anteneh, Léandre Brunel, and Olivier Pfister. Machine learning for efficient generation of universal photonic quantum computing resources. Optica Quantum, 2024.">Anteneh <em>et al.</em>, 2024</a>]</span> we performed the task of controlling the measurement-based quantum circuit shown below to generate squeezed Schrödinger cat states.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/loop_circ.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png"><img alt="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" src="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" style="width: 600px;" /></a>
-</div>
-</div>
-<p>The circuit consists of two qumodes (essentially quantum harmonic oscillators). The first qumode is an arbitrary input state <span class="math notranslate nohighlight">\(\rho_j\)</span> and the second qumode is a vacuum state <span class="math notranslate nohighlight">\(\ket{0}\bra{0}\)</span> which is transformed into a squeezed vacuum state by the squeezing operation <span class="math notranslate nohighlight">\(S(r_j)\)</span>. The two qumodes are then acted on by the beam splitter operation <span class="math notranslate nohighlight">\(B(\tau_j)\)</span> and afterwards the first qumode is measured in the photon number (Fock) basis. After this we take the non-measured qumode denoted as <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> and feed it back into the circuit to do things all over again. The hope was that we could train an AI to learn what beam splitter and squeezing parameters, <span class="math notranslate nohighlight">\(\tau_j\)</span> and <span class="math notranslate nohighlight">\(r_j\)</span> respectively, to select such that the output qumode <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> would approximate a squeezed Schrödinger cat state over a finite number of iterations of the circuit.</p>
-<p>The partial trace is used here once we perform the photon number measurement and want to recover the reduced density matrix of the non-measured qumode <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span>.</p>
-<p>Note that the partial trace will always result in a density matrix. This is because the composite system is in general entangled and as we saw in the previous page considering only one subsystem of an entangled state always results in a statistical mixture/mixed state. Also note that the output state <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> of the circuit above is always a pure state, assuming the circuit is ideal/error free, despite the beam splitter operation which in general produces entangled states. This might be confusing at first but this is the case due to the photon number measurement which destroys the entanglement.</p>
-</section>
-<section id="mathematical-definition">
-<h2>Mathematical definition<a class="headerlink" href="#mathematical-definition" title="Link to this heading">#</a></h2>
-<p>In <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id18" title="Phillip Kaye, Raymond Laflamme, and Michele Mosca. An introduction to quantum computing. OUP Oxford, 2006.">Kaye <em>et al.</em>, 2006</a>]</span> they actually give a nice detailed example of how to perform the partial trace on a two qubit system that I think is very nice.
-For their example they use the density matrix of the Bell state</p>
-<div class="math notranslate nohighlight">
-\[
-\ket{\Phi^+} = \frac{1}{\sqrt{2}}\ket{00} +  \frac{1}{\sqrt{2}}\ket{11}
-\]</div>
-</section>
-<section id="computational-implementation">
-<h2>Computational implementation<a class="headerlink" href="#computational-implementation" title="Link to this heading">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="rejection-sampling">
+<h1>Rejection sampling<a class="headerlink" href="#rejection-sampling" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -513,7 +451,7 @@ For their example they use the density matrix of the Bell state</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./physics/quantum-mechanics"
+            path: "./statistics/sampling"
         },
         predefinedOutput: true
     }
@@ -531,20 +469,20 @@ For their example they use the density matrix of the Bell state</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="density_matrix.html"
+       href="inv_trans_sampling.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Density matrix</p>
+        <p class="prev-next-title">Inverse transform sampling</p>
       </div>
     </a>
     <a class="right-next"
-       href="wigner_function.html"
+       href="mcmc.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Wigner function</p>
+        <p class="prev-next-title">Markov chain monte carlo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -554,23 +492,6 @@ For their example they use the density matrix of the Bell state</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-definition">Mathematical definition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-implementation">Computational implementation</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

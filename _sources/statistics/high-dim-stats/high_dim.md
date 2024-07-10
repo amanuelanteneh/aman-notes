@@ -1,0 +1,3 @@
+# High-Dimensional Statistics  
+
+This was a subject I was exposed to during my graduate studies at Georgia Tech. There were some very interesting topics covered in this course that one would be hard pressed to find elsewhere. The key insight of the course was that, often times, *high dimensional* data has *low dimensional* underlying structure that allows for performing easier analysis and inference with said data.  
