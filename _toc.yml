@@ -41,15 +41,37 @@ parts:
   - caption: Mathematics
     numbered: 1
     chapters:
-    - file: mathematics/intro 
-    - file: mathematics/group_theory
-    - file: mathematics/representation_theory
+    - file: mathematics/intro
+    - file: mathematics/abstract-algebra/algebra
+      sections:
+      - file: mathematics/abstract-algebra/group_theory
+      - file: mathematics/abstract-algebra/representation_theory
+    - file: mathematics/linear-algebra/linear_algebra
+      sections:
+      - file: mathematics/linear-algebra/change_basis
+    - file: mathematics/differential-equations/diff_eq
+      sections:
+      - file: mathematics/differential-equations/wave_eq
+    - file: mathematics/complex-analysis/complex_analysis
+      sections:
+      - file: mathematics/complex-analysis/contour_int
+    - file: mathematics/probability/probability
+      sections:
+      - file:  mathematics/probability/conditioning
   
   - caption: Statistics
     numbered: 1
     chapters:
     - file: statistics/intro
-    - file: statistics/inv_trans_sampling
+    - file: statistics/sampling/sampling
+      sections:
+      - file: statistics/sampling/inv_trans_sampling
+      - file: statistics/sampling/rejection_sampling
+      - file: statistics/sampling/mcmc
+    - file: statistics/high-dim-stats/high_dim
+      sections:
+      - file: statistics/high-dim-stats/robust_pca
+      - file: statistics/high-dim-stats/compress_sense
     - file: statistics/bayesian-statistics/bayesian_statistics
       sections:
       - file: statistics/bayesian-statistics/hierarchical_models
