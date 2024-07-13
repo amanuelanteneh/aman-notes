@@ -18,6 +18,16 @@ parts:
       - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/photon_number_detection
       - file: physics/quantum-mechanics/lindblad_eq
+    - file: physics/classical-mech/classical_mech
+      sections:
+      - file: physics/classical-mech/calc_of_var
+    - file: physics/e-and-m/e_and_m
+      sections:
+      - file: physics/e-and-m/gauss_law
+    - file: physics/stat-mech/stat_mech
+      sections:
+      - file: physics/stat-mech/partition_func
+      - file: physics/stat-mech/grand_can_ens
   
   - caption: Computer Science
     numbered: 1
@@ -42,6 +52,9 @@ parts:
     numbered: 1
     chapters:
     - file: mathematics/intro
+    - file: mathematics/vector-calc/vector_calc
+      sections:
+      - file: mathematics/vector-calc/gradient
     - file: mathematics/abstract-algebra/algebra
       sections:
       - file: mathematics/abstract-algebra/group_theory
@@ -63,6 +76,13 @@ parts:
     numbered: 1
     chapters:
     - file: statistics/intro
+    - file: statistics/classic-stats/classic_stats
+      sections:
+      - file: statistics/classic-stats/pca
+      - file: statistics/classic-stats/bootstrap
+    - file: statistics/hypo-testing/hypo_testing
+      sections:
+      - file: statistics/hypo-testing/1_samp_t_test
     - file: statistics/sampling/sampling
       sections:
       - file: statistics/sampling/inv_trans_sampling
