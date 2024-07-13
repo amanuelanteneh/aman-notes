@@ -507,25 +507,24 @@ n = c_0 + c_1 + \dots + c_k \quad \text{where $c_i \in \mathbb{Z^+}$}
 \end{align*}
 \]</div>
 <p>and sell each part for the price <span class="math notranslate nohighlight">\(p = p_{c_0} + p_{c_1} + \dots + p_{c_k}\)</span> where again <span class="math notranslate nohighlight">\(p_{c_i}\)</span> is the cash we get for selling a rod of integer length <span class="math notranslate nohighlight">\(c_i\)</span>. The caveat here is that there maybe certain ways to cut the rod such that we actually get more profit by selling the individually cut pieces instead of selling the uncut rod. Clearly this depends on the pricing for each length of rod. But can we devise an algorithm that, given the length <span class="math notranslate nohighlight">\(n\)</span> of the rod along with the prices <span class="math notranslate nohighlight">\(p_1, p_2,\dots, p_n\)</span> for selling a rod of length <span class="math notranslate nohighlight">\(1, 2, \dots, n\)</span> respectively, finds that optimal way of cutting the rod such that we net the highest cash?</p>
-<div class="proof algorithm admonition" id="rod-cutting">
-<p class="admonition-title"><span class="caption-number">Algorithm 8.1 </span> (Rod Cutting)</p>
+<div class="proof algorithm admonition" id="naive-rod-cutting">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.1 </span> (Naive Rod Cutting)</p>
 <section class="algorithm-content" id="proof-content">
-<p><strong>Inputs</strong> Given the length of the rod <span class="math notranslate nohighlight">\(n \in \mathbb{Z^+}\)</span> and prices <span class="math notranslate nohighlight">\(p_1, p_2,\dots, p_n\)</span> for selling a rod of length <span class="math notranslate nohighlight">\(1, 2, \dots, n\)</span> respectively</p>
+<p><strong>Inputs</strong> Given the length of the rod <span class="math notranslate nohighlight">\(n \in \mathbb{Z^+}\)</span> and prices table <span class="math notranslate nohighlight">\(p\)</span> where <span class="math notranslate nohighlight">\(p[i]\)</span> is the cash gained from selling a rod of length <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p><strong>Output</strong> The integer decomposition of <span class="math notranslate nohighlight">\(n = c_0 + c_1 + \dots + c_k\)</span> where <span class="math notranslate nohighlight">\(c_i \in \mathbb{Z^+}\)</span> that gives us the maximum cash</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(f(u, v) \leftarrow 0\)</span> for all edges <span class="math notranslate nohighlight">\((u,v)\)</span></p></li>
-<li><p>While there is a path <span class="math notranslate nohighlight">\(p\)</span> from <span class="math notranslate nohighlight">\(s\)</span> to <span class="math notranslate nohighlight">\(t\)</span> in <span class="math notranslate nohighlight">\(G_{f}\)</span> such that <span class="math notranslate nohighlight">\(c_{f}(u,v)&gt;0\)</span>
-for all edges <span class="math notranslate nohighlight">\((u,v) \in p\)</span>:</p>
+<li><p>If <span class="math notranslate nohighlight">\(n==1\)</span>:</p>
 <ol class="arabic simple">
-<li><p>Find <span class="math notranslate nohighlight">\(c_{f}(p)= \min \{c_{f}(u,v):(u,v)\in p\}\)</span></p></li>
-<li><p>For each edge <span class="math notranslate nohighlight">\((u,v) \in p\)</span></p>
-<ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(f(u,v) \leftarrow f(u,v) + c_{f}(p)\)</span> <em>(Send flow along the path)</em></p></li>
-<li><p><span class="math notranslate nohighlight">\(f(u,v) \leftarrow f(u,v) - c_{f}(p)\)</span> <em>(The flow might be “returned” later)</em></p></li>
+<li><p>return 0</p></li>
 </ol>
 </li>
+<li><p>max_cash = <span class="math notranslate nohighlight">\(-\infty\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ol class="arabic simple">
+<li><p>max_cash = <span class="math notranslate nohighlight">\(\max(max_cash, p_i + NaiveRodCut(p, n-i))\)</span></p></li>
 </ol>
 </li>
+<li><p>return max_cash</p></li>
 </ol>
 </section>
 </div></section>
