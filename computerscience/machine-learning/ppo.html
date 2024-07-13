@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Proximal policy optimization &#8212; Amanuel&#39;s Notebook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/ppo';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Attention" href="attention.html" />
+    <link rel="prev" title="9. Machine Learning" href="machine_learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Amanuel's Notebook</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/entanglement.html">Entanglement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/classical-mech/calc_of_var.html">Calculus of variations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/e-and-m/gauss_law.html">Gauss’s law</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/stat-mech/stat_mech.html">5. Statistical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/partition_func.html">Partition function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/grand_can_ens.html">Grand canonical ensemble</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">6. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_structs.html">7. Data Structures</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/algorithms.html">8. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/divide_conquer.html">Divide and conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/randomized_algos.html">Randomized algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/max_flow.html">Max flow algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/np_problems.html">NP-completeness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_prog.html">Linear programming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">9. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Proximal policy optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">10. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">11. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">12. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">13. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">14. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">15. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">16. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditioning</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">17. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">18. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrap</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">19. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">1 sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling.html">20. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">21. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">22. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">1. Hierarchical Models</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">23. Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/ppo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/computerscience/machine-learning/ppo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Proximal policy optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-introduction-to-reinforcement-learning-with-actor-critic-methods">Brief Introduction to Reinforcement Learning with Actor-Critic Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-introduction-to-ppo-and-policy-gradient-methods">Brief Introduction to PPO and Policy Gradient Methods</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="proximal-policy-optimization">
+<h1>Proximal policy optimization<a class="headerlink" href="#proximal-policy-optimization" title="Link to this heading">#</a></h1>
+<p>The following is the supplemental material for a paper I published in the journal Optica Quantum which can be found at this link. It is a short introduction to the proximal policy optimization algorithm for reinforcement learning that we used in the paper.</p>
+<section id="brief-introduction-to-reinforcement-learning-with-actor-critic-methods">
+<h2>Brief Introduction to Reinforcement Learning with Actor-Critic Methods<a class="headerlink" href="#brief-introduction-to-reinforcement-learning-with-actor-critic-methods" title="Link to this heading">#</a></h2>
+<p>Given an environment which can be modeled as a Markov decision process with state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, action space <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>, state transition function <span class="math notranslate nohighlight">\(\mathcal{T}(s,a)\)</span> and reward function <span class="math notranslate nohighlight">\(R(s)\)</span> the goal of reinforcement learning is to learn an optimal policy <span class="math notranslate nohighlight">\(\pi^*(s)\)</span> from experiences interacting with the environment. A policy defines how an agent selects an action when in a particular state <span class="math notranslate nohighlight">\(s_t\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> such that the sum of discounted future rewards, defined as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_{k=0}^{\infty}\gamma^kR_{t+k+1},
+\end{align*}\]</div>
+<p>is maximized. The hyperparameter <span class="math notranslate nohighlight">\(\gamma \in [0,1]\)</span> is the discount factor and controls how much we discount rewards received at later time steps. The closer <span class="math notranslate nohighlight">\(\gamma\)</span> is to 0 the greater rewards received at earlier time steps are weighted than those received at later time steps. In general polices are functions mapping states to probabilities of selecting each possible action.
+Another important function in reinforcement learning is the value function <span class="math notranslate nohighlight">\(V_\pi(s)\)</span>. Canonically the value function is defined as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    V_\pi(s) = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty}\gamma^kR_{t+k+1}\bigg| S_t=s\right].
+\end{align*}\]</div>
+<p>This is the expected sum of discounted future rewards when the agent begins in state <span class="math notranslate nohighlight">\(s\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> and follows the policy <span class="math notranslate nohighlight">\(\pi\)</span> for the remaining time steps. The expectation <span class="math notranslate nohighlight">\(\mathbb{E}_{\pi}[\cdot]\)</span> is used because both the policy and the environment are in general stochastic and the reward is thus a random variable. This function provides us a way to evaluate policies since a policy <span class="math notranslate nohighlight">\(\pi\)</span> can be defined to be better than policy <span class="math notranslate nohighlight">\(\pi'\)</span> if <span class="math notranslate nohighlight">\(V_{\pi}(s)\geq V_{\pi'}(s)\)</span> for all <span class="math notranslate nohighlight">\(s\in \mathcal{S}\)</span> <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id21" title="Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 2018.">Sutton and Barto, 2018</a>]</span>.</p>
+<p>For our reinforcement learning algorithm we use the <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> implementation of the Proximal Policy Optimization (PPO) algorithm <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id23" title="John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.">Schulman <em>et al.</em>, 2017</a>]</span>. <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> is an open source reinforcement learning library that provides implementations of several common reinforcement learning algorithms <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id25" title="Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian Ernestus, and Noah Dormann. Stable-baselines3: reliable reinforcement learning implementations. Journal of Machine Learning Research, 22(268):1–8, 2021.">Raffin <em>et al.</em>, 2021</a>]</span>. PPO comes from a broader class of reinforcement learning methods called actor-critic methods <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id21" title="Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 2018.">Sutton and Barto, 2018</a>]</span>. The actor is meant to learn an optimal policy while the critic evaluates the policy.</p>
+<p>The actor is modeled as a neural network and selects the optimal action given the state of the environment as it’s input. In this work the state was represented as the flattened density matrix of the input quantum state <span class="math notranslate nohighlight">\(\rho_j\)</span> i.e.
+<span class="math notranslate nohighlight">\(s_j=[\textrm{Re}(\rho_j^{u}), \textrm{Im}(\rho_j^{u}), 
+\textrm{diag}(\rho_j)] \in \mathbb{R}^{N^2}\)</span> where <span class="math notranslate nohighlight">\(\rho_j^{u}\)</span> denotes all entries of <span class="math notranslate nohighlight">\(\rho_j\)</span> that are above its diagonal and <span class="math notranslate nohighlight">\(N\)</span> is the dimension of the Hilbert space.
+The actor network has three fully connected hidden layers of size 256, 128, and 64 respectively. The output layer of the network consists of three outputs.
+These outputs are  <span class="math notranslate nohighlight">\(\mu_1\)</span>, <span class="math notranslate nohighlight">\(\mu_2\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> where <span class="math notranslate nohighlight">\(\mu_1\)</span> and <span class="math notranslate nohighlight">\(\mu_2\)</span> are the means of two Gaussian distributions respectively and <span class="math notranslate nohighlight">\(\sigma\)</span> is their standard deviation.
+The first action (the squeezing parameter <span class="math notranslate nohighlight">\(r\)</span>) is then sampled from the Gaussian <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_1, \sigma)\)</span> and the second action (the transmitivity of the beamsplitter <span class="math notranslate nohighlight">\(\tau\)</span>) is sampled from the Gaussian <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_2, \sigma)\)</span>.
+At the start of training the standard deviation is set to 1 and typically decreases as the training progresses and the agent begins moving away from exploration. The policy is thus stochastic during training to allow for exploration. However, during inference (evaluation) the policy is made deterministic by always selecting the mean of the Gaussian as the action.
+The critic is also modeled as a neural network with the same input and hidden layer architecture  with the only difference being that there is only one output. Given the state of the environment the critic attempts to approximate the value function <span class="math notranslate nohighlight">\(V_\pi(s)\)</span> where <span class="math notranslate nohighlight">\(\pi\)</span> is the current policy learned by the actor. We give an approximate outline of the <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> implementation of PPO in Algorithm \ref{alg:ppo} and go over the details in the next section. Note that in lines 33 and 37 of the algorithm we use the stochastic gradient ascent update rule for updating the network parameters for brevity, however in the numerical experiments presented in the main text we use the Adam optimizer which has a more complex update rule <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id22" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.">Goodfellow <em>et al.</em>, 2016</a>]</span>.</p>
+<div class="proof algorithm admonition" id="sb3-ppo">
+<p class="admonition-title"><span class="caption-number">Algorithm 9.1 </span> (Pseudocode of <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> implementation of PPO with deep neural networks)</p>
+<section class="algorithm-content" id="proof-content">
+<ol class="arabic simple">
+<li><p>Initialize empty rollout buffer <span class="math notranslate nohighlight">\(M=\{\}\)</span> of maximum capacity  <span class="math notranslate nohighlight">\(N\)</span>  Comment{<span class="math notranslate nohighlight">\(N\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_steps}\)</span> from Table I of the main material}</p></li>
+<li><p>Initialize policy (actor) network <span class="math notranslate nohighlight">\(\pi\)</span> with random weights <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p>Initialize value (critic) network <span class="math notranslate nohighlight">\(\hat{V}\)</span> with random weights <span class="math notranslate nohighlight">\(\phi\)</span></p></li>
+<li><p>Set number of epochs <span class="math notranslate nohighlight">\(n\)</span> to optimize over Comment{<span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_epochs}\)</span> from Table I of the main material}</p></li>
+<li><p>Set discount factor <span class="math notranslate nohighlight">\(\gamma\)</span> Comment{<span class="math notranslate nohighlight">\(\gamma\)</span> is <span class="math notranslate nohighlight">\(\texttt{gamma}\)</span> from Table I of the main material}</p></li>
+<li><p><span class="math notranslate nohighlight">\(i \gets 0\)</span></p></li>
+<li><p>While <span class="math notranslate nohighlight">\(i &lt; T\)</span>: Comment{<span class="math notranslate nohighlight">\(T\)</span> is the maximum number of times the agent can interact with the environment during training}</p>
+<ol class="arabic simple">
+<li><p>Initialize array <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(K\)</span> environments all in initial state <span class="math notranslate nohighlight">\(s_t=s_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(j \gets 0\)</span></p></li>
+<li><p>While <span class="math notranslate nohighlight">\(j &lt; N\)</span>:</p>
+<ol class="arabic simple">
+<li><p>For <span class="math notranslate nohighlight">\(k=0\)</span> to <span class="math notranslate nohighlight">\(K\)</span>: Comment{This loop can be parallelized since each environment is independent of the others}</p>
+<ol class="arabic simple">
+<li><p>(<span class="math notranslate nohighlight">\(\mu_1,\mu_2, \sigma) \gets \pi(s_t)\)</span> Comment{Get means and standard deviation of the two action distributions from <span class="math notranslate nohighlight">\(\pi\)</span>}</p></li>
+<li><p><span class="math notranslate nohighlight">\(a_1 \sim \mathcal{N}(\mu_1,\sigma)\)</span> Comment{Sample action 1 from distribution}</p></li>
+<li><p><span class="math notranslate nohighlight">\(a_2 \sim \mathcal{N}(\mu_2,\sigma)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_t \gets (a_1, a_2)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((s_{t+1}, r_t) \gets E[k](s_t, a_t, \gamma)\)</span> Comment{Perform action <span class="math notranslate nohighlight">\(a_t\)</span> and get state transition and reward}</p></li>
+<li><p>Store experience <span class="math notranslate nohighlight">\((s_t,a_t,r_t,s_{t+1})\)</span> in <span class="math notranslate nohighlight">\(M\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(s_t \gets s_{t+1}\)</span> \Comment{Update state of current (<span class="math notranslate nohighlight">\(k\)</span>-th) environment}</p></li>
+<li><p><span class="math notranslate nohighlight">\(i \gets i+1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(j \gets j+1\)</span></p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Compute advantages <span class="math notranslate nohighlight">\(A_t\)</span> for experiences in <span class="math notranslate nohighlight">\(M\)</span> using predictions from <span class="math notranslate nohighlight">\(\hat{V}\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(e=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:  Comment{Policy improvement step}</p>
+<ol class="arabic simple">
+<li><p>Divide <span class="math notranslate nohighlight">\(M\)</span> into batches of size <span class="math notranslate nohighlight">\(b\)</span> and store them in <span class="math notranslate nohighlight">\(B\)</span> Comment{<span class="math notranslate nohighlight">\(b\)</span> is <span class="math notranslate nohighlight">\(\texttt{batch_size}\)</span> from Table I of the main material}</p></li>
+<li><p>For batch in <span class="math notranslate nohighlight">\(B\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Compute gradient estimate <span class="math notranslate nohighlight">\(\hat{g}_\theta\)</span> which is the average of <span class="math notranslate nohighlight">\(\nabla_\theta L_t^{CLIP+ENT}(\theta)\)</span> over batch</p></li>
+<li><p>Clip norm of <span class="math notranslate nohighlight">\(\hat{g}_\theta\)</span> to be <span class="math notranslate nohighlight">\(&lt; |G|_{max}\)</span> Comment{<span class="math notranslate nohighlight">\(|G|_{max}\)</span> is <span class="math notranslate nohighlight">\(\texttt{max_grad_norm}\)</span> from Table I of the main material}</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta \gets \theta + \alpha\hat{g}_\theta\)</span></p></li>
+<li><p>Compute gradient estimate <span class="math notranslate nohighlight">\(\hat{g}_\phi\)</span> which is the average of <span class="math notranslate nohighlight">\(\nabla_\phi L_t^{VF}(\phi)\)</span> over batch</p></li>
+<li><p>Clip norm of <span class="math notranslate nohighlight">\(\hat{g}_\phi\)</span> to be <span class="math notranslate nohighlight">\(&lt; |G|_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi \gets \phi + \alpha\hat{g}_\phi\)</span> Comment{<span class="math notranslate nohighlight">\(\alpha\)</span> is <span class="math notranslate nohighlight">\(\texttt{learning_rate}\)</span> from Table I of the main material}</p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Reinitialize <span class="math notranslate nohighlight">\(M=\{\}\)</span> to empty rollout buffer of maximum capacity <span class="math notranslate nohighlight">\(N\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div></section>
+<section id="brief-introduction-to-ppo-and-policy-gradient-methods">
+<h2>Brief Introduction to PPO and Policy Gradient Methods<a class="headerlink" href="#brief-introduction-to-ppo-and-policy-gradient-methods" title="Link to this heading">#</a></h2>
+<p>Many earlier breakthroughs of reinforcement learning, particularly for game playing, utilized action-value methods like <span class="math notranslate nohighlight">\(Q\)</span>-learning <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id24" title="Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, and others. Human-level control through deep reinforcement learning. nature, 518(7540):529–533, 2015.">Mnih <em>et al.</em>, 2015</a>]</span>. However, these methods are not easily applicable to environments where the action space is very large or continuous [<span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id21" title="Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 2018.">Sutton and Barto, 2018</a>]</span>, <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id23" title="John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.">Schulman <em>et al.</em>, 2017</a>]</span>]. In this setting it is more advantageous to utilize another set of reinforcement learning methods known as policy gradient methods of which PPO is an example</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>PPO is also what is known as an on-policy method meaning the policy used to gather experiences for policy improvement (training) is the same policy that is updated during policy improvement. Off-policy methods like Deep <span class="math notranslate nohighlight">\(Q\)</span>-learning utilize a separate policy to gather experiences for policy improvement such as an <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy policy. Note that one disadvantage of PPO being an on-policy algorithm is that it is not as sample efficient as off-policy methods such as Deep <span class="math notranslate nohighlight">\(Q\)</span>-learning or Soft Actor Critic, as seen in line 41 of Algorithm \ref{alg:ppo}, so for environments that are expensive to sample from the advantage of PPO is less clear.</p>
+</div>
+<p>These methods seeks to learn a parameterized policy <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span> directly which selects actions without the need to consult a value function like action-value methods such as <span class="math notranslate nohighlight">\(Q\)</span>-learning <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id21" title="Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 2018.">Sutton and Barto, 2018</a>]</span>. Note, however, that although a value function is not needed for action selection it may still be used to learn the policy parameters as is the case with actor-critic methods.</p>
+<p>Given a policy <span class="math notranslate nohighlight">\(\pi_{\theta}\)</span> parameterized by <span class="math notranslate nohighlight">\(\theta\)</span> vanilla policy gradient methods attempt to optimize the policy by maximizing the objective function</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    L_t^{VPG}(\theta) = \mathbb{\hat{E}}_t\left[\log{(\pi_\theta(a_t|s_t))} \hat{A}_t \right]
+\end{align*}\]</div>
+<p>using some gradient ascent algorithm.
+This is done by computing an estimate of the gradient of the objective function (the policy gradient) with respect to the policy parameters <span class="math notranslate nohighlight">\(\theta\)</span>. The  gradient estimator is of the form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \hat{g} = \mathbb{\hat{E}}_t\left[ \nabla_\theta\log{(\pi_\theta(a_t|s_t))} \hat{A}_t \right]
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\pi_\theta(a|s)\)</span> is the probability of taking action <span class="math notranslate nohighlight">\(a\)</span> given the state <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(\hat{A}_t\)</span> is an estimator of the advantage function at time step <span class="math notranslate nohighlight">\(t\)</span>. The advantage function is given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    A_t = \left[\sum^{t_{end}}_{k=t}\gamma^{k-t}R_{k}\right]-V(s_t)
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t_{end}\)</span> is the final time step. The first term is the discounted sum of rewards computed for an episode starting from time step <span class="math notranslate nohighlight">\(t\)</span>. The second term is the value function introduced previously. When performing the optimization we do not have the function <span class="math notranslate nohighlight">\(V(s_t)\)</span> so we use an estimator for it <span class="math notranslate nohighlight">\(\hat{V}(s_t)\)</span> which is modeled by the critic network so the estimator of the advantage function is computed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \hat{A}_t = \left[\sum^{t_{end}}_{k=t}\gamma^{k-t}R_{k}\right]-\hat{V}(s_t).
+\end{align*}\]</div>
+<p>If the advantage function is positive, i.e. the discounted sum of rewards for the episode was greater than what the critic predicted it would be, we would want to increase the probability of selecting action <span class="math notranslate nohighlight">\(a_t\)</span> given the current state <span class="math notranslate nohighlight">\(s_t\)</span> in future episodes  and decrease the probability if the advantage is negative.</p>
+<p>PPO has one more crucial component that it borrows from trust region policy  methods such as trust region policy optimization (TRPO). That is it constrains how much the policy can change during each policy update. This is needed because a policy update can result in the policy (network) parameters changing so greatly that the network will ``overfit’’ to the current batch of experiences being used resulting in a catastrophic collapse in performance for unseen states. TRPO attempts to solve this by optimizing the objective function, also called the surrogate objective,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    L_t^{TRPO}(\theta)=\mathbb{\hat{E}}_t\left[\frac{\pi_\theta(a_t|s_t)}{{\pi_{\theta}}_{\textrm{old}}(a_t|s_t)}\hat{A}_t\right]
+\end{align*}\]</div>
+<p>with respect to the parameters <span class="math notranslate nohighlight">\(\theta\)</span> where <span class="math notranslate nohighlight">\(\theta_{\textrm{old}}\)</span> are the parameters of the policy before the policy update. Additionally this surrogate function is maximized with the constraint</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+    \mathbb{\hat{E}}_t\left[ \textrm{KL}[\pi_{\theta_{\textrm{old}}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)] \right] \leq \delta
+\end{align*}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\textrm{KL}[\cdot,\cdot]\)</span>  is the Kullback–Leibler divergence between the new policy and the old policy and <span class="math notranslate nohighlight">\(\delta\)</span> is some constant. Using <span class="math notranslate nohighlight">\(L_t^{TRPO}(\theta)\)</span> as the objective function subject to the given <span class="math notranslate nohighlight">\(\textrm{KL}\)</span> constraint however requires second order optimization via computation of the Hessian which is more expensive than just computing the gradient. This was in part what motivated the creation of PPO as it does not require computation of the Hessian.</p>
+<p>In the case of PPO the algorithm attempts to maximize the objective function</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+   L_t^{PPO}(\theta)= L_t^{CLIP+VF+ENT}(\theta)=\mathbb{\hat{E}}_t\left[L_t^{CLIP}(\theta)-c_1L_t^{VF}(\theta) + L^{ENT}_t(\theta) \right].
+\end{equation*}\]</div>
+<p>The first term is expressed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    L_t^{CLIP}(\theta)=\mathbb{\hat{E}}_t\left[\min(r_t(\theta)\hat{A}_t,\textrm{clip}(r_t(\theta),1-\epsilon,1+\epsilon)\hat{A}_t)\right]
+\end{equation*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r_t(\theta)=\frac{\pi_\theta(a_t|s_t)}{{\pi_{\theta}}_{\textrm{old}}(a_t|s_t)}\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> is a hyperparameter (called <span class="math notranslate nohighlight">\(\texttt{clip_range}\)</span> in Table I of the main material) controlling how far the new policy may deviate from the old policy <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id23" title="John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.">Schulman <em>et al.</em>, 2017</a>]</span>. This term serves the same purpose <span class="math notranslate nohighlight">\(L^{TRPO}(\theta)\)</span> does in TRPO i.e. to constrain the magnitude of policy updates.
+The second term is expressed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    L_t^{VF}=(\hat{V}(s_t)-V_t^{actual})^2=\left(\hat{V}(s_t)-\sum^{t_{end}}_{k=t}\gamma^{k-t}R_{k}\right)^2
+\end{equation*}\]</div>
+<p>and is the squared difference between the sum of discounted rewards predicted by the value network and the actual sum of discounted rewards received after time step <span class="math notranslate nohighlight">\(t\)</span>.
+The coefficient <span class="math notranslate nohighlight">\(c_1\)</span> (called <span class="math notranslate nohighlight">\(\texttt{vf_coef}\)</span> in Table I of the main material) is used to increase or decrease the contribution of this term to the over all objective function <span class="math notranslate nohighlight">\(L_t^{PPO}(\theta)\)</span>. The last term in the objective function
+is expressed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    L^{ENT}_t(\theta) = c_2S[\pi_{\theta}](s_t)
+\end{align*}\]</div>
+<p>and is an entropy bonus computed using the entropy of the probability distributions used to select the actions [<span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id27" title="Christopher M Bishop. Pattern Recognition and Machine Learning. Springer New York, NY, 2006.">Bishop, 2006</a>]</span>, <span id="id12">[<a class="reference internal" href="../../backmatter/bibliography.html#id26" title="Dimitri Bertsekas and John N Tsitsiklis. Introduction to probability. Athena Scientific, 2008.">Bertsekas and Tsitsiklis, 2008</a>]</span>]. This term is used to encourage exploration if the stochastic nature of action selection during training provides insufficient exploration of the environment. The coefficient <span class="math notranslate nohighlight">\(c_2\)</span> (called <span class="math notranslate nohighlight">\(\texttt{ent_coef}\)</span> in Table I of the main material) serves the same purpose as <span class="math notranslate nohighlight">\(c_1\)</span> in the previous term. Note that while the combined objective function <span class="math notranslate nohighlight">\(L_t^{PPO}(\theta)\)</span> includes all three terms the <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> implementation of PPO uses a separate network for the actor and critic by default, as opposed to sharing parameters between the two networks as it did in version <span class="math notranslate nohighlight">\(\texttt{v1.8.0}\)</span> and below, and thus only the second term of the objective function is used to optimize the critic network while the first and third terms are used to optimize the actor network.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./computerscience/machine-learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="machine_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="attention.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Attention</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-introduction-to-reinforcement-learning-with-actor-critic-methods">Brief Introduction to Reinforcement Learning with Actor-Critic Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-introduction-to-ppo-and-policy-gradient-methods">Brief Introduction to PPO and Policy Gradient Methods</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Amanuel Anteneh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
