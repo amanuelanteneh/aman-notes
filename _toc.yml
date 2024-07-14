@@ -43,9 +43,9 @@ parts:
       - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
-
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/ppo
       - file: computerscience/machine-learning/attention
   
   - caption: Mathematics
