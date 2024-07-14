@@ -64,8 +64,8 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Divide and conquer" href="divide_conquer.html" />
-    <link rel="prev" title="8. Algorithms" href="algorithms.html" />
+    <link rel="next" title="Randomized algorithms" href="randomized_algos.html" />
+    <link rel="prev" title="Divide &amp; conquer" href="divide_conquer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -210,8 +210,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">6. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_structs.html">7. Data Structures</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">8. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide &amp; conquer</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide and conquer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="randomized_algos.html">Randomized algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
@@ -263,7 +263,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">19. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">1 sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling.html">20. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -485,6 +485,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix multiplication</a></li>
 </ul>
             </nav>
         </div>
@@ -517,109 +518,108 @@ Clearly this depends on the pricing for each length of rod.  Can we devise an al
 <p>Suppose that an optimal way of cutting the rod (optimal integer decomposition of <span class="math notranslate nohighlight">\(n\)</span>) cuts the rod into <span class="math notranslate nohighlight">\(k\)</span> pieces for some integer <span class="math notranslate nohighlight">\(1 \leq k \leq n\)</span>. We denote this optimal decomposition as</p>
 <div class="math notranslate nohighlight">
 \[
-n_{opt} = c_1 + c_2 + \dots + c_k
+n_{\text{opt}} = c_1 + c_2 + \dots + c_k
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(c_i\)</span> is the length of the <span class="math notranslate nohighlight">\(i\)</span>-th segment of the rod. The corresponding optimal revenue is thus</p>
 <div class="math notranslate nohighlight">
 \[
-r_{n_{opt}} = p_{c_1} + p_{c_2} + \dots + p_{c_k}.
+r_{n_{\text{opt}}} = p_{c_1} + p_{c_2} + \dots + p_{c_k}.
 \]</div>
-<p>In general we can write the optimal revenue <span class="math notranslate nohighlight">\(r_{n_{opt}}\)</span> in terms of optimal revenues for rods of shorter length</p>
+<p>In general we can write the optimal revenue <span class="math notranslate nohighlight">\(r_{n_{\text{opt}}}\)</span> in terms of optimal revenues for rods of shorter length</p>
 <div class="math notranslate nohighlight">
 \[
-r_{n_{opt}} = \max(p_n, r_{1_{opt}} + r_{(n-1)_{opt}}, r_{2_{opt}} + r_{(n-2)_{opt}}, \dots, r_{(n-1)_{opt}} + r_{1_{opt}} )
+r_{n_{\text{opt}}} = \max(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}}, r_{2_{\text{opt}}} + r_{(n-2)_{\text{opt}}}, \dots, r_{(n-1)_{\text{opt}}} + r_{1_{\text{opt}}} )
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(p_n\)</span> is the revenue gained from selling the uncut rod of length <span class="math notranslate nohighlight">\(n\)</span>. The other <span class="math notranslate nohighlight">\(n-1\)</span> arguments to <span class="math notranslate nohighlight">\(\max\)</span> correspond to the revenue gained from cutting the rod into two pieces of size <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(n-i\)</span> respectively <span class="math notranslate nohighlight">\(\forall i \in \{1,2,\dots,n-1\}\)</span> and then optimally cutting up the two resulting pieces of the rod further.</p>
-<p>If you think about it it makes sense that the optimal solution for this problem can be achieved by combining optimal solutions of smaller problems. For example when you start with the uncut rod the two options are either</p>
+<p>If you think about it it makes sense that the optimal solution for this problem can be achieved by combining optimal solutions of smaller problems. Specifically, when you start with the uncut rod the two options are either</p>
 <ol class="arabic simple">
 <li><p>the uncut rod is already optimal to sell</p></li>
 </ol>
-<p><span class="math notranslate nohighlight">\(\Large{\textbf{or}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\qquad \qquad \Large{\textbf{or}}\)</span></p>
 <ol class="arabic simple" start="2">
 <li><p>there is a way to cut it to get more revenue in which case you know you have to cut it into <em><strong>at least</strong></em> two pieces.</p></li>
 </ol>
-<p>After that point you have two new rods which you need to find the optimal cutting/decomposition of and you simply repeat the previous step again for each rod. The problem here is you need to cut the rod into two pieces in <em><strong>every</strong></em> possible way since you don’t know ahead of time which way of cutting the rod into two pieces (i.e. which value of <span class="math notranslate nohighlight">\(i\)</span>) is optimal hence all the <span class="math notranslate nohighlight">\(n-1\)</span> arguments to <span class="math notranslate nohighlight">\(\max\)</span>.</p>
+<p>If the second option is chosen then after that point you have two new rods which you need to find the optimal cutting/decomposition of and you simply repeat the previous step again for each rod. The problem here is you need to cut the rod into two pieces in <em><strong>every</strong></em> possible way since you don’t know ahead of time which way of cutting the rod into two pieces (i.e. which value of <span class="math notranslate nohighlight">\(i\)</span>) is optimal hence all the <span class="math notranslate nohighlight">\(n-1\)</span> arguments to <span class="math notranslate nohighlight">\(\max\)</span>.</p>
+<p>We can simplify the general equation for <span class="math notranslate nohighlight">\(r_{n_{\text{opt}}}\)</span> a bit more by noticing that in the argument to <span class="math notranslate nohighlight">\(\max\)</span> we are actually double counting cases i.g. we have both <span class="math notranslate nohighlight">\(r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}}\)</span> and <span class="math notranslate nohighlight">\(r_{(n-1)_{\text{opt}}} + r_{1_{\text{opt}}}\)</span> being counted. Instead we can just consider each case without it’s reverse, since it doesn’t matter which of the two new rods we cut up in a certain way (addition is commutative), and we can get the more simple formula</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+r_{n_{\text{opt}}} &amp;= \max(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}}, r_{2_{\text{opt}}} + r_{(n-2)_{\text{opt}}}, \dots, r_{(n-\frac{n}{2})_{\text{opt}}} + r_{{\frac{n}{2}}_{\text{opt}}} ) \\
+&amp;= \max(p_{i} + r_{(n-i)_{\text{opt}}}) \quad \text{$\forall i \in \{1,2,\dots,n\}$} 
+\end{align*}
+\end{split}\]</div>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>When a problem can be solved like this by breaking it onto smaller parts, solving those smaller parts independently, and then combining those solutions to those smaller parts we say the problem exhibits <strong>optimal sub-structure</strong>.</p>
 </div>
+<p>Below is some recursive code that solves this problem</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># for reproducibility</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">p: </span>
+<span class="sd">p: A dict where the keys are the length of the rod and the value is the revenue gained from selling a rod of that length</span>
 
-<span class="sd">n: </span>
+<span class="sd">n: The (integer) length of the rod</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="k">def</span> <span class="nf">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># if rod is length 0 terminate and get 0 revenue (recursive termination condition)</span>
        <span class="k">return</span> <span class="mi">0</span>
     
     <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
     
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># loop over each possible first cut into two parts</span>
         <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> 
     
     <span class="k">return</span> <span class="n">max_rev</span>
 
 
-<span class="c1">#p = { 1:1, 2:5, 3:8, 4:9, 5:10, 6:17, 7:17, 8:20, 9:24, 10:30,  }</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">{</span>  <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>  <span class="p">}</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">{</span>  <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>  <span class="p">}</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">25</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max revenue is:&quot;</span><span class="p">,</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max revenue for rod of length </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is:&quot;</span><span class="p">,</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p = {1: 1, 2: 4, 3: 3, 4: 12, 5: 10, 6: 12, 7: 7, 8: 40, 9: 9, 10: 40, 11: 55, 12: 144, 13: 143, 14: 14, 15: 135, 16: 80, 17: 51, 18: 144, 19: 76, 20: 240, 21: 357, 22: 440, 23: 437, 24: 48, 25: 250, 26: 598, 27: 594, 28: 84, 29: 754, 30: 90, 31: 496, 32: 32, 33: 99, 34: 170, 35: 735, 36: 108, 37: 1184, 38: 114, 39: 858, 40: 680, 41: 943, 42: 1638, 43: 1677, 44: 1100, 45: 1890, 46: 1840, 47: 517, 48: 864, 49: 539, 50: 1400}
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">line</span> <span class="mi">24</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span>  <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>  <span class="p">}</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">24</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max revenue is:&quot;</span><span class="p">,</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
-
-<span class="nn">Cell In[30], line 16,</span> in <span class="ni">naive_rod_cutting</span><span class="nt">(p, n)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> 
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">return</span> <span class="n">max_rev</span>
-
-<span class="nn">Cell In[30], line 16,</span> in <span class="ni">naive_rod_cutting</span><span class="nt">(p, n)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> 
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">return</span> <span class="n">max_rev</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">naive_rod_cutting</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">16</span> <span class="p">(</span><span class="mi">28</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">Cell In[30], line 16,</span> in <span class="ni">naive_rod_cutting</span><span class="nt">(p, n)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> 
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">return</span> <span class="n">max_rev</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p = {1: 1, 2: 2, 3: 9, 4: 12, 5: 10, 6: 12, 7: 14, 8: 16, 9: 81, 10: 20, 11: 110, 12: 84, 13: 13, 14: 14, 15: 30, 16: 112, 17: 136, 18: 306, 19: 19, 20: 360, 21: 147, 22: 462, 23: 529, 24: 432, 25: 350}
+Max revenue for rod of length 25 is: 531
 </pre></div>
 </div>
 </div>
 </div>
+<p>Now this code works but there is a big issue. For large values of <span class="math notranslate nohighlight">\(n\)</span> this code will take a vey long time to run. This is called <em><strong>memoization</strong></em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-       <span class="k">return</span> <span class="mi">0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fast_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">memo</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1"># check memo to see if we&#39;ve already solved this problem for this value of n</span>
+      <span class="n">max_rev</span> <span class="o">=</span> <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">max_rev</span>
+
+   <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># if rod is length 0 terminate and get 0 revenue (recursive termination condition)</span>
+      <span class="k">return</span> <span class="mi">0</span>
     
-    <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
+   <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="c1"># initially set revenue to lowest possible number</span>
     
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">naive_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">))</span> 
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># loop over each possible first cut into two parts</span>
+      <span class="n">max_rev</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_rev</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">fast_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">memo</span><span class="p">))</span>
+   
+   <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_rev</span> <span class="c1"># save max revenue found for this value of n</span>
     
-    <span class="k">return</span> <span class="n">max_rev</span>
+   <span class="k">return</span> <span class="n">max_rev</span>
+
+<span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># for memoization </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max revenue for rod of length </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is:&quot;</span><span class="p">,</span> <span class="n">fast_rod_cutting</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">memo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p = {1: 1, 2: 2, 3: 9, 4: 12, 5: 10, 6: 12, 7: 14, 8: 16, 9: 81, 10: 20, 11: 110, 12: 84, 13: 13, 14: 14, 15: 30, 16: 112, 17: 136, 18: 306, 19: 19, 20: 360, 21: 147, 22: 462, 23: 529, 24: 432, 25: 350}
+Max revenue for rod of length 25 is: 531
 </pre></div>
 </div>
 </div>
@@ -628,10 +628,81 @@ r_{n_{opt}} = \max(p_n, r_{1_{opt}} + r_{(n-1)_{opt}}, r_{2_{opt}} + r_{(n-2)_{o
 </section>
 <section id="n-th-fibonacci-number">
 <h2><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number<a class="headerlink" href="#n-th-fibonacci-number" title="Link to this heading">#</a></h2>
+<p>Here we’ll go over a simpler example that demonstrates the power of dynamic programming: computing the <span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number.</p>
+<p>The <span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number <span class="math notranslate nohighlight">\(F_n\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+F_n = F_{n-1} + F_{n-2}
+\]</div>
+<p>where the <span class="math notranslate nohighlight">\(0\)</span>-th and <span class="math notranslate nohighlight">\(1\)</span>-st Fibonacci number are defined as <span class="math notranslate nohighlight">\(F_0=0\)</span> and <span class="math notranslate nohighlight">\(F_1=1\)</span>. This has a clear, albeit naive, recursive implementation in code shown below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nth_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">n: the n-th Fibonacci number desired</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">naive_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="n">Fn</span> <span class="o">=</span> <span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+       <span class="k">return</span> <span class="n">Fn</span>
+    
+<span class="n">n</span> <span class="o">=</span> <span class="mi">39</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">-th Fibonacci number is: </span><span class="si">{</span><span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39-th Fibonacci number is: 63245986
+</pre></div>
+</div>
+</div>
+</div>
+<p>The implementation is naive because of the of the two recursive calls <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">1)</span></code> and <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">2)</span></code>. For example when <span class="math notranslate nohighlight">\(n=10\)</span> the first recursive call computes <span class="math notranslate nohighlight">\(F_9\)</span> and the second recursive call computes <span class="math notranslate nohighlight">\(F_8\)</span>. However to compute <span class="math notranslate nohighlight">\(F_9\)</span> the first recursive call is going to need to compute <span class="math notranslate nohighlight">\(F_8\)</span> but wait, <span class="math notranslate nohighlight">\(F_8\)</span> is already being computed by the <em>second</em> recursive call. This means we’re doing double the work! We can get around this by <em>storing</em> the solutions to smaller Fibonacci problems in a hashtable/dict that we have already computed and when we need to compute them again we can simply look them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fast_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">memo</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+       <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="n">Fn</span> <span class="o">=</span> <span class="n">fast_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span> <span class="o">+</span> <span class="n">fast_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span>
+       <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fn</span>
+       <span class="k">return</span> <span class="n">Fn</span>
+    
+<span class="n">memo</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># for memoization </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">-th Fibonacci number is: </span><span class="si">{</span><span class="n">fast_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">memo</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39-th Fibonacci number is: 63245986
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrix-multiplication">
+<h2>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h2>
+<p>Let’s go over the second example of an application of dynamic programming from <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jul 14 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
 </pre></div>
 </div>
 </div>
@@ -670,20 +741,20 @@ r_{n_{opt}} = \max(p_n, r_{1_{opt}} + r_{(n-1)_{opt}}, r_{2_{opt}} + r_{(n-2)_{o
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="algorithms.html"
+       href="divide_conquer.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Algorithms</p>
+        <p class="prev-next-title">Divide &amp; conquer</p>
       </div>
     </a>
     <a class="right-next"
-       href="divide_conquer.html"
+       href="randomized_algos.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Divide and conquer</p>
+        <p class="prev-next-title">Randomized algorithms</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -708,6 +779,7 @@ r_{n_{opt}} = \max(p_n, r_{1_{opt}} + r_{(n-1)_{opt}}, r_{2_{opt}} + r_{(n-2)_{o
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix multiplication</a></li>
 </ul>
   </nav></div>
 
