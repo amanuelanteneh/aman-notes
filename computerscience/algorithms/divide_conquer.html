@@ -210,7 +210,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">8. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Divide &amp; conquer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="randomized_algos.html">Randomized algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Numerical algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
@@ -479,6 +479,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrences">Solving recurrences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 </ul>
             </nav>
         </div>
@@ -492,9 +493,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="divide-conquer">
 <h1>Divide &amp; conquer<a class="headerlink" href="#divide-conquer" title="Link to this heading">#</a></h1>
-<p>Divide and conquer is a method for designing algorithms</p>
+<p>Divide &amp; conquer is a method for designing algorithms that solve problems by breaking the problem into smaller subproblems and then solving those smaller problems by dividing further until some base case is reached when the problem is small enough. Once the base case is reached we solve that subproblem and then use that solution to solve the larger problem by combining it with solutions to the other smaller subproblems we have solved. Merge sort is a nice example of this that we will go over. As you can probably guess from this description divide &amp; conquer is very closely tied to the concept of recursion.</p>
 <section id="solving-recurrences">
 <h2>Solving recurrences<a class="headerlink" href="#solving-recurrences" title="Link to this heading">#</a></h2>
+</section>
+<section id="merge-sort">
+<h2>Merge sort<a class="headerlink" href="#merge-sort" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -580,6 +584,7 @@ IPython version      : 8.22.2
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrences">Solving recurrences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 </ul>
   </nav></div>
 
