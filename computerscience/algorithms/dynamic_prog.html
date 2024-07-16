@@ -586,22 +586,39 @@ r_{n_{\text{opt}}} &amp;= \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{op
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test case table of rod lengths 1 to 21 (top row) and corresponding revenues for selling (bottom row):
-╒═════╤═════╤═════╤═════╤═════╤═════╤═════╤═════╤═════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╕
-│   1 │   2 │   3 │   4 │   5 │   6 │   7 │   8 │   9 │   10 │   11 │   12 │   13 │   14 │   15 │   16 │   17 │   18 │   19 │   20 │   21 │
-╞═════╪═════╪═════╪═════╪═════╪═════╪═════╪═════╪═════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╡
-│   1 │   2 │   9 │  12 │  10 │  12 │  14 │  16 │  81 │   20 │  110 │   84 │   13 │   14 │   30 │  112 │  136 │  306 │   19 │  360 │  147 │
-╘═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╛
-Max revenue for rod of length 21 is: 361
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test case table of rod lengths 1 to 25 (top row) and corresponding revenues for selling (bottom row):
+╒═════╤═════╤═════╤═════╤═════╤═════╤═════╤═════╤═════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╤══════╕
+│   1 │   2 │   3 │   4 │   5 │   6 │   7 │   8 │   9 │   10 │   11 │   12 │   13 │   14 │   15 │   16 │   17 │   18 │   19 │   20 │   21 │   22 │   23 │   24 │   25 │
+╞═════╪═════╪═════╪═════╪═════╪═════╪═════╪═════╪═════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╪══════╡
+│   1 │   2 │   9 │  12 │  10 │  12 │  14 │  16 │  81 │   20 │  110 │   84 │   13 │   14 │   30 │  112 │  136 │  306 │   19 │  360 │  147 │  462 │  529 │  432 │  350 │
+╘═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╛
+Max revenue for rod of length 25 is: 531
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now this code works but there is a big issue. For large values of <span class="math notranslate nohighlight">\(n\)</span> this code will take a vey long time to run. This makes sense if we think of this in terms of set theory. Consider each segment of the rod (which has length <span class="math notranslate nohighlight">\(n\)</span>) of length 1 as one element in the set in which case we have a set of <span class="math notranslate nohighlight">\(n\)</span> elements. Now each subset</p>
+<p>Now this code works but there is a big issue. For large values of <span class="math notranslate nohighlight">\(n\)</span> this code will take a vey long time to run. This makes sense if we think of this in terms of a recursion tree. Below we have an example from <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> of the recursion tree for <code class="docutils literal notranslate"><span class="pre">naive_rod_cutting</span></code> for <span class="math notranslate nohighlight">\(n=4\)</span>. So we have the initial call to the function with <span class="math notranslate nohighlight">\(n=4\)</span> now what happens once we get to the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop? The function is called recursively at <em>each</em> iteration of the loop. During the first iteration we call the function recursively with <span class="math notranslate nohighlight">\(n=3\)</span> which can be seen in the leftmost branch of the tree connected to the root. But wait this recursive call <em>will also loop over all integers that are less than <span class="math notranslate nohighlight">\(n=3\)</span></em> and recursively call itself at each iteration again and so on for those recursive calls until the base case of <span class="math notranslate nohighlight">\(n=0\)</span> is reached. More interestingly from the recursion tree we can see that we are calling the function with the same value of <span class="math notranslate nohighlight">\(n\)</span> multiple times. For example we call the function with <span class="math notranslate nohighlight">\(n=2\)</span> two times and with <span class="math notranslate nohighlight">\(n=1\)</span> four times. So not only are we exhaustively looking at each possible way of cutting the rod we are also recomputing the solutions for different values of <span class="math notranslate nohighlight">\(n\)</span> over and over again.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/rod_cut_recursion_tree.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/b4dc3e59649862d82339db6c197137984dcd59d8556b80f66aba9b56f20193be.png"><img alt="../../_images/b4dc3e59649862d82339db6c197137984dcd59d8556b80f66aba9b56f20193be.png" src="../../_images/b4dc3e59649862d82339db6c197137984dcd59d8556b80f66aba9b56f20193be.png" style="width: 600px;" /></a>
+</div>
+</div>
 <p>Now instead of solving the same subproblem over and we can instead <em>store</em> the solution to a subproblem, in this case the optimal revenue one can get for a rod of length <span class="math notranslate nohighlight">\(n' &lt; n\)</span>, in a hashtable and then when we come across that subproblem again we can retrieve this solution from the hashtable instead of recomputing a problem we’ve already solved.  This is called <em><strong>memoization</strong></em> and is the key distinction between dynamic programming versus divide &amp; conquer approaches.</p>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
-<p>Note this isn’t a typo; it’s actually spelled <em>memoization</em> and refers to the idea of memos since we store the value and look back at it later <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. In my opinion <em>memorization</em> would also work just as well since we are memorization the solution to a problem.</p>
+<p>Note this isn’t a typo; it’s actually spelled <em>memoization</em> and refers to the idea of memos since we store the value and look back at it later <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. In my opinion <em>memorization</em> would also work just as well since we are memorization the solution to a problem.</p>
 </div>
 <p>A more efficient version of the <code class="docutils literal notranslate"><span class="pre">naive_rod_cutting</span></code> algorithm, which utilizes memoization, is given below. This algorithm brings the time complexity from <span class="math notranslate nohighlight">\(O(2^n)\)</span> to <span class="math notranslate nohighlight">\(O(n^2)\)</span> so an exponential speedup! Although note that this comes with the cost of increasing the space complexity from <span class="math notranslate nohighlight">\(O(1)\)</span> to <span class="math notranslate nohighlight">\(O(n)\)</span> since we are storing a solution for each of the values of rod length that are <span class="math notranslate nohighlight">\(&lt; n\)</span>.</p>
 <div class="cell docutils container">
@@ -699,7 +716,7 @@ F_n = F_{n-1} + F_{n-2}
 </section>
 <section id="matrix-multiplication">
 <h2>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h2>
-<p>Let’s go over the second example of an application of dynamic programming from <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>Let’s go over the second example of an application of dynamic programming from <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -708,9 +725,7 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Sun Jul 14 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Jul 15 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
