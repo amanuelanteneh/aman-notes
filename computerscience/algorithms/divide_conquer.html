@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/divide_conquer';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -478,7 +480,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrences">Solving recurrences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
 </ul>
@@ -495,16 +499,41 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="divide-conquer">
 <h1>Divide &amp; conquer<a class="headerlink" href="#divide-conquer" title="Link to this heading">#</a></h1>
 <p>Divide &amp; conquer is a method for designing algorithms that solve problems by breaking the problem into smaller subproblems and then solving those smaller problems by dividing further until some base case is reached when the problem is small enough. Once the base case is reached we solve that subproblem and then use that solution to solve the larger problem by combining it with solutions to the other smaller subproblems we have solved. Merge sort is a nice example of this that we will go over. As you can probably guess from this description divide &amp; conquer is very closely tied to the concept of recursion.</p>
-<section id="solving-recurrences">
-<h2>Solving recurrences<a class="headerlink" href="#solving-recurrences" title="Link to this heading">#</a></h2>
-<p>A recurrence is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. In section 4.1 of <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> they</p>
+<section id="solving-recurrence-relations">
+<h2>Solving recurrence relations<a class="headerlink" href="#solving-recurrence-relations" title="Link to this heading">#</a></h2>
+<p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. In section 4.1 of <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> they present a simple divide &amp; conquer matrix multiplication of 2 <span class="math notranslate nohighlight">\(n\times n\)</span> matrices by breaking it into four subproblems of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> which then is solved recursively. They state that the run time of the algorthim is given by</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 8T\left(\frac{n}{2}\right) + \Theta(1)
+\]</div>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<h3 class="rubric" id="substitution">Substitution</h3>
+<p>Given the recurrence</p>
+<h3 class="rubric" id="recursion-tree">Recursion-tree</h3>
+<p>Given the recurrence</p>
+<h3 class="rubric" id="master-method">Master method</h3>
+<p>Given the recurrence</p>
+</div>
+</section>
+<section id="scalar-multiplication">
+<h2>Scalar multiplication<a class="headerlink" href="#scalar-multiplication" title="Link to this heading">#</a></h2>
+<p>The first problem divide &amp; conquer methods are applied to in <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> is integer multiplication.</p>
+</section>
+<section id="square-matrix-multiplication">
+<h2>Square matrix multiplication<a class="headerlink" href="#square-matrix-multiplication" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(A=(a_{ik})\)</span> and <span class="math notranslate nohighlight">\(B=(b_{jk})\)</span> be <span class="math notranslate nohighlight">\(n\times n\)</span> matrices. The product <span class="math notranslate nohighlight">\(AB\)</span> is given by (recall that this is equivalent to taking the dot product between the rows of <span class="math notranslate nohighlight">\(A\)</span> with the columns of <span class="math notranslate nohighlight">\(B\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[
+c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}
+\]</div>
 </section>
 <section id="merge-sort">
 <h2>Merge sort<a class="headerlink" href="#merge-sort" title="Link to this heading">#</a></h2>
 </section>
 <section id="fast-fourier-transform-fft">
 <h2>Fast Fourier transform (FFT)<a class="headerlink" href="#fast-fourier-transform-fft" title="Link to this heading">#</a></h2>
-<p><span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p><span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -589,7 +618,9 @@ IPython version      : 8.22.2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrences">Solving recurrences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
 </ul>
