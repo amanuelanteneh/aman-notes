@@ -212,7 +212,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">8. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Divide &amp; conquer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Numerical algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
@@ -519,6 +519,53 @@ T(n) = 8T\left(\frac{n}{2}\right) + \Theta(1)
 <section id="scalar-multiplication">
 <h2>Scalar multiplication<a class="headerlink" href="#scalar-multiplication" title="Link to this heading">#</a></h2>
 <p>The first problem divide &amp; conquer methods are applied to in <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> is integer multiplication.</p>
+<p>To multiple two complex numbers <span class="math notranslate nohighlight">\(g=a+ib\)</span> and <span class="math notranslate nohighlight">\(h=c+id\)</span> we compute</p>
+<div class="math notranslate nohighlight">
+\[
+(a+ib)(c+id)= ac-bd + (bc+ad)i
+\]</div>
+<p>which involves 4 multiplications of real numbers. Carl Gauss, the famous mathematician, discovered that we can actually reduce this to 3 since</p>
+<div class="math notranslate nohighlight">
+\[
+bc+ad = (a+b)(c+d) - ac - bd
+\]</div>
+<p>our formula now becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+(a+ib)(c+id) &amp;= ac-bd + (bc+ad)i \\
+&amp;= ac-bd + ((a+b)(c+d) - ac - bd)i.
+\end{align*}
+\end{split}\]</div>
+<p>It seems like this involves more multiplication but actually we now just need to compute <span class="math notranslate nohighlight">\(ac\)</span>, <span class="math notranslate nohighlight">\(bd\)</span> and <span class="math notranslate nohighlight">\((a+b)(c+d)\)</span> since <span class="math notranslate nohighlight">\(ac\)</span> and <span class="math notranslate nohighlight">\(bd\)</span> appear twice in the expression so we have 3 <em>unique</em> multiplications of real numbers.</p>
+<p>This might seem like minimal improvement but lets see what happens when we apply recursion and switch to integer multiplication. Suppose <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-bit integers where <span class="math notranslate nohighlight">\(n\)</span> is a power of 2. First lets start by splitting <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> into two halves that are <span class="math notranslate nohighlight">\(n/2\)</span> bits each such that</p>
+<div class="math notranslate nohighlight">
+\[
+x = 2^{n/2} x_L + x_R \text{\quad and \quad} y = 2^{n/2} y_L + y_R.
+\]</div>
+<p>For example if  <span class="math notranslate nohighlight">\(x=10110110_2\)</span> then <span class="math notranslate nohighlight">\(x_L=1011_2\)</span> and <span class="math notranslate nohighlight">\(x_R=0110_2\)</span> and <span class="math notranslate nohighlight">\(x=(2^{n/2} \times 1011_2) + 0110_2\)</span>, (note the subscript of 2 means the number is written in base 2 i.e. binary).</p>
+<p>Now the product of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+xy &amp;= (2^{n/2} x_L + x_R)(2^{n/2} y_L + y_R)  \\
+   &amp;= 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
+\end{align*}
+\end{split}\]</div>
+<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n//2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would fruther divide the problem into subproblem of smaller size. The recurrence for this algorthim is given by</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 4T\left(\frac{n}{2}\right) + O(n)
+\]</div>
+<p>we multiple by 4 since we are creating 4 new subproblems and multiple by <span class="math notranslate nohighlight">\(T\left(\frac{n}{2}\right)\)</span> since the new subproblems have size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. The additional <span class="math notranslate nohighlight">\(O(n)\)</span> is there to capture the linear time complexity of additions and leftward bit shifts. Solving this recurrence we get the solution is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fast_int_mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="square-matrix-multiplication">
 <h2>Square matrix multiplication<a class="headerlink" href="#square-matrix-multiplication" title="Link to this heading">#</a></h2>
