@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Hierarchical Models &#8212; Amanuel&#39;s Notebook</title>
+    <title>Hierarchical models &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="23. Bibliography" href="../../backmatter/bibliography.html" />
-    <link rel="prev" title="22. Bayesian Statistics" href="bayesian_statistics.html" />
+    <link rel="prev" title="Credible interval" href="cred_int.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -258,6 +258,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">17. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../classic-stats/classic_stats.html">18. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../classic-stats/conf_int.html">Confidence intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../classic-stats/bootstrap.html">Bootstrap</a></li>
 </ul>
@@ -278,7 +279,8 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="bayesian_statistics.html">22. Bayesian Statistics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1. Hierarchical Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cred_int.html">Credible interval</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hierarchical models</a></li>
 </ul>
 </details></li>
 </ul>
@@ -470,7 +472,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Hierarchical Models</h1>
+    <h1>Hierarchical models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -499,7 +501,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="hierarchical-models">
-<h1>1. Hierarchical Models<a class="headerlink" href="#hierarchical-models" title="Link to this heading">#</a></h1>
+<h1>Hierarchical models<a class="headerlink" href="#hierarchical-models" title="Link to this heading">#</a></h1>
 <p>This was originally contributed to <a class="reference external" href="https://github.com/areding">Aaron Reding’s</a> website for the graduate <a class="reference external" href="https://areding.github.io/6420-pymc/intro.html">Bayesian Statistics course ISYE 6420</a> I took while studying at Georgia Tech.</p>
 <p>In the excellent introductory textbook <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id15" title="Ben Lambert. A student's guide to Bayesian statistics. SAGE Publications Ltd, 2018.">Lambert, 2018</a>]</span> Ben Lambert provides a great introduction to the concept of hierarchial models with an example. We will go over a modified version of this example here.
 Hierarchical models can be seen as a compromise between two other types of models. The first is what Lambert calls ‘fully pooled’ models and the second are called ‘heterogenous’ models. Let’s look to a specific example to compare and contrast the two models.</p>
@@ -584,12 +586,12 @@ S_{ij} \sim \mathcal{N}(\mu_j, \sigma^2_j)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="bayesian_statistics.html"
+       href="cred_int.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">22. </span>Bayesian Statistics</p>
+        <p class="prev-next-title">Credible interval</p>
       </div>
     </a>
     <a class="right-next"
