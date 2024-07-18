@@ -523,18 +523,18 @@ bc+ad = (a+b)(c+d) - ac - bd
 \end{align*}
 \end{split}\]</div>
 <p>It seems like this involves more multiplication but actually we now just need to compute <span class="math notranslate nohighlight">\(ac\)</span>, <span class="math notranslate nohighlight">\(bd\)</span> and <span class="math notranslate nohighlight">\((a+b)(c+d)\)</span> since <span class="math notranslate nohighlight">\(ac\)</span> and <span class="math notranslate nohighlight">\(bd\)</span> appear twice in the expression so we have 3 <em>unique</em> multiplications of real numbers.</p>
-<p>This might seem like minimal improvement but lets see what happens when we apply recursion and switch to integer multiplication. Suppose <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-bit integers where <span class="math notranslate nohighlight">\(n\)</span> is a power of 2. First lets start by splitting <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> into two halves that are <span class="math notranslate nohighlight">\(n/2\)</span> bits each such that</p>
+<p>This might seem like minimal improvement but lets see what happens when we apply recursion and switch to integer multiplication. Suppose <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-bit integers where <span class="math notranslate nohighlight">\(n\)</span> is a power of 2. First lets start by splitting <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> into two halves that are <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> bits each such that</p>
 <div class="math notranslate nohighlight">
 \[
-x = 2^{n/2} x_L + x_R \quad \text{ and } \quad y = 2^{n/2} y_L + y_R.
+x = 2^{\frac{n}{2}} x_L + x_R \quad \text{ and } \quad y = 2^{\frac{n}{2}} y_L + y_R.
 \]</div>
-<p>For example if  <span class="math notranslate nohighlight">\(x=10110110_2\)</span> then <span class="math notranslate nohighlight">\(x_L=1011_2\)</span> and <span class="math notranslate nohighlight">\(x_R=0110_2\)</span> and <span class="math notranslate nohighlight">\(x=(2^{n/2} \times 1011_2) + 0110_2\)</span>, (note the subscript of 2 means the number is written in base 2 i.e. binary).</p>
+<p>For example if  <span class="math notranslate nohighlight">\(x=10110110_2\)</span> then <span class="math notranslate nohighlight">\(x_L=1011_2\)</span> and <span class="math notranslate nohighlight">\(x_R=0110_2\)</span> and <span class="math notranslate nohighlight">\(x=(2^{\frac{n}{2}} \times 1011_2) + 0110_2\)</span>, (note the subscript of 2 means the number is written in base 2 i.e. binary).</p>
 <p>Now the product of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-xy &amp;= (2^{n/2} x_L + x_R)(2^{n/2} y_L + y_R)  \\
-   &amp;= 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
+xy &amp;= (2^{\frac{n}{2}} x_L + x_R)(2^{\frac{n}{2}} y_L + y_R)  \\
+   &amp;= 2^nx_Ly_L + 2^{\frac{n}{2}}(x_Ly_R + x_Ry_L) + x_Ry_R
 \end{align*}
 \end{split}\]</div>
 <p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n//2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size. The pseudocode and a <code class="docutils literal notranslate"><span class="pre">Python</span></code> implementation of the algorithm are given below.</p>
