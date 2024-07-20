@@ -1,4 +1,4 @@
-# 1. Hierarchical Models
+# Hierarchical models
 
 This was originally contributed to [Aaron Reding's](https://github.com/areding) website for the graduate [Bayesian Statistics course ISYE 6420](https://areding.github.io/6420-pymc/intro.html) I took while studying at Georgia Tech.
 

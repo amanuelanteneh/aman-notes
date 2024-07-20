@@ -45,6 +45,7 @@ parts:
       - file: computerscience/algorithms/linear_prog
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/cross_ent_loss
       - file: computerscience/machine-learning/ppo
       - file: computerscience/machine-learning/attention
   
@@ -78,6 +79,7 @@ parts:
     - file: statistics/intro
     - file: statistics/classic-stats/classic_stats
       sections:
+      - file: statistics/classic-stats/conf_int
       - file: statistics/classic-stats/pca
       - file: statistics/classic-stats/bootstrap
     - file: statistics/hypo-testing/hypo_testing
@@ -94,6 +96,7 @@ parts:
       - file: statistics/high-dim-stats/compress_sense
     - file: statistics/bayesian-statistics/bayesian_statistics
       sections:
+      - file: statistics/bayesian-statistics/cred_int
       - file: statistics/bayesian-statistics/hierarchical_models
   
   - caption: Back Matter
