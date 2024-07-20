@@ -65,7 +65,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Attention" href="attention.html" />
-    <link rel="prev" title="9. Machine Learning" href="machine_learning.html" />
+    <link rel="prev" title="Cross entropy loss" href="cross_ent_loss.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -220,6 +220,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">9. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cross_ent_loss.html">Cross entropy loss</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Proximal policy optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
 </ul>
@@ -525,27 +526,27 @@ The critic is also modeled as a neural network with the same input and hidden la
 <p class="admonition-title"><span class="caption-number">Algorithm 9.1 </span> (Pseudocode of <span class="math notranslate nohighlight">\(\texttt{StableBaselines3}\)</span> implementation of PPO with deep neural networks)</p>
 <section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
-<li><p>Initialize empty rollout buffer <span class="math notranslate nohighlight">\(M=\{\}\)</span> of maximum capacity  <span class="math notranslate nohighlight">\(N\)</span>  <em>(<span class="math notranslate nohighlight">\(N\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_steps}\)</span> from Table I of the main material)</em></p></li>
+<li><p>Initialize empty rollout buffer <span class="math notranslate nohighlight">\(M=\{\}\)</span> of maximum capacity  <span class="math notranslate nohighlight">\(N\)</span>  <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(N\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_steps}\)</span> from Table I of the main material</p></li>
 <li><p>Initialize policy (actor) network <span class="math notranslate nohighlight">\(\pi\)</span> with random weights <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
 <li><p>Initialize value (critic) network <span class="math notranslate nohighlight">\(\hat{V}\)</span> with random weights <span class="math notranslate nohighlight">\(\phi\)</span></p></li>
-<li><p>Set number of epochs <span class="math notranslate nohighlight">\(n\)</span> to optimize over <em>(<span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_epochs}\)</span> from Table I of the main material)</em></p></li>
-<li><p>Set discount factor <span class="math notranslate nohighlight">\(\gamma\)</span> <em>(<span class="math notranslate nohighlight">\(\gamma\)</span> is <span class="math notranslate nohighlight">\(\texttt{gamma}\)</span> from Table I of the main material)</em></p></li>
+<li><p>Set number of epochs <span class="math notranslate nohighlight">\(n\)</span> to optimize over <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(n\)</span> is <span class="math notranslate nohighlight">\(\texttt{n_epochs}\)</span> from Table I of the main material</p></li>
+<li><p>Set discount factor <span class="math notranslate nohighlight">\(\gamma\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(\gamma\)</span> is <span class="math notranslate nohighlight">\(\texttt{gamma}\)</span> from Table I of the main material</p></li>
 <li><p><span class="math notranslate nohighlight">\(i \gets 0\)</span></p></li>
-<li><p>While <span class="math notranslate nohighlight">\(i &lt; T\)</span>: <em>(<span class="math notranslate nohighlight">\(T\)</span> is the maximum number of times the agent can interact with the environment during training)</em></p>
+<li><p>While <span class="math notranslate nohighlight">\(i &lt; T\)</span>: <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(T\)</span> is the maximum number of times the agent can interact with the environment during training</p>
 <ol class="arabic simple">
 <li><p>Initialize array <span class="math notranslate nohighlight">\(E\)</span> of <span class="math notranslate nohighlight">\(K\)</span> environments all in initial state <span class="math notranslate nohighlight">\(s_t=s_0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(j \gets 0\)</span></p></li>
 <li><p>While <span class="math notranslate nohighlight">\(j &lt; N\)</span>:</p>
 <ol class="arabic simple">
-<li><p>For <span class="math notranslate nohighlight">\(k=0\)</span> to <span class="math notranslate nohighlight">\(K\)</span>: <em>(This loop can be parallelized since each environment is independent of the others)</em></p>
+<li><p>For <span class="math notranslate nohighlight">\(k=0\)</span> to <span class="math notranslate nohighlight">\(K\)</span>: <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> This loop can be parallelized since each environment is independent of the others</p>
 <ol class="arabic simple">
-<li><p>(<span class="math notranslate nohighlight">\(\mu_1,\mu_2, \sigma) \gets \pi(s_t)\)</span> <em>(Get means and standard deviation of the two action distributions from <span class="math notranslate nohighlight">\(\pi\)</span>)</em></p></li>
-<li><p><span class="math notranslate nohighlight">\(a_1 \sim \mathcal{N}(\mu_1,\sigma)\)</span> <em>(Sample action 1 from distribution)</em></p></li>
+<li><p>(<span class="math notranslate nohighlight">\(\mu_1,\mu_2, \sigma) \gets \pi(s_t)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Get means and standard deviation of the two action distributions from <span class="math notranslate nohighlight">\(\pi\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_1 \sim \mathcal{N}(\mu_1,\sigma)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Sample action 1 from distribution</p></li>
 <li><p><span class="math notranslate nohighlight">\(a_2 \sim \mathcal{N}(\mu_2,\sigma)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(a_t \gets (a_1, a_2)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\((s_{t+1}, r_t) \gets E[k](s_t, a_t, \gamma)\)</span> <em>(Perform action <span class="math notranslate nohighlight">\(a_t\)</span> and get state transition and reward)</em></p></li>
+<li><p><span class="math notranslate nohighlight">\((s_{t+1}, r_t) \gets E[k](s_t, a_t, \gamma)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Perform action <span class="math notranslate nohighlight">\(a_t\)</span> and get state transition and reward</p></li>
 <li><p>Store experience <span class="math notranslate nohighlight">\((s_t,a_t,r_t,s_{t+1})\)</span> in <span class="math notranslate nohighlight">\(M\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(s_t \gets s_{t+1}\)</span> <em>(Update state of current (<span class="math notranslate nohighlight">\(k\)</span>-th) environment)</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(s_t \gets s_{t+1}\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Update state of current (<span class="math notranslate nohighlight">\(k\)</span>-th) environment</p></li>
 <li><p><span class="math notranslate nohighlight">\(i \gets i+1\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(j \gets j+1\)</span></p></li>
 </ol>
@@ -553,17 +554,17 @@ The critic is also modeled as a neural network with the same input and hidden la
 </ol>
 </li>
 <li><p>Compute advantages <span class="math notranslate nohighlight">\(A_t\)</span> for experiences in <span class="math notranslate nohighlight">\(M\)</span> using predictions from <span class="math notranslate nohighlight">\(\hat{V}\)</span></p></li>
-<li><p>For <span class="math notranslate nohighlight">\(e=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:  <em>(Policy improvement step)</em></p>
+<li><p>For <span class="math notranslate nohighlight">\(e=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:  <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Policy improvement step</p>
 <ol class="arabic simple">
-<li><p>Divide <span class="math notranslate nohighlight">\(M\)</span> into batches of size <span class="math notranslate nohighlight">\(b\)</span> and store them in <span class="math notranslate nohighlight">\(B\)</span> <em>(<span class="math notranslate nohighlight">\(b\)</span> is <span class="math notranslate nohighlight">\(\texttt{batch_size}\)</span> from Table I of the main material)</em></p></li>
+<li><p>Divide <span class="math notranslate nohighlight">\(M\)</span> into batches of size <span class="math notranslate nohighlight">\(b\)</span> and store them in <span class="math notranslate nohighlight">\(B\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(b\)</span> is <span class="math notranslate nohighlight">\(\texttt{batch_size}\)</span> from Table I of the main material</p></li>
 <li><p>For batch in <span class="math notranslate nohighlight">\(B\)</span>:</p>
 <ol class="arabic simple">
 <li><p>Compute gradient estimate <span class="math notranslate nohighlight">\(\hat{g}_\theta\)</span> which is the average of <span class="math notranslate nohighlight">\(\nabla_\theta L_t^{CLIP+ENT}(\theta)\)</span> over batch</p></li>
-<li><p>Clip norm of <span class="math notranslate nohighlight">\(\hat{g}_\theta\)</span> to be <span class="math notranslate nohighlight">\(&lt; |G|_{max}\)</span> <em>(<span class="math notranslate nohighlight">\(|G|_{max}\)</span> is <span class="math notranslate nohighlight">\(\texttt{max_grad_norm}\)</span> from Table I of the main material)</em></p></li>
+<li><p>Clip norm of <span class="math notranslate nohighlight">\(\hat{g}_\theta\)</span> to be <span class="math notranslate nohighlight">\(&lt; |G|_{max}\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(|G|_{max}\)</span> is <span class="math notranslate nohighlight">\(\texttt{max_grad_norm}\)</span> from Table I of the main material</p></li>
 <li><p><span class="math notranslate nohighlight">\(\theta \gets \theta + \alpha\hat{g}_\theta\)</span></p></li>
 <li><p>Compute gradient estimate <span class="math notranslate nohighlight">\(\hat{g}_\phi\)</span> which is the average of <span class="math notranslate nohighlight">\(\nabla_\phi L_t^{VF}(\phi)\)</span> over batch</p></li>
 <li><p>Clip norm of <span class="math notranslate nohighlight">\(\hat{g}_\phi\)</span> to be <span class="math notranslate nohighlight">\(&lt; |G|_{max}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\phi \gets \phi + \alpha\hat{g}_\phi\)</span> <em>(<span class="math notranslate nohighlight">\(\alpha\)</span> is <span class="math notranslate nohighlight">\(\texttt{learning_rate}\)</span> from Table I of the main material)</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi \gets \phi + \alpha\hat{g}_\phi\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\(\alpha\)</span> is <span class="math notranslate nohighlight">\(\texttt{learning_rate}\)</span> from Table I of the main material</p></li>
 </ol>
 </li>
 </ol>
@@ -675,12 +676,12 @@ is expressed as</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="machine_learning.html"
+       href="cross_ent_loss.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Machine Learning</p>
+        <p class="prev-next-title">Cross entropy loss</p>
       </div>
     </a>
     <a class="right-next"

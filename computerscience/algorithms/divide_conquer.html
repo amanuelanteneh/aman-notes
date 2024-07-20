@@ -220,6 +220,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">9. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/ppo.html">Proximal policy optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 </ul>
@@ -483,7 +484,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar multiplication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-tree">Recursion-tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-method">Master method</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
@@ -537,11 +543,19 @@ xy &amp;= (2^{\frac{n}{2}} x_L + x_R)(2^{\frac{n}{2}} y_L + y_R)  \\
    &amp;= 2^nx_Ly_L + 2^{\frac{n}{2}}(x_Ly_R + x_Ry_L) + x_Ry_R
 \end{align*}
 \end{split}\]</div>
-<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n//2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size. The pseudocode and a <code class="docutils literal notranslate"><span class="pre">Python</span></code> implementation of the algorithm are given below.</p>
-<div class="proof algorithm dropdown admonition" id="fast-int-mult">
+<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n//2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size.
+We can describe the runtime (time complexity) of these recursive algorithms using <em>recurrence relations</em> which we cover in the next section. The recurrence relation for this algorithm is given by</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 4T\left(\frac{n}{2}\right) + O(n)
+\]</div>
+<p>we multiply by 4 since we are creating 4 new subproblems and multiple by <span class="math notranslate nohighlight">\(T\left(\frac{n}{2}\right)\)</span> since the new subproblems have size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. The additional <span class="math notranslate nohighlight">\(O(n)\)</span> is there to capture the linear time complexity of additions and leftward bit shifts. Solving this recurrence relation for <span class="math notranslate nohighlight">\(T(n)\)</span> we get the solution is <span class="math notranslate nohighlight">\(T(n)=O(n^2)\)</span>. This is the same complexity as the grade-school multiplication method so we have no real improvement with this new recursive algorithm.</p>
+<p>We can improve this algorithm by using the insight from Gauss that we laid out earlier that. Since <span class="math notranslate nohighlight">\(x_Ly_R + x_Ry_L=(x_L+x_R)(y_L+y_R)-x_Ly_L-x_Ry_R\)</span> we can reduce the 4 multiplications needed down to 3 resulting in a more efficient algorithm.</p>
+<p>The pseudocode and for the algorithm are given below.</p>
+<div class="proof algorithm dropdown admonition" id="gauss-int-mult">
 <p class="admonition-title"><span class="caption-number">Algorithm 8.1 </span> (Integer Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
-<p><strong>function</strong> <span class="math notranslate nohighlight">\(\text{fast_int_mult}(x,y)\)</span>:</p>
+<p><strong>function</strong> <span class="math notranslate nohighlight">\(\text{gauss_int_mult}(x,y,n)\)</span>:</p>
 <p><strong>Inputs</strong> Given <span class="math notranslate nohighlight">\(n\)</span>-bit integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
 <p><strong>Output</strong> Their integer product <span class="math notranslate nohighlight">\(xy\)</span></p>
 <ol class="arabic simple">
@@ -551,52 +565,61 @@ xy &amp;= (2^{\frac{n}{2}} x_L + x_R)(2^{\frac{n}{2}} y_L + y_R)  \\
 </ol>
 </li>
 <li><p><span class="math notranslate nohighlight">\(x_L = \text{ leftmost } \lceil \frac{n}{2} \rceil \text{ bits of } x\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x_R = \text{ rightmost } \lceil \frac{n}{2} \rceil \text{ bits of } x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x_R = \text{ rightmost } \lfloor \frac{n}{2} \rfloor \text{ bits of } x\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(y_L = \text{ leftmost } \lceil \frac{n}{2} \rceil \text{ bits of } y\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(y_R = \text{ rightmost } \lceil \frac{n}{2} \rceil \text{ bits of } y\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P_1 = \text{fast_int_mult}(x_L,y_L)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P_2 = \text{fast_int_mult}(x_R,y_R)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P_3 = \text{fast_int_mult}(x_L+x_R,y_L+y_R)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_R = \text{ rightmost } \lfloor \frac{n}{2} \rfloor \text{ bits of } y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P_1 = \text{fast_int_mult}(x_L,y_L)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Compute <span class="math notranslate nohighlight">\(x_Ly_L\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P_2 = \text{fast_int_mult}(x_R,y_R)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Compute <span class="math notranslate nohighlight">\(x_Ry_R\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P_3 = \text{fast_int_mult}(x_L+x_R,y_L+y_R)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Compute <span class="math notranslate nohighlight">\((x_L+x_R)(y_L+y_R)\)</span></p></li>
 <li><p>return <span class="math notranslate nohighlight">\(2^{n} P_1 + 2^{n}(P_3 - P_1 - P_2) + P_2\)</span></p></li>
 </ol>
 </section>
-</div><div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fast_int_mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<p>The recurrence for this algorithm is given by</p>
+</div><p>The time complexity for this algorithm is given by the recurrence relation</p>
 <div class="math notranslate nohighlight">
 \[
-T(n) = 4T\left(\frac{n}{2}\right) + O(n)
+T(n) = 3T\left(\frac{n}{2}\right) + O(n)
 \]</div>
-<p>we multiple by 4 since we are creating 4 new subproblems and multiple by <span class="math notranslate nohighlight">\(T\left(\frac{n}{2}\right)\)</span> since the new subproblems have size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. The additional <span class="math notranslate nohighlight">\(O(n)\)</span> is there to capture the linear time complexity of additions and leftward bit shifts. Solving this recurrence we get the solution is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
+<p>which has the solution <span class="math notranslate nohighlight">\(T(n) = O(n^{1.59})\)</span> which is a very nice improvement.</p>
 </section>
 <section id="solving-recurrence-relations">
 <h2>Solving recurrence relations<a class="headerlink" href="#solving-recurrence-relations" title="Link to this heading">#</a></h2>
-<p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. In section 4.1 of <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> they present a simple divide &amp; conquer matrix multiplication of two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices by breaking it into four subproblems of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> which then is solved recursively. They state that the run time of the algorthim is given by</p>
+<p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. To solve these recurrences there are three main methods described below <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<section id="substitution">
+<h3>Substitution<a class="headerlink" href="#substitution" title="Link to this heading">#</a></h3>
+<p>Given a recurrent algorithm we guess the solution and use induction to prove it is correct.</p>
+</section>
+<section id="recursion-tree">
+<h3>Recursion-tree<a class="headerlink" href="#recursion-tree" title="Link to this heading">#</a></h3>
+<p>Given a recurrent algorithm you draw out a the recursion as a tree with with the number of branches at each node being the number of subproblems being created, the depth being the levels of recursion and the nodes of the tree representing the cost of an operation at that level of recursion. By examining the tree you then attempt to write out the expression for the time complexity by summing up the nodes.</p>
+</section>
+<section id="master-method">
+<h3>Master method<a class="headerlink" href="#master-method" title="Link to this heading">#</a></h3>
+<p>Given a recurrent algorithm if we can express it’s runtime as a recurrence of the form</p>
 <div class="math notranslate nohighlight">
 \[
-T(n) = 8T\left(\frac{n}{2}\right) + \Theta(1)
+T(n) = aT\left(\left\lceil\frac{n}{b}\right\rceil\right) + O(n^d)
 \]</div>
-<div class="dropdown admonition note">
-<p class="admonition-title">Note</p>
-<h3 class="rubric" id="substitution">Substitution</h3>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the size of the initial problem, <span class="math notranslate nohighlight">\(a\)</span> is the number of subproblems that we divide the problem into at each recursion level, <span class="math notranslate nohighlight">\(\frac{n}{b}\)</span> is the size of the subproblems and <span class="math notranslate nohighlight">\(O(n^d)\)</span> is the time needed to combine the solutions of said subproblems into solutions for the larger problems we can use the <em>master theorem</em> to solve the recurrence.</p>
+<div class="proof theorem dropdown admonition" id="theorem-1">
+<p class="admonition-title"><span class="caption-number">Theorem 8.1 </span> (Master Theorem)</p>
+<section class="theorem-content" id="proof-content">
 <p>Given the recurrence</p>
-<h3 class="rubric" id="recursion-tree">Recursion-tree</h3>
-<p>Given the recurrence</p>
-<h3 class="rubric" id="master-method">Master method</h3>
-<p>Given the recurrence</p>
-</div>
+<div class="math notranslate nohighlight">
+\[
+T(n) = aT\left(\left\lceil\frac{n}{b}\right\rceil\right) + O(n^d)
+\]</div>
+<p>the solution <span class="math notranslate nohighlight">\(T(n)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T(n) = \begin{cases}
+  O(n^d)  &amp; \text{if } d &gt; \log_b(a)\\
+  O(n^d\log(n))  &amp; \text{if } d = \log_b(a)\\
+  O(n^{\log_b(a)})  &amp; \text{if } d &lt; \log_b(a)\\
+\end{cases}
+\end{split}\]</div>
+<p>with the proof along with the theorem given in <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span></p>
+</section>
+</div></section>
 </section>
 <section id="square-matrix-multiplication">
 <h2>Square matrix multiplication<a class="headerlink" href="#square-matrix-multiplication" title="Link to this heading">#</a></h2>
@@ -611,7 +634,7 @@ c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}
 </section>
 <section id="fast-fourier-transform-fft">
 <h2>Fast Fourier transform (FFT)<a class="headerlink" href="#fast-fourier-transform-fft" title="Link to this heading">#</a></h2>
-<p><span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p><span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -697,7 +720,12 @@ IPython version      : 8.22.2
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalar-multiplication">Scalar multiplication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-tree">Recursion-tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-method">Master method</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
