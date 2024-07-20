@@ -490,9 +490,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-method">Master method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-matrix-multiplication">Naive matrix multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strassens-algorithm">Strassen’s algorithm</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
             </nav>
         </div>
@@ -535,6 +541,20 @@ bc+ad = (a+b)(c+d) - ac - bd
 x = 2^{\frac{n}{2}} x_L + x_R \quad \text{ and } \quad y = 2^{\frac{n}{2}} y_L + y_R.
 \]</div>
 <p>For example if  <span class="math notranslate nohighlight">\(x=10110110_2\)</span> then <span class="math notranslate nohighlight">\(x_L=1011_2\)</span> and <span class="math notranslate nohighlight">\(x_R=0110_2\)</span> and <span class="math notranslate nohighlight">\(x=(2^{\frac{n}{2}} \times 1011_2) + 0110_2\)</span>, (note the subscript of 2 means the number is written in base 2 i.e. binary).</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that we multiply the left most bits by <span class="math notranslate nohighlight">\(2^{n/2}\)</span> since these are the <span class="math notranslate nohighlight">\(n/2\)</span> most significant bits since we’re using big endian convention.
+As an explicit example for the <span class="math notranslate nohighlight">\(8\)</span>-bit number</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+x &amp;= 182_{10}\\
+&amp;=10110110_2 \\ 
+&amp;= (1\times2^7)+(0\times2^6)+(1\times2^5)+(1\times2^4)+(0\times2^3)+(1\times2^2)+(1\times2^1)+(0\times2^0)
+\end{align*}
+\end{split}\]</div>
+<p>since the leftmost bits are the most significant we must have <span class="math notranslate nohighlight">\(x_L=2^{4}\times1011_2 =2^{\\frac{8}{2}}\left[(1\times2^3)+(0\times2^2)+(1\times2^1)+(1\times2^0)\right]\)</span> if we are to have <span class="math notranslate nohighlight">\(x_R=0110_2\)</span> and satisfy the equation <span class="math notranslate nohighlight">\(x_L+x_R=x\)</span>.</p>
+</div>
 <p>Now the product of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -555,11 +575,11 @@ T(n) = 4T\left(\frac{n}{2}\right) + O(n)
 <div class="proof algorithm dropdown admonition" id="gauss-int-mult">
 <p class="admonition-title"><span class="caption-number">Algorithm 8.1 </span> (Integer Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
-<p><strong>function</strong> <span class="math notranslate nohighlight">\(\text{gauss_int_mult}(x,y,n)\)</span>:</p>
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{gauss_int_mult}(x,y,n)\)</span>:</p>
 <p><strong>Inputs</strong> Given <span class="math notranslate nohighlight">\(n\)</span>-bit integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
 <p><strong>Output</strong> Their integer product <span class="math notranslate nohighlight">\(xy\)</span></p>
 <ol class="arabic simple">
-<li><p>if <span class="math notranslate nohighlight">\(n=1\)</span></p>
+<li><p>if <span class="math notranslate nohighlight">\(n=1\)</span>:</p>
 <ol class="arabic simple">
 <li><p>return <span class="math notranslate nohighlight">\(xy\)</span></p></li>
 </ol>
@@ -586,15 +606,15 @@ T(n) = 3T\left(\frac{n}{2}\right) + O(n)
 <p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. To solve these recurrences there are three main methods described below <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 <section id="substitution">
 <h3>Substitution<a class="headerlink" href="#substitution" title="Link to this heading">#</a></h3>
-<p>Given a recurrent algorithm we guess the solution and use induction to prove it is correct.</p>
+<p>Given a recursion based algorithm we guess the solution and use induction to prove it is correct.</p>
 </section>
 <section id="recursion-tree">
 <h3>Recursion-tree<a class="headerlink" href="#recursion-tree" title="Link to this heading">#</a></h3>
-<p>Given a recurrent algorithm you draw out a the recursion as a tree with with the number of branches at each node being the number of subproblems being created, the depth being the levels of recursion and the nodes of the tree representing the cost of an operation at that level of recursion. By examining the tree you then attempt to write out the expression for the time complexity by summing up the nodes.</p>
+<p>Given a recursion based algorithm you draw out a the recursion as a tree with with the number of branches at each node being the number of subproblems being created, the depth being the levels of recursion and the nodes of the tree representing the cost of an operation at that level of recursion. By examining the tree you then attempt to write out the expression for the time complexity by summing up the nodes.</p>
 </section>
 <section id="master-method">
 <h3>Master method<a class="headerlink" href="#master-method" title="Link to this heading">#</a></h3>
-<p>Given a recurrent algorithm if we can express it’s runtime as a recurrence of the form</p>
+<p>Given a recursion based algorithm if we can express it’s runtime as a recurrence of the form</p>
 <div class="math notranslate nohighlight">
 \[
 T(n) = aT\left(\left\lceil\frac{n}{b}\right\rceil\right) + O(n^d)
@@ -617,24 +637,195 @@ T(n) = \begin{cases}
   O(n^{\log_b(a)})  &amp; \text{if } d &lt; \log_b(a)\\
 \end{cases}
 \end{split}\]</div>
-<p>with the proof along with the theorem given in <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span></p>
+<p>which is very useful. The proof along with the theorem is given in <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
 </section>
 </div></section>
 </section>
 <section id="square-matrix-multiplication">
 <h2>Square matrix multiplication<a class="headerlink" href="#square-matrix-multiplication" title="Link to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(A=(a_{ik})\)</span> and <span class="math notranslate nohighlight">\(B=(b_{jk})\)</span> be <span class="math notranslate nohighlight">\(n\times n\)</span> matrices. The product <span class="math notranslate nohighlight">\(AB\)</span> is given by (recall that this is equivalent to taking the dot product between the rows of <span class="math notranslate nohighlight">\(A\)</span> with the columns of <span class="math notranslate nohighlight">\(B\)</span>)</p>
+<section id="naive-matrix-multiplication">
+<h3>Naive matrix multiplication<a class="headerlink" href="#naive-matrix-multiplication" title="Link to this heading">#</a></h3>
+<p>Let’s go over an example from <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> now. Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be <span class="math notranslate nohighlight">\(n\times n\)</span> matrices. Their product <span class="math notranslate nohighlight">\(C=AB\)</span> is given by (recall that this is equivalent to taking the dot product between the rows of <span class="math notranslate nohighlight">\(A\)</span> with the columns of <span class="math notranslate nohighlight">\(B\)</span>)</p>
 <div class="math notranslate nohighlight">
 \[
-c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}
+C_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj}
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(C_{ij}\)</span> is the element of matrix <span class="math notranslate nohighlight">\(C\)</span> at row <span class="math notranslate nohighlight">\(i\)</span> column <span class="math notranslate nohighlight">\(j\)</span>. The pseudocode for an algorithm that computes this formula is given below.</p>
+<p>From the triply nested for-loops we can tell the runtime of this algorithm will be <span class="math notranslate nohighlight">\(\Theta(n^3)\)</span>, since for <span class="math notranslate nohighlight">\(n\)</span> iterations we are performing <span class="math notranslate nohighlight">\(n\)</span> operations <span class="math notranslate nohighlight">\(n\)</span> times.</p>
+<p>We can however apply the divide and conquer method to this problem by utilizing <em>matrix partitioning</em>. Recall that for two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, if <span class="math notranslate nohighlight">\(n\)</span> is even, we can partition the matrices as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \begin{bmatrix}
+A_{11} &amp; A_{12}\\
+A_{21} &amp; A_{22}
+\end{bmatrix} 
+\text{ and } 
+B = \begin{bmatrix}
+B_{11} &amp; B_{12}\\
+B_{21} &amp; B_{22}
+\end{bmatrix} 
+\end{split}\]</div>
+<p>where the blocks <span class="math notranslate nohighlight">\(A_{ij}\)</span> and <span class="math notranslate nohighlight">\(B_{ij}\)</span> are simply four <span class="math notranslate nohighlight">\(\frac{n}{2} \times \frac{n}{2}\)</span> square block submatrices. We can now express the matrix product in terms of the standard matrices product formula except this time we treat the block matrices as scalars in a sense</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+AB &amp;= \begin{bmatrix}
+A_{11} &amp; A_{12}\\
+A_{21} &amp; A_{22}
+\end{bmatrix}
+\begin{bmatrix}
+B_{11} &amp; B_{12}\\
+B_{21} &amp; B_{22} 
+\end{bmatrix} \\
+&amp;= \begin{bmatrix}
+A_{11}B_{11} + A_{12}B_{21} &amp;  A_{11}B_{12} + A_{12}B_{22} \\
+A_{21}B_{11} + A_{22}B_{21} &amp; A_{21}B_{12} + A_{22}B_{22} 
+\end{bmatrix}.
+\end{align*}
+\end{split}\]</div>
+<p>Now we can begin to see how divide and conquer can be applied. Notice that we now have 4 smaller problems now i.e. computing the 4 expressions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C_{11} = A_{11}B_{11} + A_{12}B_{21}\\
+C_{12} = A_{11}B_{12} + A_{12}B_{22}\\
+C_{21} = A_{21}B_{11} + A_{22}B_{21}\\
+C_{22} = A_{21}B_{12} + A_{22}B_{22} 
+\end{split}\]</div>
+<p>which involve 4 addition and 8 multiplication of <em>smaller</em> matrices now i.e. matrices of size <span class="math notranslate nohighlight">\(\frac{n}{2}\times \frac{n}{2}\)</span>. The divide and conquer algorithm is given below.</p>
+<div class="proof algorithm dropdown admonition" id="naive-mat-mult">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.2 </span> (Naive Matrix Multiplication)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{naive_mat_mult}(A,B)\)</span>:</p>
+<p><strong>Inputs</strong> Given two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></p>
+<p><strong>Output</strong> Their matrix product <span class="math notranslate nohighlight">\(C=AB\)</span></p>
+<ol class="arabic simple">
+<li><p>Initialize <span class="math notranslate nohighlight">\(C\)</span> to an all zeros matrix of size <span class="math notranslate nohighlight">\(n\times n\)</span></p></li>
+<li><p>for <span class="math notranslate nohighlight">\(i=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ol class="arabic simple">
+<li><p>for <span class="math notranslate nohighlight">\(j=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ol class="arabic simple">
+<li><p>for <span class="math notranslate nohighlight">\(k=0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(C[i][j] = C[i][j] + A[i][k] \times B[k][j]\)</span></p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>return <span class="math notranslate nohighlight">\(C\)</span></p></li>
+</ol>
+</section>
+</div><div class="proof algorithm dropdown admonition" id="d&amp;c-mat-mult">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.3 </span> (D&amp;C Matrix Multiplication)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A,B,C, n)\)</span>:</p>
+<p><strong>Inputs</strong> Given two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> and an all zeros matrix of size <span class="math notranslate nohighlight">\(n\times n\)</span></p>
+<p><strong>Output</strong> Their matrix product <span class="math notranslate nohighlight">\(C=AB\)</span></p>
+<ol class="arabic simple">
+<li><p>if <span class="math notranslate nohighlight">\(n=1\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(C[0][0] = C[0][0] + A[0][0]\times B[0][0]\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> These are simply scalars since <span class="math notranslate nohighlight">\(n=1\)</span></p></li>
+</ol>
+</li>
+<li><p>Partition <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(C\)</span> into the 12 <span class="math notranslate nohighlight">\(\frac{n}{2}\times \frac{n}{2}\)</span> matrices <span class="math notranslate nohighlight">\(A_{11},A_{21},A_{21},A_{22},B_{11},B_{21},B_{21},B_{22},C_{11},C_{12},C_{21}\)</span> and <span class="math notranslate nohighlight">\(C_{22}\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Divide step</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{11},B_{11},C_{11}, \frac{n}{2})\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> This computes <span class="math notranslate nohighlight">\(A_{11}B_{11}\)</span> from <span class="math notranslate nohighlight">\(C_{11} = A_{11}B_{11} + A_{12}B_{21}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{12},B_{21},C_{11}, \frac{n}{2})\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> This computes <span class="math notranslate nohighlight">\(A_{12}B_{21}\)</span> from <span class="math notranslate nohighlight">\(C_{11} = A_{11}B_{11} + A_{12}B_{21}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{11},B_{12},C_{12}, \frac{n}{2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{12},B_{22},C_{12}, \frac{n}{2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{21},B_{11},C_{21}, \frac{n}{2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{22},B_{21},C_{21}, \frac{n}{2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{21},B_{12},C_{22}, \frac{n}{2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{22},B_{22},C_{22}, \frac{n}{2})\)</span></p></li>
+</ol>
+</section>
+</div><p>Now since we divide the problem into 8 subproblems at each recursion (the 8 matrix multiplications of the submatrices) of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> and the operation of partitioning the matrices can be made to have complexity <span class="math notranslate nohighlight">\(O(1)\)</span> if we just keep track of the indices of the submatrices we are working with, instead of creating a whole new set of matrices in memory each time we partition a matrix into blocks which has complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>, we can characterize the runtime of this algorithm with the recurrence</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 8T\left(\frac{n}{2}\right) + O(1).
+\]</div>
+<p>Using the master theorem we have the solution of this recurrence is <span class="math notranslate nohighlight">\(O(n^3)\)</span> so not an asymptotic improvement over the naive method but a useful example of how to use divide and conquer to solve this problem. There is, however, a divide and conquer algorithm for matrix multiplication, devised by Volker Strassen, that is more clever and has better a runtime.</p>
+</section>
+<section id="strassens-algorithm">
+<h3>Strassen’s algorithm<a class="headerlink" href="#strassens-algorithm" title="Link to this heading">#</a></h3>
+<p>Strassen’s algorithm achieves a speed up over both the prior methods by utilizing a clever trick akin to the one found by Gauss for integer multiplication. Specifically the algorithm reduces the number of matrix multiplications that need to be computed at each recursion level from 8 to 7! This is done by computing the product as <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+AB = \begin{bmatrix}
+P_5 + P_4 - P_2 + P_6 &amp; P_1 + P_2\\
+P_3 + P_4 &amp; P_1 + P_5 - P_3 - P_7
+\end{bmatrix}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;P_1=A_{11}(B_{12} - B_{22}), \qquad P_2=(A_{11} + A_{12})B_{22}, \\
+&amp;P_3=(A_{21}+A_{22})B_{11}, \qquad P_4=A_{22}(B_{21}+B_{22}), \\
+&amp;P_5=(A_{11}+A_{22})(B_{11}+B_{22}), \qquad P_6=(A_{12}-A_{22})(B_{21}+B_{22})\\
+&amp;P_7=(A_{11}-A_{21})(B_{11}+B_{12}).
+\end{align*}
+\end{split}\]</div>
+<p>The recurrence for this algorithms time complexity is now given by</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 7T\left(\frac{n}{2}\right) + O(1).
+\]</div>
+<p>and from the master theorem we get the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n^{log_{2}(7)}) \approx O(n^{2.807})\)</span>. This may not seem like a huge improvement but as the matrix sizes get large e.g. in the millions, which is this very common for computations in fields such as deep learning, this algorithms runtime is about an order of magnitude faster.</p>
+</section>
 </section>
 <section id="merge-sort">
 <h2>Merge sort<a class="headerlink" href="#merge-sort" title="Link to this heading">#</a></h2>
+<p>Merge sort is one of the best divide and conquer algorithms for sorting a list of numbers. The idea behind merge sort is you have a list <span class="math notranslate nohighlight">\(L\)</span> of numbers and you go about sorting it by first dividing the list into two halves of equal length. We then recursively sort each half of the list and then merge the two sorted lists. The merge sort algorithm is given below.</p>
+<div class="proof algorithm dropdown admonition" id="merge-sort">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.4 </span> (Merge sort)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{merge_sort}(L)\)</span>:</p>
+<p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span></p>
+<p><strong>Output</strong> The sorted list <span class="math notranslate nohighlight">\(L\)</span> in ascending order</p>
+<ol class="arabic simple">
+<li><p>if <span class="math notranslate nohighlight">\(n&gt;1\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{merge}( \text{merge_sort}(L[1,...,\lfloor\frac{n}{2}\rfloor]),  \text{ merge_sort}(L[\lfloor\frac{n}{2}\rfloor+1,...,n]) )\)</span></p></li>
+</ol>
+</li>
+<li><p>else:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(L\)</span></p></li>
+</ol>
+</li>
+</ol>
 </section>
-<section id="fast-fourier-transform-fft">
-<h2>Fast Fourier transform (FFT)<a class="headerlink" href="#fast-fourier-transform-fft" title="Link to this heading">#</a></h2>
-<p><span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+</div><p>Now the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function is the crucial component here as it defines how we combine the resulting sorted lists. Let’s think about how we would combine two sorted (ascending order) lists <span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span> into a list <span class="math notranslate nohighlight">\(L\)</span>. Well since both lists are sorted when now that the first element of the combined list will either be the first element of <span class="math notranslate nohighlight">\(L_1\)</span> or the first element of <span class="math notranslate nohighlight">\(L_2\)</span></p>
+<div class="proof algorithm dropdown admonition" id="merge">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.5 </span> (Merge)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{merge}(L_1, L_2)\)</span>:</p>
+<p><strong>Inputs</strong> Given 2 lists <span class="math notranslate nohighlight">\(L_1[1,...,n]\)</span> and <span class="math notranslate nohighlight">\(L_2[1,...,m]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> respectively sorted in ascending order.</p>
+<p><strong>Output</strong> The  combined list <span class="math notranslate nohighlight">\(L\)</span> sorted in ascending order</p>
+<ol class="arabic simple">
+<li><p>if <span class="math notranslate nohighlight">\(n&gt;1\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{merge}( \text{merge_sort}(L[1,...,\lfloor\frac{n}{2}\rfloor]),  \text{ merge_sort}(L[\lfloor\frac{n}{2}\rfloor+1,...,n]) )\)</span></p></li>
+</ol>
+</li>
+<li><p>else:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(L\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div></section>
+<section id="medians">
+<h2>Medians<a class="headerlink" href="#medians" title="Link to this heading">#</a></h2>
+</section>
+<section id="fast-fourier-transform">
+<h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
+<p>The fast Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+</section>
+<section id="practice-problems">
+<h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -726,9 +917,15 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#master-method">Master method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#square-matrix-multiplication">Square matrix multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-matrix-multiplication">Naive matrix multiplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strassens-algorithm">Strassen’s algorithm</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform-fft">Fast Fourier transform (FFT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
   </nav></div>
 
