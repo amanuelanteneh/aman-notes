@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
@@ -847,7 +847,9 @@ L = [2, 36, 5, 21, 8, 13, 11, 20, 5, 4, 1]
 <p>and take <span class="math notranslate nohighlight">\(w=5\)</span>. We would then split the list into</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-L_l = [2, 4, 1] \\ L_w = [5,5] \\ L_g = [36, 21, 8, 13, 11, 20].
+\begin{align*}
+L_l &amp;= [2, 4, 1] \\ L_w &amp;= [5,5] \\ L_g &amp;= [36, 21, 8, 13, 11, 20].
+\end{align*}
 \end{split}\]</div>
 <p>Now suppose we want the 8th smallest element of <span class="math notranslate nohighlight">\(L\)</span>. We know that this would be the 3rd smallest element of <span class="math notranslate nohighlight">\(L_g\)</span>. Why? Think of it like this: Where is the smallest element? Well it’s certainly in <span class="math notranslate nohighlight">\(L_l\)</span> since that is the list with all elements smaller than <span class="math notranslate nohighlight">\(w\)</span>. Where is the second smallest element? Also in <span class="math notranslate nohighlight">\(L_l\)</span>. The third smallest element is also in <span class="math notranslate nohighlight">\(L_l\)</span>. Now what about the fourth smallest? Well that would be in <span class="math notranslate nohighlight">\(L_w\)</span> since the first 3 smallest elements are in <span class="math notranslate nohighlight">\(L_l\)</span>. What about the sixth smallest element? Well it can’t be in <span class="math notranslate nohighlight">\(L_l\)</span> since that contains the first 3 smallest, and it can’t be in <span class="math notranslate nohighlight">\(L_w\)</span> since that contains the next 2 smallest so it must be in <span class="math notranslate nohighlight">\(L_g\)</span>, and more importantly it will be the smallest number in <span class="math notranslate nohighlight">\(L_g\)</span>. The seventh smallest number can be found in the same way except this time it will be the <em>second</em> smallest element in <span class="math notranslate nohighlight">\(L_g\)</span>. So to put it in general terms if we want the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_l\)</span> and we can simply ignore the other two list. If <span class="math notranslate nohighlight">\(k &gt; |L_l|+|L_w|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_g\)</span>. And if neither condition is true then that means <span class="math notranslate nohighlight">\(|L_s|&lt;k\leq |L_l|+|L_w|\)</span> which means the element we want is  in <span class="math notranslate nohighlight">\(L_w\)</span> i.e. the element is <span class="math notranslate nohighlight">\(w\)</span> itself. The pseudocode is given below.</p>
 <div class="proof algorithm dropdown admonition" id="selection">
@@ -881,7 +883,7 @@ L_l = [2, 4, 1] \\ L_w = [5,5] \\ L_g = [36, 21, 8, 13, 11, 20].
 \[
 T(n) = T\left(\frac{n}{2}\right) + O(n)
 \]</div>
-<p>which from the master theorem has the solution <span class="math notranslate nohighlight">\(O(n)\)</span>! This is a great solution but it relies on a rather strong assumption: that we choose a value of <span class="math notranslate nohighlight">\(w\)</span> that creates list <span class="math notranslate nohighlight">\(L_l\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span> which have size roughly equal to half the size of the original list. But we don’t really have a way of selecting <span class="math notranslate nohighlight">\(w\)</span> that guarantees this to be the case every time. What if we just pick <span class="math notranslate nohighlight">\(w\)</span> randomly (hence why this is a randomized divide &amp; conquer algorithm)? The worst case scenario here is that we pick a <span class="math notranslate nohighlight">\(w\)</span> that is the largest element in the list each time which would only reduce the size of the list by one at each recursive call. This means we would end up doing <span class="math notranslate nohighlight">\(n\)</span> recursive calls and <span class="math notranslate nohighlight">\(n-i\)</span> comparisons at each call where <span class="math notranslate nohighlight">\(i\)</span> is the recursion level we are on. We would thus do</p>
+<p>which from the master theorem has the solution <span class="math notranslate nohighlight">\(O(n)\)</span>! This is a great solution but it relies on a rather strong assumption: that we choose a value of <span class="math notranslate nohighlight">\(w\)</span> that creates list <span class="math notranslate nohighlight">\(L_l\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span> which have size roughly equal to half the size of the original list. But we don’t really have a way of selecting <span class="math notranslate nohighlight">\(w\)</span> that guarantees this to be the case every time. What if we just pick <span class="math notranslate nohighlight">\(w\)</span> randomly (hence why this is a randomized divide &amp; conquer algorithm)? The worst case scenario here is that we want to run the algorithm for <span class="math notranslate nohighlight">\(k=1\)</span>, so we want the smallest element in the list, and pick a <span class="math notranslate nohighlight">\(w\)</span> that is the largest element in the list each time which would only reduce the size of the list by one at each recursive call. This means we would end up doing <span class="math notranslate nohighlight">\(n\)</span> recursive calls and <span class="math notranslate nohighlight">\(n-i\)</span> comparisons at each call where <span class="math notranslate nohighlight">\(i\)</span> is the recursion level we are on. We would thus do</p>
 <div class="math notranslate nohighlight">
 \[
 \sum^{n}_{i=1}(n-i) 
@@ -891,7 +893,7 @@ T(n) = T\left(\frac{n}{2}\right) + O(n)
 \[
 \prod_{i=0}^{n-1}\frac{1}{n-i} = \frac{1}{n!}
 \]</div>
-<p>which very quickly approaches 0 as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
+<p>which very quickly approaches 0 as <span class="math notranslate nohighlight">\(n\)</span> increases. But this is just the absolute worse case it would be more useful to know the time complexity for the <em>average</em> case.</p>
 </section>
 </section>
 <section id="fast-fourier-transform">

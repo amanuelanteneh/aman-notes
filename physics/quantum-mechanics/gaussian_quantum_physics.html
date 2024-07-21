@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>11. Vector Calculus &#8212; Amanuel&#39;s Notebook</title>
+    <title>Gaussian quantum mechanics &#8212; Amanuel&#39;s Notes</title>
   
   
   
@@ -34,7 +34,6 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -58,12 +57,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'mathematics/vector-calc/vector_calc';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/gaussian_quantum_physics';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Gradient" href="gradient.html" />
-    <link rel="prev" title="10. Introduction" href="../intro.html" />
+    <link rel="next" title="3. Introduction" href="../../computerscience/intro.html" />
+    <link rel="prev" title="Homodyne detection" href="homodyne_detection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,8 +151,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/logo1.png" class="logo__image only-light" alt="Amanuel's Notes - Home"/>
+    <script>document.write(`<img src="../../_static/logo1.png" class="logo__image only-dark" alt="Amanuel's Notes - Home"/>`);</script>
   
-    <p class="title logo__title">Amanuel's Notebook</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -176,116 +183,32 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/entanglement.html">Entanglement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/density_matrix.html">Density matrix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/classical-mech/calc_of_var.html">Calculus of variations</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/e-and-m/gauss_law.html">Gauss’s law</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/stat-mech/stat_mech.html">5. Statistical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/partition_func.html">Partition function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/grand_can_ens.html">Grand canonical ensemble</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pure_mixed_states.html">Pure and mixed quantum states</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wigner_function.html">The Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Gaussian quantum mechanics</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">6. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/data_structs.html">7. Data Structures</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">8. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/graph_algos.html">Graph algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/max_flow.html">Max flow algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/np_problems.html">NP-completeness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/linear_prog.html">Linear programming</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">9. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/ppo.html">Proximal policy optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">3. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">10. Introduction</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">11. Vector Calculus</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="gradient.html">Gradient</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../abstract-algebra/algebra.html">12. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../abstract-algebra/group_theory.html">Group theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../abstract-algebra/representation_theory.html">Representation theory</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../linear-algebra/linear_algebra.html">13. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/change_basis.html">Change of basis</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../differential-equations/diff_eq.html">14. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../differential-equations/wave_eq.html">Wave equation</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../complex-analysis/complex_analysis.html">15. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../complex-analysis/contour_int.html">Contour integration</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../probability/probability.html">16. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../probability/conditioning.html">Conditioning</a></li>
-</ul>
-</details></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">4. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">17. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">18. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrap</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">19. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling.html">20. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">21. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">22. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
-</ul>
-</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">5. Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">23. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">6. Bibliography</a></li>
 </ul>
 
     </div>
@@ -357,7 +280,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fmathematics/vector-calc/vector_calc.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/gaussian_quantum_physics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +310,7 @@
       
       
       
-      <li><a href="../../_sources/mathematics/vector-calc/vector_calc.md" target="_blank"
+      <li><a href="../../_sources/physics/quantum-mechanics/gaussian_quantum_physics.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,7 +320,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -458,7 +381,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -469,11 +394,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Vector Calculus</h1>
+    <h1>Gaussian quantum mechanics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard">Why simulating arbitrary quantum systems is classically hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate">Why not all quantum systems are classically hard to simulate</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -483,10 +417,30 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="vector-calculus">
-<h1><span class="section-number">11. </span>Vector Calculus<a class="headerlink" href="#vector-calculus" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-quantum-mechanics">
+<h1>Gaussian quantum mechanics<a class="headerlink" href="#gaussian-quantum-mechanics" title="Link to this heading">#</a></h1>
+<section id="why-simulating-arbitrary-quantum-systems-is-classically-hard">
+<h2>Why simulating arbitrary quantum systems is classically hard<a class="headerlink" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard" title="Link to this heading">#</a></h2>
+<p>Those that are familiar with the field of quantum computing know that the goal of building a quantum computer
+is to have a computer capable of performing computations that are intractable for a classical computer, modeled as a deterministic Turing machine, to compute. This is due to the exponential size of the matrices required to
+describe the dynamics of quantum systems. For instance for a two-level quantum system (a qubit) such as the polarization of a photon the states of the photon are described by <span class="math notranslate nohighlight">\(2\)</span>-dimensional vectors and the evolution of the state of the photon is described by matrices of size <span class="math notranslate nohighlight">\(2 \times 2\)</span>.
+However we wish to study systems of arbitrarily many particles and for a quantum system of <span class="math notranslate nohighlight">\(N\)</span> qubits the state of the system is now described by a <span class="math notranslate nohighlight">\(2^N\)</span>-dimensional vectors and their evolution is described by matrices of size <span class="math notranslate nohighlight">\(2^N \times 2^N\)</span>. Clearly this implies the overhead of classically simulating such a system is <span class="math notranslate nohighlight">\(\omega(2^N)\)</span> which is exponential in the size of the system.</p>
+</section>
+<section id="why-not-all-quantum-systems-are-classically-hard-to-simulate">
+<h2>Why not all quantum systems are classically hard to simulate<a class="headerlink" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate" title="Link to this heading">#</a></h2>
+<p>Remarkably there are, however, some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">BSBN02</a>]</span>. These are systems of quantum harmonic oscillators that are all initially Gaussian states and evolve under Gaussian unitary operations and measurement. In this context Gaussian states are quantum states whose Wigner function is a Gaussian and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on.</p>
+<p>These processes can be simulated classically because the covariances of the position and momentum of the harmonic oscillators, which can be compactly written as a covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, and the expectation values of position and momentum of the harmonic oscillators, which can be compactly written as a vector of means <span class="math notranslate nohighlight">\(\mu\)</span>, provide <em>complete information</em> about the system. For a system of <span class="math notranslate nohighlight">\(M\)</span> oscillators <span class="math notranslate nohighlight">\(\Sigma\)</span> is of size <span class="math notranslate nohighlight">\(2M \times 2M\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is of size <span class="math notranslate nohighlight">\(2M\)</span>. The evolution of this system under Gaussian operations is described by <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrices  [^1] and given by the evolution rules</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma \rightarrow S\Sigma S^T, \quad \mu \rightarrow S\mu
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S\)</span> is the <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrix representing the Gaussian operation. Since the size of these matrices scales like <span class="math notranslate nohighlight">\(O(M^2)\)</span> the computation is <em>polynomial</em> in the size of the system which is tractable. Note that a symplectic matrix is a real <span class="math notranslate nohighlight">\(2n \times 2n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> that satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+A^T \Omega A = \Omega
+\]</div>
+<p>where  <span class="math notranslate nohighlight">\(\Omega = \begin{bmatrix} 0 &amp; I_n \\\ I_n &amp; 0 \end{bmatrix}\)</span> and <span class="math notranslate nohighlight">\(I_n\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> identity matrix.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -502,7 +456,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./mathematics/vector-calc"
+            path: "./physics/quantum-mechanics"
         },
         predefinedOutput: true
     }
@@ -520,20 +474,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="homodyne_detection.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Introduction</p>
+        <p class="prev-next-title">Homodyne detection</p>
       </div>
     </a>
     <a class="right-next"
-       href="gradient.html"
+       href="../../computerscience/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Gradient</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -543,6 +497,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-simulating-arbitrary-quantum-systems-is-classically-hard">Why simulating arbitrary quantum systems is classically hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-all-quantum-systems-are-classically-hard-to-simulate">Why not all quantum systems are classically hard to simulate</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

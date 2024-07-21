@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/numerical_algos';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -481,6 +483,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-arithmetic">Modular arithmetic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
             </nav>
@@ -495,6 +499,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="number-theoretic-algorithms">
 <h1>Number-theoretic algorithms<a class="headerlink" href="#number-theoretic-algorithms" title="Link to this heading">#</a></h1>
+<section id="modular-arithmetic">
+<h2>Modular arithmetic<a class="headerlink" href="#modular-arithmetic" title="Link to this heading">#</a></h2>
+<p>Modular arithmetic refers to arithmetic that is done using the <em>modulo</em> operator on the set of integers <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>. For example we define</p>
+<div class="math notranslate nohighlight">
+\[
+x \pmod N
+\]</div>
+<p>to be equal to the remainder from dividing <span class="math notranslate nohighlight">\(x\)</span> by <span class="math notranslate nohighlight">\(N\)</span> i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{if } x=qN+r \text{ and } 0\leq r &lt; N \\\text{ then } x \pmod N = r.
+\end{split}\]</div>
+<p>Another expression that will be important is</p>
+<div class="math notranslate nohighlight">
+\[
+x \equiv y\pmod N \iff x\pmod N = y\pmod N 
+\]</div>
+<p>which means <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> have the same remainder when divided by <span class="math notranslate nohighlight">\(N\)</span> or equivalently <span class="math notranslate nohighlight">\(N\)</span> divides the quantity <span class="math notranslate nohighlight">\(x-y\)</span>.</p>
+</section>
+<section id="cryptography-rsa">
+<h2>Cryptography (RSA)<a class="headerlink" href="#cryptography-rsa" title="Link to this heading">#</a></h2>
+</section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 </section>
@@ -564,6 +590,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-arithmetic">Modular arithmetic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
   </nav></div>
