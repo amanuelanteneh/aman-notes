@@ -496,7 +496,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
@@ -797,16 +800,6 @@ T(n) = 7T\left(\frac{n}{2}\right) + O(1).
 </ol>
 </li>
 </ol>
-</section>
-</div><p>Now the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function is the crucial component here as it defines how we combine the resulting sorted lists. Let’s think about how we would combine two sorted (ascending order) lists <span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span> into a list <span class="math notranslate nohighlight">\(L\)</span>. Well since both lists are sorted when now that the first element of the combined list will either be the first element of <span class="math notranslate nohighlight">\(L_1\)</span> or the first element of <span class="math notranslate nohighlight">\(L_2\)</span>. But why are we assuming the lists are sorted? It isn’t super clear where the lists are getting sorted in the first place. So the key thing to think about is the case where <span class="math notranslate nohighlight">\(\text{merge_sort}\)</span>’s base case is reached. When this happens we just return a a list with one element. Once this happens we start to recurse back up the recursion tree. So the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function is called with the input lists being single element lists. At that point we just compare the elements in both lists and concatenate them based on which is smaller as is done by the last two conditional statements in the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function. After this we move up one level in the recursion tree <span class="math notranslate nohighlight">\(\text{merge}\)</span> is called again but this time the lists have length 2. So we can see that once we get to the top of the recursion tree we will have two list whose sizes, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> respectively, add up to the size adds up to the length of the original input list. Clearly the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function compares the first element of <span class="math notranslate nohighlight">\(L_1\)</span> with the first element of <span class="math notranslate nohighlight">\(L_2\)</span> and then compares the second element of <span class="math notranslate nohighlight">\(L_1\)</span> with the second element of <span class="math notranslate nohighlight">\(L_2\)</span> and so on. This means <span class="math notranslate nohighlight">\(\text{merge}\)</span> does <span class="math notranslate nohighlight">\(O(n+m)\)</span> operations meaning the time for the merge step is linear in the size of the two lists. So we take a problem of size <span class="math notranslate nohighlight">\(n\)</span> and divide it into two subproblems of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> and solve each of these subproblems in time <span class="math notranslate nohighlight">\(O(n)\)</span> thus the runtime of merge sort is characterized by the recurrence</p>
-<div class="math notranslate nohighlight">
-\[
-T(n) = 2T\left(\frac{n}{2}\right) + O(n)
-\]</div>
-<p>from the master theorem we have that the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n\log(n))\)</span> which means we can sort a list in time that is log-linear in the size of the list. Not bad and in fact this is, provably, the best we can do for a <em>comparison based</em> sorting algorithm <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. See radix sort for a non-comparison based sorting algorithm with complexity <span class="math notranslate nohighlight">\(O(n)\)</span> <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
-<div class="proof algorithm dropdown admonition" id="merge">
-<p class="admonition-title"><span class="caption-number">Algorithm 8.5 </span> (Merge)</p>
-<section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{merge}(L_1, L_2)\)</span>:</p>
 <p><strong>Inputs</strong> Given 2 lists <span class="math notranslate nohighlight">\(L_1[1,...,n]\)</span> and <span class="math notranslate nohighlight">\(L_2[1,...,m]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> respectively sorted in ascending order.</p>
 <p><strong>Output</strong> The  combined list <span class="math notranslate nohighlight">\(L\)</span> sorted in ascending order</p>
@@ -834,13 +827,76 @@ T(n) = 2T\left(\frac{n}{2}\right) + O(n)
 </ol>
 <p>Note <span class="math notranslate nohighlight">\(L_1[1] \oplus \text{merge}(L_1[2,...,n], L_2[1,...,m])\)</span> means we concatenate the list returned from the <span class="math notranslate nohighlight">\(\text{merge}\)</span> call to the end of the one element list <span class="math notranslate nohighlight">\(L_1[1]\)</span>.</p>
 </section>
-</div></section>
+</div><p>Now the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function is the crucial component here as it defines how we combine the resulting sorted lists. Let’s think about how we would combine two sorted (ascending order) lists <span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span> into a list <span class="math notranslate nohighlight">\(L\)</span>. Well since both lists are sorted when now that the first element of the combined list will either be the first element of <span class="math notranslate nohighlight">\(L_1\)</span> or the first element of <span class="math notranslate nohighlight">\(L_2\)</span>. But why are we assuming the lists are sorted? It isn’t super clear where the lists are getting sorted in the first place. So the key thing to think about is the case where <span class="math notranslate nohighlight">\(\text{merge_sort}\)</span>’s base case is reached. When this happens we just return a a list with one element. Once this happens we start to recurse back up the recursion tree. So the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function is called with the input lists being single element lists. At that point we just compare the elements in both lists and concatenate them based on which is smaller as is done by the last two conditional statements in the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function. After this we move up one level in the recursion tree <span class="math notranslate nohighlight">\(\text{merge}\)</span> is called again but this time the lists have length 2. So we can see that once we get to the top of the recursion tree we will have two list whose sizes, <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span> respectively, add up to the size adds up to the length of the original input list. Clearly the <span class="math notranslate nohighlight">\(\text{merge}\)</span> function compares the first element of <span class="math notranslate nohighlight">\(L_1\)</span> with the first element of <span class="math notranslate nohighlight">\(L_2\)</span> and then compares the second element of <span class="math notranslate nohighlight">\(L_1\)</span> with the second element of <span class="math notranslate nohighlight">\(L_2\)</span> and so on. This means <span class="math notranslate nohighlight">\(\text{merge}\)</span> does <span class="math notranslate nohighlight">\(O(n+m)\)</span> operations meaning the time for the merge step is linear in the size of the two lists. So we take a problem of size <span class="math notranslate nohighlight">\(n\)</span> and divide it into two subproblems of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> and solve each of these subproblems in time <span class="math notranslate nohighlight">\(O(n)\)</span> thus the runtime of merge sort is characterized by the recurrence</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = 2T\left(\frac{n}{2}\right) + O(n)
+\]</div>
+<p>from the master theorem we have that the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n\log(n))\)</span> which means we can sort a list in time that is log-linear in the size of the list. Not bad and in fact this is, provably, the best we can do for a <em>comparison based</em> sorting algorithm <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. See radix sort for a non-comparison based sorting algorithm with complexity <span class="math notranslate nohighlight">\(O(n)\)</span> <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+</section>
 <section id="medians">
 <h2>Medians<a class="headerlink" href="#medians" title="Link to this heading">#</a></h2>
+<p>We will now look at how to find the median of a list of <em>unsorted</em>, Unsorted because if the list was sorted the problem would be trivial, numbers using the divide &amp; conquer method. The median of a set of numbers is of course the number that is smaller than 50% of the numbers in the list and greater than or equal to the other 50% of the numbers in the list. To devise an algorithm for this problem it is actually useful to generalize it. The median, for a list of size <span class="math notranslate nohighlight">\(n\)</span>, can also be thought of as the <span class="math notranslate nohighlight">\(\lfloor\frac{n}{2}\rfloor\)</span>-th smallest number in the list. So perhaps we should generalize this problem into finding the <span class="math notranslate nohighlight">\(k\)</span>-th smallest number in a list of numbers and we’ll call this problem <em>selection</em>.</p>
+<section id="randomized-divide-conquer">
+<h3>Randomized divide &amp; conquer<a class="headerlink" href="#randomized-divide-conquer" title="Link to this heading">#</a></h3>
+<p>So how can we devise an algorithm to find the <span class="math notranslate nohighlight">\(k\)</span>-th smallest number in an unsorted list <span class="math notranslate nohighlight">\(L\)</span>? Suppose we take a number <span class="math notranslate nohighlight">\(w\)</span> and split <span class="math notranslate nohighlight">\(L\)</span> into 3 lists: <span class="math notranslate nohighlight">\(L_l\)</span> which is the list of elements in <span class="math notranslate nohighlight">\(L\)</span> that are less than <span class="math notranslate nohighlight">\(w\)</span>, <span class="math notranslate nohighlight">\(L_w\)</span> the list of elements in <span class="math notranslate nohighlight">\(L\)</span> that are equal to <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span> which is the list of elements in <span class="math notranslate nohighlight">\(L\)</span> that are greater than <span class="math notranslate nohighlight">\(w\)</span>. As an example lets take the following list</p>
+<div class="math notranslate nohighlight">
+\[
+L = [2, 36, 5, 21, 8, 13, 11, 20, 5, 4, 1]
+\]</div>
+<p>and take <span class="math notranslate nohighlight">\(w=5\)</span>. We would then split the list into</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_l = [2, 4, 1] \\ L_w = [5,5] \\ L_g = [36, 21, 8, 13, 11, 20].
+\end{split}\]</div>
+<p>Now suppose we want the 8th smallest element of <span class="math notranslate nohighlight">\(L\)</span>. We know that this would be the 3rd smallest element of <span class="math notranslate nohighlight">\(L_g\)</span>. Why? Think of it like this: Where is the smallest element? Well it’s certainly in <span class="math notranslate nohighlight">\(L_l\)</span> since that is the list with all elements smaller than <span class="math notranslate nohighlight">\(w\)</span>. Where is the second smallest element? Also in <span class="math notranslate nohighlight">\(L_l\)</span>. The third smallest element is also in <span class="math notranslate nohighlight">\(L_l\)</span>. Now what about the fourth smallest? Well that would be in <span class="math notranslate nohighlight">\(L_w\)</span> since the first 3 smallest elements are in <span class="math notranslate nohighlight">\(L_l\)</span>. What about the sixth smallest element? Well it can’t be in <span class="math notranslate nohighlight">\(L_l\)</span> since that contains the first 3 smallest, and it can’t be in <span class="math notranslate nohighlight">\(L_w\)</span> since that contains the next 2 smallest so it must be in <span class="math notranslate nohighlight">\(L_g\)</span>, and more importantly it will be the smallest number in <span class="math notranslate nohighlight">\(L_g\)</span>. The seventh smallest number can be found in the same way except this time it will be the <em>second</em> smallest element in <span class="math notranslate nohighlight">\(L_g\)</span>. So to put it in general terms if we want the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_l\)</span> and we can simply ignore the other two list. If <span class="math notranslate nohighlight">\(k &gt; |L_l|+|L_w|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_g\)</span>. And if neither condition is true then that means <span class="math notranslate nohighlight">\(|L_s|&lt;k\leq |L_l|+|L_w|\)</span> which means the element we want is  in <span class="math notranslate nohighlight">\(L_w\)</span> i.e. the element is <span class="math notranslate nohighlight">\(w\)</span> itself. The pseudocode is given below.</p>
+<div class="proof algorithm dropdown admonition" id="selection">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.5 </span> (Selection)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
+<p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and a number <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
+<p><strong>Output</strong> The <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in the list</p>
+<ol class="arabic simple">
+<li><p>Pick a number <span class="math notranslate nohighlight">\(w\)</span> from <span class="math notranslate nohighlight">\(L\)</span></p></li>
+<li><p>Divide <span class="math notranslate nohighlight">\(L\)</span> into the lists <span class="math notranslate nohighlight">\(L_l\)</span>, <span class="math notranslate nohighlight">\(L_w\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_l, k)\)</span></p></li>
+</ol>
+</li>
+<li><p>if <span class="math notranslate nohighlight">\(k &gt; |L_l| + |L_w|\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_l, k-|L_l| - |L_w|)\)</span></p></li>
+</ol>
+</li>
+<li><p>else:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(w\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>Now what about the time complexity of this algorithm? Well if we assume that the size of <span class="math notranslate nohighlight">\(L_l\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span> are roughly equal to <span class="math notranslate nohighlight">\(\frac{1}{2}|L|\)</span> at each divide step then we are dividing the problem into a subproblem of half the time <em>but</em> we must note that the process of splitting the list into the three sublists takes linear time in the number of elements since we must compare each of the <span class="math notranslate nohighlight">\(n\)</span> elements with <span class="math notranslate nohighlight">\(w\)</span> to decide which list it should go into. So the recurrence for this algorithm is given by</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = T\left(\frac{n}{2}\right) + O(n)
+\]</div>
+<p>which from the master theorem has the solution <span class="math notranslate nohighlight">\(O(n)\)</span>! This is a great solution but it relies on a rather strong assumption: that we choose a value of <span class="math notranslate nohighlight">\(w\)</span> that creates list <span class="math notranslate nohighlight">\(L_l\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span> which have size roughly equal to half the size of the original list. But we don’t really have a way of selecting <span class="math notranslate nohighlight">\(w\)</span> that guarantees this to be the case every time. What if we just pick <span class="math notranslate nohighlight">\(w\)</span> randomly (hence why this is a randomized divide &amp; conquer algorithm)? The worst case scenario here is that we pick a <span class="math notranslate nohighlight">\(w\)</span> that is the largest element in the list each time which would only reduce the size of the list by one at each recursive call. This means we would end up doing <span class="math notranslate nohighlight">\(n\)</span> recursive calls and <span class="math notranslate nohighlight">\(n-i\)</span> comparisons at each call where <span class="math notranslate nohighlight">\(i\)</span> is the recursion level we are on. We would thus do</p>
+<div class="math notranslate nohighlight">
+\[
+\sum^{n}_{i=1}(n-i) 
+\]</div>
+<p>total comparisons which by induction can be shown to be equal to <span class="math notranslate nohighlight">\(\frac{n(n-1)}{2}\)</span> for <span class="math notranslate nohighlight">\(n \in \mathbb{Z^+}\)</span> so our worst case time complexity is <span class="math notranslate nohighlight">\(O(n^2)\)</span> which is the time a naive approach of just comparing each element with every other one would take to find the median. However the chance that we pick badly like this at every step is incredibly low. For example the chance that we pick the largest element in a list <span class="math notranslate nohighlight">\(n\)</span> elements, assuming each element is equally likely to be chosen, is <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>. The chance that we do it again once that element is removed is <span class="math notranslate nohighlight">\(\frac{1}{n-1}\)</span> and so on until we get to a list of only one element. That means the probability of this worst case scenario occurring is</p>
+<div class="math notranslate nohighlight">
+\[
+\prod_{i=0}^{n-1}\frac{1}{n-i} = \frac{1}{n!}
+\]</div>
+<p>which very quickly approaches 0 as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
+</section>
 </section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>The fast Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
@@ -941,7 +997,10 @@ IPython version      : 8.22.2
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
