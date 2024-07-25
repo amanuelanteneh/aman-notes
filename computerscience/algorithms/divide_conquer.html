@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -220,6 +220,8 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">9. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/ppo.html">Proximal policy optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
@@ -244,7 +246,6 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">14. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/stoc_diff_eq.html">Stochastic differential equations</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">15. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -253,6 +254,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">16. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -567,7 +569,7 @@ xy &amp;= (2^{\frac{n}{2}} x_L + x_R)(2^{\frac{n}{2}} y_L + y_R)  \\
    &amp;= 2^nx_Ly_L + 2^{\frac{n}{2}}(x_Ly_R + x_Ry_L) + x_Ry_R
 \end{align*}
 \end{split}\]</div>
-<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n_2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size.
+<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n//2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size.
 We can describe the runtime (time complexity) of these recursive algorithms using <em>recurrence relations</em> which we cover in the next section. The recurrence relation for this algorithm is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -695,7 +697,7 @@ C_{12} = A_{11}B_{12} + A_{12}B_{22}\\
 C_{21} = A_{21}B_{11} + A_{22}B_{21}\\
 C_{22} = A_{21}B_{12} + A_{22}B_{22} 
 \end{split}\]</div>
-<p>which involve 4 addition and 8 multiplication of <em>smaller</em> matrices now i.e. matrices of size <span class="math notranslate nohighlight">\(\frac{n}{2}\times \frac{n}{2}\)</span>. The divide and conquer algorithm is given below along with a python implementation of it.</p>
+<p>which involve 4 addition and 8 multiplication of <em>smaller</em> matrices now i.e. matrices of size <span class="math notranslate nohighlight">\(\frac{n}{2}\times \frac{n}{2}\)</span>. The divide and conquer algorithm is given below.</p>
 <div class="proof algorithm dropdown admonition" id="naive-mat-mult">
 <p class="admonition-title"><span class="caption-number">Algorithm 8.2 </span> (Naive Matrix Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
@@ -743,69 +745,7 @@ C_{22} = A_{21}B_{12} + A_{22}B_{22}
 <li><p><span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A_{22},B_{22},C_{22}, \frac{n}{2})\)</span></p></li>
 </ol>
 </section>
-</div><div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">dc_mat_mult</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-       <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-       <span class="k">return</span> <span class="n">C</span>
-
-    <span class="n">n_2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">A11</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">]</span>
-    <span class="n">A12</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-    <span class="n">A21</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">]</span>
-    <span class="n">A22</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-
-    <span class="n">B11</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">]</span>
-    <span class="n">B12</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-    <span class="n">B21</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">]</span>
-    <span class="n">B22</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">]</span>
-
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A11</span><span class="p">,</span> <span class="n">B11</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A12</span><span class="p">,</span> <span class="n">B21</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A11</span><span class="p">,</span> <span class="n">B12</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A12</span><span class="p">,</span> <span class="n">B22</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A21</span><span class="p">,</span> <span class="n">B11</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">B21</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">n_2</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A21</span><span class="p">,</span> <span class="n">B12</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">B22</span><span class="p">,</span> <span class="n">C</span><span class="p">[</span><span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n_2</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">n_2</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">C</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">6</span>  <span class="c1"># size of matrix</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-
-<span class="n">AB</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@B</span> <span class="c1"># compute product with numpy</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">dc_mat_mult</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="c1"># compute product with our algo</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are the matrices the same?&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Are the matrices the same? Yes
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<p>Now since we divide the problem into 8 subproblems at each recursion (the 8 matrix multiplications of the submatrices) of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> and the operation of partitioning the matrices can be made to have complexity <span class="math notranslate nohighlight">\(O(1)\)</span> if we just keep track of the indices of the submatrices we are working with, instead of creating a whole new set of matrices in memory each time we partition a matrix into blocks which has complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>, we can characterize the runtime of this algorithm with the recurrence</p>
+</div><p>Now since we divide the problem into 8 subproblems at each recursion (the 8 matrix multiplications of the submatrices) of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> and the operation of partitioning the matrices can be made to have complexity <span class="math notranslate nohighlight">\(O(1)\)</span> if we just keep track of the indices of the submatrices we are working with, instead of creating a whole new set of matrices in memory each time we partition a matrix into blocks which has complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>, we can characterize the runtime of this algorithm with the recurrence</p>
 <div class="math notranslate nohighlight">
 \[
 T(n) = 8T\left(\frac{n}{2}\right) + O(1).
@@ -919,7 +859,7 @@ L_l &amp;= [2, 4, 1] \\ L_w &amp;= [5,5] \\ L_g &amp;= [36, 21, 8, 13, 11, 20].
 <p class="admonition-title"><span class="caption-number">Algorithm 8.5 </span> (Selection)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
-<p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and an integer <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
+<p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and a number <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
 <p><strong>Output</strong> The <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in the list</p>
 <ol class="arabic simple">
 <li><p>Pick a number <span class="math notranslate nohighlight">\(w\)</span> from <span class="math notranslate nohighlight">\(L\)</span></p></li>
