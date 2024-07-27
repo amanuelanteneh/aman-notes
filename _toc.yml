@@ -66,6 +66,7 @@ parts:
     - file: mathematics/differential-equations/diff_eq
       sections:
       - file: mathematics/differential-equations/wave_eq
+      - file: mathematics/differential-equations/stoc_diff_eq
     - file: mathematics/complex-analysis/complex_analysis
       sections:
       - file: mathematics/complex-analysis/contour_int
