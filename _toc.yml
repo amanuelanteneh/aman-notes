@@ -45,6 +45,8 @@ parts:
       - file: computerscience/algorithms/linear_prog
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/discriminative
+      - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/cross_ent_loss
       - file: computerscience/machine-learning/ppo
       - file: computerscience/machine-learning/attention
@@ -73,6 +75,7 @@ parts:
     - file: mathematics/probability/probability
       sections:
       - file:  mathematics/probability/conditioning
+      - file:  mathematics/probability/joint
   
   - caption: Statistics
     numbered: 1
