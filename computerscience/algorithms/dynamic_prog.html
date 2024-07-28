@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Number-theoretic algorithms" href="numerical_algos.html" />
+    <link rel="next" title="Graph algorithms" href="graph_algos.html" />
     <link rel="prev" title="Divide &amp; conquer" href="divide_conquer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -210,9 +210,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">6. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_structs.html">7. Data Structures</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">8. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide &amp; conquer</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
@@ -222,6 +222,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">9. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../optimization/semidef_prog.html">Semidefinite programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../optimization/quad_prog.html">Quadratic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimization/bayes_opt.html">Bayesian optimization</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">10. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -691,13 +692,13 @@ F_n = F_{n-1} + F_{n-2}
        <span class="n">Fn</span> <span class="o">=</span> <span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
        <span class="k">return</span> <span class="n">Fn</span>
     
-<span class="n">n</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">-th Fibonacci number is: </span><span class="si">{</span><span class="n">naive_fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40-th Fibonacci number is: 102334155
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-th Fibonacci number is: 6765
 </pre></div>
 </div>
 </div>
@@ -723,7 +724,7 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40-th Fibonacci number is: 102334155
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-th Fibonacci number is: 6765
 </pre></div>
 </div>
 </div>
@@ -744,11 +745,11 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Jul 15 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jul 28 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
-IPython version      : 8.22.2
+IPython version      : 8.19.0
 </pre></div>
 </div>
 </div>
@@ -796,11 +797,11 @@ IPython version      : 8.22.2
       </div>
     </a>
     <a class="right-next"
-       href="numerical_algos.html"
+       href="graph_algos.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Number-theoretic algorithms</p>
+        <p class="prev-next-title">Graph algorithms</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
