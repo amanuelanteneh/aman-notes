@@ -36,13 +36,18 @@ parts:
     - file: computerscience/data_structs
     - file: computerscience/algorithms/algorithms
       sections:
+      - file: computerscience/algorithms/numerical_algos
       - file: computerscience/algorithms/divide_conquer
       - file: computerscience/algorithms/dynamic_prog
-      - file: computerscience/algorithms/numerical_algos
       - file: computerscience/algorithms/graph_algos
       - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
+    - file: computerscience/optimization/optimization
+      sections:
+      - file: computerscience/optimization/semidef_prog
+      - file: computerscience/optimization/quad_prog
+      - file: computerscience/optimization/bayes_opt
     - file: computerscience/machine-learning/machine_learning
       sections:
       - file: computerscience/machine-learning/discriminative
