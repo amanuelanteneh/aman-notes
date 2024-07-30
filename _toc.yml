@@ -72,6 +72,9 @@ parts:
     - file: mathematics/linear-algebra/linear_algebra
       sections:
       - file: mathematics/linear-algebra/change_basis
+    - file: mathematics/matrix-calc/matrix_calc
+      sections:
+      - file: mathematics/matrix-calc/vec_mat_deriv
     - file: mathematics/differential-equations/diff_eq
       sections:
       - file: mathematics/differential-equations/wave_eq
