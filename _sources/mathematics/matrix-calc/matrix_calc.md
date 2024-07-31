@@ -1,0 +1,3 @@
+# Matrix Calculus
+
+This is a subject that is very important to deep learning and physics but for some reason I actually never came across many of the concepts in this section until took my first deep learning class. In fact I don't think there are many classes that cover these topics i.e. taking derivatives of matrices and vectors. This might sound similar to vector/multi-variable calculus (calculus 3) but the suitable difference seems to be that calculus 3 does not really cover things like how to take the derivative of the trace function $\textrm{Tr}(A)$. Even more surprisingly it seems like there really aren't many textbooks on this subject except for The Matrix Cookbook which I encountered during my time at Georgia Tech.

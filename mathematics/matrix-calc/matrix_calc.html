@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Max flow algorithms &#8212; Amanuel&#39;s Notebook</title>
+    <title>15. Matrix Calculus &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,12 +58,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/max_flow';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mathematics/matrix-calc/matrix_calc';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="NP-completeness" href="np_problems.html" />
-    <link rel="prev" title="Graph algorithms" href="graph_algos.html" />
+    <link rel="next" title="Vector and matrix derivatives" href="vec_mat_deriv.html" />
+    <link rel="prev" title="Change of basis" href="../linear-algebra/change_basis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,68 +206,68 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">6. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_structs.html">7. Data Structures</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">8. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide &amp; conquer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Max flow algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">6. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/data_structs.html">7. Data Structures</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">8. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/max_flow.html">Max flow algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/np_problems.html">NP-completeness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/linear_prog.html">Linear programming</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">9. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../optimization/semidef_prog.html">Semidefinite programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../optimization/quad_prog.html">Quadratic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../optimization/bayes_opt.html">Bayesian optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/optimization/optimization.html">9. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/semidef_prog.html">Semidefinite programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/quad_prog.html">Quadratic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/bayes_opt.html">Bayesian optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">10. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/conv_net.html">Convolutional neural network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/rnn.html">Recurrent neural network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/ppo.html">Proximal policy optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">10. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/generative.html">Generative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/conv_net.html">Convolutional neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/rnn.html">Recurrent neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/ppo.html">Proximal policy optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">11. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">12. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">11. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../vector-calc/vector_calc.html">12. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../vector-calc/gradient.html">Gradient</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">13. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../abstract-algebra/algebra.html">13. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../abstract-algebra/group_theory.html">Group theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../abstract-algebra/representation_theory.html">Representation theory</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">14. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear-algebra/linear_algebra.html">14. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/change_basis.html">Change of basis</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/matrix-calc/matrix_calc.html">15. Matrix Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/matrix-calc/vec_mat_deriv.html">Vector and matrix derivatives</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">15. Matrix Calculus</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="vec_mat_deriv.html">Vector and matrix derivatives</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">16. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/stoc_diff_eq.html">Stochastic differential equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../differential-equations/diff_eq.html">16. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../differential-equations/stoc_diff_eq.html">Stochastic differential equations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">17. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../complex-analysis/complex_analysis.html">17. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../complex-analysis/contour_int.html">Contour integration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">18. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditional distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../probability/probability.html">18. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../probability/conditioning.html">Conditional distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../probability/joint.html">Joint distributions</a></li>
 </ul>
 </details></li>
 </ul>
@@ -373,7 +375,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/algorithms/max_flow.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fmathematics/matrix-calc/matrix_calc.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,7 +405,7 @@
       
       
       
-      <li><a href="../../_sources/computerscience/algorithms/max_flow.ipynb" target="_blank"
+      <li><a href="../../_sources/mathematics/matrix-calc/matrix_calc.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -413,7 +415,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -474,9 +476,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -487,19 +487,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Max flow algorithms</h1>
+    <h1>Matrix Calculus</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -509,11 +501,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="max-flow-algorithms">
-<h1>Max flow algorithms<a class="headerlink" href="#max-flow-algorithms" title="Link to this heading">#</a></h1>
-<section id="practice-problems">
-<h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="matrix-calculus">
+<h1><span class="section-number">15. </span>Matrix Calculus<a class="headerlink" href="#matrix-calculus" title="Link to this heading">#</a></h1>
+<p>This is a subject that is very important to deep learning and physics but for some reason I actually never came across many of the concepts in this section until took my first deep learning class. In fact I don’t think there are many classes that cover these topics i.e. taking derivatives of matrices and vectors. This might sound similar to vector/multi-variable calculus (calculus 3) but the suitable difference seems to be that calculus 3 does not really cover things like how to take the derivative of the trace function <span class="math notranslate nohighlight">\(\textrm{Tr}(A)\)</span>. Even more surprisingly it seems like there really aren’t many textbooks on this subject except for The Matrix Cookbook which I encountered during my time at Georgia Tech.</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -529,7 +521,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./computerscience/algorithms"
+            path: "./mathematics/matrix-calc"
         },
         predefinedOutput: true
     }
@@ -547,20 +539,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="graph_algos.html"
+       href="../linear-algebra/change_basis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Graph algorithms</p>
+        <p class="prev-next-title">Change of basis</p>
       </div>
     </a>
     <a class="right-next"
-       href="np_problems.html"
+       href="vec_mat_deriv.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">NP-completeness</p>
+        <p class="prev-next-title">Vector and matrix derivatives</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -570,21 +562,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
