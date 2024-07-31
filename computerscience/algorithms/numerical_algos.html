@@ -499,6 +499,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-arithmetic">Basic arithmetic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addition">Addition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-division">Multiplication &amp; division</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-arithmetic">Modular arithmetic</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-addition">Modular addition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-multiplication">Modular multiplication</a></li>
@@ -506,7 +511,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclids-greatest-common-divisor-algorithm">Euclid’s greatest common divisor algorithm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primality-testing">Primality testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primality-testing">Primality testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factoring-is-hard">Factoring is hard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fermats-little-theorem">Fermat’s little theorem</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
@@ -522,10 +531,33 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="number-theoretic-algorithms">
 <h1>Number-theoretic algorithms<a class="headerlink" href="#number-theoretic-algorithms" title="Link to this heading">#</a></h1>
+<section id="basic-arithmetic">
+<h2>Basic arithmetic<a class="headerlink" href="#basic-arithmetic" title="Link to this heading">#</a></h2>
+<p>Since we will be dealing with algorithms that implement various arithmetic operations with numbers it will be useful to briefly go over basic arithmetic operations such as addition and multiplication. For the purpose of this section, as opposed to others, we will think of the input size of the problem in terms of the number of bits used to represent the inputs which are numbers. We’ll see an example of this for addition.</p>
+<section id="addition">
+<h3>Addition<a class="headerlink" href="#addition" title="Link to this heading">#</a></h3>
+<p>Suppose we have two <span class="math notranslate nohighlight">\(n\)</span>-bit number <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and we want to find their sum. Well this can be done in the standard way one would do this in base 10. We just add the least significant bit of <span class="math notranslate nohighlight">\(x\)</span> to the least significant bit of <span class="math notranslate nohighlight">\(y\)</span>, if the sum exceeds 1 then we set the corresponding bit in the sum to 0 and carry the 1 to the next least significant bit. We do this <span class="math notranslate nohighlight">\(n\)</span> times, since there are <span class="math notranslate nohighlight">\(n\)</span> bits in each number, and we are done so our time complexity is <span class="math notranslate nohighlight">\(O(n)\)</span> i.e. linear in the input size. An example of adding the <span class="math notranslate nohighlight">\(6\)</span>-bit numbers <span class="math notranslate nohighlight">\(x=110101_2\)</span> and <span class="math notranslate nohighlight">\(y=100011_2\)</span> is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/bit_add.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/24c882eb32de560988160aa36e288cc079b9d4c49e55ec9b9e7898c00d0628e6.png"><img alt="../../_images/24c882eb32de560988160aa36e288cc079b9d4c49e55ec9b9e7898c00d0628e6.png" src="../../_images/24c882eb32de560988160aa36e288cc079b9d4c49e55ec9b9e7898c00d0628e6.png" style="width: 600px;" /></a>
+</div>
+</div>
+</section>
+<section id="multiplication-division">
+<h3>Multiplication &amp; division<a class="headerlink" href="#multiplication-division" title="Link to this heading">#</a></h3>
+<p>The time complexity of multiplying two <span class="math notranslate nohighlight">\(n\)</span>-bit numbers using the “grade school” method we all learn in school when we are little is <span class="math notranslate nohighlight">\(O(n^2)\)</span>. Similarly for division it is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>How many bits does one need to represent a number written in base 10 in binary? Well with <span class="math notranslate nohighlight">\(n\)</span> bits we can represent <span class="math notranslate nohighlight">\(2^n\)</span> numbers</p>
 </div>
+</section>
+</section>
 <section id="modular-arithmetic">
 <h2>Modular arithmetic<a class="headerlink" href="#modular-arithmetic" title="Link to this heading">#</a></h2>
 <p>Modular arithmetic refers to arithmetic that is done using the <em>modulo</em> operator on the set of integers <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. For example we define</p>
@@ -543,7 +575,8 @@ x \bmod N
 \[
 x \equiv y\mod N \iff x\bmod N = y\bmod N 
 \]</div>
-<p>which means <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> have the same remainder when divided by <span class="math notranslate nohighlight">\(N\)</span> or equivalently <span class="math notranslate nohighlight">\(N\)</span> divides the quantity <span class="math notranslate nohighlight">\(x-y\)</span> or also equivalently <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> differ by a multiple of <span class="math notranslate nohighlight">\(N\)</span>. There are some other useful properties of modular arithmetic for example for addition and multiplication we have</p>
+<p>which means <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> have the same remainder when divided by <span class="math notranslate nohighlight">\(N\)</span> or equivalently <span class="math notranslate nohighlight">\(N\)</span> divides the quantity <span class="math notranslate nohighlight">\(x-y\)</span> or also equivalently <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> differ by a multiple of <span class="math notranslate nohighlight">\(N\)</span>. This essentially means <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are equal under the operation <span class="math notranslate nohighlight">\(\bmod N\)</span>.</p>
+<p>There are some other useful properties of modular arithmetic for example for addition and multiplication we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 x+(y+z) \equiv (x+y)+z \mod N \qquad \text{Associativity} \\
@@ -620,8 +653,9 @@ x^2 \equiv (x \bmod N) \mod N
 \end{align*}
 \end{split}\]</div>
 <p>So to compute <span class="math notranslate nohighlight">\(x^y\bmod N\)</span> we can first compute <span class="math notranslate nohighlight">\(z_1=x\bmod N\)</span> and then to compute <span class="math notranslate nohighlight">\(x^2 \bmod N\)</span> we compute <span class="math notranslate nohighlight">\(z_2=(z_1x)\bmod N\)</span>. And then to compute <span class="math notranslate nohighlight">\(x^3 \bmod N\)</span> we just compute <span class="math notranslate nohighlight">\(z_3=(z_2x)\bmod N\)</span> and so on until we have computed <span class="math notranslate nohighlight">\(x^y\bmod N\)</span>.
-Doing it this way we only ever have to compute the modulo <span class="math notranslate nohighlight">\(N\)</span> of numbers that are at most equal to <span class="math notranslate nohighlight">\(Nx\)</span> in the case that one of the intermediate modulo operations yields <span class="math notranslate nohighlight">\(z_i=N\)</span>. There is a huge downside with this method however. It is easy to see that we will need to compute exactly <span class="math notranslate nohighlight">\(y-1\)</span> multiplications to compute <span class="math notranslate nohighlight">\(x^y \bmod N\)</span> with this method which at first seems great; the time complexity is linear in <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(O(y)\)</span>, so whats the big deal? Well recall that the time complexity of multiplying two <span class="math notranslate nohighlight">\(n\)</span>-bit numbers is <span class="math notranslate nohighlight">\(O(n^2)\)</span> and the complexity of division is also <span class="math notranslate nohighlight">\(O(n^2)\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> so each intermediate step has complexity <span class="math notranslate nohighlight">\(O(n^2+n^2)=O(n^2)\)</span> since we must multiply <span class="math notranslate nohighlight">\(z_i\)</span> with <span class="math notranslate nohighlight">\(x\)</span> as well as divide that product by <span class="math notranslate nohighlight">\(N\)</span> to compute the modulo <span class="math notranslate nohighlight">\(N\)</span>. However we do this <span class="math notranslate nohighlight">\(y-1\)</span> times and since <span class="math notranslate nohighlight">\(y\)</span> is an <span class="math notranslate nohighlight">\(n\)</span>-bit number it is at most <span class="math notranslate nohighlight">\(2^n\)</span> so our overall time complexity is <span class="math notranslate nohighlight">\(O(2^nn^2)\)</span> which is exponential in the input size (number of bits needed to represent <span class="math notranslate nohighlight">\(x,y\)</span> and <span class="math notranslate nohighlight">\(N\)</span>).</p>
-<p>We can do better than this however. Take for example <span class="math notranslate nohighlight">\(x^{25}=x^{11001_2}\)</span> we can break this up into products of powers of 2 and <span class="math notranslate nohighlight">\(x\)</span>. For this example we have</p>
+Doing it this way we only ever have to compute the modulo <span class="math notranslate nohighlight">\(N\)</span> of numbers that are at most equal to <span class="math notranslate nohighlight">\(Nx\)</span> in the case that one of the intermediate modulo operations yields <span class="math notranslate nohighlight">\(z_i=N\)</span>.</p>
+<p>There is a huge downside with this method however. It is easy to see that we will need to compute exactly <span class="math notranslate nohighlight">\(y-1\)</span> multiplications to compute <span class="math notranslate nohighlight">\(x^y \bmod N\)</span> with this method which at first seems great; the time complexity is linear in <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(O(y)\)</span>, so whats the big deal? Well recall that the time complexity of multiplying two <span class="math notranslate nohighlight">\(n\)</span>-bit numbers is <span class="math notranslate nohighlight">\(O(n^2)\)</span> and the complexity of division is also <span class="math notranslate nohighlight">\(O(n^2)\)</span> <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> so each intermediate step has complexity <span class="math notranslate nohighlight">\(O(n^2+n^2)=O(n^2)\)</span> since we must multiply <span class="math notranslate nohighlight">\(z_i\)</span> with <span class="math notranslate nohighlight">\(x\)</span> as well as divide that product by <span class="math notranslate nohighlight">\(N\)</span> to compute the modulo <span class="math notranslate nohighlight">\(N\)</span>. <em><strong>However</strong></em>, recall that we want to be able to compute <span class="math notranslate nohighlight">\(x^y \bmod N\)</span> for <span class="math notranslate nohighlight">\(x,y\)</span> and <span class="math notranslate nohighlight">\(N\)</span> that are <em>hundreds</em> of bits long so <span class="math notranslate nohighlight">\(y-1\)</span> is on the order of between <span class="math notranslate nohighlight">\([2^{100}, 2^{999}]\)</span> which is huge. So  in our overall time complexity it makes sense to think of <span class="math notranslate nohighlight">\(y\)</span> on the order of <span class="math notranslate nohighlight">\(2^n\)</span> so we have a final time complexity of <span class="math notranslate nohighlight">\(O(2^nn^2)\)</span> which is exponential in the input size (number of bits needed to represent <span class="math notranslate nohighlight">\(x,y\)</span> and <span class="math notranslate nohighlight">\(N\)</span>).</p>
+<p>We can do better than this however. Take for example <span class="math notranslate nohighlight">\(x^{25}=x^{11001_2}\)</span> we can break this up into products of powers of 2 and one <span class="math notranslate nohighlight">\(x\)</span>. For this example we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
@@ -630,12 +664,14 @@ x^{25} &amp;= x^{11001_2} \\ &amp;= x^{10000_2 + 01000_2 + 00001_2}  \\
 &amp;= x^{16} \cdot x^{8} \cdot x^{1}
 \end{align*}
 \end{split}\]</div>
-<p>Now we have to compute at least 3 multiplications and in general <span class="math notranslate nohighlight">\(O(\log_2(y))=O(n)\)</span> multiplications for <span class="math notranslate nohighlight">\(n\)</span>-bit inputs. This is because for a <span class="math notranslate nohighlight">\(n\)</span>-bit number we can have at most <span class="math notranslate nohighlight">\(n\)</span> 1’s in the binary representation and therefore will have to break the number into a product of at most <span class="math notranslate nohighlight">\(n\)</span> terms and recall, again, that we need about <span class="math notranslate nohighlight">\(n=\log_2(y)\)</span> bits to represent a number <span class="math notranslate nohighlight">\(y\)</span> that is in base 10. Now if we use repeated squaring to compute one of the terms in the product we only need to compute <span class="math notranslate nohighlight">\(x^a \bmod N\)</span> at most <span class="math notranslate nohighlight">\(\log_2(y)\)</span> times until we get to <span class="math notranslate nohighlight">\(x^y \bmod N\)</span> since we double the exponent at each step. Lastly during each of the <span class="math notranslate nohighlight">\(\log_2(y)\)</span> steps when computing the corresponding power of 2 we will need to perform a division operation to compute the <span class="math notranslate nohighlight">\(\bmod\)</span> which has time complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>. Thus we have a method with that has complexity <span class="math notranslate nohighlight">\(O(\log_2(y)\log_2(y)n^2)=O(n^4)\)</span>. But this assumes we recompute the intermediate powers of 2 when computing each term which, i.e. recomputing <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x^4\)</span>, <span class="math notranslate nohighlight">\(x^8\)</span> when computing <span class="math notranslate nohighlight">\(x^{16}\)</span> having just computing <span class="math notranslate nohighlight">\(x^{32}\)</span>, but we can just compute the largest value of 2 first and then store the intermediate powers of 2 to use later (this is called memoization stay tuned). This would mean we only need to compute each power of 2 <em><strong>once</strong></em> instead of for each product which brings our time complexity to <span class="math notranslate nohighlight">\(O(\log_2(y) + \log_2(y)n^2) = O(\log_2(y)n^2) = O(n^3)\)</span>. Boom! :blush:</p>
+<p>Now we have to compute at least 3 multiplications and in general <span class="math notranslate nohighlight">\(O(\log_2(y))=O(n)\)</span> multiplications for <span class="math notranslate nohighlight">\(n\)</span>-bit inputs. This is because for a <span class="math notranslate nohighlight">\(n\)</span>-bit number we can have at most <span class="math notranslate nohighlight">\(n\)</span> 1’s in the binary representation and therefore will have to break the number into a product of at most <span class="math notranslate nohighlight">\(n\)</span> terms and recall, again, that we need about <span class="math notranslate nohighlight">\(n=\log_2(y)\)</span> bits to represent a number <span class="math notranslate nohighlight">\(y\)</span> that is in base 10.</p>
+<p>Now if we use repeated squaring to compute one of the terms in the product we only need to compute <span class="math notranslate nohighlight">\(x^a \bmod N\)</span> at most <span class="math notranslate nohighlight">\(\log_2(y)\)</span> times until we get to <span class="math notranslate nohighlight">\(x^y \bmod N\)</span> since we double the exponent at each step (sort of like the opposite of binary search). Lastly during each of the <span class="math notranslate nohighlight">\(\log_2(y)\)</span> steps when computing the corresponding power of 2 we will need to perform a division operation to compute the <span class="math notranslate nohighlight">\(\bmod\)</span> which has time complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>. Thus we have a method with that has complexity <span class="math notranslate nohighlight">\(O(\log_2(y)\log_2(y)n^2)=O(n^4)\)</span>.</p>
+<p>But this assumes we recompute the intermediate powers of 2 when computing each term, i.e. recomputing <span class="math notranslate nohighlight">\(x^2\)</span>, <span class="math notranslate nohighlight">\(x^4\)</span>, <span class="math notranslate nohighlight">\(x^8\)</span> when computing <span class="math notranslate nohighlight">\(x^{16}\)</span> having just computing <span class="math notranslate nohighlight">\(x^{32}\)</span>, but we can just compute the largest value of 2 first and then store the intermediate powers of 2 to use later (this is called memoization stay tuned). This would mean we only need to compute each power of 2 <em><strong>once</strong></em> instead of for each product which brings our time complexity to <span class="math notranslate nohighlight">\(O(\log_2(y) + \log_2(y)n^2) = O(\log_2(y)n^2) = O(n^3)\)</span>.</p>
 </section>
 </section>
 <section id="euclids-greatest-common-divisor-algorithm">
 <h2>Euclid’s greatest common divisor algorithm<a class="headerlink" href="#euclids-greatest-common-divisor-algorithm" title="Link to this heading">#</a></h2>
-<p>Given two integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> the largest integer that divides both of them is called their <em>greatest common divisor</em> denoted <span class="math notranslate nohighlight">\(\gcd(x,y)\)</span>. Euclid devised an algorithm to find the <span class="math notranslate nohighlight">\(\gcd\)</span> of 2 integers using the fact that, for any positive integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> where <span class="math notranslate nohighlight">\(x \geq y\)</span>, then</p>
+<p>Given two integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> the largest integer that divides both of them is called their <em>greatest common divisor</em> denoted <span class="math notranslate nohighlight">\(\gcd(x,y)\)</span>. Euclid devised an algorithm to find the <span class="math notranslate nohighlight">\(\gcd\)</span> of 2 integers using the fact that, for any positive integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> where <span class="math notranslate nohighlight">\(x \geq y\)</span>, we have</p>
 <div class="math notranslate nohighlight">
 \[
 \gcd(x,y)=\gcd(x\bmod y, y).
@@ -657,11 +693,20 @@ x^{25} &amp;= x^{11001_2} \\ &amp;= x^{10000_2 + 01000_2 + 00001_2}  \\
 </ol>
 </section>
 </div><p>The time complexity of this algorithm is <span class="math notranslate nohighlight">\(O(n^3)\)</span>. Why? Well first lets think about how many times we will have to recurse before we reach the base case.
-Well the base case is reached when the input <span class="math notranslate nohighlight">\(y=0\)</span> and at each level of recursion our new <span class="math notranslate nohighlight">\(y\)</span> is <span class="math notranslate nohighlight">\(x \bmod y\)</span>. So how much does the <span class="math notranslate nohighlight">\(\bmod\)</span> operation reduce a number by?</p>
-<p>Lastly at each recursive call we perform the <span class="math notranslate nohighlight">\(\bmod\)</span> operation which requires we compute a division which has <span class="math notranslate nohighlight">\(O(n^2)\)</span> complexity, and thus we have a total time complexity of <span class="math notranslate nohighlight">\(O(n^3)\)</span>.</p>
+Well the base case is reached when the input <span class="math notranslate nohighlight">\(y=0\)</span> and at each level of recursion our new <span class="math notranslate nohighlight">\(y\)</span> is <span class="math notranslate nohighlight">\(x \bmod y\)</span>. So how much does the <span class="math notranslate nohighlight">\(\bmod\)</span> operation reduce a number by? Well if <span class="math notranslate nohighlight">\(x\geq y\)</span>, which we are assuming is true for our inputs, then <span class="math notranslate nohighlight">\(x \bmod y &lt; \frac{x}{2}\)</span>. The proof for this is shown in <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. So we are reducing the input size, size of <span class="math notranslate nohighlight">\(x\)</span> and size of <span class="math notranslate nohighlight">\(y\)</span>, by more than <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> every 2 recursive calls meaning the we remove at least 1 bit from their length every 2 recursive calls. This means we reach the base case in at most <span class="math notranslate nohighlight">\(2n\)</span> recursive calls.</p>
+<p>Lastly at each recursive call we perform the <span class="math notranslate nohighlight">\(\bmod\)</span> operation which requires we compute a division which has <span class="math notranslate nohighlight">\(O(n^2)\)</span> complexity, and thus we have a total time complexity of <span class="math notranslate nohighlight">\(O(2nn^2)=O(n^3)\)</span>.</p>
 </section>
 <section id="primality-testing">
 <h2>Primality testing<a class="headerlink" href="#primality-testing" title="Link to this heading">#</a></h2>
+<p>We now turn to the problem of determining if a given integer <span class="math notranslate nohighlight">\(x\)</span> is a prime number or not (called primality). A prime number of course being a number that is only divisible by itself and <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<section id="factoring-is-hard">
+<h3>Factoring is hard<a class="headerlink" href="#factoring-is-hard" title="Link to this heading">#</a></h3>
+<p>According to the Fundamental Theorem of Arithmetic every positive integer larger than 1 can be expressed as (factored) into a product of prime numbers and furthermore this prime factorization is unique up to a permutation of terms in the product. Since prime numbers by definition are their own prime factorization if we can devise an algorithm that computes the prime factorization of any number we will have a way to test if a number is prime. Unfortunately (or maybe fortunately if you like sending messages securely) it is strongly believed that this problem is hard to solve i.e. no algorithm exists that can perform it in time that is polynomial in the size of the input (number of bits in the number to be factored). This hardness of this problem is actually the foundation of modern cryptography and partly why quantum computers have gained much attention with Peter Shor’s publication of his algorithm which solves this problem in polynomial time on a <em>quantum</em> computer.</p>
+<p>So factoring the number is not an option. What <em>else</em> can we do?</p>
+</section>
+<section id="fermats-little-theorem">
+<h3>Fermat’s little theorem<a class="headerlink" href="#fermats-little-theorem" title="Link to this heading">#</a></h3>
+<p>In the year 1640 the French mathematician Pierre de Fermat stated the following theorem which was later proved by Leonhard Euler.</p>
 <div class="proof theorem admonition" id="fermat">
 <p class="admonition-title"><span class="caption-number">Theorem 8.1 </span> (Fermat’s little theorem)</p>
 <section class="theorem-content" id="proof-content">
@@ -674,7 +719,31 @@ a^{p-1}\equiv 1 \pmod p \iff a^{p-1}\bmod p &amp;= 1\bmod p \\
 \end{align*}
 \end{split}\]</div>
 </section>
-</div></section>
+</div><p>In essence what this theorem states is that if <span class="math notranslate nohighlight">\(p\)</span> is a prime number then for any integer greater than or equal to 1 and less than <span class="math notranslate nohighlight">\(p\)</span> we have <span class="math notranslate nohighlight">\(a^{p-1}\bmod p=1\)</span>. So we’re done right? Instead of factoring now we can simply loop through all values of <span class="math notranslate nohighlight">\(a\)</span> between 1 and <span class="math notranslate nohighlight">\(p\)</span> and check to make sure they are all equal to 1 under <span class="math notranslate nohighlight">\(\bmod p\)</span>. This means we would test <span class="math notranslate nohighlight">\(p-1\)</span> numbers and for each number we have to perform a division which has time complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span> given <span class="math notranslate nohighlight">\(p\)</span> is a <span class="math notranslate nohighlight">\(n\)</span>-bit number. So our time complexity is <span class="math notranslate nohighlight">\(O((p-1)n^2)=O(pn^2)\)</span> right? Well not quite. While this works fine for small numbers we must remember that we want to be able to do this for very large numbers such as ones with hundreds of bits so the numbers could be as large as <span class="math notranslate nohighlight">\(2^n \approx 2^{512}\)</span> which is many orders of magnitude larger than the number of atoms in the universe. This means in the worst case we will have to loop through <span class="math notranslate nohighlight">\(2^n\)</span> numbers so our true time complexity in terms of the size of our input <span class="math notranslate nohighlight">\(p\)</span> (number of bits) is <span class="math notranslate nohighlight">\(O(2^{n}n^2)\)</span> which is exponential in the problem size (number of bits in <span class="math notranslate nohighlight">\(p\)</span>).</p>
+<p>So now what? Let’s devise a simple <em>randomize</em> algorithm shown below.</p>
+<div class="proof algorithm dropdown admonition" id="primality">
+<p class="admonition-title"><span class="caption-number">Algorithm 8.2 </span> (Primality test)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{is_prime}(p)\)</span>:</p>
+<p><strong>Inputs</strong> Given a <span class="math notranslate nohighlight">\(n\)</span>-bit integer <span class="math notranslate nohighlight">\(p\)</span></p>
+<p><strong>Output</strong> True/False</p>
+<ol class="arabic simple">
+<li><p>Pick a random integer <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(1 &lt; a &lt; p\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(a^{p-1}\bmod N = 1\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return True</p></li>
+</ol>
+</li>
+<li><p>else:</p>
+<ol class="arabic simple">
+<li><p>return False</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>Now clearly this algorithm will not always be correct because Fermat’s little theorem only tells us that if <span class="math notranslate nohighlight">\(N\)</span> is prime then all integers <span class="math notranslate nohighlight">\(1 \leq a&lt; p\)</span> must satisfy <span class="math notranslate nohighlight">\(a^{p-1}\bmod p = 1\)</span> but it is entirely possible that <span class="math notranslate nohighlight">\(p\)</span> is <strong>not</strong> prime yet this condition holds for some values of <span class="math notranslate nohighlight">\(a\)</span> but not others. In this case our algorithm could return True when <span class="math notranslate nohighlight">\(p\)</span> is in fact not a prime since we are choosing one <span class="math notranslate nohighlight">\(a\)</span> at random.</p>
+</section>
+</section>
 <section id="cryptography-rsa">
 <h2>Cryptography (RSA)<a class="headerlink" href="#cryptography-rsa" title="Link to this heading">#</a></h2>
 </section>
@@ -747,6 +816,11 @@ a^{p-1}\equiv 1 \pmod p \iff a^{p-1}\bmod p &amp;= 1\bmod p \\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-arithmetic">Basic arithmetic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addition">Addition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-division">Multiplication &amp; division</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-arithmetic">Modular arithmetic</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-addition">Modular addition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-multiplication">Modular multiplication</a></li>
@@ -754,7 +828,11 @@ a^{p-1}\equiv 1 \pmod p \iff a^{p-1}\bmod p &amp;= 1\bmod p \\
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclids-greatest-common-divisor-algorithm">Euclid’s greatest common divisor algorithm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primality-testing">Primality testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primality-testing">Primality testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factoring-is-hard">Factoring is hard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fermats-little-theorem">Fermat’s little theorem</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
