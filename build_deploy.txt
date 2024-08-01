@@ -1,2 +1,3 @@
 To build: rm -r _build/ && jupyter-book build .
 To deploy: ghp-import -n -p -f _build/html
+If asked for credentials run: gh auth login
