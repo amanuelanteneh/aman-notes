@@ -516,7 +516,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
             </nav>
@@ -977,6 +980,25 @@ T(n) = T\left(\frac{n}{2}\right) + O(n)
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
 <p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p>The continuous time Fourier transform, Fourier transform for short, of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{x}(f) = \int_{-\infty}^{\infty}x(t)e^{-i2\pi f t}dt
+\]</div>
+<p>and the discrete time Fourier transform of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{x}(f) = \sum_{n=-\infty}^{\infty}x[n]e^{-i2\pi f t}.
+\]</div>
+<p>The <em>discrete</em> Fourier transform transforms a discrete sequence of complex numbers <span class="math notranslate nohighlight">\(\{x_0,x_1,...,x_{N-1}\}\)</span> into another discrete sequence of complex numbers
+<span class="math notranslate nohighlight">\(\{X_0, X_1,...,X_{N-1}\}\)</span> such that
+$<span class="math notranslate nohighlight">\(
+X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
+\)</span>$</p>
+<p>For the FFT we are interested in</p>
+<section id="representations-of-polynomials">
+<h3>Representations of polynomials<a class="headerlink" href="#representations-of-polynomials" title="Link to this heading">#</a></h3>
+</section>
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
@@ -1081,7 +1103,10 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
   </nav></div>
