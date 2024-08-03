@@ -591,10 +591,43 @@ document.write(`
 <img alt="../../_images/976848543c1d6c663affd608a6fed958ff1a2b85829f587a157eea9e7462de42.png" src="../../_images/976848543c1d6c663affd608a6fed958ff1a2b85829f587a157eea9e7462de42.png" />
 </div>
 </div>
+<p>The edges of graphs can also have an attribute associated with it. Most often this attribute is numerical and called the <em>weight</em> of an edge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_weighted</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">}),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">}),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">4.4</span><span class="p">}),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">3.9</span><span class="p">})]</span>
+<span class="n">G_weighted</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G_weighted</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="c1"># explicitly set node positions</span>
+<span class="c1"># G[i][j] returns edge data of edge (i,j)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span>
+    <span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> 
+    <span class="n">edge_labels</span><span class="o">=</span><span class="p">{</span> <span class="n">E</span> <span class="p">:</span> <span class="n">G_weighted</span><span class="p">[</span><span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">E</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>  <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">G_weighted</span><span class="o">.</span><span class="n">edges</span><span class="p">()},</span> <span class="c1"># loop trough edges and make dict { edge: weight }</span>
+    <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/afd6c306651d84da4d72bd625b011eb746495267a6080bd45e0e2f42d751f1a8.png" src="../../_images/afd6c306651d84da4d72bd625b011eb746495267a6080bd45e0e2f42d751f1a8.png" />
+</div>
+</div>
 <section id="representing-graphs">
 <h2>Representing graphs<a class="headerlink" href="#representing-graphs" title="Link to this heading">#</a></h2>
+<p>While representing graphs pictorially is useful for visualization it is not straightforward to work with in code. Thus it is important to have ways of representing graphs that are easier to work with computationally.</p>
 <section id="adjacency-matrix">
 <h3>Adjacency matrix<a class="headerlink" href="#adjacency-matrix" title="Link to this heading">#</a></h3>
+<p>The first way of represent a graph we will go over is by an adjacency matrix. For a graph with <span class="math notranslate nohighlight">\(n\)</span> nodes the adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> of an <em>undirected</em> graph <span class="math notranslate nohighlight">\(G\)</span> is a <span class="math notranslate nohighlight">\(n\times n\)</span> matrix where the element <span class="math notranslate nohighlight">\(A_{ij}=1\)</span> if there is an edge between node <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(0\)</span> if there is no edge. This immediately implies that the adjacency matrix of undirected graphs is symmetric i.e. <span class="math notranslate nohighlight">\(A_{ij}=A_{ji}\)</span>.</p>
 <p>For example the adjacency matrix of the undirected graph shown above is</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -633,9 +666,23 @@ document.write(`
 \[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 1.0 &amp; 1.0 &amp; 0\\0 &amp; 0 &amp; 1.0 &amp; 1.0\\0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
 </div>
 </div>
+<p>And the adjacency matrix of the weighted undirected graph shown above is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G_weighted</span><span class="p">)</span>
+<span class="n">syp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 2.5 &amp; 4.4 &amp; 0\\2.5 &amp; 0 &amp; 1.2 &amp; 3.9\\4.4 &amp; 1.2 &amp; 0 &amp; 0\\0 &amp; 3.9 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
 </section>
 <section id="adjacency-list">
 <h3>Adjacency list<a class="headerlink" href="#adjacency-list" title="Link to this heading">#</a></h3>
+<p>The other common way of representing a graph is using an adjacency list.</p>
 </section>
 </section>
 <section id="breadth-first-search-bfs">
@@ -659,15 +706,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
   %reload_ext watermark
-Last updated: Thu Aug 01 2024
+Last updated: Fri Aug 02 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
+sympy     : 1.12
 matplotlib: 3.7.4
 networkx  : 3.2.1
-sympy     : 1.12
 </pre></div>
 </div>
 </div>
