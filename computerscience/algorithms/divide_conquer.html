@@ -585,7 +585,7 @@ xy &amp;= (2^{\frac{n}{2}} x_L + x_R)(2^{\frac{n}{2}} y_L + y_R)  \\
    &amp;= 2^nx_Ly_L + 2^{\frac{n}{2}}(x_Ly_R + x_Ry_L) + x_Ry_R
 \end{align*}
 \end{split}\]</div>
-<p>The addition will take linear time, in the number of bits, and so do will the power of 2 multiplications since it is just a bit shift to the left i.e <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n_2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size.
+<p>The addition will take linear time, in the number of bits, and so to will the power of 2 multiplications since it is just a bit shift to the left i.e. <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&lt;&lt;</span> <span class="pre">n_2</span></code> in  <code class="docutils literal notranslate"><span class="pre">Python</span></code>. The important operation are the 4 multiplications of the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-bit numbers. Notice that we have <em>divided</em> the problem into 4 subproblems each of which are <em>half</em> the size i.e. <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. We can now recursively perform the same routine for the 4 new multiplications which would further divide the problem into subproblem of smaller size.
 We can describe the runtime (time complexity) of these recursive algorithms using <em>recurrence relations</em> which we cover in the next section. The recurrence relation for this algorithm is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -991,10 +991,11 @@ T(n) = T\left(\frac{n}{2}\right) + O(n)
 \hat{x}(f) = \sum_{n=-\infty}^{\infty}x[n]e^{-i2\pi f t}.
 \]</div>
 <p>The <em>discrete</em> Fourier transform transforms a discrete sequence of complex numbers <span class="math notranslate nohighlight">\(\{x_0,x_1,...,x_{N-1}\}\)</span> into another discrete sequence of complex numbers
-<span class="math notranslate nohighlight">\(\{X_0, X_1,...,X_{N-1}\}\)</span> such that
-$<span class="math notranslate nohighlight">\(
+<span class="math notranslate nohighlight">\(\{X_0, X_1,...,X_{N-1}\}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
 X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
-\)</span>$</p>
+\]</div>
 <p>For the FFT we are interested in</p>
 <section id="representations-of-polynomials">
 <h3>Representations of polynomials<a class="headerlink" href="#representations-of-polynomials" title="Link to this heading">#</a></h3>
