@@ -504,7 +504,15 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-structure-of-an-optimal-parenthesization">1. The structure of an optimal parenthesization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequences-subarray">Longest increasing subsequences/subarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence-subarray">Longest common subsequence/subarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
             </nav>
@@ -734,10 +742,52 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 </section>
-<section id="matrix-multiplication">
-<h2>Matrix multiplication<a class="headerlink" href="#matrix-multiplication" title="Link to this heading">#</a></h2>
-<p>Let’s go over the second example of an application of dynamic programming from <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
-<p>Ideas: divide series of products into two series of products and recursively find the best one?</p>
+<section id="chain-matrix-multiplication">
+<h2>Chain matrix multiplication<a class="headerlink" href="#chain-matrix-multiplication" title="Link to this heading">#</a></h2>
+<p>Let’s go over the second example of an application of dynamic programming which is covered extensively in <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> and rather briefly in <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. Suppose we have a chain of <span class="math notranslate nohighlight">\(n\)</span> matrices  we want to multiply together</p>
+<div class="math notranslate nohighlight">
+\[
+P = A_1A_2A_3...A_n
+\]</div>
+<p>where matrix <span class="math notranslate nohighlight">\(A_1\)</span> has shape <span class="math notranslate nohighlight">\(m_0\times m_1\)</span> and matrix <span class="math notranslate nohighlight">\(A_2\)</span> has shape <span class="math notranslate nohighlight">\(m_1\times m_2\)</span> and so on. We would like to devise an algorithm to do this optimally. Optimally in what sense though? Matrix multiplication is not commutative, i.e. <span class="math notranslate nohighlight">\(AB \not =BA\)</span> in general, so we can not swap the order of the matrices in the product. However, matrix multiplication is associative, i.e. <span class="math notranslate nohighlight">\((AB)C=A(BC)\)</span>, so we can choose which of the two term products to compute before others.</p>
+<p>Recall that (naively) multiplying a <span class="math notranslate nohighlight">\(m\times n\)</span> matrix with a <span class="math notranslate nohighlight">\(n\times p\)</span> matrix has time complexity (which is measured in scalar multiplications) <span class="math notranslate nohighlight">\(O(mnp)\)</span> which reduces to the familiar <span class="math notranslate nohighlight">\(O(n^3)\)</span> for square matrices. Suppose we want to calculate <span class="math notranslate nohighlight">\(P=A_1A_2A_3\)</span> where the corresponding shapes are <span class="math notranslate nohighlight">\(100 \times 20, 20 \times 200, 200 \times 15\)</span> respectively.</p>
+<p>First let’s find the complexity of computing</p>
+<div class="math notranslate nohighlight">
+\[
+P=(A_1A_2)A_3.
+\]</div>
+<p>The product in parentheses has complexity <span class="math notranslate nohighlight">\(100 \times 20 \times 200 = 400,000\)</span> and results in a <span class="math notranslate nohighlight">\(100 \times 200\)</span> matrix. Then the complexity of multiplying this resulting matrix with <span class="math notranslate nohighlight">\(A_3\)</span> is <span class="math notranslate nohighlight">\(100 \times 200 \times 15 = 300,000\)</span> for a total complexity of <span class="math notranslate nohighlight">\(400,000+300,000=700,000\)</span>.</p>
+<p>Now what if we compute the product as</p>
+<div class="math notranslate nohighlight">
+\[
+P=A_1(A_2A_3)?
+\]</div>
+<p>The product in parentheses has complexity <span class="math notranslate nohighlight">\(20 \times 200 \times 15 = 60,000\)</span> and results in a <span class="math notranslate nohighlight">\(20 \times 15\)</span> matrix. Then the complexity of multiplying this resulting matrix with <span class="math notranslate nohighlight">\(A_1\)</span> is <span class="math notranslate nohighlight">\(100 \times 20 \times 15 = 30,000\)</span> for a total complexity of <span class="math notranslate nohighlight">\(60,000+30,000=90,000\)</span>. From this we can see that choosing how to parenthesize the products can have a <em>drastic</em> effect on the complexity of the overall multi-matrix product computation. Can we devise an algorithm to find the <em>optimal</em> parenthesization given a list of matrix shapes that we want to multiply? Let’s follow the steps laid out by <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> for solving a dynamic programming problem.</p>
+<section id="the-structure-of-an-optimal-parenthesization">
+<h3>1. The structure of an optimal parenthesization<a class="headerlink" href="#the-structure-of-an-optimal-parenthesization" title="Link to this heading">#</a></h3>
+<p>Suppose that we have an optimal parenthesization for the <span class="math notranslate nohighlight">\(n\)</span> matrix product <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span>. Now suppose we take this solution and split it into two chains at <span class="math notranslate nohighlight">\(A_k\)</span> such that we have <span class="math notranslate nohighlight">\(P_{\text{opt}}^L=A_1A_2...A_k\)</span> and <span class="math notranslate nohighlight">\(P_{\text{opt}}^R=A_{k+1}A_{k+2}...A_n\)</span> and clearly <span class="math notranslate nohighlight">\(P_{\text{opt}} = P_{\text{opt}}^LP_{\text{opt}}^R\)</span>. Since we know <span class="math notranslate nohighlight">\(P_{\text{opt}}\)</span> has an optimal parenthesization then we also know that the parenthesization of <span class="math notranslate nohighlight">\(P_{\text{opt}}^L\)</span> is optimal. Why is this the case? Well if it wasn’t the case and there was another parenthesization that was optimal for <span class="math notranslate nohighlight">\(P_{\text{opt}}^L\)</span> then we can use that same parenthesization in the overall product in <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span> to make it more optimal. But this is a contradiction since we stated at the beginning that <span class="math notranslate nohighlight">\(P_{\text{opt}}\)</span> is already optimal. Therefore if <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span> is an optimal parenthesization then the parenthesizations for sub-chains of the chain when considered in isolation must also be optimal. For example if <span class="math notranslate nohighlight">\(P_{\text{opt}}=(A_1(A_2(A_3A_4)))\)</span> then <span class="math notranslate nohighlight">\((A_2(A_3A_4))\)</span> must also be an optimal parenthesization for the produce <span class="math notranslate nohighlight">\(A_2A_3A_4\)</span>.</p>
+<p>This <em><strong>partially</strong></em> goes in the other direction as well: an optimal solution to parenthesizing <span class="math notranslate nohighlight">\(A_1A_2A_3...A_n\)</span> can be constructed by splitting the chain into two parts and finding optimal parenthesizing of the two resulting chains and multiplying them together (combining the solutions). The problem is that we do not know <em>which</em> split, i.e. splitting at <span class="math notranslate nohighlight">\(k=1\)</span>, <span class="math notranslate nohighlight">\(k=2\)</span> etc, is optimal so we have to try all of them much like the rod cutting problem. But as with rod cutting we will find that we can exploit the repeated occurrence of subproblems to drastically cut down the number of computations we must perform.</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>I say it partially goes in the other direction because in general it is not true that all splits can yield an optimal solution. For example if <span class="math notranslate nohighlight">\((A(B(C(EF)G)))\)</span> is an optimal parenthesization we can certainly find instance where the optimal parenthesization of <span class="math notranslate nohighlight">\(ABC\)</span> is not an optimal parenthesization for the overall chain when multiplied by the optimal parenthesization of <span class="math notranslate nohighlight">\(EDF\)</span>.</p>
+</div>
+<p>We can also solve this problem using a binary tree as laid out by <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
+</section>
+<section id="binary-tree-method">
+<h3>Binary tree method<a class="headerlink" href="#binary-tree-method" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="knapsack">
+<h2>Knapsack<a class="headerlink" href="#knapsack" title="Link to this heading">#</a></h2>
+</section>
+<section id="longest-increasing-subsequences-subarray">
+<h2>Longest increasing subsequences/subarray<a class="headerlink" href="#longest-increasing-subsequences-subarray" title="Link to this heading">#</a></h2>
+</section>
+<section id="longest-common-subsequence-subarray">
+<h2>Longest common subsequence/subarray<a class="headerlink" href="#longest-common-subsequence-subarray" title="Link to this heading">#</a></h2>
+</section>
+<section id="shortest-paths">
+<h2>Shortest paths<a class="headerlink" href="#shortest-paths" title="Link to this heading">#</a></h2>
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
@@ -830,7 +880,15 @@ IPython version      : 8.19.0
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-multiplication">Matrix multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-structure-of-an-optimal-parenthesization">1. The structure of an optimal parenthesization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequences-subarray">Longest increasing subsequences/subarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence-subarray">Longest common subsequence/subarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
 </ul>
   </nav></div>
