@@ -75,10 +75,12 @@ parts:
     - file: mathematics/matrix-calc/matrix_calc
       sections:
       - file: mathematics/matrix-calc/vec_mat_deriv
+    - file: mathematics/stoc-calc/stoc_calc
+      sections:
+      - file: mathematics/stoc-calc/stoc_diff_eq
     - file: mathematics/differential-equations/diff_eq
       sections:
       - file: mathematics/differential-equations/wave_eq
-      - file: mathematics/differential-equations/stoc_diff_eq
     - file: mathematics/complex-analysis/complex_analysis
       sections:
       - file: mathematics/complex-analysis/contour_int
