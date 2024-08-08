@@ -8,6 +8,7 @@ parts:
     numbered: 1
     chapters:
     - file: physics/intro
+    
     - file: physics/quantum-mechanics/quantum_mechanics
       sections:
       - file: physics/quantum-mechanics/entanglement
@@ -18,12 +19,15 @@ parts:
       - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/photon_number_detection
       - file: physics/quantum-mechanics/lindblad_eq
+    
     - file: physics/classical-mech/classical_mech
       sections:
       - file: physics/classical-mech/calc_of_var
+   
     - file: physics/e-and-m/e_and_m
       sections:
       - file: physics/e-and-m/gauss_law
+    
     - file: physics/stat-mech/stat_mech
       sections:
       - file: physics/stat-mech/partition_func
@@ -33,7 +37,9 @@ parts:
     numbered: 1
     chapters:
     - file: computerscience/intro
+    
     - file: computerscience/data_structs
+    
     - file: computerscience/algorithms/algorithms
       sections:
       - file: computerscience/algorithms/numerical_algos
@@ -43,47 +49,67 @@ parts:
       - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
+    
     - file: computerscience/optimization/optimization
       sections:
       - file: computerscience/optimization/semidef_prog
       - file: computerscience/optimization/quad_prog
       - file: computerscience/optimization/bayes_opt
+    
     - file: computerscience/machine-learning/machine_learning
       sections:
       - file: computerscience/machine-learning/discriminative
       - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/cross_ent_loss
-      - file: computerscience/machine-learning/conv_net
-      - file: computerscience/machine-learning/rnn
-      - file: computerscience/machine-learning/ppo
       - file: computerscience/machine-learning/attention
-  
+    
+    - file: computerscience/deep-learning/deep_learning
+      sections:
+      - file: computerscience/deep-learning/conv_net
+      - file: computerscience/deep-learning/rnn
+    
+    - file: computerscience/reinforcement-learning/reinforcement_learning
+      sections:
+      - file: computerscience/reinforcement-learning/ppo
+
+    - file: computerscience/quantum-comp/quantum_comp
+      sections:
+      - file: computerscience/quantum-comp/bern_vazirani
+
   - caption: Mathematics
     numbered: 1
     chapters:
     - file: mathematics/intro
+    
     - file: mathematics/vector-calc/vector_calc
       sections:
       - file: mathematics/vector-calc/gradient
+    
     - file: mathematics/abstract-algebra/algebra
       sections:
       - file: mathematics/abstract-algebra/group_theory
       - file: mathematics/abstract-algebra/representation_theory
+    
     - file: mathematics/linear-algebra/linear_algebra
       sections:
       - file: mathematics/linear-algebra/change_basis
+    
     - file: mathematics/matrix-calc/matrix_calc
       sections:
       - file: mathematics/matrix-calc/vec_mat_deriv
+    
     - file: mathematics/stoc-calc/stoc_calc
       sections:
       - file: mathematics/stoc-calc/stoc_diff_eq
+    
     - file: mathematics/differential-equations/diff_eq
       sections:
       - file: mathematics/differential-equations/wave_eq
+    
     - file: mathematics/complex-analysis/complex_analysis
       sections:
       - file: mathematics/complex-analysis/contour_int
+    
     - file: mathematics/probability/probability
       sections:
       - file:  mathematics/probability/conditioning
@@ -93,23 +119,28 @@ parts:
     numbered: 1
     chapters:
     - file: statistics/intro
+    
     - file: statistics/classic-stats/classic_stats
       sections:
       - file: statistics/classic-stats/conf_int
       - file: statistics/classic-stats/pca
       - file: statistics/classic-stats/bootstrap
+    
     - file: statistics/hypo-testing/hypo_testing
       sections:
       - file: statistics/hypo-testing/1_samp_t_test
+    
     - file: statistics/sampling/sampling
       sections:
       - file: statistics/sampling/inv_trans_sampling
       - file: statistics/sampling/rejection_sampling
       - file: statistics/sampling/mcmc
+    
     - file: statistics/high-dim-stats/high_dim
       sections:
       - file: statistics/high-dim-stats/robust_pca
       - file: statistics/high-dim-stats/compress_sense
+    
     - file: statistics/bayesian-statistics/bayesian_statistics
       sections:
       - file: statistics/bayesian-statistics/cred_int
