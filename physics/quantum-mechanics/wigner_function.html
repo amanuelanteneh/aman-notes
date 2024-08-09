@@ -226,6 +226,10 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">10. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/lin_reg.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/tree_based.html">Tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
@@ -518,6 +522,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-wigner-function-of-arbitrary-density-matrices">Computing the Wigner function of arbitrary density matrices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
             </nav>
@@ -732,6 +737,10 @@ W(q,p) = (-1)^n\frac{e^{-q^2-p^2}}{\pi}  L_n(2(q^2+p^2))
 </div>
 </section>
 </section>
+<section id="computing-the-wigner-function-of-arbitrary-density-matrices">
+<h2>Computing the Wigner function of arbitrary density matrices<a class="headerlink" href="#computing-the-wigner-function-of-arbitrary-density-matrices" title="Link to this heading">#</a></h2>
+<p>Previously we have derived the Wigner function for specific density matrices. Can we write some code to numerically compute the Wigner function of an arbitrary density matrix <span class="math notranslate nohighlight">\(\rho\)</span>  which can be a superposition of many states and even mixed?</p>
+</section>
 <section id="properties-of-the-wigner-function">
 <h2>Properties of the Wigner function<a class="headerlink" href="#properties-of-the-wigner-function" title="Link to this heading">#</a></h2>
 <p>The Wigner function has many interesting properties <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id11" title="Ulf Leonhardt. Measuring the quantum state of light. Volume 22. Cambridge university press, 1997.">Leonhardt, 1997</a>]</span>. For example it is real so <span class="math notranslate nohighlight">\(W(q,p) = W^*(q,p)\)</span>. Secondly it is normalized such that</p>
@@ -868,6 +877,7 @@ scipy     : 1.12.0
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qutip-wigner-function-of-ket-psi-ket-1">QuTiP: Wigner function of <span class="math notranslate nohighlight">\(\ket{\psi}=\ket{1}\)</span></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-wigner-function-of-arbitrary-density-matrices">Computing the Wigner function of arbitrary density matrices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-wigner-function">Properties of the Wigner function</a></li>
 </ul>
   </nav></div>
