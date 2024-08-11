@@ -58,6 +58,10 @@ parts:
     
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/lin_reg
+      - file: computerscience/machine-learning/tree_based
+      - file: computerscience/machine-learning/boosting
+      - file: computerscience/machine-learning/kernel_machines
       - file: computerscience/machine-learning/discriminative
       - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/cross_ent_loss
