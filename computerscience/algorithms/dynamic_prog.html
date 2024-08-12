@@ -294,7 +294,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">24. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">25. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -599,8 +599,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-69802795-a72d-45dd-89c7-b5880906e2e3">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-69802795-a72d-45dd-89c7-b5880906e2e3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-dd920caa-218d-4e1b-ade3-dd984322a43d">
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-dd920caa-218d-4e1b-ade3-dd984322a43d" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -877,27 +877,50 @@ s[i,j] = s[i,k] + s[k+1,j] + m_{i-1}m_km_j
 \[
 L_n=a_1,a_2,...a_n
 \]</div>
-<p>how can we find the longest increasing subsequence (LIS)? A subsequence is any subset of this sequence that preservers the relative ordering of the elements in the original sequence. For example <span class="math notranslate nohighlight">\(a_1,a_2,a_3\)</span> is a subsequence as is <span class="math notranslate nohighlight">\(a_3, a_4, a_7\)</span>. An increasing subsequence is a subsequence where each element <span class="math notranslate nohighlight">\(a_i\)</span> is strictly greater than the previous term in the sequence so</p>
+<p>how can we find the length of the longest increasing subsequence (LIS) which we will denote as <span class="math notranslate nohighlight">\(L_n^s\)</span>? A subsequence is any subset of this sequence that preservers the relative ordering of the elements in the original sequence. For example <span class="math notranslate nohighlight">\(a_1,a_2,a_3\)</span> is a subsequence as is <span class="math notranslate nohighlight">\(a_3, a_4, a_7\)</span>. An increasing subsequence is a subsequence where each element <span class="math notranslate nohighlight">\(a_i\)</span> is strictly greater than the previous term in the sequence so</p>
 <div class="math notranslate nohighlight">
 \[
 a_i &lt; a_{i+1} &lt; ... &lt; a_j.
 \]</div>
-<p>Thinking of this in terms of dynamic programming we may think to take the bottom-up approach and find the LIS. That is we first find the LIS for the smallest subproblem</p>
+<p>Thinking of this in terms of dynamic programming we may think to take the bottom-up approach and find the length of the LIS. That is we first find the length of the LIS for the smallest subproblem</p>
+<div class="math notranslate nohighlight">
+\[
+L_1=a_1
+\]</div>
+<p>and then use that solution to compute the length of the LIS for the next largest subproblem</p>
 <div class="math notranslate nohighlight">
 \[
 L_2=a_1,a_2
 \]</div>
-<p>and then use that solution to compute the LIS for the next largest subproblem</p>
-<div class="math notranslate nohighlight">
-\[
-L_3=a_1,a_2,a_3
-\]</div>
-<p>and so on until we compute the LIS for the full sequence <span class="math notranslate nohighlight">\(L_n\)</span>. Note that we skip the case of <span class="math notranslate nohighlight">\(L_1\)</span> since the solution is trivial: the LIS for a sequence with one element is always just that one element.</p>
+<p>and so on until we compute the length of the LIS for the full sequence <span class="math notranslate nohighlight">\(L_n\)</span>. Note that for the case of <span class="math notranslate nohighlight">\(L_1\)</span> the solution is trivial: the LIS for a sequence with one element is always just that one element which has length <span class="math notranslate nohighlight">\(L_1^s=1\)</span>.</p>
 <p>Let’s use the specific example from lecture</p>
 <div class="math notranslate nohighlight">
 \[
-L_{n=12} = 5,7,4,-3,9,1,10,4,5,8,9,3
+L_{n=12} = 5,7,4,-3,9,1,10,4,5,8,9,3.
 \]</div>
+<p>So the smallest subproblem is <span class="math notranslate nohighlight">\(L_1=5\)</span> for which the LIS is <span class="math notranslate nohighlight">\(5\)</span> and the solution is thus <span class="math notranslate nohighlight">\(L_1^s=1\)</span>. The next smallest subproblem is <span class="math notranslate nohighlight">\(L_2=5,7\)</span>. Using the previous solution we can just check to see if the newly added element, <span class="math notranslate nohighlight">\(7\)</span>, is strictly greater than the last element in the LIS for the previous subproblem. If it is then we append that element to the end of the LIS for the previous subproblem and add <span class="math notranslate nohighlight">\(1\)</span> to the solution of the previous problem. If it is not strictly greater then we simply use the solution from the previous subproblem as the solution to this subproblem. For the case of <span class="math notranslate nohighlight">\(L_2\)</span>, since <span class="math notranslate nohighlight">\(7&gt;5\)</span>, the LIS is <span class="math notranslate nohighlight">\(5,7\)</span> and thus <span class="math notranslate nohighlight">\(L_2^s=2\)</span>. The next smallest subproblem is <span class="math notranslate nohighlight">\(L_3=5,7,4\)</span> and we simply do the same check as we did for the previous one. Since <span class="math notranslate nohighlight">\(4 \not &gt; 5\)</span> the solution to this subproblem is the same as the solution to <span class="math notranslate nohighlight">\(L_2\)</span> i.e the LIS is <span class="math notranslate nohighlight">\(5,7\)</span> and <span class="math notranslate nohighlight">\(L_3^s=2\)</span>. For <span class="math notranslate nohighlight">\(L_4=5,7,4,-3\)</span> we get the same result.</p>
+<p>Suppose we continue this up until
+$<span class="math notranslate nohighlight">\(
+L_{10}=5,7,4,-3,9,1,10,4,5,8.
+\)</span>$</p>
+<p>If we have been using the same procedure as before we will have found the solution to <span class="math notranslate nohighlight">\(L_9=5,7,4,-3,9,1,10,4,5\)</span> to be <span class="math notranslate nohighlight">\(L_9^s=4\)</span> with the LIS <span class="math notranslate nohighlight">\(5,7,9,10\)</span>. If we use this solution to construct our solution to <span class="math notranslate nohighlight">\(L_{10}\)</span> using the same check as before we will deduce that the LIS is still <span class="math notranslate nohighlight">\(5,7,9,10\)</span> and <span class="math notranslate nohighlight">\(L_{10}^s=4\)</span>. But this is <em><strong>wrong</strong></em>. There is actually a longer LIS, i.e. <span class="math notranslate nohighlight">\(-3,1,4,5,8\)</span>, which has length <span class="math notranslate nohighlight">\(5\)</span>.</p>
+<p>Clearly our approach is not optimal. We are either specifying the subproblems incorrectly or incorrectly combining their solutions to create solutions for larger subproblems. Let’s think about how this went wrong. We now know the LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+-3,1,4,5,8.
+\]</div>
+<p>For our initial procedure to have worked it would have had to find that the LIS for the previous subproblem <span class="math notranslate nohighlight">\(L_9\)</span> was</p>
+<div class="math notranslate nohighlight">
+\[
+-3,1,4,5.
+\]</div>
+<p>But this is not what our procedure finds the LIS to be. Our procedure finds that</p>
+<div class="math notranslate nohighlight">
+\[
+5,7,9,10
+\]</div>
+<p>is the LIS for <span class="math notranslate nohighlight">\(L_9\)</span>. Notice that both of these LIS are of length 4 but the first is more optimal for solving subproblems down the road. This is because the first subsequence has a final element, <span class="math notranslate nohighlight">\(5\)</span>, which is smaller than the final element of the second subsequence, <span class="math notranslate nohighlight">\(10\)</span>, which allows for more options to append to the end of the subsequence when considering the next subproblem since there are more numbers that are larger than <span class="math notranslate nohighlight">\(5\)</span> then there are numbers that are larger than <span class="math notranslate nohighlight">\(10\)</span>.</p>
+<p>Which would then entail the LIS for the subproblem <span class="math notranslate nohighlight">\(L_8\)</span> is <span class="math notranslate nohighlight">\(-3,1,4\)</span>. But this is not what our algorithm would have found for <span class="math notranslate nohighlight">\(L_8\)</span>. For <span class="math notranslate nohighlight">\(L_8\)</span> our algorithm would have found the LIS was <span class="math notranslate nohighlight">\(5,7,9,10\)</span> which is in fact a longer increasing subsequence than <span class="math notranslate nohighlight">\(-3,1,4,5\)</span>. Clearly this greedy approach does not work as there</p>
 </section>
 <section id="longest-common-subsequence">
 <h2>Longest common subsequence<a class="headerlink" href="#longest-common-subsequence" title="Link to this heading">#</a></h2>
