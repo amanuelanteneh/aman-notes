@@ -600,8 +600,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d4da7bf-5bdd-4e59-9007-e1514475d9b2">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-6d4da7bf-5bdd-4e59-9007-e1514475d9b2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ab7e2f76-bf77-4860-aa72-dc571fbe705f">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-ab7e2f76-bf77-4860-aa72-dc571fbe705f" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -922,7 +922,7 @@ L_{10}=5,7,4,-3,9,1,10,4,5,8.
 \]</div>
 <p>is the LIS for <span class="math notranslate nohighlight">\(L_9\)</span>. Notice that both of these LIS are of length 4 but the first is more optimal for solving subproblems down the road. This is because the first subsequence has a final element, <span class="math notranslate nohighlight">\(5\)</span>, which is smaller than the final element of the second subsequence, <span class="math notranslate nohighlight">\(10\)</span>, which allows for more options to append to the end of the subsequence when considering the next subproblem since there are more numbers that are larger than <span class="math notranslate nohighlight">\(5\)</span> then there are numbers that are larger than <span class="math notranslate nohighlight">\(10\)</span>.</p>
 <p>Interestingly we should also note that our procedure would have found the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to also be <span class="math notranslate nohighlight">\(5,7,9,10\)</span> but in fact to get the true LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> we would have needed the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to be <span class="math notranslate nohighlight">\(-3,1,4\)</span> which is <em>shorter</em> than the LIS found by our procedure and is thus not the true LIS for <span class="math notranslate nohighlight">\(L_8\)</span>. So what do we do? We need to find the LIS that has each possible element as its last element.</p>
-<p>The crucial insight here is that the LIS for the <span class="math notranslate nohighlight">\(i\)</span>-th smallest subproblem <em><strong>is not necessarily</strong></em> going to be built from the LIS of the previous, i.e. <span class="math notranslate nohighlight">\((i-1)\)</span>-th smallest, subproblem. It may in fact need to be built from the LIS for the <span class="math notranslate nohighlight">\((i-2)\)</span>-th smallest subproblem or the <span class="math notranslate nohighlight">\((i-3)\)</span>-th smallest or even smaller problems. To put it another way we can say that the solution to the <span class="math notranslate nohighlight">\(i\)</span>-th smallest problem will be one of two options:</p>
+<p>The crucial insight here is that the LIS for the <span class="math notranslate nohighlight">\(i\)</span>-th smallest subproblem <em><strong>is not necessarily</strong></em> going to be built from the LIS of the previous, i.e. <span class="math notranslate nohighlight">\((i-1)\)</span>-th smallest, subproblem (as we erroneously assumed in our original procedure). It may in fact need to be built from the LIS for the <span class="math notranslate nohighlight">\((i-2)\)</span>-th smallest subproblem or the <span class="math notranslate nohighlight">\((i-3)\)</span>-th smallest or even smaller problems. To put it another way we can say that the solution to the <span class="math notranslate nohighlight">\(i\)</span>-th smallest problem will be one of two options:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(a_i\)</span> will be smaller than or equal to all of the previous <span class="math notranslate nohighlight">\(i-1\)</span> elements in <span class="math notranslate nohighlight">\(L_i\)</span> and thus the LIS is just <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(L_i^s=1\)</span>.</p></li>
 </ol>
@@ -930,61 +930,38 @@ L_{10}=5,7,4,-3,9,1,10,4,5,8.
 <ol class="arabic simple" start="2">
 <li><p>The LIS will be created by appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of <em><strong>one</strong></em> of the previous LISs for the previous <span class="math notranslate nohighlight">\(i-1\)</span> smaller subproblems <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span>. If we denote this previous subproblem as <span class="math notranslate nohighlight">\(L_j\)</span> we will have the length of the LIS for <span class="math notranslate nohighlight">\(L_i\)</span>, again denoted <span class="math notranslate nohighlight">\(L_i^s\)</span>, is equal to <span class="math notranslate nohighlight">\(L_i^s = L_j^s+1\)</span>. The plus one is needed since we are appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of the LIS for <span class="math notranslate nohighlight">\(L_j\)</span>. The important thing to note here is <em><strong>we do not know which value of <span class="math notranslate nohighlight">\(j\)</span> is the optimal one so we must loop through all of them</strong></em>. Note that this takes time linear in the size of the subproblem since we just have to loop over the solutions to <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span>.</p></li>
 </ol>
+<p>Below is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> implementation of this algorithm.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LIS</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span> <span class="c1"># start baseline for all LIS&#39;s. Set baseline to 1 since the shortest LIS will always have at least 1 element</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># loop through all elements</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="c1"># loop through all previous LISs</span>
-            <span class="c1"># if the last element of the current LIS we are examining is less than A[i] we can append A[i] to it</span>
-            <span class="c1"># also must check to see if the length of the LIS which includes A[i] is less than that of the LIS that includes A[j] plus 1</span>
-            <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> 
-                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="c1"># the new length of the LIS for the subproblem L[0:i] is the length of the the LIS for L[0:j] plus one. We add one since we are adding on A[i] to the LIS</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LIS</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    
+    <span class="c1"># start baseline for all LIS&#39;s. Set baseline to 1 since the shortest LIS will always have at least 1 element (the i-th element)</span>
+    <span class="n">LIS_lens</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span> 
+    
+    <span class="c1"># loop through all subproblems starting from the smallest one (L_i=L_1)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> 
+        <span class="c1"># for each subproblem L_i examine all previous solutions to smaller subproblems L_j (where j&lt;i)</span>
+        <span class="c1"># and see if the last element, a_i, of L_i can be appended to the end of any of them (a_i&gt;a_j)</span>
+        <span class="c1"># if so also check if the resulting subsequence is longer than the current best LIS found for L_i</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="c1"># append a_i to the end of this previous subsequence only if a_i is greater than</span>
+            <span class="c1"># the last element of the subsequence (a_j) AND if the new subsequence created would have length</span>
+            <span class="c1"># greater than the current best subsequence found for the current subproblem (L_i)</span>
+            <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">LIS_lens</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">LIS_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> 
+               <span class="n">LIS_lens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">LIS_lens</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># new LIS found for subproblem L_i</span>
+    
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">LIS_lens</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-
-<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">LIS</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of longest increasing subsequence for</span><span class="se">\n</span><span class="s2">L = </span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="se">\n</span><span class="s2">is </span><span class="si">{</span><span class="n">LIS</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lis_end_at_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-    <span class="c1"># Base case</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">1</span>
-
-    <span class="c1"># Consider all elements on the left of i,</span>
-    <span class="c1"># recursively compute LISs ending with </span>
-    <span class="c1"># them and consider the largest</span>
-    <span class="n">mx</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">prev</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-            <span class="n">mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">lis_end_at_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">prev</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mx</span>
-
-<span class="k">def</span> <span class="nf">lis</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">lis_end_at_i</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">res</span>
-
-<span class="c1"># Driver program to test the above function</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of lis is&quot;</span><span class="p">,</span> <span class="n">lis</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of lis is 9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Length of longest increasing subsequence for
+L = [5, 7, -3, 9, 1, 10, 4, 5, 8, 9, 3]
+is 6.
 </pre></div>
 </div>
 </div>
