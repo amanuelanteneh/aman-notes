@@ -302,7 +302,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling.html">27. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling_methods.html">27. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
@@ -528,7 +528,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-analysis">Complexity analysis</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
@@ -600,8 +604,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab7e2f76-bf77-4860-aa72-dc571fbe705f">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-ab7e2f76-bf77-4860-aa72-dc571fbe705f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-28e0cb33-cb76-4faf-b0b1-b9d600c4489b">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-28e0cb33-cb76-4faf-b0b1-b9d600c4489b" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -878,12 +882,12 @@ s[i,j] = s[i,k] + s[k+1,j] + m_{i-1}m_km_j
 \[
 L_n=a_1,a_2,...a_n
 \]</div>
-<p>how can we find the length of the longest increasing subsequence (LIS) which we will denote as <span class="math notranslate nohighlight">\(L_n^s\)</span>? A subsequence is any subset of this sequence that preservers the relative ordering of the elements in the original sequence. For example <span class="math notranslate nohighlight">\(a_1,a_2,a_3\)</span> is a subsequence as is <span class="math notranslate nohighlight">\(a_3, a_4, a_7\)</span>. An increasing subsequence is a subsequence where each element <span class="math notranslate nohighlight">\(a_i\)</span> is strictly greater than the previous term in the sequence so</p>
+<p>how can we find the length <span class="math notranslate nohighlight">\(L_n^s\)</span> of the longest increasing subsequence (LIS)? A subsequence is any subset of this sequence that preservers the relative ordering of the elements in the original sequence. For example <span class="math notranslate nohighlight">\(a_1,a_2,a_3\)</span> is a subsequence as is <span class="math notranslate nohighlight">\(a_3, a_4, a_7\)</span> but not <span class="math notranslate nohighlight">\(a_3, a_2, a_5\)</span>. An increasing subsequence is a subsequence where each element <span class="math notranslate nohighlight">\(a_i\)</span> is strictly greater than the previous term in the sequence so</p>
 <div class="math notranslate nohighlight">
 \[
 a_i &lt; a_{i+1} &lt; ... &lt; a_j.
 \]</div>
-<p>Thinking of this in terms of dynamic programming we may think to take the bottom-up approach and find the length of the LIS. That is we first find the length of the LIS for the smallest subproblem</p>
+<p>Thinking of this in terms of dynamic programming we may think to take the bottom-up approach to find the length of the LIS. That is we first find the length of the LIS for the smallest subproblem</p>
 <div class="math notranslate nohighlight">
 \[
 L_1=a_1
@@ -900,11 +904,17 @@ L_2=a_1,a_2
 L_{n=12} = 5,7,4,-3,9,1,10,4,5,8,9,3.
 \]</div>
 <p>So the smallest subproblem is <span class="math notranslate nohighlight">\(L_1=5\)</span> for which the LIS is <span class="math notranslate nohighlight">\(5\)</span> and the solution is thus <span class="math notranslate nohighlight">\(L_1^s=1\)</span>. The next smallest subproblem is <span class="math notranslate nohighlight">\(L_2=5,7\)</span>. Using the previous solution we can just check to see if the newly added element, <span class="math notranslate nohighlight">\(7\)</span>, is strictly greater than the last element in the LIS for the previous subproblem. If it is then we append that element to the end of the LIS for the previous subproblem and add <span class="math notranslate nohighlight">\(1\)</span> to the solution of the previous problem. If it is not strictly greater then we simply use the solution from the previous subproblem as the solution to this subproblem. For the case of <span class="math notranslate nohighlight">\(L_2\)</span>, since <span class="math notranslate nohighlight">\(7&gt;5\)</span>, the LIS is <span class="math notranslate nohighlight">\(5,7\)</span> and thus <span class="math notranslate nohighlight">\(L_2^s=2\)</span>. The next smallest subproblem is <span class="math notranslate nohighlight">\(L_3=5,7,4\)</span> and we simply do the same check as we did for the previous one. Since <span class="math notranslate nohighlight">\(4 \not &gt; 5\)</span> the solution to this subproblem is the same as the solution to <span class="math notranslate nohighlight">\(L_2\)</span> i.e the LIS is <span class="math notranslate nohighlight">\(5,7\)</span> and <span class="math notranslate nohighlight">\(L_3^s=2\)</span>. For <span class="math notranslate nohighlight">\(L_4=5,7,4,-3\)</span> we get the same result.</p>
-<p>Suppose we continue this up until
-$<span class="math notranslate nohighlight">\(
+<p>Suppose we continue this up until the 10th smallest subproblem</p>
+<div class="math notranslate nohighlight">
+\[
 L_{10}=5,7,4,-3,9,1,10,4,5,8.
-\)</span>$</p>
-<p>If we have been using the same procedure as before we will have found the solution to <span class="math notranslate nohighlight">\(L_9=5,7,4,-3,9,1,10,4,5\)</span> to be <span class="math notranslate nohighlight">\(L_9^s=4\)</span> with the LIS <span class="math notranslate nohighlight">\(5,7,9,10\)</span>. If we use this solution to construct our solution to <span class="math notranslate nohighlight">\(L_{10}\)</span> using the same check as before we will deduce that the LIS is still <span class="math notranslate nohighlight">\(5,7,9,10\)</span> and <span class="math notranslate nohighlight">\(L_{10}^s=4\)</span>. But this is <em><strong>wrong</strong></em>. There is actually a longer LIS, i.e. <span class="math notranslate nohighlight">\(-3,1,4,5,8\)</span>, which has length <span class="math notranslate nohighlight">\(5\)</span>.</p>
+\]</div>
+<p>If we have been using the same procedure as before we will have found the solution to the previous subproblem</p>
+<div class="math notranslate nohighlight">
+\[
+L_9=5,7,4,-3,9,1,10,4,5
+\]</div>
+<p>to be <span class="math notranslate nohighlight">\(L_9^s=4\)</span> with the LIS being <span class="math notranslate nohighlight">\(5,7,9,10\)</span>. If we use this solution to construct our solution to <span class="math notranslate nohighlight">\(L_{10}\)</span> using the same check as before we will deduce that the LIS is still <span class="math notranslate nohighlight">\(5,7,9,10\)</span> and <span class="math notranslate nohighlight">\(L_{10}^s=4\)</span>. But this is <em><strong>wrong</strong></em>. There is actually a longer LIS, i.e. <span class="math notranslate nohighlight">\(-3,1,4,5,8\)</span>, which has length <span class="math notranslate nohighlight">\(5\)</span>.</p>
 <p>Clearly our approach is not optimal. We are either specifying the subproblems incorrectly or incorrectly combining their solutions to create solutions for larger subproblems. Let’s think about how this went wrong. We now know the LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -921,27 +931,29 @@ L_{10}=5,7,4,-3,9,1,10,4,5,8.
 5,7,9,10
 \]</div>
 <p>is the LIS for <span class="math notranslate nohighlight">\(L_9\)</span>. Notice that both of these LIS are of length 4 but the first is more optimal for solving subproblems down the road. This is because the first subsequence has a final element, <span class="math notranslate nohighlight">\(5\)</span>, which is smaller than the final element of the second subsequence, <span class="math notranslate nohighlight">\(10\)</span>, which allows for more options to append to the end of the subsequence when considering the next subproblem since there are more numbers that are larger than <span class="math notranslate nohighlight">\(5\)</span> then there are numbers that are larger than <span class="math notranslate nohighlight">\(10\)</span>.</p>
-<p>Interestingly we should also note that our procedure would have found the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to also be <span class="math notranslate nohighlight">\(5,7,9,10\)</span> but in fact to get the true LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> we would have needed the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to be <span class="math notranslate nohighlight">\(-3,1,4\)</span> which is <em>shorter</em> than the LIS found by our procedure and is thus not the true LIS for <span class="math notranslate nohighlight">\(L_8\)</span>. So what do we do? We need to find the LIS that has each possible element as its last element.</p>
+<p>We should also note that our procedure would have found the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to also be <span class="math notranslate nohighlight">\(5,7,9,10\)</span> but in fact to get the true LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> we would have needed the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to be <span class="math notranslate nohighlight">\(-3,1,4\)</span> which is <em>shorter</em> than the LIS found by our procedure and is thus not the true LIS for <span class="math notranslate nohighlight">\(L_8\)</span>. So what do we do?</p>
+<section id="key-insight">
+<h3>Key Insight<a class="headerlink" href="#key-insight" title="Link to this heading">#</a></h3>
 <p>The crucial insight here is that the LIS for the <span class="math notranslate nohighlight">\(i\)</span>-th smallest subproblem <em><strong>is not necessarily</strong></em> going to be built from the LIS of the previous, i.e. <span class="math notranslate nohighlight">\((i-1)\)</span>-th smallest, subproblem (as we erroneously assumed in our original procedure). It may in fact need to be built from the LIS for the <span class="math notranslate nohighlight">\((i-2)\)</span>-th smallest subproblem or the <span class="math notranslate nohighlight">\((i-3)\)</span>-th smallest or even smaller problems. To put it another way we can say that the solution to the <span class="math notranslate nohighlight">\(i\)</span>-th smallest problem will be one of two options:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(a_i\)</span> will be smaller than or equal to all of the previous <span class="math notranslate nohighlight">\(i-1\)</span> elements in <span class="math notranslate nohighlight">\(L_i\)</span> and thus the LIS is just <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(L_i^s=1\)</span>.</p></li>
 </ol>
 <p><span class="math notranslate nohighlight">\(\qquad \qquad \qquad \Large{\textbf{or}}\)</span></p>
 <ol class="arabic simple" start="2">
-<li><p>The LIS will be created by appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of <em><strong>one</strong></em> of the previous LISs for the previous <span class="math notranslate nohighlight">\(i-1\)</span> smaller subproblems <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span>. If we denote this previous subproblem as <span class="math notranslate nohighlight">\(L_j\)</span> we will have the length of the LIS for <span class="math notranslate nohighlight">\(L_i\)</span>, again denoted <span class="math notranslate nohighlight">\(L_i^s\)</span>, is equal to <span class="math notranslate nohighlight">\(L_i^s = L_j^s+1\)</span>. The plus one is needed since we are appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of the LIS for <span class="math notranslate nohighlight">\(L_j\)</span>. The important thing to note here is <em><strong>we do not know which value of <span class="math notranslate nohighlight">\(j\)</span> is the optimal one so we must loop through all of them</strong></em>. Note that this takes time linear in the size of the subproblem since we just have to loop over the solutions to <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span>.</p></li>
+<li><p>The LIS will be created by appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of <em><strong>one</strong></em> of the previous LISs for the previous <span class="math notranslate nohighlight">\(i-1\)</span> smaller subproblems <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span> since there must be some <span class="math notranslate nohighlight">\(a_j&lt;a_i\)</span> as the first case was not fulfilled. If we denote this previous subproblem as <span class="math notranslate nohighlight">\(L_j\)</span> we will have the length of the LIS for <span class="math notranslate nohighlight">\(L_i\)</span>, again denoted <span class="math notranslate nohighlight">\(L_i^s\)</span>, is equal to <span class="math notranslate nohighlight">\(L_i^s = L_j^s+1\)</span>. The plus one is needed since we are appending <span class="math notranslate nohighlight">\(a_i\)</span> to the end of the LIS for <span class="math notranslate nohighlight">\(L_j\)</span>. The important thing to note here is <em><strong>we do not know which value of <span class="math notranslate nohighlight">\(j\)</span> is the optimal one so we must loop through all of them</strong></em>. Note that this takes time linear in the size of the subproblem since we just have to loop over the solutions to <span class="math notranslate nohighlight">\(L_1,L_2,...L_{i-1}\)</span>. The only caveat with this case is that we have to make sure that we only append <span class="math notranslate nohighlight">\(a_i\)</span> to the LIS of <span class="math notranslate nohighlight">\(L_j\)</span> if doing so would result in an LIS that is longer than the current best LIS we have found from examining the previous smaller <span class="math notranslate nohighlight">\(j-1\)</span> subproblems. This caveat is accounted for by the second part of the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement in the below <code class="docutils literal notranslate"><span class="pre">Python</span></code> implementation of this algorithm.</p></li>
 </ol>
-<p>Below is a <code class="docutils literal notranslate"><span class="pre">Python</span></code> implementation of this algorithm.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LIS</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bottom-up approach</span>
+<span class="k">def</span> <span class="nf">length_of_LIS</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     
     <span class="c1"># start baseline for all LIS&#39;s. Set baseline to 1 since the shortest LIS will always have at least 1 element (the i-th element)</span>
-    <span class="n">LIS_lens</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span> 
+    <span class="n">LIS_lens</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n</span> <span class="c1"># LIS_lens[i] = length of LIS for subproblem L_i</span>
     
-    <span class="c1"># loop through all subproblems starting from the smallest one (L_i=L_1)</span>
+    <span class="c1"># loop through all subproblems starting from the smallest one (L_i = L_1)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> 
-        <span class="c1"># for each subproblem L_i examine all previous solutions to smaller subproblems L_j (where j&lt;i)</span>
+        <span class="c1"># for each subproblem L_i examine all previous solutions to smaller subproblems L_j (meaning j&lt;i)</span>
         <span class="c1"># and see if the last element, a_i, of L_i can be appended to the end of any of them (a_i&gt;a_j)</span>
         <span class="c1"># if so also check if the resulting subsequence is longer than the current best LIS found for L_i</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
@@ -954,7 +966,7 @@ L_{10}=5,7,4,-3,9,1,10,4,5,8.
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">LIS_lens</span><span class="p">)</span>
 
 <span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of longest increasing subsequence for</span><span class="se">\n</span><span class="s2">L = </span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="se">\n</span><span class="s2">is </span><span class="si">{</span><span class="n">LIS</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of longest increasing subsequence for</span><span class="se">\n</span><span class="s2">L = </span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="se">\n</span><span class="s2">is </span><span class="si">{</span><span class="n">length_of_LIS</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -966,6 +978,11 @@ is 6.
 </div>
 </div>
 </div>
+</section>
+<section id="complexity-analysis">
+<h3>Complexity analysis<a class="headerlink" href="#complexity-analysis" title="Link to this heading">#</a></h3>
+<p>The time complexity of this algorithm is <span class="math notranslate nohighlight">\(O(n^2)\)</span> due to the doubly nested for loops. The first loops over <span class="math notranslate nohighlight">\(n\)</span> items and the second loops over <span class="math notranslate nohighlight">\(i\)</span> items and <span class="math notranslate nohighlight">\(i=n\)</span> once we are at the last subproblem. The space complexity is <span class="math notranslate nohighlight">\(O(n)\)</span> since we store the solutions to all <span class="math notranslate nohighlight">\(n\)</span> subproblems for later use.</p>
+</section>
 </section>
 <section id="longest-common-subsequence">
 <h2>Longest common subsequence<a class="headerlink" href="#longest-common-subsequence" title="Link to this heading">#</a></h2>
@@ -1099,7 +1116,11 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-analysis">Complexity analysis</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
