@@ -39,6 +39,7 @@ parts:
     - file: computerscience/intro
     
     - file: computerscience/data_structs
+    - file: computerscience/lazy_eval
     
     - file: computerscience/algorithms/algorithms
       sections:
@@ -134,7 +135,7 @@ parts:
       sections:
       - file: statistics/hypo-testing/1_samp_t_test
     
-    - file: statistics/sampling/sampling
+    - file: statistics/sampling/sampling_methods
       sections:
       - file: statistics/sampling/inv_trans_sampling
       - file: statistics/sampling/rejection_sampling
