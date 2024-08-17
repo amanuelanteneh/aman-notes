@@ -529,11 +529,15 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-solution">Potential solution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-analysis">Complexity analysis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-subproblem-structure">Determining subproblem structure</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -604,8 +608,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96a966b5-1b8f-493f-92ae-a60c52f146b2">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-96a966b5-1b8f-493f-92ae-a60c52f146b2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-239fa65f-06e5-435e-ada7-1724144b7078">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-239fa65f-06e5-435e-ada7-1724144b7078" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -887,6 +891,8 @@ L_n=a_1,a_2,...a_n
 \[
 a_i &lt; a_{i+1} &lt; ... &lt; a_j.
 \]</div>
+<section id="potential-solution">
+<h3>Potential solution<a class="headerlink" href="#potential-solution" title="Link to this heading">#</a></h3>
 <p>Thinking of this in terms of dynamic programming we may think to take the bottom-up approach to find the length of the LIS. That is we first find the length of the LIS for the smallest subproblem</p>
 <div class="math notranslate nohighlight">
 \[
@@ -932,6 +938,7 @@ L_9=5,7,4,-3,9,1,10,4,5
 \]</div>
 <p>is the LIS for <span class="math notranslate nohighlight">\(L_9\)</span>. Notice that both of these LIS are of length 4 but the first is more optimal for solving subproblems down the road. This is because the first subsequence has a final element, <span class="math notranslate nohighlight">\(5\)</span>, which is smaller than the final element of the second subsequence, <span class="math notranslate nohighlight">\(10\)</span>, which allows for more options to append to the end of the subsequence when considering the next subproblem since there are more numbers that are larger than <span class="math notranslate nohighlight">\(5\)</span> then there are numbers that are larger than <span class="math notranslate nohighlight">\(10\)</span>.</p>
 <p>We should also note that our procedure would have found the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to also be <span class="math notranslate nohighlight">\(5,7,9,10\)</span> but in fact to get the true LIS for <span class="math notranslate nohighlight">\(L_{10}\)</span> we would have needed the LIS for <span class="math notranslate nohighlight">\(L_8\)</span> to be <span class="math notranslate nohighlight">\(-3,1,4\)</span> which is <em>shorter</em> than the LIS found by our procedure and is thus not the true LIS for <span class="math notranslate nohighlight">\(L_8\)</span>. So what do we do?</p>
+</section>
 <section id="key-insight">
 <h3>Key Insight<a class="headerlink" href="#key-insight" title="Link to this heading">#</a></h3>
 <p>The crucial insight here is that the LIS for the <span class="math notranslate nohighlight">\(i\)</span>-th smallest subproblem <em><strong>is not necessarily</strong></em> going to be built from the LIS of the previous, i.e. <span class="math notranslate nohighlight">\((i-1)\)</span>-th smallest, subproblem (as we erroneously assumed in our original procedure). It may in fact need to be built from the LIS for the <span class="math notranslate nohighlight">\((i-2)\)</span>-th smallest subproblem or the <span class="math notranslate nohighlight">\((i-3)\)</span>-th smallest or even smaller problems. To put it another way we can say that the solution to the <span class="math notranslate nohighlight">\(i\)</span>-th smallest problem will be one of two options:</p>
@@ -986,6 +993,31 @@ is 6.
 </section>
 <section id="longest-common-subsequence">
 <h2>Longest common subsequence<a class="headerlink" href="#longest-common-subsequence" title="Link to this heading">#</a></h2>
+<p>The next problem we will look at is somewhat similar to the previous problem. Given two lists <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> of equal length <span class="math notranslate nohighlight">\(n\)</span> find the <em>length</em> of the longest <em>common</em> subsequence (LCS) between them. For example if</p>
+<div class="math notranslate nohighlight">
+\[
+X_7=b,c,d,b,c,d,a \quad \text{ and } \quad Y_7=a,b,e,c,b,a,b
+\]</div>
+<p>the longest subsequence shared between the two is <span class="math notranslate nohighlight">\(b,c,b,a\)</span> which has length <span class="math notranslate nohighlight">\(4\)</span>.</p>
+<section id="determining-subproblem-structure">
+<h3>Determining subproblem structure<a class="headerlink" href="#determining-subproblem-structure" title="Link to this heading">#</a></h3>
+<p>Continuing with the above example suppose we have a solution for the subproblem that consists of the first 3 elements of both lists</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+X_3 &amp;= x_1,x_2,x_3 = b,c,d  \\ 
+Y_3 &amp;= y_1,y_2,y_3 = a,b,e
+\end{align*}
+\end{split}\]</div>
+<p>the LCS here is clearly <span class="math notranslate nohighlight">\(b\)</span> which is of length <span class="math notranslate nohighlight">\(L_3=1\)</span>. Now for the next largest subproblem we will look at the next element in the two lists: <span class="math notranslate nohighlight">\(x_4\)</span> and <span class="math notranslate nohighlight">\(y_4\)</span>. There are two cases that can occur:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x_4=y_4\)</span> in which case the new elements simply extend the LCS for the previous smaller subproblem by <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(L_4=L_3+1\)</span> and in the general case <span class="math notranslate nohighlight">\(L_i=L_{i-1}+1\)</span>.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\qquad \qquad \qquad \Large{\textbf{or}}\)</span></p>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(x_4\not =y_4\)</span> (which is true for our current example since <span class="math notranslate nohighlight">\(x_4=b\)</span> and <span class="math notranslate nohighlight">\(y_4=c\)</span>) in which case there are three options: we can append either <span class="math notranslate nohighlight">\(x_4\)</span> <em><strong>or</strong></em> <span class="math notranslate nohighlight">\(y_4\)</span> <em><strong>or</strong></em> neither of them to the LCS. Clearly we can not append both since they are not equal and thus the resulting subsequence would not be a common subsequence. But how will we know which of the 3 possible option is the best one? Well if we want to check if we can append <span class="math notranslate nohighlight">\(x_4\)</span> we</p></li>
+</ol>
+</section>
 </section>
 <section id="knapsack">
 <h2>Knapsack<a class="headerlink" href="#knapsack" title="Link to this heading">#</a></h2>
@@ -1117,11 +1149,15 @@ IPython version      : 8.22.2
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-solution">Potential solution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complexity-analysis">Complexity analysis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence">Longest common subsequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-subproblem-structure">Determining subproblem structure</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
