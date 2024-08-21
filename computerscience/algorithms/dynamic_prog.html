@@ -608,8 +608,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-239fa65f-06e5-435e-ada7-1724144b7078">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-239fa65f-06e5-435e-ada7-1724144b7078" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0fef113c-6d8b-4ceb-82b8-61259bc35b34">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-0fef113c-6d8b-4ceb-82b8-61259bc35b34" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -627,15 +627,26 @@ r_{n_{\text{opt}}} &amp;= \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{op
 \end{split}\]</div>
 <p>When a problem can be solved like this by breaking it onto smaller parts, solving those smaller parts independently, and then combining those solutions to those smaller parts we say the problem exhibits <strong>optimal sub-structure</strong>.</p>
 <p>Below is some recursive code that solves this problem</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># for reproducibility</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">p: A dict where the keys are the length of the rod and the value is the revenue gained from selling a rod of that length</span>
 
 <span class="sd">n: The (integer) length of the rod</span>
@@ -670,7 +681,7 @@ r_{n_{\text{opt}}} &amp;= \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{op
 │   1 │   2 │   9 │  12 │  10 │  12 │  14 │  16 │  81 │   20 │  110 │   84 │   13 │   14 │   30 │  112 │  136 │  306 │   19 │  360 │  147 │  462 │  529 │  432 │  350 │  208 │  405 │
 ╘═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧═════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╧══════╛
 Max revenue for rod of length 27 is: 541
-Took 40.415 seconds
+Took 39.417 seconds
 </pre></div>
 </div>
 </div>
@@ -766,7 +777,7 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45-th Fibonacci number is: 1134903170
-Took 304.175 seconds
+Took 310.440 seconds
 </pre></div>
 </div>
 </div>
@@ -1029,6 +1040,40 @@ Y_3 &amp;= y_1,y_2,y_3 = a,b,e
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <section id="id10">
 <h3>6.1<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>The below algorithm has complexity <span class="math notranslate nohighlight">\(O(n)\)</span> in both time and space. You could get this down to <span class="math notranslate nohighlight">\(O(1)\)</span> space complexity by just keeping track of the maximum value as you make your way through the subproblems.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nums</span> <span class="o">==</span> <span class="p">[]:</span> <span class="c1"># if empty list </span>
+        <span class="k">return</span> <span class="mi">0</span>
+        
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># the solution to the smallest non-trivial subproblem is simply nums[0] since it is the only element in the array</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="c1"># the solution to subproblem i will either </span>
+        <span class="c1"># 1) be appending nums[i] to the end of the solution for subproblem i-1 (the previous smaller subproblem) OR</span>
+        <span class="c1"># 2) the solution will just be the element nums[i] itself.</span>
+        <span class="c1"># This follows from the constraint that this must be a contiguous subarray/subsequence</span>
+        <span class="k">if</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> 
+            <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="id11">
 <h3>6.2<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
@@ -1058,9 +1103,7 @@ Y_3 &amp;= y_1,y_2,y_3 = a,b,e
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Sat Aug 10 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Aug 20 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
