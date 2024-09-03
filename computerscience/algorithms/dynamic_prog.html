@@ -546,11 +546,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotel-stops">6.2 Hotel Stops</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yuckdonalds">6.3 Yuckdonald’s</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corrupted-text-document">6.4 Corrupted text document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.11</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 longest common substring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.26</a></li>
 </ul>
 </li>
 </ul>
@@ -713,8 +714,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eebfd7a3-f93b-4f08-9426-368389ec7f54">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-eebfd7a3-f93b-4f08-9426-368389ec7f54" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-51533db6-0e45-4b91-929e-a69410434026">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-51533db6-0e45-4b91-929e-a69410434026" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -1097,6 +1098,11 @@ L_{i-1,j-1}+1 &amp;\quad \text{if} \quad x_i=y_j
 <p>These are problems from chapter 6 of the DPV textbook.</p>
 <section id="maximal-contiguous-subsequence">
 <h3>6.1 Maximal Contiguous Subsequence<a class="headerlink" href="#maximal-contiguous-subsequence" title="Link to this heading">#</a></h3>
+<p>The recurrence for this problem is</p>
+<div class="math notranslate nohighlight">
+\[
+S_i = \max\{ S_{i-1} + L_i, L_i \}
+\]</div>
 <p>The below algorithm has complexity <span class="math notranslate nohighlight">\(O(n)\)</span> in both time and space. You could get this down to <span class="math notranslate nohighlight">\(O(1)\)</span> space complexity by just keeping track of the maximum value as you make your way through the subproblems.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1228,38 +1234,43 @@ L_i^{opt} = \max\left\{ \max_j\left\{ p_i + L_j^{opt} \bigg\vert m_i-m_j \geq k\
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    <span class="n">sols</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">]</span> <span class="c1"># set the baseline to be that the optimal solution for subproblem i is to only have one location open at position i</span>
+    <span class="n">sols</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">]</span> <span class="c1"># set the baseline to all 0</span>
+    <span class="n">sols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># for subproblem 1 the optimal solution is trivial: open a location at location 1</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">sols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sols</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">:</span>
                <span class="n">sols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sols</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+               
 
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">sols</span><span class="p">)</span>
 
 
+<span class="c1"># Should be 10, see: https://gist.github.com/primaryobjects/1406b79f12db5320f0797792d8f73b04</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">38</span> <span class="p">]</span>
-<span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span> <span class="p">]</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Should be 25</span>
+<span class="n">m</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Greedy approach (which assumes a restaurant at location i) will fail this case (correct</span>
 <span class="c1"># answer is 400)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span> <span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span> <span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Corner case, the return should be 42 and not 41</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span> <span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">31</span> <span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1269,16 +1280,19 @@ m=[1, 2, 3, 4, 5, 6]
 p=[5, 5, 5, 5, 5, 5] 
 k=5 
 is: 10
+
 Maximum profit for 
-m=[1, 10, 16, 21, 22, 35, 38] 
-p=[30, 9, 13, 25, 23, 3, 10] 
-k=10 
-is: 65
+m=[0, 5, 10, 15, 20] 
+p=[5, 5, 5, 5, 5] 
+k=5 
+is: 25
+
 Maximum profit for 
 m=[10, 20, 25, 30, 40] 
 p=[100, 100, 101, 100, 100] 
 k=10 
 is: 400
+
 Maximum profit for 
 m=[0, 4, 8] 
 p=[10, 42, 31] 
@@ -1296,27 +1310,71 @@ is: 42
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p4</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">word_dict</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">sols</span> <span class="o">=</span> <span class="p">[</span> <span class="kc">False</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="longest-palindromic-subsequence">
+<h3>6.7 Longest palindromic subsequence<a class="headerlink" href="#longest-palindromic-subsequence" title="Link to this heading">#</a></h3>
+<p>Given a sequence</p>
+<div class="math notranslate nohighlight">
+\[
+s_n = a_1,a_2,a_3...,a_n
+\]</div>
+<p>The recurrence is thus
+$<span class="math notranslate nohighlight">\(
+L_i^s = \max\left\{ \max_j\left\{1+L_j^s| s_j=s_i\right\} ,\quad 1\right\}
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p7</span><span class="p">():</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="longest-common-substring">
+<h3>6.8 longest common substring<a class="headerlink" href="#longest-common-substring" title="Link to this heading">#</a></h3>
+<p>Since we must find the longest common <em>substring</em> this means the subsequences must be contiguous.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p8</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">):</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+   
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">L</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">m</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="id11">
-<h3>6.11<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
-<p>Since we solved this above I’ll solve a modified version of this where we find the longest common <em>substring</em>. This means the subsequences must be contiguous.</p>
+<h3>6.18<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 </section>
 <section id="id12">
-<h3>6.18<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>6.19<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 </section>
 <section id="id13">
-<h3>6.19<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<h3>6.20<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 </section>
 <section id="id14">
-<h3>6.20<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
-</section>
-<section id="id15">
-<h3>6.26<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<h3>6.26<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1431,11 +1489,12 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotel-stops">6.2 Hotel Stops</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yuckdonalds">6.3 Yuckdonald’s</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corrupted-text-document">6.4 Corrupted text document</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.11</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 longest common substring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.26</a></li>
 </ul>
 </li>
 </ul>
