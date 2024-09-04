@@ -537,7 +537,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characterize-the-structure-of-an-optimal-solution-parenthesization">1. Characterize the structure of an optimal solution (parenthesization)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursively-define-the-value-of-an-optimal-solution">2. Recursively define the value of an optimal solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-method">Bottom-up method</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
@@ -714,8 +714,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-256ff59e-5adb-427b-861c-32bec381c701">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-256ff59e-5adb-427b-861c-32bec381c701" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-165a3b7c-c79e-4747-9f04-3ac964fdec7b">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-165a3b7c-c79e-4747-9f04-3ac964fdec7b" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -1085,9 +1085,9 @@ P=A_1(A_2A_3)?
 s[i,j] = s[i,k] + s[k+1,j] + m_{i-1}m_km_j
 \]</div>
 </section>
-<section id="binary-tree-method">
-<h3>Binary tree method<a class="headerlink" href="#binary-tree-method" title="Link to this heading">#</a></h3>
-<p>We can also solve this problem using a binary tree as laid out by <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and lecture.</p>
+<section id="bottom-up-method">
+<h3>Bottom-up method<a class="headerlink" href="#bottom-up-method" title="Link to this heading">#</a></h3>
+<p>We can also solve this problem using a bottom-up approach as laid out by <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and Dr. Vigoda’s lecture.</p>
 </section>
 </section>
 <section id="shortest-paths">
@@ -1481,7 +1481,7 @@ IPython version      : 8.22.2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#characterize-the-structure-of-an-optimal-solution-parenthesization">1. Characterize the structure of an optimal solution (parenthesization)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursively-define-the-value-of-an-optimal-solution">2. Recursively define the value of an optimal solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-tree-method">Binary tree method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-method">Bottom-up method</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-paths">Shortest paths</a></li>
