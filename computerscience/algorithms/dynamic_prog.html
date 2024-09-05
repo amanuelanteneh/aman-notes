@@ -718,8 +718,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19bdb9de-57bd-4f5a-8372-82d095df1388">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-19bdb9de-57bd-4f5a-8372-82d095df1388" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d9518f12-964b-4b87-8e65-0aaf30f26db3">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-d9518f12-964b-4b87-8e65-0aaf30f26db3" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -1036,9 +1036,82 @@ Y_j=y_1,y_2,...,y_j
 L_{i,j}^s = \begin{cases}
 \max\left\{L_{i-1,j}^s, L_{i,j-1}^s\right\} &amp;\quad \text{if} \quad x_i\not=y_j\\
 L_{i-1,j-1}^s+1 &amp;\quad \text{if} \quad x_i=y_j
-\end{cases} \quad \text{for} \quad 1\leq i\leq n, \quad  1\leq j\leq m
+\end{cases} \quad \text{where} \quad 1\leq i\leq n, \quad  1\leq j\leq m
 \end{split}\]</div>
-<p>for <span class="math notranslate nohighlight">\(L_{i,0}\)</span> and <span class="math notranslate nohighlight">\(L_{0,j}\)</span> the solution is of course <span class="math notranslate nohighlight">\(0\)</span> since there is no common subsequence between a non-empty string and the empty string. Also note that the dimesnions of this array will be <span class="math notranslate nohighlight">\((n+1) \times (m+1)\)</span> since the first row and column are used to account for the case when one, or both, of the strings are the empty string.</p>
+<p>The base cases are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_{i,0} = 0 \quad \text{where} \quad 1\leq i\leq n \\
+L_{0,j} = 0 \quad \text{where} \quad  1\leq j\leq m
+\end{split}\]</div>
+<p>we set them to <span class="math notranslate nohighlight">\(0\)</span> since there is no common subsequence between a non-empty string and the empty string. Also note that the dimesnions of this array will be <span class="math notranslate nohighlight">\((n+1) \times (m+1)\)</span> since the first row and column are used to account for the case when one, or both, of the strings are the empty string.</p>
+<p>For the problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X=b,c,d,b,c,d,a \\ Y=a,b,e,c,b,a
+\end{split}\]</div>
+<p>we have the table <span class="math notranslate nohighlight">\(L^s\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L^s = 
+\begin{array}{cc} &amp; 
+\begin{array}{ccccccc} \varnothing &amp; a &amp; b &amp; e &amp; c &amp; b &amp; a \end{array}
+\\
+\begin{array}{ccc}
+\varnothing \\
+b \\
+c \\
+d \\
+b \\
+c \\
+d \\
+a\end{array}
+&amp;
+\left[
+\begin{array}{ccc}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1  \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2  \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2  \\  
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3  \\ 
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3  \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3  \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 
+\end{array}
+\right]\end{array}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(L_{8,7}\)</span> hold our answer which is the length of the subsequence <span class="math notranslate nohighlight">\(b,c,b,a\)</span> which is the LCS between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. Note that <span class="math notranslate nohighlight">\(\varnothing\)</span> denotes the empty string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">syp</span>
+
+<span class="k">def</span> <span class="nf">LCS</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span> <span class="c1"># base case </span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> 
+            <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="nb">max</span><span class="p">(</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">T</span>
+
+
+<span class="n">X</span> <span class="o">=</span> <span class="s2">&quot;bcdbcda&quot;</span> 
+<span class="n">Y</span> <span class="o">=</span> <span class="s2">&quot;abecba&quot;</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">LCS</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">syp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3\\0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 3\\0 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
 </section>
 </section>
 <section id="knapsack">
@@ -1257,26 +1330,22 @@ L_i^{opt} = \max\left\{ \max_j\left\{ p_i + L_j^{opt} \bigg\vert m_i-m_j \geq k\
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">sols</span><span class="p">)</span>
 
 
-<span class="c1"># Should be 10, see: https://gist.github.com/primaryobjects/1406b79f12db5320f0797792d8f73b04</span>
+<span class="c1"># Test cases from: https://gist.github.com/primaryobjects/1406b79f12db5320f0797792d8f73b04</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Should be 25</span>
 <span class="n">m</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">k</span><span class="o">=</span><span class="mi">5</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Greedy approach (which assumes a restaurant at location i) will fail this case (correct</span>
-<span class="c1"># answer is 400)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span> <span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span> <span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for </span><span class="se">\n</span><span class="s2">m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">is: </span><span class="si">{</span><span class="n">p3</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Corner case, the return should be 42 and not 41</span>
 <span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span> <span class="p">]</span>
 <span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">31</span> <span class="p">]</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
@@ -1312,7 +1381,72 @@ is: 42
 </div>
 </div>
 </div>
-<p>The time and space complexity are clearly <span class="math notranslate nohighlight">\(O(n^2)\)</span> and <span class="math notranslate nohighlight">\(O(n)\)</span> respectively.</p>
+<p>The time and space complexity are clearly <span class="math notranslate nohighlight">\(O(n^2)\)</span> and <span class="math notranslate nohighlight">\(O(n)\)</span> respectively. As a sanity check we can code a brute force algorithm to compute the answer of our test cases shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p3_brute_force</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># Initialize the maximum profit</span>
+    <span class="n">max_profit</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># Iterate over all subsets of the locations</span>
+    <span class="k">for</span> <span class="n">subset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>  <span class="c1"># 2^n possible subsets</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">total_profit</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">last_location</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>  <span class="c1"># Initialize last location as negative infinity</span>
+        
+        <span class="c1"># Check each location in the subset</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># If the i-th bit is set in the subset, location i is included</span>
+            <span class="k">if</span> <span class="n">subset</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">):</span>
+                <span class="c1"># Check if this location satisfies the distance constraint</span>
+                <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">last_location</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">:</span>
+                    <span class="n">total_profit</span> <span class="o">+=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Add the profit of location i</span>
+                    <span class="n">last_location</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Update last location</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>  <span class="c1"># Subset is invalid, so break out of loop</span>
+        
+        <span class="c1"># If the subset is valid and its profit is greater than the current max, update max_profit</span>
+        <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+            <span class="n">max_profit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_profit</span><span class="p">,</span> <span class="n">total_profit</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">max_profit</span>
+
+
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for test case 1 is: </span><span class="si">{</span><span class="n">p3_brute_force</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for test case 2 is: </span><span class="si">{</span><span class="n">p3_brute_force</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span> <span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span> <span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for test case 3 is: </span><span class="si">{</span><span class="n">p3_brute_force</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span> <span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">31</span> <span class="p">]</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maximum profit for test case 4 is: </span><span class="si">{</span><span class="n">p3_brute_force</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum profit for test case 1 is: 10
+
+Maximum profit for test case 2 is: 25
+
+Maximum profit for test case 3 is: 400
+
+Maximum profit for test case 4 is: 42
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="corrupted-text-document">
 <h3>6.4 Corrupted text document<a class="headerlink" href="#corrupted-text-document" title="Link to this heading">#</a></h3>
