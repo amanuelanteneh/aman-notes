@@ -616,7 +616,7 @@ We can describe the runtime (time complexity) of these recursive algorithms usin
 T(n) = 4T\left(\frac{n}{2}\right) + O(n)
 \]</div>
 <p>we multiply by 4 since we are creating 4 new subproblems and multiple by <span class="math notranslate nohighlight">\(T\left(\frac{n}{2}\right)\)</span> since the new subproblems have size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. The additional <span class="math notranslate nohighlight">\(O(n)\)</span> is there to capture the linear time complexity of additions and leftward bit shifts. Solving this recurrence relation for <span class="math notranslate nohighlight">\(T(n)\)</span> we get the solution is <span class="math notranslate nohighlight">\(T(n)=O(n^2)\)</span>. This is the same complexity as the grade-school multiplication method so we have no real improvement with this new recursive algorithm.</p>
-<p>We can improve this algorithm by using the insight from Gauss that we laid out earlier that. Since <span class="math notranslate nohighlight">\(x_Ly_R + x_Ry_L=(x_L+x_R)(y_L+y_R)-x_Ly_L-x_Ry_R\)</span> we can reduce the 4 multiplications needed down to 3 resulting in a more efficient algorithm.</p>
+<p>We can improve this algorithm by using the insight from Gauss that we laid out earlier. Since <span class="math notranslate nohighlight">\(x_Ly_R + x_Ry_L=(x_L+x_R)(y_L+y_R)-x_Ly_L-x_Ry_R\)</span> we can reduce the 4 multiplications needed down to 3 resulting in a more efficient algorithm.</p>
 <p>The pseudocode and for the algorithm are given below.</p>
 <div class="proof algorithm dropdown admonition" id="gauss-int-mult">
 <p class="admonition-title"><span class="caption-number">Algorithm 9.3 </span> (Integer Multiplication)</p>
