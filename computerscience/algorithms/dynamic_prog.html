@@ -517,10 +517,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-versus-top-down-approach">Bottom-up versus top-down approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-versus-top-down-approaches">Bottom-up versus top-down approaches</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rod-cutting">Rod cutting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-reasoning-for-solution">Mathematical reasoning for solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-down-approach">Top-down approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-reasoning-for-solution">Mathematical reasoning for solution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-approach">Bottom-up approach</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
@@ -535,8 +539,8 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-approach">Bottom-up approach</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-down-approach">Top-down approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Bottom-up approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Top-down approach</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#characterize-the-structure-of-an-optimal-solution-parenthesization">1. Characterize the structure of an optimal solution (parenthesization)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recursively-define-the-value-of-an-optimal-solution">2. Recursively define the value of an optimal solution</a></li>
 </ul>
@@ -552,10 +556,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 Longest common substring</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-6-11-longest-common-subsequence">DPV 6.11 Longest common subsequence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change">6.17 Making change</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-2">6.18 Making change 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-3">6.19 Making change 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-binary-search-trees">6.20 Optimal binary search trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-alignment">6.26 Sequence alignment</a></li>
 </ul>
 </li>
 </ul>
@@ -591,9 +596,9 @@ document.write(`
 <h1>Dynamic programming<a class="headerlink" href="#dynamic-programming" title="Link to this heading">#</a></h1>
 <p>Dynamic programming is similar to the divide and conquer approach except that the subproblems overlap i.e. the subproblems share the same sub-subproblems. This method of solving problems typically is used in optimization problems, particularly optimal control problems, and was originally developed by Richard E. Bellman who is also famous for developing the closely related Bellman equation which is at the core of reinforcement learning <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id21" title="Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 2018.">Sutton and Barto, 2018</a>]</span>.</p>
 <p>The key strategy is to store the solutions, in a hashtable for example, to the subproblems and then reuse the solution later if the same subproblem is encountered rather than recomputing the solution <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. Computing the <span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number is a common example problem that illustrates this. This is a crucial distinction between dynamic programming versus divide and conquer: in the former the subproblems may overlap or appear multiple times and we can exploit this redundancy by storing solutions to these subproblems to reuse when we encounter them later on in the process of solving the problem.</p>
-<section id="bottom-up-versus-top-down-approach">
-<h2>Bottom-up versus top-down approach<a class="headerlink" href="#bottom-up-versus-top-down-approach" title="Link to this heading">#</a></h2>
-<p>There are two approaches to solving dynamic programming problems: bottom-up and top-down <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. The top-down approach involves writing the algorithm recursively and utilizing <em>memoization</em> (which we go over later).  The bottom-up approach does not utilize recursion, and is thus usually has better constant factors for complexity since we avoid the time and space overhead of multiple function calls, but instead solves the “smallest” subproblems first and uses those solutions to construct solutions to the next largest subproblems until the original problem is solved.</p>
+<section id="bottom-up-versus-top-down-approaches">
+<h2>Bottom-up versus top-down approaches<a class="headerlink" href="#bottom-up-versus-top-down-approaches" title="Link to this heading">#</a></h2>
+<p>There are two approaches to solving dynamic programming problems: bottom-up and top-down <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. The top-down approach involves writing the algorithm recursively and utilizing <em>memoization</em> (which we go over later).  The bottom-up approach does not utilize recursion, and thus usually has better constant factors for complexity since we avoid the time and space overhead of multiple function calls, but instead solves the “smallest” subproblems first and uses those solutions to construct solutions to the next largest subproblems until the overall problem is solved.</p>
 </section>
 <section id="n-th-fibonacci-number">
 <h2><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number<a class="headerlink" href="#n-th-fibonacci-number" title="Link to this heading">#</a></h2>
@@ -626,7 +631,7 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 </div>
-<p>The implementation is naive because of the two recursive calls <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">1)</span></code> and <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">2)</span></code>. For example when <span class="math notranslate nohighlight">\(n=10\)</span> the first recursive call computes <span class="math notranslate nohighlight">\(F_9\)</span> and the second recursive call computes <span class="math notranslate nohighlight">\(F_8\)</span>. However to compute <span class="math notranslate nohighlight">\(F_9\)</span> the first recursive call is going to need to compute <span class="math notranslate nohighlight">\(F_8\)</span> but wait, <span class="math notranslate nohighlight">\(F_8\)</span> is already being computed by the <em>second</em> recursive call. This means we’re doing double the work! We can get around this by <em>storing</em> the solutions to smaller Fibonacci problems in a hashtable/dict that we have already computed and when we need to compute them again we can simply look up the solution in the table. This is called <em><strong>memoization</strong></em> and is the key distinction between dynamic programming versus divide &amp; conquer approaches.</p>
+<p>The implementation is naive because of the two recursive calls <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">1)</span></code> and <code class="docutils literal notranslate"><span class="pre">naive_fibonacci(n</span> <span class="pre">-</span> <span class="pre">2)</span></code>. For example when <span class="math notranslate nohighlight">\(n=10\)</span> the first recursive call computes <span class="math notranslate nohighlight">\(F_9\)</span> and the second recursive call computes <span class="math notranslate nohighlight">\(F_8\)</span>. However to compute <span class="math notranslate nohighlight">\(F_9\)</span> the first recursive call is going to need to compute <span class="math notranslate nohighlight">\(F_8\)</span> but wait, <span class="math notranslate nohighlight">\(F_8\)</span> is already being computed by the <em>second</em> recursive call. This means we’re doing double the work and it only gets worse as <span class="math notranslate nohighlight">\(n\)</span> increases! We can get around this by <em>storing</em> the solutions to smaller Fibonacci problems in a hashtable/dict that we have already computed and when we need to compute them again we can simply look up the solution in the table. This is called <em><strong>memoization</strong></em> and is the key distinction between dynamic programming versus divide &amp; conquer approaches.</p>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Note this isn’t a typo; it’s actually spelled <em>memoization</em> and refers to the idea of memos since we store the value and look back at it later <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. In my opinion <em>memorization</em> would also work just as well since we are memorization the solution to a problem.</p>
@@ -674,7 +679,7 @@ F_n = F_{n-1} + F_{n-2}
 </div>
 </div>
 </div>
-<p>This method has time complexity <span class="math notranslate nohighlight">\(O(n)\)</span> but a space complexity of <span class="math notranslate nohighlight">\(O(1)\)</span> since we do not utilize and array to store all <span class="math notranslate nohighlight">\(n\)</span> solutions to smaller subproblems.</p>
+<p>This method has time complexity <span class="math notranslate nohighlight">\(O(n)\)</span> but a space complexity of <span class="math notranslate nohighlight">\(O(1)\)</span> since we do not utilize an array to store all <span class="math notranslate nohighlight">\(n\)</span> solutions to smaller subproblems.</p>
 </section>
 <section id="rod-cutting">
 <h2>Rod cutting<a class="headerlink" href="#rod-cutting" title="Link to this heading">#</a></h2>
@@ -688,8 +693,11 @@ n = c_1 + c_2 + \dots + c_k \quad \text{where $c_i \in \mathbb{Z^+}$}
 \]</div>
 <p>and sell each part for the revenue <span class="math notranslate nohighlight">\(r_n = p_{c_1} + p_{c_2} + \dots + p_{c_k}\)</span> where again <span class="math notranslate nohighlight">\(p_{c_i}\)</span> is the cash we get for selling a rod of integer length <span class="math notranslate nohighlight">\(c_i\)</span>. The caveat here is that there maybe certain ways to cut the rod such that we actually get more profit by selling the individually cut pieces instead of selling the uncut rod.
 Clearly this depends on the pricing for each length of rod.  Can we devise an algorithm that, given the length <span class="math notranslate nohighlight">\(n\)</span> of the rod along with the prices <span class="math notranslate nohighlight">\(p_1, p_2,\dots, p_n\)</span> for selling a rod of length <span class="math notranslate nohighlight">\(1, 2, \dots, n\)</span> respectively, finds an (as there could be more than one I think) optimal way of cutting the rod such that we net the highest revenue?</p>
+<section id="top-down-approach">
+<h3>Top-down approach<a class="headerlink" href="#top-down-approach" title="Link to this heading">#</a></h3>
+<p><span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> uses a top-down approach so I will go over that first.</p>
 <section id="mathematical-reasoning-for-solution">
-<h3>Mathematical reasoning for solution<a class="headerlink" href="#mathematical-reasoning-for-solution" title="Link to this heading">#</a></h3>
+<h4>Mathematical reasoning for solution<a class="headerlink" href="#mathematical-reasoning-for-solution" title="Link to this heading">#</a></h4>
 <p>Suppose that an optimal way of cutting the rod (optimal integer decomposition of <span class="math notranslate nohighlight">\(n\)</span>) cuts the rod into <span class="math notranslate nohighlight">\(k\)</span> pieces for some integer <span class="math notranslate nohighlight">\(1 \leq k \leq n\)</span>. We denote this optimal decomposition as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -718,8 +726,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d9518f12-964b-4b87-8e65-0aaf30f26db3">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-d9518f12-964b-4b87-8e65-0aaf30f26db3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-943ba339-a38d-423e-afe5-9cc9555200aa">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-943ba339-a38d-423e-afe5-9cc9555200aa" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -779,7 +787,7 @@ Took 5.325 seconds
 </div>
 </div>
 </div>
-<p>Now this code works but there is a big issue. For large values of <span class="math notranslate nohighlight">\(n\)</span> this code will take a vey long time to run. This makes sense if we think of this in terms of a recursion tree. Below we have an example from <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> of the recursion tree for <code class="docutils literal notranslate"><span class="pre">naive_rod_cutting</span></code> for <span class="math notranslate nohighlight">\(n=4\)</span>. So we have the initial call to the function with <span class="math notranslate nohighlight">\(n=4\)</span> now what happens once we get to the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop? The function is called recursively at <em>each</em> iteration of the loop. During the first iteration we call the function recursively with <span class="math notranslate nohighlight">\(n=3\)</span> which can be seen in the leftmost branch of the tree connected to the root. But wait this recursive call <em>will also loop over all integers that are less than <span class="math notranslate nohighlight">\(n=3\)</span></em> and recursively call itself at each iteration again and so on for those recursive calls until the base case of <span class="math notranslate nohighlight">\(n=0\)</span> is reached. More interestingly from the recursion tree we can see that we are calling the function with the same value of <span class="math notranslate nohighlight">\(n\)</span> multiple times. For example we call the function with <span class="math notranslate nohighlight">\(n=2\)</span> two times and with <span class="math notranslate nohighlight">\(n=1\)</span> four times. So not only are we exhaustively looking at each possible way of cutting the rod we are also recomputing the solutions for different values of <span class="math notranslate nohighlight">\(n\)</span> over and over again.</p>
+<p>Now this code works but there is a big issue. For large values of <span class="math notranslate nohighlight">\(n\)</span> this code will take a vey long time to run. This makes sense if we think of this in terms of a recursion tree. Below we have an example from <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> of the recursion tree for <code class="docutils literal notranslate"><span class="pre">naive_rod_cutting</span></code> for <span class="math notranslate nohighlight">\(n=4\)</span>. So we have the initial call to the function with <span class="math notranslate nohighlight">\(n=4\)</span> now what happens once we get to the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop? The function is called recursively at <em>each</em> iteration of the loop. During the first iteration we call the function recursively with <span class="math notranslate nohighlight">\(n=3\)</span> which can be seen in the leftmost branch of the tree connected to the root. But wait this recursive call <em>will also loop over all integers that are less than <span class="math notranslate nohighlight">\(n=3\)</span></em> and recursively call itself at each iteration again and so on for those recursive calls until the base case of <span class="math notranslate nohighlight">\(n=0\)</span> is reached. More interestingly from the recursion tree we can see that we are calling the function with the same value of <span class="math notranslate nohighlight">\(n\)</span> multiple times. For example we call the function with <span class="math notranslate nohighlight">\(n=2\)</span> two times and with <span class="math notranslate nohighlight">\(n=1\)</span> four times. So not only are we exhaustively looking at each possible way of cutting the rod we are also recomputing the solutions for different values of <span class="math notranslate nohighlight">\(n\)</span> over and over again.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -832,11 +840,17 @@ Took 0.000 seconds
 </div>
 </div>
 </div>
-<p>For the bottom up approach we can state the recurrence relation as</p>
+</section>
+</section>
+<section id="bottom-up-approach">
+<h3>Bottom-up approach<a class="headerlink" href="#bottom-up-approach" title="Link to this heading">#</a></h3>
+<p>For the bottom-up approach we can state the recurrence relation and base case as</p>
 <div class="math notranslate nohighlight">
-\[
-L_i^{opt} = \max\left\{ \max_j\left\{ L_j^{opt} + p_{i-j} \right\}, \quad p_i \right\}
-\]</div>
+\[\begin{split}
+\text{Base case:} \quad L_1^{opt} = p_1 \\ \\
+L_i^{opt} = \max\left\{ \max_j\left\{ L_j^{opt} + p_{i-j} \right\}, \quad p_i \right\} \quad \text{where} \quad 1 \leq i \leq n, 1 \leq j &lt; i 
+\end{split}\]</div>
+<p>This recurrence can be read as saying: For a rod of length <span class="math notranslate nohighlight">\(i\)</span> the maximum profit attainable will be either the profit from selling the whole uncut rod <em><strong>or</strong></em> the profit from cutting it into a rod of length <span class="math notranslate nohighlight">\(i-j\)</span> and selling that and cutting the other part of the rod, which is of length <span class="math notranslate nohighlight">\(j\)</span>, into the optimal set of pieces for a rod of length <span class="math notranslate nohighlight">\(j\)</span> and selling those. Since <span class="math notranslate nohighlight">\(j\)</span> is smaller than <span class="math notranslate nohighlight">\(i\)</span> this is a smaller subproblem we have solved before and we can therefore just use the solution to that problem to solve this problem. See how much easier this was to understand than top-down?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fast_rod_cutting_bottom_up</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -996,13 +1010,13 @@ X_3 &amp;= x_1,x_2,x_3 = b,c,d  \\
 Y_3 &amp;= y_1,y_2,y_3 = a,b,e
 \end{align*}
 \end{split}\]</div>
-<p>the LCS here is clearly <span class="math notranslate nohighlight">\(b\)</span> which is of length <span class="math notranslate nohighlight">\(L_3^s=1\)</span>. Now for the next largest subproblem we will look at the next element in the two lists: <span class="math notranslate nohighlight">\(x_4\)</span> and <span class="math notranslate nohighlight">\(y_4\)</span>. There are two cases that can occur:</p>
+<p>the LCS here is clearly <span class="math notranslate nohighlight">\(b\)</span> which is of length <span class="math notranslate nohighlight">\(L_3^s=1\)</span>. Now for the next largest subproblem we will look at the next element in the two lists: <span class="math notranslate nohighlight">\(x_4=b\)</span> and <span class="math notranslate nohighlight">\(y_4=c\)</span>. There are two cases that can occur:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(x_4=y_4\)</span> in which case the new elements simply extend the LCS for the previous smaller subproblem by <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(L_4^s=L_3^s+1\)</span> and in the general case <span class="math notranslate nohighlight">\(L_i^s=L_{i-1}^s+1\)</span>.</p></li>
 </ol>
 <p><span class="math notranslate nohighlight">\(\qquad \qquad \qquad \Large{\textbf{or}}\)</span></p>
 <ol class="arabic simple" start="2">
-<li><p><span class="math notranslate nohighlight">\(x_4\not =y_4\)</span> (which is true for our current example since <span class="math notranslate nohighlight">\(x_4=b\)</span> and <span class="math notranslate nohighlight">\(y_4=c\)</span>) in which case there are three options: we can append either <span class="math notranslate nohighlight">\(x_4\)</span> <em><strong>or</strong></em> <span class="math notranslate nohighlight">\(y_4\)</span> <em><strong>or</strong></em> neither of them to the LCS. Clearly we can not append both since they are not equal and thus the resulting subsequence would not be a common subsequence. But how does it make sense that only appending one of <span class="math notranslate nohighlight">\(x_4\)</span> <strong>or</strong> <span class="math notranslate nohighlight">\(y_4\)</span> could work? The idea here is that the value of <span class="math notranslate nohighlight">\(x_4\)</span> could be one of the elements in string <span class="math notranslate nohighlight">\(Y_3\)</span> that came before <span class="math notranslate nohighlight">\(y_4\)</span> and thus by appending <span class="math notranslate nohighlight">\(x_4\)</span> to the string <span class="math notranslate nohighlight">\(X_3\)</span> we can extend the current LCS. The same logic applies to <span class="math notranslate nohighlight">\(y_4\)</span> but with the string <span class="math notranslate nohighlight">\(X_3\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_4\not =y_4\)</span> (which is true for our current example since <span class="math notranslate nohighlight">\(x_4=b\)</span> and <span class="math notranslate nohighlight">\(y_4=c\)</span>) in which case there are three options: we can append either <span class="math notranslate nohighlight">\(x_4\)</span> <em><strong>or</strong></em> <span class="math notranslate nohighlight">\(y_4\)</span> <em><strong>or</strong></em> neither of them to the LCS. Clearly we can not append both since they are not equal and thus the resulting subsequence would not be a common subsequence. But how does it make sense that only appending one of <span class="math notranslate nohighlight">\(x_4\)</span> <strong>or</strong> <span class="math notranslate nohighlight">\(y_4\)</span> could work? The idea here is that the value of <span class="math notranslate nohighlight">\(x_4\)</span> could be one of the elements in string <span class="math notranslate nohighlight">\(Y_3\)</span> that came before <span class="math notranslate nohighlight">\(y_4\)</span> and thus by appending <span class="math notranslate nohighlight">\(x_4\)</span> to the string <span class="math notranslate nohighlight">\(X_3\)</span> we can extend the current LCS. The same logic applies to <span class="math notranslate nohighlight">\(y_4\)</span> but with the string <span class="math notranslate nohighlight">\(X_3\)</span>. And in fact the latter is exactly what happens here since <span class="math notranslate nohighlight">\(c\)</span> appears in <span class="math notranslate nohighlight">\(X_3\)</span> after the last element of the current LCS, i.e. <span class="math notranslate nohighlight">\(b\)</span>, if we append <span class="math notranslate nohighlight">\(y_4=c\)</span> to <span class="math notranslate nohighlight">\(Y_3\)</span> we will now have a longer LCS, i.e. <span class="math notranslate nohighlight">\(b,c\)</span>, which has length 2.</p></li>
 </ol>
 <p>In the case where <span class="math notranslate nohighlight">\(x_4\not=y_4\)</span> and neither are appended then the LCS is simply the LCS of the previous smallest subproblem, <span class="math notranslate nohighlight">\(L_3\)</span>, and the length is of course <span class="math notranslate nohighlight">\(L_3^s\)</span>. But wait if we only append <span class="math notranslate nohighlight">\(x_4\)</span> or <span class="math notranslate nohighlight">\(y_4\)</span> this leads to a problem. For example appending <span class="math notranslate nohighlight">\(x_4\)</span> would lead to the LCS only being defined for</p>
 <div class="math notranslate nohighlight">
@@ -1016,7 +1030,7 @@ Y=y_1,y_2,y_3
 X=x_1,x_2,x_3 \\
 Y=y_1,y_2,y_3,y_4
 \end{split}\]</div>
-<p>so what do we do? Well we’ll have to modify our subproblem definition. Instead of have just one index <span class="math notranslate nohighlight">\(i\)</span> we will have two, <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and subproblem <span class="math notranslate nohighlight">\(L_{i,j}\)</span> will be defined as finding the length of the LCS between the first <span class="math notranslate nohighlight">\(i\)</span> characters in <span class="math notranslate nohighlight">\(X\)</span> and the first <span class="math notranslate nohighlight">\(j\)</span> characters in <span class="math notranslate nohighlight">\(Y\)</span> i.e.</p>
+<p>so what do we do? Well we’ll have to modify our subproblem definition. Instead of have just one index <span class="math notranslate nohighlight">\(i\)</span> we will have <em><strong>two</strong></em>, <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>, and subproblem <span class="math notranslate nohighlight">\(L_{i,j}\)</span> will be defined as finding the length of the LCS between the first <span class="math notranslate nohighlight">\(i\)</span> characters in <span class="math notranslate nohighlight">\(X\)</span> and the first <span class="math notranslate nohighlight">\(j\)</span> characters in <span class="math notranslate nohighlight">\(Y\)</span> i.e.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 X_i=x_1,x_2,...,x_i \\
@@ -1090,7 +1104,7 @@ a\end{array}
     <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
     <span class="n">T</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span> <span class="c1"># base case </span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># note the +1 and -1 for some indices to account for the fact that python indexing starts at 0</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> 
@@ -1116,10 +1130,16 @@ a\end{array}
 </section>
 <section id="knapsack">
 <h2>Knapsack<a class="headerlink" href="#knapsack" title="Link to this heading">#</a></h2>
+<p>Knapsack is a well known optimization problem. Given a knapsack of weight capacity <span class="math notranslate nohighlight">\(B\)</span> and a set <span class="math notranslate nohighlight">\(U\)</span> of <span class="math notranslate nohighlight">\(n\)</span> items with integer weights <span class="math notranslate nohighlight">\(W=\{w_1,...,w_n\}\)</span> and corresponding integer values <span class="math notranslate nohighlight">\(V=\{v_1,...,v_n\}\)</span> find a subset <span class="math notranslate nohighlight">\(S\)</span> of the items that maximizes the total value while not exceeding the capacity <span class="math notranslate nohighlight">\(B\)</span> of the knapsack. Note that the requirement that the weights and values are integers can be, and often is, relaxed to included non-negative real numbers but for this section we will not relax that constraint as it makes the dynamic programming approach more difficult.</p>
+<div class="math notranslate nohighlight">
+\[
+\argmax_S \left\{ \sum_{i\in S} v_i \right\} \quad \text{where} \quad \sum_{i\in S} w_i \leq B
+\]</div>
+<p>For this section we will look at two variants of this problem. In one variation we can include each object at most once in our subset <span class="math notranslate nohighlight">\(S\)</span>. In the other variant we can include each object as many times as we want. This means <span class="math notranslate nohighlight">\(S\)</span> is no longer a proper set, but we will just refer to it as one for simplicity.</p>
 </section>
 <section id="chain-matrix-multiplication">
 <h2>Chain matrix multiplication<a class="headerlink" href="#chain-matrix-multiplication" title="Link to this heading">#</a></h2>
-<p>Let’s go over the second example of an application of dynamic programming which is covered extensively in <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> and rather briefly in <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. Suppose we have a chain of <span class="math notranslate nohighlight">\(n\)</span> matrices  we want to multiply together</p>
+<p>Let’s go over the second example of an application of dynamic programming which is covered extensively in <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> and rather briefly in <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. Suppose we have a chain of <span class="math notranslate nohighlight">\(n\)</span> matrices  we want to multiply together</p>
 <div class="math notranslate nohighlight">
 \[
 P = A_1A_2A_3...A_n
@@ -1138,13 +1158,13 @@ P=(A_1A_2)A_3.
 P=A_1(A_2A_3)?
 \]</div>
 <p>The product in parentheses has complexity <span class="math notranslate nohighlight">\(20 \times 200 \times 15 = 60,000\)</span> and results in a <span class="math notranslate nohighlight">\(20 \times 15\)</span> matrix. Then the complexity of multiplying this resulting matrix with <span class="math notranslate nohighlight">\(A_1\)</span> is <span class="math notranslate nohighlight">\(100 \times 20 \times 15 = 30,000\)</span> for a total complexity of <span class="math notranslate nohighlight">\(60,000+30,000=90,000\)</span>. From this we can see that choosing how to parenthesize the products can have a <em>drastic</em> effect on the complexity of the overall multi-matrix product computation. Can we devise an algorithm to find the <em>optimal</em> parenthesization given a list of matrix shapes that we want to multiply?</p>
-<section id="bottom-up-approach">
-<h3>Bottom-up approach<a class="headerlink" href="#bottom-up-approach" title="Link to this heading">#</a></h3>
-<p>We can solve this problem using a bottom-up approach as laid out by <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and Dr. Vigoda’s lecture.</p>
+<section id="id10">
+<h3>Bottom-up approach<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>We can solve this problem using a bottom-up approach as laid out by <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and Dr. Vigoda’s lecture.</p>
 </section>
-<section id="top-down-approach">
-<h3>Top-down approach<a class="headerlink" href="#top-down-approach" title="Link to this heading">#</a></h3>
-<p>We can also follow the steps laid out by <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> for solving this dynamic programming problem.</p>
+<section id="id12">
+<h3>Top-down approach<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>We can also follow the steps laid out by <span id="id13">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> for solving this dynamic programming problem.</p>
 <section id="characterize-the-structure-of-an-optimal-solution-parenthesization">
 <h4>1. Characterize the structure of an optimal solution (parenthesization)<a class="headerlink" href="#characterize-the-structure-of-an-optimal-solution-parenthesization" title="Link to this heading">#</a></h4>
 <p>Suppose that we have an optimal parenthesization for the <span class="math notranslate nohighlight">\(n\)</span> matrix product <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span>. Now suppose we take this solution and split it into two chains at <span class="math notranslate nohighlight">\(A_k\)</span> such that we have <span class="math notranslate nohighlight">\(P_{\text{opt}}^L=A_1A_2...A_k\)</span> and <span class="math notranslate nohighlight">\(P_{\text{opt}}^R=A_{k+1}A_{k+2}...A_n\)</span> and clearly <span class="math notranslate nohighlight">\(P_{\text{opt}} = P_{\text{opt}}^LP_{\text{opt}}^R\)</span>. Since we know <span class="math notranslate nohighlight">\(P_{\text{opt}}\)</span> has an optimal parenthesization then we also know that the parenthesization of <span class="math notranslate nohighlight">\(P_{\text{opt}}^L\)</span> is optimal. Why is this the case? Well if it wasn’t the case and there was another parenthesization that was optimal for <span class="math notranslate nohighlight">\(P_{\text{opt}}^L\)</span> then we can use that same parenthesization in the overall product in <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span> to make it more optimal. But this is a contradiction since we stated at the beginning that <span class="math notranslate nohighlight">\(P_{\text{opt}}\)</span> is already optimal. Therefore if <span class="math notranslate nohighlight">\(P_{\text{opt}}=A_1A_2A_3...A_n\)</span> is an optimal parenthesization then the parenthesizations for sub-chains of the chain when considered in isolation must also be optimal. For example if <span class="math notranslate nohighlight">\(P_{\text{opt}}=(A_1(A_2(A_3A_4)))\)</span> then <span class="math notranslate nohighlight">\((A_2(A_3A_4))\)</span> must also be an optimal parenthesization for the produce <span class="math notranslate nohighlight">\(A_2A_3A_4\)</span>.</p>
@@ -1222,7 +1242,7 @@ S_i = \max\{ S_{i-1} + L_i, L_i \}
 </section>
 <section id="hotel-stops">
 <h3>6.2 Hotel Stops<a class="headerlink" href="#hotel-stops" title="Link to this heading">#</a></h3>
-<p>So the idea here is fairly straightforward. Given a sequence of <span class="math notranslate nohighlight">\(n\)</span> hotels with distances from the starting point <span class="math notranslate nohighlight">\(a_i\)</span></p>
+<p>So the idea here is fairly straightforward. Given a sequence of <span class="math notranslate nohighlight">\(n\)</span> hotels with distances <span class="math notranslate nohighlight">\(a_i\)</span> from the starting point</p>
 <div class="math notranslate nohighlight">
 \[
 a_1,a_2,...,a_n.
@@ -1513,17 +1533,21 @@ L_i^s = \max\left\{ \max_j\left\{1+L_j^s| s_j=s_i\right\} ,\quad 1\right\}
 <h3>DPV 6.11 Longest common subsequence<a class="headerlink" href="#dpv-6-11-longest-common-subsequence" title="Link to this heading">#</a></h3>
 <p>Already solved above!</p>
 </section>
-<section id="id11">
-<h3>6.18<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="making-change">
+<h3>6.17 Making change<a class="headerlink" href="#making-change" title="Link to this heading">#</a></h3>
+<p>This problem seems similar to the knapsack problem</p>
 </section>
-<section id="id12">
-<h3>6.19<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="making-change-2">
+<h3>6.18 Making change 2<a class="headerlink" href="#making-change-2" title="Link to this heading">#</a></h3>
 </section>
-<section id="id13">
-<h3>6.20<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="making-change-3">
+<h3>6.19 Making change 3<a class="headerlink" href="#making-change-3" title="Link to this heading">#</a></h3>
 </section>
-<section id="id14">
-<h3>6.26<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="optimal-binary-search-trees">
+<h3>6.20 Optimal binary search trees<a class="headerlink" href="#optimal-binary-search-trees" title="Link to this heading">#</a></h3>
+</section>
+<section id="sequence-alignment">
+<h3>6.26 Sequence alignment<a class="headerlink" href="#sequence-alignment" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1609,10 +1633,14 @@ IPython version      : 8.22.2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-versus-top-down-approach">Bottom-up versus top-down approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-versus-top-down-approaches">Bottom-up versus top-down approaches</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-th-fibonacci-number"><span class="math notranslate nohighlight">\(n\)</span>-th Fibonacci number</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rod-cutting">Rod cutting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-reasoning-for-solution">Mathematical reasoning for solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-down-approach">Top-down approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-reasoning-for-solution">Mathematical reasoning for solution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-approach">Bottom-up approach</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-increasing-subsequence">Longest increasing subsequence</a><ul class="nav section-nav flex-column">
@@ -1627,8 +1655,8 @@ IPython version      : 8.22.2
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack">Knapsack</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-matrix-multiplication">Chain matrix multiplication</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-approach">Bottom-up approach</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-down-approach">Top-down approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Bottom-up approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Top-down approach</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#characterize-the-structure-of-an-optimal-solution-parenthesization">1. Characterize the structure of an optimal solution (parenthesization)</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#recursively-define-the-value-of-an-optimal-solution">2. Recursively define the value of an optimal solution</a></li>
 </ul>
@@ -1644,10 +1672,11 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 Longest common substring</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-6-11-longest-common-subsequence">DPV 6.11 Longest common subsequence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change">6.17 Making change</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-2">6.18 Making change 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-3">6.19 Making change 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-binary-search-trees">6.20 Optimal binary search trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-alignment">6.26 Sequence alignment</a></li>
 </ul>
 </li>
 </ul>
