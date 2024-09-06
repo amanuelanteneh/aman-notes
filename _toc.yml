@@ -50,6 +50,7 @@ parts:
       - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
+      - file: computerscience/algorithms/greedy_algos
     
     - file: computerscience/optimization/optimization
       sections:
