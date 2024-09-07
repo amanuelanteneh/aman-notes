@@ -564,7 +564,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corrupted-text-document">6.4 Corrupted text document</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 Longest common substring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-6-11-longest-common-subsequence">DPV 6.11 Longest common subsequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.11 Longest common subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change">6.17 Making change</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-2">6.18 Making change 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-3">6.19 Making change 3</a></li>
@@ -594,7 +594,7 @@ document.write(`
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># for reproducibility</span>
 </pre></div>
 </div>
@@ -735,8 +735,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d53b5cda-a970-4cba-b76d-713e276255a2">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-d53b5cda-a970-4cba-b76d-713e276255a2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6ce50532-7ce3-4376-ae3b-fd5b933af024">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-6ce50532-7ce3-4376-ae3b-fd5b933af024" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -804,8 +804,7 @@ Took 5.325 seconds
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/rod_cut_recursion_tree.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/rod_cut_recursion_tree.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1234,7 +1233,24 @@ P=A_1(A_2A_3)?
 <p>The product in parentheses has complexity <span class="math notranslate nohighlight">\(20 \times 200 \times 15 = 60,000\)</span> and results in a <span class="math notranslate nohighlight">\(20 \times 15\)</span> matrix. Then the complexity of multiplying this resulting matrix with <span class="math notranslate nohighlight">\(A_1\)</span> is <span class="math notranslate nohighlight">\(100 \times 20 \times 15 = 30,000\)</span> for a total complexity of <span class="math notranslate nohighlight">\(60,000+30,000=90,000\)</span>. From this we can see that choosing how to parenthesize the products can have a <em>drastic</em> effect on the complexity of the overall multi-matrix product computation. Can we devise an algorithm to find the <em>optimal</em> parenthesization given a list of matrix shapes that we want to multiply?</p>
 <section id="id10">
 <h3>Bottom-up approach<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
-<p>We can solve this problem using a bottom-up approach as laid out by <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and Dr. Vigoda’s lecture.</p>
+<p>We can solve this problem using a bottom-up approach as laid out by <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and Dr. Vigoda’s lecture. First it’s useful to observe that different parenthesizations can be represented as binary trees. For example look at the below image.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/cmm_tree.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/90122de2b344f9aabeafcb5734d56ea62dff7ff2ca025be7c595fd657692ea11.png"><img alt="../../_images/90122de2b344f9aabeafcb5734d56ea62dff7ff2ca025be7c595fd657692ea11.png" src="../../_images/90122de2b344f9aabeafcb5734d56ea62dff7ff2ca025be7c595fd657692ea11.png" style="width: 700px;" /></a>
+</div>
+</div>
+<p>The leftmost binary tree corresponds to the parenthesizations <span class="math notranslate nohighlight">\(((AB)C)D\)</span>, the middle corresponds to <span class="math notranslate nohighlight">\(A((BC)D)\)</span> and the rightmost to <span class="math notranslate nohighlight">\((A(BC))D\)</span>. The leaves correspond to the four matrices and the internal nodes corresponds to the intermediate products such as <span class="math notranslate nohighlight">\(AB\)</span> or <span class="math notranslate nohighlight">\((AB)C\)</span> for the case of the left most tree. The root corresponds to the overall product.</p>
 </section>
 <section id="id12">
 <h3>Top-down approach<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
@@ -1610,13 +1626,80 @@ L_i^s = \max\left\{ \max_j\left\{1+L_j^s| s_j=s_i\right\} ,\quad 1\right\}
 </div>
 </div>
 </section>
-<section id="dpv-6-11-longest-common-subsequence">
-<h3>DPV 6.11 Longest common subsequence<a class="headerlink" href="#dpv-6-11-longest-common-subsequence" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3>6.11 Longest common subsequence<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <p>Already solved above!</p>
 </section>
 <section id="making-change">
 <h3>6.17 Making change<a class="headerlink" href="#making-change" title="Link to this heading">#</a></h3>
-<p>This problem seems similar to the knapsack problem</p>
+<p>This problem seems similar to knapsack with repetition since we have an unlimited supply of each denomination. I think we can either define the subproblems in terms of either a smaller subset of the possible coins, e.g. <span class="math notranslate nohighlight">\(T(i)\)</span> is the boolean value corresponding to whether or not we can make change for <span class="math notranslate nohighlight">\(v\)</span> using a subset of coins of denomination <span class="math notranslate nohighlight">\(X_i=\{x_1,...,x_i\}\)</span>, or in terms of smaller values of <span class="math notranslate nohighlight">\(v\)</span>, e.g. <span class="math notranslate nohighlight">\(T(i)\)</span> is the boolean value corresponding to whether or not we can make change for <span class="math notranslate nohighlight">\(0\leq i\leq v\)</span> using  the full set of coins of denomination <span class="math notranslate nohighlight">\(X=\{x_1,...,x_n\}\)</span>. The latter seems to most straightforward to me in terms of how we could use solutions to smaller subproblems to find solutions to larger ones. For example suppose we want to see if we can make change for <span class="math notranslate nohighlight">\(i\)</span> and we have determined whether we can make change or not for all values <span class="math notranslate nohighlight">\(&lt;i\)</span>. We can</p>
+<ol class="arabic simple">
+<li><p>Look to see if there is a coin with denomination <span class="math notranslate nohighlight">\(i\)</span> in <span class="math notranslate nohighlight">\(X\)</span> and if so return <span class="math notranslate nohighlight">\(\text{True}\)</span>.</p></li>
+</ol>
+<p>or</p>
+<ol class="arabic simple" start="2">
+<li><p>Look to see if we can make change for <span class="math notranslate nohighlight">\(i-1\)</span> and <span class="math notranslate nohighlight">\(1\)</span> and if so then we return <span class="math notranslate nohighlight">\(\text{True}\)</span> if not then we return <span class="math notranslate nohighlight">\(\text{False}\)</span> and see if we can instead make change for <span class="math notranslate nohighlight">\(i-2\)</span> and <span class="math notranslate nohighlight">\(2\)</span> and so on until we’ve tried up to <span class="math notranslate nohighlight">\(i-(i-1)\)</span> and <span class="math notranslate nohighlight">\(i-1\)</span>. In that case we can use the following recurrence:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T(i) = \left(\bigvee_{j} [T(i-j) \wedge T(j)]\right) \vee i \in X\\
+\text{where} \quad 2 \leq i \leq v, \quad 1 \leq j &lt; i
+\end{split}\]</div>
+<p>and the base case is <span class="math notranslate nohighlight">\(T(0)=\text{True}\)</span> since we can always make change for nothing and
+$$</p>
+<p>T(1)=\begin{cases}
+\text{True} &amp;\quad\text{if}\quad 1 \in {x_1,…,x_n}\
+\text{False}  &amp;\quad\text{otherwise} \
+\end{cases}\
+$<span class="math notranslate nohighlight">\(
+Note that the \)</span>\bigvee$ means we perform an or over the and clauses</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bigvee_{j=0}^i T(i-j) \wedge T(j) \\= (T(i) \wedge T(0)) \vee (T(i-1) \wedge T(1)) \vee \cdots \vee (T(0) \wedge T(i))
+\end{split}\]</div>
+<p>so if any one of them is <span class="math notranslate nohighlight">\(\text{True}\)</span> the whole expression evaluates to <span class="math notranslate nohighlight">\(\text{True}\)</span>. And in fact we actually just need to let <span class="math notranslate nohighlight">\(j\)</span> run from 1 to at most <span class="math notranslate nohighlight">\(\left\lceil\frac{i}{2}\right\rceil\)</span> due to the symmetric nature of the and clause (notice the first and last terms of the clause are logically equivalent <span class="math notranslate nohighlight">\(T(i) \wedge T(0) = T(0) \wedge T(i)\)</span>).</p>
+<p>For each value of <span class="math notranslate nohighlight">\(i\)</span> we solve for we have to examine all elements in the set <span class="math notranslate nohighlight">\(X=\{x_1,...,x_n\}\)</span> and there are <span class="math notranslate nohighlight">\(v\)</span> values of <span class="math notranslate nohighlight">\(i\)</span> so our time complexity is <span class="math notranslate nohighlight">\(O(nv)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p17</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">X</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">v</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">X</span> <span class="c1"># baseline is: is there a coin with denomination i in X?</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="p">(</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">77</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can we make change for </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">? </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p17</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;no&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can we make change for </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">? </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p17</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;no&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can we make change for </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">? </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p17</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;no&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Can we make change for </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> using </span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">? </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">p17</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;no&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Can we make change for 77 using [1, 4, 6, 8, 3]? yes
+Can we make change for 7 using [2, 8, 9]? no
+Can we make change for 15 using [5, 10]? yes
+Can we make change for 12 using [5, 10]? no
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="making-change-2">
 <h3>6.18 Making change 2<a class="headerlink" href="#making-change-2" title="Link to this heading">#</a></h3>
@@ -1760,7 +1843,7 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#corrupted-text-document">6.4 Corrupted text document</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-palindromic-subsequence">6.7 Longest palindromic subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-substring">6.8 Longest common substring</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-6-11-longest-common-subsequence">DPV 6.11 Longest common subsequence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.11 Longest common subsequence</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change">6.17 Making change</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-2">6.18 Making change 2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-change-3">6.19 Making change 3</a></li>
