@@ -754,8 +754,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7caa8c2f-e0f1-48cd-af61-956779b93a0e">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-7caa8c2f-e0f1-48cd-af61-956779b93a0e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5b59f8b8-4bbd-4215-9d1f-47af18cc4566">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-5b59f8b8-4bbd-4215-9d1f-47af18cc4566" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -1333,7 +1333,7 @@ s[i,j] = s[i,k] + s[k+1,j] + m_{i-1}m_km_j
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<p>These are problems from chapter 6 of the DPV textbook.</p>
+<p>These are problems from chapter 6 of the DPV textbook. Note that for these problems I will use <span class="math notranslate nohighlight">\(T(i)\)</span> or <span class="math notranslate nohighlight">\(T(i,j)\)</span> to denote the table entries whereas above I use <span class="math notranslate nohighlight">\(L_i\)</span> or <span class="math notranslate nohighlight">\(L_{ij}\)</span> for the subsequence problems and <span class="math notranslate nohighlight">\(K(i,j)\)</span> for the knapsack problems.</p>
 <section id="maximal-contiguous-subsequence">
 <h3>6.1 Maximal Contiguous Subsequence<a class="headerlink" href="#maximal-contiguous-subsequence" title="Link to this heading">#</a></h3>
 <p>Given a list of numbers</p>
@@ -1620,6 +1620,15 @@ Maximum profit for test case 4 is: 42
 T(i) = \bigvee_{j=0}^{i-1} (T(j) \wedge s[j+1...i] \in D) \quad \text{where} \quad 1\leq i \leq n
 \]</div>
 <p>With the base case <span class="math notranslate nohighlight">\(T(0)=\text{True}\)</span> which will enable us to first check if the whole substring <span class="math notranslate nohighlight">\(s[1...i]\)</span> is in <span class="math notranslate nohighlight">\(D\)</span> since the first term in the clause, i.e. <span class="math notranslate nohighlight">\(T(0) \wedge s[1...i] \in D\)</span>, will now evaluate to <span class="math notranslate nohighlight">\(\text{True}\)</span> only if the whole substring is in <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<p>Note that the <span class="math notranslate nohighlight">\(\bigvee\)</span> means we perform an OR over the AND clauses</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;\bigvee_{j=0}^{i-1} (T(j) \wedge s[j+1...i] \in D) \\
+&amp;= (T(0) \wedge s[1...i] \in D) \vee (T(1) \wedge s[2...i] \in D) \vee \cdots \vee (T(i-1) \wedge s[i...i] \in D)
+\end{align*}
+\end{split}\]</div>
+<p>so if any one of them is <span class="math notranslate nohighlight">\(\text{True}\)</span> the whole expression evaluates to <span class="math notranslate nohighlight">\(\text{True}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We use j-1 because python indexing starts at 0 instead of 1,</span>
@@ -1693,7 +1702,7 @@ s_n = a_1,a_2,a_3...,a_n
 <p>The recurrence is thus</p>
 <div class="math notranslate nohighlight">
 \[
-L_i^s = \max\left\{ \max_j\left\{1+L_j^s| s_j=s_i\right\} ,\quad 1\right\}
+T(i) = \max\left\{ \max_j\left\{1+T(j)| s_j=s_i\right\} ,\quad 1\right\}
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1762,7 +1771,7 @@ T(i) = \left(\bigvee_{j} [T(i-j) \wedge T(j)]\right) \vee \alpha(i)\\
       \text{False}  &amp;\quad\text{otherwise} \\
    \end{cases}\\
 \end{split}\]</div>
-<p>Note that the <span class="math notranslate nohighlight">\(\bigvee\)</span> means we perform an OR over the and clauses</p>
+<p>Note that the <span class="math notranslate nohighlight">\(\bigvee\)</span> means we perform an OR over the AND clauses</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}

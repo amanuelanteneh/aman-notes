@@ -533,6 +533,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
@@ -540,10 +541,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.14</a></li>
 </ul>
 </li>
 </ul>
@@ -962,14 +963,14 @@ L_l &amp;= [2, 4, 1] \\ L_w &amp;= [5,5] \\ L_g &amp;= [36, 21, 8, 13, 11, 20].
 \end{align*}
 \end{split}\]</div>
 <p>Now suppose we want the 8th smallest element of <span class="math notranslate nohighlight">\(L\)</span>. We know that this would be the 3rd smallest element of <span class="math notranslate nohighlight">\(L_g\)</span>. Why? Think of it like this: Where is the smallest element? Well it’s certainly in <span class="math notranslate nohighlight">\(L_l\)</span> since that is the list with all elements smaller than <span class="math notranslate nohighlight">\(w\)</span>. Where is the second smallest element? Also in <span class="math notranslate nohighlight">\(L_l\)</span>. The third smallest element is also in <span class="math notranslate nohighlight">\(L_l\)</span>. Now what about the fourth smallest? Well that would be in <span class="math notranslate nohighlight">\(L_w\)</span> since the first 3 smallest elements are in <span class="math notranslate nohighlight">\(L_l\)</span>. What about the sixth smallest element? Well it can’t be in <span class="math notranslate nohighlight">\(L_l\)</span> since that contains the first 3 smallest, and it can’t be in <span class="math notranslate nohighlight">\(L_w\)</span> since that contains the next 2 smallest so it must be in <span class="math notranslate nohighlight">\(L_g\)</span>, and more importantly it will be the smallest number in <span class="math notranslate nohighlight">\(L_g\)</span>. The seventh smallest number can be found in the same way except this time it will be the <em>second</em> smallest element in <span class="math notranslate nohighlight">\(L_g\)</span>. So to put it in general terms if we want the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_l\)</span> and we can simply ignore the other two list. If <span class="math notranslate nohighlight">\(k &gt; |L_l|+|L_w|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_g\)</span>. And if neither condition is true then that means <span class="math notranslate nohighlight">\(|L_s|&lt;k\leq |L_l|+|L_w|\)</span> which means the element we want is in <span class="math notranslate nohighlight">\(L_w\)</span> i.e. the element is <span class="math notranslate nohighlight">\(w\)</span> itself. The pseudocode is given below.</p>
-<div class="proof algorithm dropdown admonition" id="selection">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.7 </span> (Selection)</p>
+<div class="proof algorithm dropdown admonition" id="selection (Linear Expected Case Time)">
+<p class="admonition-title"><span class="caption-number">Algorithm 9.7 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Expected Case Time)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
 <p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and an integer <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
 <p><strong>Output</strong> The <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in the list</p>
 <ol class="arabic simple">
-<li><p>Pick a number <span class="math notranslate nohighlight">\(w\)</span> from <span class="math notranslate nohighlight">\(L\)</span></p></li>
+<li><p>Select pivot element <span class="math notranslate nohighlight">\(w\)</span> by randomly sampling uniformly from <span class="math notranslate nohighlight">\(L\)</span></p></li>
 <li><p>Divide <span class="math notranslate nohighlight">\(L\)</span> into the lists <span class="math notranslate nohighlight">\(L_l\)</span>, <span class="math notranslate nohighlight">\(L_w\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span></p></li>
 <li><p>if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span>:</p>
 <ol class="arabic simple">
@@ -978,7 +979,7 @@ L_l &amp;= [2, 4, 1] \\ L_w &amp;= [5,5] \\ L_g &amp;= [36, 21, 8, 13, 11, 20].
 </li>
 <li><p>if <span class="math notranslate nohighlight">\(k &gt; |L_l| + |L_w|\)</span>:</p>
 <ol class="arabic simple">
-<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_l, k-|L_l| - |L_w|)\)</span></p></li>
+<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_g, k-|L_l| - |L_w|)\)</span></p></li>
 </ol>
 </li>
 <li><p>else:</p>
@@ -1004,7 +1005,7 @@ T(n) = T\left(\frac{n}{2}\right) + O(n)
 \prod_{i=0}^{n-1}\frac{1}{n-i} = \frac{1}{n!}
 \]</div>
 <p>which very quickly approaches 0 as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
-<p>But this is just the absolute worse case; it would be more useful to know the time complexity for the case where we pick a pivot that is somewhat good. For example if we pick a <span class="math notranslate nohighlight">\(w\)</span> which creates lists of size <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span> that we then recursively run the algorithm on? Well in that case the recurrence is given by</p>
+<p>But this is just the absolute worse case; it would be more useful to know the time complexity for the case where we pick a pivot that is somewhat good. For example what if we pick a <span class="math notranslate nohighlight">\(w\)</span> which creates lists of size <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span> that we then recursively run the algorithm on? Well in that case the recurrence is given by</p>
 <div class="math notranslate nohighlight">
 \[
 T(n) = T\left(\frac{3n}{4}\right) + O(n)
@@ -1015,12 +1016,53 @@ T(n) = T\left(\frac{3n}{4}\right) + O(n)
 T(n) = T\left(an\right) + O(n)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(a&lt;1\)</span>! So this means we have some leeway in picking <span class="math notranslate nohighlight">\(w\)</span>. If we can find a way to pick a <span class="math notranslate nohighlight">\(w\)</span> that is less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest we will have an <span class="math notranslate nohighlight">\(O(n)\)</span> algorithm for finding the median of an unsorted list.</p>
-<p>How many elements are there in the list that are less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element? Well that <span class="math notranslate nohighlight">\(\frac{3n}{4}-\frac{n}{4}=\frac{n}{2}\)</span> elements. So if we pick a pivot randomly that means we have a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> chance of picking a pivot that is one of these elements.</p>
+<p>How many elements are there in the list that are less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element (note that it doesn’t matter if the list is sorted)? Well thats <span class="math notranslate nohighlight">\(\frac{3n}{4}-\frac{n}{4}=\frac{n}{2}\)</span> elements. So if we pick a pivot randomly that means we have a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> chance of picking a pivot that is one of these elements. This means that on average we have to randomly select an element twice to get a good pivot. This is akin to flipping a fair coin where <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> show that on average we must flip the coin two times before we see a heads. Note that once we randomly select a candiadate for the pivot we must check to see it satisfies the condition of being less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element in the list which will take <span class="math notranslate nohighlight">\(O(n)\)</span> time. So on average we will need to do this twice before we have a good pivot so on average we can expect a time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> when choosing the pivot in this way and thus our recurrence form earlier will describe the runtime of our algorithm.</p>
 </section>
+<section id="tighter-bound">
+<h3>Tighter bound<a class="headerlink" href="#tighter-bound" title="Link to this heading">#</a></h3>
+<p>But this is just the <em>expected/average</em> runtime of the algorithm. Can we modify the algorithm to get an even tighter bound that shows that in the <em>worst</em> case we have a complexity of <span class="math notranslate nohighlight">\(O(n)\)</span>? Well it turns out we can by modifying how we select the pivot which is explained by Dr. Vigoda in lecture and in chapter 9 of <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>The key insight is that we want to select the pivot from a sample from the list <span class="math notranslate nohighlight">\(L\)</span>. The</p>
+<p>So first we will take <span class="math notranslate nohighlight">\(L\)</span> and divide it into <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> smaller lists <span class="math notranslate nohighlight">\(G_1,G_2,...,G_{n/5}\)</span> which each have <span class="math notranslate nohighlight">\(5\)</span> elements in them. We will then <em>sort</em> each list. You might think that this ruins our time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> since (comparison-based) sorting takes <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time but you would be incorrect. This is because each list has a constant number of elements in it regardless of the input size <span class="math notranslate nohighlight">\(n\)</span> i.e. <span class="math notranslate nohighlight">\(5\)</span> elements. So it in fact takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to sort each list! Once each <span class="math notranslate nohighlight">\(G_i\)</span> is sorted we find its median, <span class="math notranslate nohighlight">\(m_i\)</span>, which takes <span class="math notranslate nohighlight">\(O(1)\)</span> time since the list is sorted (just look at the middle element) and create a list of these medians <span class="math notranslate nohighlight">\(S=[m_1,m_2,...m_{n/5}]\)</span>. We will then select our pivot from this list by finding it’s median by <em>recursively calling the selection algorithm on it</em> with <span class="math notranslate nohighlight">\(k=\frac{n}{10}\)</span>.</p>
+<p>Why is the median of <span class="math notranslate nohighlight">\(S\)</span> the <span class="math notranslate nohighlight">\(\frac{n}{10}\)</span>-th smallest element of <span class="math notranslate nohighlight">\(S\)</span>? Because</p>
+<div class="proof algorithm dropdown admonition" id="selection $O(n)$ Worst Case Time">
+<p class="admonition-title"><span class="caption-number">Algorithm 9.8 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Worst Case Time)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
+<p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and an integer <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
+<p><strong>Output</strong> The <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in the list</p>
+<ol class="arabic simple">
+<li><p>Break <span class="math notranslate nohighlight">\(L\)</span> into <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> groups, <span class="math notranslate nohighlight">\(G_1,G_2,...,G_{n/5}\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Lines 1-4 are for selecting the pivot <span class="math notranslate nohighlight">\(w\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1\)</span> to <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Sort <span class="math notranslate nohighlight">\(G_i\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Sort each <span class="math notranslate nohighlight">\(G_i\)</span></p></li>
+<li><p>Set <span class="math notranslate nohighlight">\(m_i=\text{median}(G_i)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Set <span class="math notranslate nohighlight">\(m_i\)</span> to median of sorted list <span class="math notranslate nohighlight">\(G_i\)</span></p></li>
+</ol>
+</li>
+<li><p><span class="math notranslate nohighlight">\(S=[m_1,m_2,...,m_{n/5}]\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Create new list of median values</p></li>
+<li><p><span class="math notranslate nohighlight">\(w = \text{selection}(S, \frac{n}{10})\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Recursively call algorithm to select a good pivot from this sample</p></li>
+<li><p>Divide <span class="math notranslate nohighlight">\(L\)</span> into the lists <span class="math notranslate nohighlight">\(L_l\)</span>, <span class="math notranslate nohighlight">\(L_w\)</span> and <span class="math notranslate nohighlight">\(L_g\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_l, k)\)</span></p></li>
+</ol>
+</li>
+<li><p>if <span class="math notranslate nohighlight">\(k &gt; |L_l| + |L_w|\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(\text{selection}(L_g, k-|L_l| - |L_w|)\)</span></p></li>
+</ol>
+</li>
+<li><p>else:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(w\)</span></p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div></section>
 </section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
 <p>The continuous time Fourier transform, Fourier transform for short, of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1044,17 +1086,17 @@ X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<section id="id9">
-<h3>2.1<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
-</section>
-<section id="id10">
-<h3>2.5<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
-</section>
 <section id="id11">
-<h3>2.7<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<h3>2.1<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 </section>
 <section id="id12">
-<h3>2.14<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>2.5<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+</section>
+<section id="id13">
+<h3>2.7<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+</section>
+<section id="id14">
+<h3>2.14<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1155,6 +1197,7 @@ IPython version      : 8.22.2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
@@ -1162,10 +1205,10 @@ IPython version      : 8.22.2
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.14</a></li>
 </ul>
 </li>
 </ul>
