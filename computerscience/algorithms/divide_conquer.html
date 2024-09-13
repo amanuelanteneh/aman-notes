@@ -533,7 +533,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#median-of-medians">Median of medians</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-good-pivot-selection">Proof of good pivot selection</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
@@ -541,10 +545,19 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">2.22</a></li>
 </ul>
 </li>
 </ul>
@@ -885,7 +898,7 @@ P_3 + P_4 &amp; P_1 + P_5 - P_3 - P_7
 \[
 T(n) = 7T\left(\frac{n}{2}\right) + O(1).
 \]</div>
-<p>and from the master theorem we get the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n^{log_{2}(7)}) \approx O(n^{2.807})\)</span>. This may not seem like a huge improvement but as the matrix sizes get large e.g. in the millions, which is this very common for computations in fields such as deep learning, this algorithms runtime is about an order of magnitude faster.</p>
+<p>and from the master theorem we get the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n^{log_{2}(7)}) \approx O(n^{2.807})\)</span>. This may not seem like a huge improvement but as the matrix sizes get large e.g. in the millions, which is this very common for computations in fields such as deep learning, this algorithms runtime is about an order of magnitude faster. This is, to my knowledge as of writing in 2024, the fastest <em>practical</em> matrix multiplication algorithm. There are other algorithms that are asymptotically faster such as the Coppersmith–Winograd algorithm with a time complexity of <span class="math notranslate nohighlight">\(O(n^{2.373})\)</span> but these are not nearly as practical as they are what are known as <a class="reference external" href="https://en.wikipedia.org/wiki/Galactic_algorithm">galactic algorithms</a>.</p>
 </section>
 </section>
 <section id="merge-sort">
@@ -1013,17 +1026,37 @@ T(n) = T\left(\frac{3n}{4}\right) + O(n)
 <p>and if we use the master theorem we will come to the surprising conclusion that the solution to this recurrence is also <span class="math notranslate nohighlight">\(O(n)\)</span> and in fact is <span class="math notranslate nohighlight">\(O(n)\)</span> for any recurrence relation of the form</p>
 <div class="math notranslate nohighlight">
 \[
-T(n) = T\left(an\right) + O(n)
+T(n) = T\left(bn\right) + O(n)
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(a&lt;1\)</span>! So this means we have some leeway in picking <span class="math notranslate nohighlight">\(w\)</span>. If we can find a way to pick a <span class="math notranslate nohighlight">\(w\)</span> that is less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest we will have an <span class="math notranslate nohighlight">\(O(n)\)</span> algorithm for finding the median of an unsorted list.</p>
+<p>where <span class="math notranslate nohighlight">\(b&lt;1\)</span>! So this means we have some leeway in picking <span class="math notranslate nohighlight">\(w\)</span>. If we can find a way to pick a <span class="math notranslate nohighlight">\(w\)</span> that is less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest we will have an <span class="math notranslate nohighlight">\(O(n)\)</span> algorithm for finding the median of an unsorted list.</p>
 <p>How many elements are there in the list that are less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element (note that it doesn’t matter if the list is sorted)? Well thats <span class="math notranslate nohighlight">\(\frac{3n}{4}-\frac{n}{4}=\frac{n}{2}\)</span> elements. So if we pick a pivot randomly that means we have a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> chance of picking a pivot that is one of these elements. This means that on average we have to randomly select an element twice to get a good pivot. This is akin to flipping a fair coin where <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> show that on average we must flip the coin two times before we see a heads. Note that once we randomly select a candiadate for the pivot we must check to see it satisfies the condition of being less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element in the list which will take <span class="math notranslate nohighlight">\(O(n)\)</span> time. So on average we will need to do this twice before we have a good pivot so on average we can expect a time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> when choosing the pivot in this way and thus our recurrence form earlier will describe the runtime of our algorithm.</p>
 </section>
 <section id="tighter-bound">
 <h3>Tighter bound<a class="headerlink" href="#tighter-bound" title="Link to this heading">#</a></h3>
 <p>But this is just the <em>expected/average</em> runtime of the algorithm. Can we modify the algorithm to get an even tighter bound that shows that in the <em>worst</em> case we have a complexity of <span class="math notranslate nohighlight">\(O(n)\)</span>? Well it turns out we can by modifying how we select the pivot which is explained by Dr. Vigoda in lecture and in chapter 9 of <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
-<p>The key insight is that we want to select the pivot from a sample from the list <span class="math notranslate nohighlight">\(L\)</span>. The</p>
-<p>So first we will take <span class="math notranslate nohighlight">\(L\)</span> and divide it into <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> smaller lists <span class="math notranslate nohighlight">\(G_1,G_2,...,G_{n/5}\)</span> which each have <span class="math notranslate nohighlight">\(5\)</span> elements in them. We will then <em>sort</em> each list. You might think that this ruins our time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> since (comparison-based) sorting takes <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time but you would be incorrect. This is because each list has a constant number of elements in it regardless of the input size <span class="math notranslate nohighlight">\(n\)</span> i.e. <span class="math notranslate nohighlight">\(5\)</span> elements. So it in fact takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to sort each list! Once each <span class="math notranslate nohighlight">\(G_i\)</span> is sorted we find its median, <span class="math notranslate nohighlight">\(m_i\)</span>, which takes <span class="math notranslate nohighlight">\(O(1)\)</span> time since the list is sorted (just look at the middle element) and create a list of these medians <span class="math notranslate nohighlight">\(S=[m_1,m_2,...m_{n/5}]\)</span>. We will then select our pivot from this list by finding it’s median by <em>recursively calling the selection algorithm on it</em> with <span class="math notranslate nohighlight">\(k=\frac{n}{10}\)</span>.</p>
-<p>Why is the median of <span class="math notranslate nohighlight">\(S\)</span> the <span class="math notranslate nohighlight">\(\frac{n}{10}\)</span>-th smallest element of <span class="math notranslate nohighlight">\(S\)</span>? Because</p>
+<p>So recall that for our recurrence which is of the form</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = T\left(bn\right) + O(n)
+\]</div>
+<p>we just need <span class="math notranslate nohighlight">\(b\)</span> to be less than 1 for this recurrence to solve to <span class="math notranslate nohighlight">\(O(n)\)</span>. So lets use this leeway to devise a way to find a good pivot that keeps us within this <span class="math notranslate nohighlight">\(b&lt;1\)</span> range. To this end we will devise an algorithm whose time complexity is described by the following recurrence</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\begin{align*}
+T(n) &amp;= T\left(\frac{3n}{4}\right) + \left(T\left(\frac{n}{5}\right) + O(n)\right) + O(n) \\
+     &amp;= T\left(\frac{3n}{4}\right) + T\left(\frac{n}{5}\right) + O(n) \quad \text{Note that $O(n)+O(n)=O(n)$}\\
+     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n)\end{split}\\\end{align*}
+\end{aligned}\end{align} \]</div>
+<p>The extra terms <span class="math notranslate nohighlight">\(\left(T\left(\frac{n}{5}\right) + O(n)\right)\)</span> will account for the time taken to find a good pivot at each recursion level. And note that this still solves to <span class="math notranslate nohighlight">\(O(n)\)</span> since <span class="math notranslate nohighlight">\(\left(\frac{3}{4}+\frac{1}{5}\right)&lt;1\)</span>. But where does this extra term come from? Well the strategy we will use to find the pivot is we will create a list <span class="math notranslate nohighlight">\(S\)</span> of size <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> and recursively call our <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm <em>on it</em> to find it’s median which we will then us as out pivot.</p>
+<section id="median-of-medians">
+<h4>Median of medians<a class="headerlink" href="#median-of-medians" title="Link to this heading">#</a></h4>
+<p>The key insight is that we want the elements of <span class="math notranslate nohighlight">\(S\)</span> to possess a certain property. That is we want each <span class="math notranslate nohighlight">\(x\in S\)</span> to have the property that there are a few elements of <span class="math notranslate nohighlight">\(L\)</span> which are less than or equal to it and a few elements of <span class="math notranslate nohighlight">\(L\)</span> which are greater than or equal to it. In our case we will pick “a few” to mean <span class="math notranslate nohighlight">\(2\)</span>. But how will we ensure this?</p>
+<p>So first we will take <span class="math notranslate nohighlight">\(L\)</span> and divide it into <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> smaller lists <span class="math notranslate nohighlight">\(G_1,G_2,...,G_{n/5}\)</span> which each have <span class="math notranslate nohighlight">\(5\)</span> elements in them. We will then <em>sort</em> each list. You might think that this ruins our time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> since (comparison-based) sorting takes <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time but you would be incorrect. This is because each list has a constant number of elements in it regardless of the input size <span class="math notranslate nohighlight">\(n\)</span> i.e. <span class="math notranslate nohighlight">\(5\)</span> elements. So it in fact takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to sort each list! Once each <span class="math notranslate nohighlight">\(G_i\)</span> is sorted we find its median, <span class="math notranslate nohighlight">\(m_i\)</span>, which takes <span class="math notranslate nohighlight">\(O(1)\)</span> time since the list is sorted (just look at the middle element) and create <span class="math notranslate nohighlight">\(S=[m_1,m_2,...m_{n/5}]\)</span> from these medians. We will then select our pivot from this list by finding it’s median by <em>recursively calling <span class="math notranslate nohighlight">\(\text{selection}\)</span> on it</em> with <span class="math notranslate nohighlight">\(k=\frac{n}{10}\)</span>. <span class="math notranslate nohighlight">\(k=\frac{n}{10}\)</span> since <span class="math notranslate nohighlight">\(S\)</span> is of size <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> the median is the <span class="math notranslate nohighlight">\(\frac{\frac{n}{5}}{2} = \frac{n}{10}\)</span> smallest element. This whole process is described by the recurrence</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = T\left(\frac{n}{5}\right) +  O(n)
+\]</div>
+<p>which were the extra terms we added to the recurrence of the expected time <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm above. The new algorithm is given below and as we can see by solving this recurrence has a worst case time complexity that is linear. This is a pretty impressive algorithm and complexity and it took quite a bit of work to find it. Unfortunately as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say it is not as practical as the earlier randomized version of this algorithm but is still of great theoretical interest.</p>
 <div class="proof algorithm dropdown admonition" id="selection $O(n)$ Worst Case Time">
 <p class="admonition-title"><span class="caption-number">Algorithm 9.8 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Worst Case Time)</p>
 <section class="algorithm-content" id="proof-content">
@@ -1059,10 +1092,15 @@ T(n) = T\left(an\right) + O(n)
 </ol>
 </section>
 </div></section>
+<section id="proof-of-good-pivot-selection">
+<h4>Proof of good pivot selection<a class="headerlink" href="#proof-of-good-pivot-selection" title="Link to this heading">#</a></h4>
+<p>But why does the median of this list of medians, <span class="math notranslate nohighlight">\(S\)</span>, yield a good pivot? First note that since each group <span class="math notranslate nohighlight">\(G_i\)</span> is of size <span class="math notranslate nohighlight">\(5\)</span> if we sort it and take its median then we know exactly <span class="math notranslate nohighlight">\(2\)</span> elements will be greater than or equal to <span class="math notranslate nohighlight">\(m_i\)</span> and exactly <span class="math notranslate nohighlight">\(2\)</span> elements will be less than or equal to <span class="math notranslate nohighlight">\(m_i\)</span> so this means each element of <span class="math notranslate nohighlight">\(S\)</span> will possess the property we said we wanted earlier.</p>
+</section>
+</section>
 </section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
 <p>The continuous time Fourier transform, Fourier transform for short, of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1086,17 +1124,44 @@ X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<section id="id11">
-<h3>2.1<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
-</section>
 <section id="id12">
-<h3>2.5<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<h3>2.2<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
 </section>
 <section id="id13">
-<h3>2.7<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<h3>2.4<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 </section>
 <section id="id14">
-<h3>2.14<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<h3>2.5<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+</section>
+<section id="id15">
+<h3>2.6<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+</section>
+<section id="id16">
+<h3>2.7<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+</section>
+<section id="id17">
+<h3>2.12<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+</section>
+<section id="id18">
+<h3>2.14<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+</section>
+<section id="id19">
+<h3>2.15<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+</section>
+<section id="a-i-i">
+<h3>2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span><a class="headerlink" href="#a-i-i" title="Link to this heading">#</a></h3>
+</section>
+<section id="id20">
+<h3>2.18<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+</section>
+<section id="id21">
+<h3>2.19<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+</section>
+<section id="id22">
+<h3>2.20<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+</section>
+<section id="id23">
+<h3>2.22<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1197,7 +1262,11 @@ IPython version      : 8.22.2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-sort">Merge sort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medians">Medians</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-divide-conquer">Randomized divide &amp; conquer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tighter-bound">Tighter bound</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#median-of-medians">Median of medians</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-good-pivot-selection">Proof of good pivot selection</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
@@ -1205,10 +1274,19 @@ IPython version      : 8.22.2
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.7</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">2.22</a></li>
 </ul>
 </li>
 </ul>
