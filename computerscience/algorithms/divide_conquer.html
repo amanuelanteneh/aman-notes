@@ -518,6 +518,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search">Binary search</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-multiplication">Integer multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
@@ -540,8 +541,14 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quicksort">Quicksort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -574,6 +581,55 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="divide-conquer">
 <h1>Divide &amp; conquer<a class="headerlink" href="#divide-conquer" title="Link to this heading">#</a></h1>
 <p>Divide &amp; conquer is a method for designing algorithms that solve problems by breaking the problem into smaller subproblems and then solving those smaller problems by dividing further until some base case is reached when the problem is small enough. Once the base case is reached we solve that subproblem and then use that solution to solve the larger problem by combining it with solutions to the other smaller subproblems we have solved. Merge sort is a nice example of this that we will go over. As you can probably guess from this description divide &amp; conquer is very closely tied to the concept of recursion.</p>
+<section id="binary-search">
+<h2>Binary search<a class="headerlink" href="#binary-search" title="Link to this heading">#</a></h2>
+<p>Perhaps the simplest example of a divide and conquer algorithm is binary search. The algorithm solves the following problem: Given a <em>sorted</em> (ascending order) list of numbers <span class="math notranslate nohighlight">\(A\)</span> of size <span class="math notranslate nohighlight">\(n\)</span> how quickly can we determine of an arbitrary target value <span class="math notranslate nohighlight">\(t\)</span> is in the list and find its position in the list? The algorithm is given below.</p>
+<div class="proof algorithm dropdown admonition" id="bin-search">
+<p class="admonition-title"><span class="caption-number">Algorithm 9.3 </span> (Binary Search)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{binary_search}(A,t)\)</span>:</p>
+<p><strong>Inputs</strong> Given a list of <span class="math notranslate nohighlight">\(A[1,...,n]\)</span> and a target <span class="math notranslate nohighlight">\(t\)</span></p>
+<p><strong>Output</strong> The position of <span class="math notranslate nohighlight">\(t\)</span> in the list if it exists in the list</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(L = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R = n\)</span></p></li>
+<li><p>while <span class="math notranslate nohighlight">\(L\leq R\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(m = \lfloor\frac{L+R}{2}\rfloor\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(A[m]&lt;t\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(L=m+1\)</span></p></li>
+</ol>
+</li>
+<li><p>else if <span class="math notranslate nohighlight">\(A[m]&gt;t\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(R=m-1\)</span></p></li>
+</ol>
+</li>
+<li><p>else if <span class="math notranslate nohighlight">\(A[m]=t\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(m\)</span></p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>return unsuccessful</p></li>
+</ol>
+</section>
+</div><p>At each iteration we are checking the value in the value in the middle of the list to see if it is greater than, equal to or less than <span class="math notranslate nohighlight">\(t\)</span>. If the value is equal to <span class="math notranslate nohighlight">\(t\)</span> then we are done. If the value is greater than <span class="math notranslate nohighlight">\(t\)</span> then we update the iteration to only look at the elements in the list that come before the middle value. Why? Because the list is sorted in ascending order if the middle element is greater than <span class="math notranslate nohighlight">\(t\)</span> then we <em>know</em> all values that come after the middle element will also be greater than <span class="math notranslate nohighlight">\(t\)</span> since they must be equal to or greater than the middle element. The same logic applied in the case where the middle element is less than <span class="math notranslate nohighlight">\(t\)</span> except in that case in the next iteration we look at only the elements that come <em>after</em> the middle element.</p>
+<p>What is the time complexity of this algorithm? Well during each iteration we just compare two numbers which takes <span class="math notranslate nohighlight">\(O(1)\)</span> time. But how many iterations, or recursion calls if we implement this with recursion, will we have to compute before we finish? Well the algorithm terminates when we have only 1 item left in the list and since we remove half the elements in the list at each iteration we need to simply answer: how many times do we need to divide <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(2\)</span> before we reach <span class="math notranslate nohighlight">\(1\)</span>? The simple algebriac equation that descirbes this is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{n}{2^x} = 1
+\]</div>
+<p>solving this for <span class="math notranslate nohighlight">\(x\)</span> yields <span class="math notranslate nohighlight">\(x=\log_2{n}\)</span> so in the worse case where the element is not in the list we must complete <span class="math notranslate nohighlight">\(\log_2{n}\)</span> iterations. So the time complexity of binary search is <span class="math notranslate nohighlight">\(O(\log_2{n})\)</span> which is incredibly efficient.</p>
+<p>Alternatively if we had implemented this algorithm using recursion then the time complexity for solving a problem of size <span class="math notranslate nohighlight">\(n\)</span> would be described by the recurrence relation</p>
+<div class="math notranslate nohighlight">
+\[
+T(n) = T\left(\frac{n}{2}\right) + O(1)
+\]</div>
+<p>which can be read as saying: to solve a problem of size <span class="math notranslate nohighlight">\(n\)</span> requires we perform a constant number of operations, which is captured by the <span class="math notranslate nohighlight">\(O(1)\)</span>, as well as solve a <em>single</em> problem of half the size which is captured by the <span class="math notranslate nohighlight">\(T\left(\frac{n}{2}\right)\)</span>.</p>
+</section>
 <section id="integer-multiplication">
 <h2>Integer multiplication<a class="headerlink" href="#integer-multiplication" title="Link to this heading">#</a></h2>
 <p>The first problem divide &amp; conquer methods are applied to in <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> is integer multiplication.</p>
@@ -634,7 +690,7 @@ T(n) = 4T\left(\frac{n}{2}\right) + O(n)
 <p>We can improve this algorithm by using the insight from Gauss that we laid out earlier. Since <span class="math notranslate nohighlight">\(x_Ly_R + x_Ry_L=(x_L+x_R)(y_L+y_R)-x_Ly_L-x_Ry_R\)</span> we can reduce the 4 multiplications needed down to 3 resulting in a more efficient algorithm.</p>
 <p>The pseudocode and for the algorithm are given below.</p>
 <div class="proof algorithm dropdown admonition" id="gauss-int-mult">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.3 </span> (Integer Multiplication)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.4 </span> (Integer Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{gauss_int_mult}(x,y,n)\)</span>:</p>
 <p><strong>Inputs</strong> Given <span class="math notranslate nohighlight">\(n\)</span>-bit integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
@@ -685,7 +741,7 @@ T(n) = T\left(\frac{4n}{5}\right) + O(n)
 T(n) = aT\left(\left\lceil\frac{n}{b}\right\rceil\right) + O(n^d)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(n\)</span> is the size of the initial problem, <span class="math notranslate nohighlight">\(a\)</span> is the number of subproblems that we divide the problem into at each recursion level, <span class="math notranslate nohighlight">\(\frac{n}{b}\)</span> is the size of the subproblems and <span class="math notranslate nohighlight">\(O(n^d)\)</span> is the time needed to combine the solutions of said subproblems into solutions for the larger problems we can use the <em>master theorem</em> to solve the recurrence.</p>
-<div class="proof theorem dropdown admonition" id="theorem-1">
+<div class="proof theorem dropdown admonition" id="theorem-2">
 <p class="admonition-title"><span class="caption-number">Theorem 9.2 </span> (Master Theorem)</p>
 <section class="theorem-content" id="proof-content">
 <p>Given the recurrence</p>
@@ -758,7 +814,7 @@ C_{22} = A_{21}B_{12} + A_{22}B_{22}
 \end{split}\]</div>
 <p>which involve 4 addition and 8 multiplication of <em>smaller</em> matrices now i.e. matrices of size <span class="math notranslate nohighlight">\(\frac{n}{2}\times \frac{n}{2}\)</span>. The divide and conquer algorithm is given below along with a python implementation of it.</p>
 <div class="proof algorithm dropdown admonition" id="naive-mat-mult">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.4 </span> (Naive Matrix Multiplication)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.5 </span> (Naive Matrix Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{naive_mat_mult}(A,B)\)</span>:</p>
 <p><strong>Inputs</strong> Given two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></p>
@@ -782,7 +838,7 @@ C_{22} = A_{21}B_{12} + A_{22}B_{22}
 </ol>
 </section>
 </div><div class="proof algorithm dropdown admonition" id="d&amp;c-mat-mult">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.5 </span> (D&amp;C Matrix Multiplication)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.6 </span> (D&amp;C Matrix Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{dc_mat_mult}(A,B,C, n)\)</span>:</p>
 <p><strong>Inputs</strong> Given two <span class="math notranslate nohighlight">\(n\times n\)</span> matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> and an all zeros matrix of size <span class="math notranslate nohighlight">\(n\times n\)</span></p>
@@ -905,7 +961,7 @@ T(n) = 7T\left(\frac{n}{2}\right) + O(1).
 <h2>Merge sort<a class="headerlink" href="#merge-sort" title="Link to this heading">#</a></h2>
 <p>Merge sort is one of the best divide and conquer algorithms for sorting a list of numbers. The idea behind merge sort is you have a list <span class="math notranslate nohighlight">\(L\)</span> of numbers and you go about sorting it by first dividing the list into two halves of equal length. We then recursively sort each half of the list and then merge the two sorted lists. The merge sort algorithm is given below.</p>
 <div class="proof algorithm dropdown admonition" id="merge-sort">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.6 </span> (Merge sort)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.7 </span> (Merge sort)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{merge_sort}(L)\)</span>:</p>
 <p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span></p>
@@ -977,7 +1033,7 @@ L_l &amp;= [2, 4, 1] \\ L_w &amp;= [5,5] \\ L_g &amp;= [36, 21, 8, 13, 11, 20].
 \end{split}\]</div>
 <p>Now suppose we want the 8th smallest element of <span class="math notranslate nohighlight">\(L\)</span>. We know that this would be the 3rd smallest element of <span class="math notranslate nohighlight">\(L_g\)</span>. Why? Think of it like this: Where is the smallest element? Well it’s certainly in <span class="math notranslate nohighlight">\(L_l\)</span> since that is the list with all elements smaller than <span class="math notranslate nohighlight">\(w\)</span>. Where is the second smallest element? Also in <span class="math notranslate nohighlight">\(L_l\)</span>. The third smallest element is also in <span class="math notranslate nohighlight">\(L_l\)</span>. Now what about the fourth smallest? Well that would be in <span class="math notranslate nohighlight">\(L_w\)</span> since the first 3 smallest elements are in <span class="math notranslate nohighlight">\(L_l\)</span>. What about the sixth smallest element? Well it can’t be in <span class="math notranslate nohighlight">\(L_l\)</span> since that contains the first 3 smallest, and it can’t be in <span class="math notranslate nohighlight">\(L_w\)</span> since that contains the next 2 smallest so it must be in <span class="math notranslate nohighlight">\(L_g\)</span>, and more importantly it will be the smallest number in <span class="math notranslate nohighlight">\(L_g\)</span>. The seventh smallest number can be found in the same way except this time it will be the <em>second</em> smallest element in <span class="math notranslate nohighlight">\(L_g\)</span>. So to put it in general terms if we want the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element if <span class="math notranslate nohighlight">\(k \leq |L_l|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_l\)</span> and we can simply ignore the other two list. If <span class="math notranslate nohighlight">\(k &gt; |L_l|+|L_w|\)</span> then we know the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element is in <span class="math notranslate nohighlight">\(L_g\)</span>. And if neither condition is true then that means <span class="math notranslate nohighlight">\(|L_s|&lt;k\leq |L_l|+|L_w|\)</span> which means the element we want is in <span class="math notranslate nohighlight">\(L_w\)</span> i.e. the element is <span class="math notranslate nohighlight">\(w\)</span> itself. The pseudocode is given below.</p>
 <div class="proof algorithm dropdown admonition" id="selection (Linear Expected Case Time)">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.7 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Expected Case Time)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.8 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Expected Case Time)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
 <p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and an integer <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
@@ -1045,7 +1101,7 @@ T(n) = T\left(bn\right) + O(n)
 \begin{align*}
 T(n) &amp;= T\left(\frac{3n}{4}\right) + \left(T\left(\frac{n}{5}\right) + O(n)\right) + O(n) \\
      &amp;= T\left(\frac{3n}{4}\right) + T\left(\frac{n}{5}\right) + O(n) \quad \text{Recall $O(n)+O(n)=O(n)$}\\
-     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n)
+     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n) \quad \text{Recall $f(ax)+f(bx)=f((a+b)x)$ for real-valued functions}
 \end{align*}
 \end{split}\]</div>
 <p>The extra terms <span class="math notranslate nohighlight">\(\left(T\left(\frac{n}{5}\right) + O(n)\right)\)</span> will account for the time taken to find a good pivot at each recursion level. And note that this still solves to <span class="math notranslate nohighlight">\(O(n)\)</span> since <span class="math notranslate nohighlight">\(\left(\frac{3}{4}+\frac{1}{5}\right)&lt;1\)</span>. But where does this extra term come from? Well the strategy we will use to find the pivot is we will create a list <span class="math notranslate nohighlight">\(S\)</span> of size <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> and recursively call our <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm <em>on it</em> to find it’s median which we will then us as out pivot.</p>
@@ -1059,7 +1115,7 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 \]</div>
 <p>which were the extra terms we added to the recurrence of the expected time <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm above. The new algorithm is given below and as we can see by solving this recurrence has a worst case time complexity that is linear. This is a pretty impressive algorithm and complexity and it took quite a bit of work to find it. Unfortunately as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say it is not as practical as the earlier randomized version of this algorithm but is still of great theoretical interest.</p>
 <div class="proof algorithm dropdown admonition" id="selection $O(n)$ Worst Case Time">
-<p class="admonition-title"><span class="caption-number">Algorithm 9.8 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Worst Case Time)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 9.9 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Worst Case Time)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{selection}(L, k)\)</span>:</p>
 <p><strong>Inputs</strong> Given a list <span class="math notranslate nohighlight">\(L[1,...,n]\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> and an integer <span class="math notranslate nohighlight">\(1\leq k \leq n\)</span></p>
@@ -1099,6 +1155,10 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 </section>
 </section>
 </section>
+<section id="quicksort">
+<h2>Quicksort<a class="headerlink" href="#quicksort" title="Link to this heading">#</a></h2>
+<p>Some of the ideas behind the median algorithm we just covered can also be applied to create an asymptotically efficient and empirically performant divide and conquer sorting algorithm called Quicksort. This algorithm, along with the one we will cover in the next section, was named as one of the top 10 with the greatest influence on the development and practice of science and engineering in the 20th century by <a class="reference external" href="https://www.computer.org/csdl/magazine/cs/2000/01/c1022/13rRUxBJhBm">IEEE</a>.</p>
+</section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
 <p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
@@ -1121,6 +1181,46 @@ X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
 <p>For the FFT we are interested in</p>
 <section id="representations-of-polynomials">
 <h3>Representations of polynomials<a class="headerlink" href="#representations-of-polynomials" title="Link to this heading">#</a></h3>
+<p>We first started by looking at how to multiply integers efficiently using a divide and conquer approach followed by how to multiply matrices. For the FFT we will extend this to the multiplication of <em>polynomials</em>.</p>
+<section id="coefficient-representation">
+<h4>Coefficient representation<a class="headerlink" href="#coefficient-representation" title="Link to this heading">#</a></h4>
+<p>Recall that a general polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> of degree <span class="math notranslate nohighlight">\(n-1\)</span> can be represented as</p>
+<div class="math notranslate nohighlight">
+\[
+A(x) = a_0 + a_1x + a_2x^2 + \cdots + a_{n-1}x^{n-1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_i \in \{a_0,...,a_{n-1}\}\)</span> are coefficients.</p>
+<p>Given another polynomial <span class="math notranslate nohighlight">\(B(x) = b_0 + b_1x + b_2x^2 + \cdots + b_{n-1}x^{n-1}\)</span> we want an algorithm that can compute their product</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+C(x) &amp;= A(x)B(x) \\
+&amp;= c_0 + c_1x + c_2x^2 + \cdots + c_{2n-2}x^{2n-2}
+\end{align*}
+\end{split}\]</div>
+<p>Note that the resulting function will be a polynomial of degree at most <span class="math notranslate nohighlight">\(2n-2\)</span> and the coefficients have the form</p>
+<div class="math notranslate nohighlight">
+\[
+c_i = a_0b_i + a_1b_{i-1} + \cdots + a_ib_0 = \sum_{k=0}^ia_kb_{i-k}
+\]</div>
+<p>Note that if <span class="math notranslate nohighlight">\(i&gt;n-1\)</span> then <span class="math notranslate nohighlight">\(b_i=0\)</span> and <span class="math notranslate nohighlight">\(a_i=0\)</span> since <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(B(x)\)</span> only have coefficients up to <span class="math notranslate nohighlight">\(a_{n-1}\)</span> and <span class="math notranslate nohighlight">\(b_{n-1}\)</span> respectively. This operation is actually known as a convolution and is denoted as <span class="math notranslate nohighlight">\(a\ast b\)</span>. Computing <span class="math notranslate nohighlight">\(c_i\)</span> takes <span class="math notranslate nohighlight">\(O(i)\)</span> time, where <span class="math notranslate nohighlight">\(i\leq 2n-2\)</span>, and there are at most <span class="math notranslate nohighlight">\(2n-1\)</span> coefficients <span class="math notranslate nohighlight">\(c_i\)</span> so this formula leads to an <span class="math notranslate nohighlight">\(O((2n-2)(2n-1))=O(n^2)\)</span> time algorithm for multiplying polynomials.</p>
+<p>We can notice something interesting here: each of these polynomials is uniquely determined by its coefficients <span class="math notranslate nohighlight">\((a_0,a_1,...,a_{n-1})\)</span> and <span class="math notranslate nohighlight">\((b_0,b_1,...,b_{n-1})\)</span> and the resulting product can be computed using only these coefficients. Thus we can represent a polynomial as a vector of coefficients and their product as the convolution between these lists of coefficients.</p>
+</section>
+<section id="value-representation">
+<h4>Value representation<a class="headerlink" href="#value-representation" title="Link to this heading">#</a></h4>
+<p>In addition to this there is another way to represent a polynomial and that is as <span class="math notranslate nohighlight">\(A(x) := (A(x_1),...,A(x_n))\)</span>. That is as a vector of values the polynomial takes on at the points <span class="math notranslate nohighlight">\(x_1,x_2,...x_{n}\)</span> where all <span class="math notranslate nohighlight">\(x_i\)</span> are <em>distinct</em>. These <span class="math notranslate nohighlight">\(n\)</span> points also uniquely determine a polynomial of degree <span class="math notranslate nohighlight">\(n-1\)</span>. This representation is more useful for multiplying polynomials and what the FFT does is switch between these representations to multiply polynomials more efficiently than our <span class="math notranslate nohighlight">\(O(n^2)\)</span> time from using the coefficient representation.</p>
+<p>But why is it more efficient to use this representation? Well if we have two value vectors <span class="math notranslate nohighlight">\(A(x) := (A(x_1),...,A(x_{2n}))\)</span> and <span class="math notranslate nohighlight">\(B(x) := (B(x_1),...,B(x_{2n}))\)</span> for two polynomials their product polynomial is uniquely characterized by the vector that results from taking the pairwise product of elements of the two vectors so <span class="math notranslate nohighlight">\(C(x) := (A(x_1)B(x_1),...,A(x_{2n})B(x_{2n}))\)</span>. Each of these products takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to compute since we are just multiplying two scalars and there are <span class="math notranslate nohighlight">\(2n\)</span> of these products to compute so the time complexity is <span class="math notranslate nohighlight">\(O(n)\)</span>! Why are there <span class="math notranslate nohighlight">\(2n\)</span> elements in these vectors instead of <span class="math notranslate nohighlight">\(n\)</span>? Well recall that the product of two <span class="math notranslate nohighlight">\(n\)</span> degree polynomials has degree of at most <span class="math notranslate nohighlight">\(2n\)</span> so we need to have at least <span class="math notranslate nohighlight">\(2n\)</span> points in our vectors for <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(B(x)\)</span> to uniquely characterize their resulting product polynomial.</p>
+<p>Given the coefficient representation of a polynomial and <span class="math notranslate nohighlight">\(2n\)</span> points <span class="math notranslate nohighlight">\(X=\{x_1,...,x_{2n}\}\)</span> we want to evaluate the polynomial at the naive approach to switch to the value representation would involve evaluating the polynomial at each of these points by computing</p>
+<div class="math notranslate nohighlight">
+\[
+A(x_i) = a_0 + a_1x_i + \cdots + a_{n-1}x_i^{n-1}
+\]</div>
+<p>for each <span class="math notranslate nohighlight">\(x_i\)</span>. This is naive since computing <span class="math notranslate nohighlight">\(A(x_i)\)</span> takes <span class="math notranslate nohighlight">\(O(n)\)</span> scalar multiplication and computing all <span class="math notranslate nohighlight">\(2n\)</span> values of <span class="math notranslate nohighlight">\(A(x_i)\)</span> thus yields a time complexity of <span class="math notranslate nohighlight">\(O(n^2)\)</span> so we may as well have just used the coefficients to find the product of the polynomial instead of going through the trouble of converting to the value representation.</p>
+<p>The FFT, by picking a clever set of points <span class="math notranslate nohighlight">\(X=\{x_1,...,x_{2n}\}\)</span>, will allow us to switch from the coefficient representation to the value representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time, after which we can do the multiplication in <span class="math notranslate nohighlight">\(O(n)\)</span> time and then switch back the coefficient representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time for an overall time complexity of <span class="math notranslate nohighlight">\(O(n\log{n})\)</span>.</p>
+</section>
+</section>
+<section id="choosing-the-set-x">
+<h3>Choosing the set <span class="math notranslate nohighlight">\(X\)</span><a class="headerlink" href="#choosing-the-set-x" title="Link to this heading">#</a></h3>
 </section>
 </section>
 <section id="practice-problems">
@@ -1248,6 +1348,7 @@ IPython version      : 8.22.2
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-search">Binary search</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-multiplication">Integer multiplication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-recurrence-relations">Solving recurrence relations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substitution">Substitution</a></li>
@@ -1270,8 +1371,14 @@ IPython version      : 8.22.2
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quicksort">Quicksort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
