@@ -546,6 +546,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-transformation">Naive transformation</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
@@ -1073,7 +1074,7 @@ T(n) = T\left(\frac{n}{2}\right) + O(n)
 \[
 \prod_{i=0}^{n-1}\frac{1}{n-i} = \frac{1}{n!}
 \]</div>
-<p>which very quickly approaches 0 as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
+<p>which approaches 0 faster than exponentially as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
 <p>But this is just the absolute worse case; it would be more useful to know the time complexity for the case where we pick a pivot that is somewhat good. For example what if we pick a <span class="math notranslate nohighlight">\(w\)</span> which creates lists of size <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span> that we then recursively run the algorithm on? Well in that case the recurrence is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1101,7 +1102,7 @@ T(n) = T\left(bn\right) + O(n)
 \begin{align*}
 T(n) &amp;= T\left(\frac{3n}{4}\right) + \left(T\left(\frac{n}{5}\right) + O(n)\right) + O(n) \\
      &amp;= T\left(\frac{3n}{4}\right) + T\left(\frac{n}{5}\right) + O(n) \quad \text{Recall $O(n)+O(n)=O(n)$}\\
-     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n) \quad \text{Recall $f(ax)+f(bx)=f((a+b)x)$ for real-valued functions}
+     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n)
 \end{align*}
 \end{split}\]</div>
 <p>The extra terms <span class="math notranslate nohighlight">\(\left(T\left(\frac{n}{5}\right) + O(n)\right)\)</span> will account for the time taken to find a good pivot at each recursion level. And note that this still solves to <span class="math notranslate nohighlight">\(O(n)\)</span> since <span class="math notranslate nohighlight">\(\left(\frac{3}{4}+\frac{1}{5}\right)&lt;1\)</span>. But where does this extra term come from? Well the strategy we will use to find the pivot is we will create a list <span class="math notranslate nohighlight">\(S\)</span> of size <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> and recursively call our <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm <em>on it</em> to find it’s median which we will then us as out pivot.</p>
@@ -1179,12 +1180,13 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
 \]</div>
 <p>For the FFT we are interested in</p>
+<p>We first started by looking at how to multiply integers efficiently using a divide and conquer approach followed by how to multiply matrices. For the FFT we will extend this to the multiplication of <em>polynomials</em>.</p>
 <section id="representations-of-polynomials">
 <h3>Representations of polynomials<a class="headerlink" href="#representations-of-polynomials" title="Link to this heading">#</a></h3>
-<p>We first started by looking at how to multiply integers efficiently using a divide and conquer approach followed by how to multiply matrices. For the FFT we will extend this to the multiplication of <em>polynomials</em>.</p>
+<p>First let’s go over two different ways we can represent polynomials.</p>
 <section id="coefficient-representation">
 <h4>Coefficient representation<a class="headerlink" href="#coefficient-representation" title="Link to this heading">#</a></h4>
-<p>Recall that a general polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> of degree <span class="math notranslate nohighlight">\(n-1\)</span> can be represented as</p>
+<p>Recall that a general polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> of degree <span class="math notranslate nohighlight">\(n-1\)</span> can be written as</p>
 <div class="math notranslate nohighlight">
 \[
 A(x) = a_0 + a_1x + a_2x^2 + \cdots + a_{n-1}x^{n-1}
@@ -1204,23 +1206,40 @@ C(x) &amp;= A(x)B(x) \\
 c_i = a_0b_i + a_1b_{i-1} + \cdots + a_ib_0 = \sum_{k=0}^ia_kb_{i-k}
 \]</div>
 <p>Note that if <span class="math notranslate nohighlight">\(i&gt;n-1\)</span> then <span class="math notranslate nohighlight">\(b_i=0\)</span> and <span class="math notranslate nohighlight">\(a_i=0\)</span> since <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(B(x)\)</span> only have coefficients up to <span class="math notranslate nohighlight">\(a_{n-1}\)</span> and <span class="math notranslate nohighlight">\(b_{n-1}\)</span> respectively. This operation is actually known as a convolution and is denoted as <span class="math notranslate nohighlight">\(a\ast b\)</span>. Computing <span class="math notranslate nohighlight">\(c_i\)</span> takes <span class="math notranslate nohighlight">\(O(i)\)</span> time, where <span class="math notranslate nohighlight">\(i\leq 2n-2\)</span>, and there are at most <span class="math notranslate nohighlight">\(2n-1\)</span> coefficients <span class="math notranslate nohighlight">\(c_i\)</span> so this formula leads to an <span class="math notranslate nohighlight">\(O((2n-2)(2n-1))=O(n^2)\)</span> time algorithm for multiplying polynomials.</p>
-<p>We can notice something interesting here: each of these polynomials is uniquely determined by its coefficients <span class="math notranslate nohighlight">\((a_0,a_1,...,a_{n-1})\)</span> and <span class="math notranslate nohighlight">\((b_0,b_1,...,b_{n-1})\)</span> and the resulting product can be computed using only these coefficients. Thus we can represent a polynomial as a vector of coefficients and their product as the convolution between these lists of coefficients.</p>
+<p>We can notice something interesting here: each of these polynomials is uniquely determined by its coefficients <span class="math notranslate nohighlight">\((a_0,a_1,...,a_{n-1})\)</span> and <span class="math notranslate nohighlight">\((b_0,b_1,...,b_{n-1})\)</span> and the resulting product can be computed using only these coefficients. Thus we can represent a polynomial as a vector of coefficients and their product as the convolution between these vectors of coefficients.</p>
 </section>
 <section id="value-representation">
 <h4>Value representation<a class="headerlink" href="#value-representation" title="Link to this heading">#</a></h4>
-<p>In addition to this there is another way to represent a polynomial and that is as <span class="math notranslate nohighlight">\(A(x) := (A(x_1),...,A(x_n))\)</span>. That is as a vector of values the polynomial takes on at the points <span class="math notranslate nohighlight">\(x_1,x_2,...x_{n}\)</span> where all <span class="math notranslate nohighlight">\(x_i\)</span> are <em>distinct</em>. These <span class="math notranslate nohighlight">\(n\)</span> points also uniquely determine a polynomial of degree <span class="math notranslate nohighlight">\(n-1\)</span>. This representation is more useful for multiplying polynomials and what the FFT does is switch between these representations to multiply polynomials more efficiently than our <span class="math notranslate nohighlight">\(O(n^2)\)</span> time from using the coefficient representation.</p>
+<div class="proof theorem dropdown admonition" id="value-rep">
+<p class="admonition-title"><span class="caption-number">Theorem 9.3 </span> (Value representation of polynomials)</p>
+<section class="theorem-content" id="proof-content">
+<p>For a degree <span class="math notranslate nohighlight">\(n-1\)</span> polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> the set of values <span class="math notranslate nohighlight">\((A(x_1),...,A(x_n))\)</span> where <span class="math notranslate nohighlight">\(x_1\not = x_2 \not= \cdots \not = x_i \)</span> uniquely characterizes the polynomial <span class="math notranslate nohighlight">\(A(x)\)</span>.</p>
+</section>
+</div><p>In addition to this there is another way to represent a polynomial and that is as <span class="math notranslate nohighlight">\(A(x) := (A(x_1),...,A(x_n))\)</span>. That is as a vector of values the polynomial takes on at the points <span class="math notranslate nohighlight">\(x_1,x_2,...x_{n}\)</span> where all <span class="math notranslate nohighlight">\(x_i\)</span> are <em>distinct</em>. These <span class="math notranslate nohighlight">\(n\)</span> points also uniquely determine a polynomial of degree <span class="math notranslate nohighlight">\(n-1\)</span>. This representation is more useful for multiplying polynomials and what the FFT does is switch between these representations to multiply polynomials more efficiently than our <span class="math notranslate nohighlight">\(O(n^2)\)</span> time method using the coefficient representation.</p>
 <p>But why is it more efficient to use this representation? Well if we have two value vectors <span class="math notranslate nohighlight">\(A(x) := (A(x_1),...,A(x_{2n}))\)</span> and <span class="math notranslate nohighlight">\(B(x) := (B(x_1),...,B(x_{2n}))\)</span> for two polynomials their product polynomial is uniquely characterized by the vector that results from taking the pairwise product of elements of the two vectors so <span class="math notranslate nohighlight">\(C(x) := (A(x_1)B(x_1),...,A(x_{2n})B(x_{2n}))\)</span>. Each of these products takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to compute since we are just multiplying two scalars and there are <span class="math notranslate nohighlight">\(2n\)</span> of these products to compute so the time complexity is <span class="math notranslate nohighlight">\(O(n)\)</span>! Why are there <span class="math notranslate nohighlight">\(2n\)</span> elements in these vectors instead of <span class="math notranslate nohighlight">\(n\)</span>? Well recall that the product of two <span class="math notranslate nohighlight">\(n\)</span> degree polynomials has degree of at most <span class="math notranslate nohighlight">\(2n\)</span> so we need to have at least <span class="math notranslate nohighlight">\(2n\)</span> points in our vectors for <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(B(x)\)</span> to uniquely characterize their resulting product polynomial.</p>
+</section>
+<section id="naive-transformation">
+<h4>Naive transformation<a class="headerlink" href="#naive-transformation" title="Link to this heading">#</a></h4>
 <p>Given the coefficient representation of a polynomial and <span class="math notranslate nohighlight">\(2n\)</span> points <span class="math notranslate nohighlight">\(X=\{x_1,...,x_{2n}\}\)</span> we want to evaluate the polynomial at the naive approach to switch to the value representation would involve evaluating the polynomial at each of these points by computing</p>
 <div class="math notranslate nohighlight">
 \[
 A(x_i) = a_0 + a_1x_i + \cdots + a_{n-1}x_i^{n-1}
 \]</div>
-<p>for each <span class="math notranslate nohighlight">\(x_i\)</span>. This is naive since computing <span class="math notranslate nohighlight">\(A(x_i)\)</span> takes <span class="math notranslate nohighlight">\(O(n)\)</span> scalar multiplication and computing all <span class="math notranslate nohighlight">\(2n\)</span> values of <span class="math notranslate nohighlight">\(A(x_i)\)</span> thus yields a time complexity of <span class="math notranslate nohighlight">\(O(n^2)\)</span> so we may as well have just used the coefficients to find the product of the polynomial instead of going through the trouble of converting to the value representation.</p>
-<p>The FFT, by picking a clever set of points <span class="math notranslate nohighlight">\(X=\{x_1,...,x_{2n}\}\)</span>, will allow us to switch from the coefficient representation to the value representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time, after which we can do the multiplication in <span class="math notranslate nohighlight">\(O(n)\)</span> time and then switch back the coefficient representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time for an overall time complexity of <span class="math notranslate nohighlight">\(O(n\log{n})\)</span>.</p>
+<p>for each <span class="math notranslate nohighlight">\(x_i\)</span>. This is naive since computing <span class="math notranslate nohighlight">\(A(x_i)\)</span> takes <span class="math notranslate nohighlight">\(O(n)\)</span> scalar multiplication and computing all <span class="math notranslate nohighlight">\(2n\)</span> values of <span class="math notranslate nohighlight">\(A(x_i)\)</span> thus yields a time complexity of <span class="math notranslate nohighlight">\(O(n^2)\)</span> so we might as well have just used the coefficients to find the product of the polynomial instead of going through the trouble of converting to the value representation.</p>
+<p>The FFT, by picking a clever set of points <span class="math notranslate nohighlight">\(X=\{x_1,...,x_{2n}\}\)</span>, will allow us to switch from the coefficient representation to the value representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time, after which we can use the efficient <span class="math notranslate nohighlight">\(O(n)\)</span> time multiplication method available in the value representation and then switch back (this part is called <em>interpolation</em>) to the coefficient representation in <span class="math notranslate nohighlight">\(O(n\log{n})\)</span> time for an overall time complexity of <span class="math notranslate nohighlight">\(O(n\log{n})\)</span>.</p>
 </section>
 </section>
 <section id="choosing-the-set-x">
 <h3>Choosing the set <span class="math notranslate nohighlight">\(X\)</span><a class="headerlink" href="#choosing-the-set-x" title="Link to this heading">#</a></h3>
+<p>So to quickly summarize our task thus far: Given a set of coefficients <span class="math notranslate nohighlight">\((a_0,a_1,...,a_{n-1})\)</span> for the polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> how quickly can we compute the set of values <span class="math notranslate nohighlight">\((A(x_0),...,A(x_{2n}))\)</span> for some set, <span class="math notranslate nohighlight">\(X = \{x_1,x_2,...,x_{2n}\}\)</span>, in the domain of the function. We saw the naive method results in a time complexity of <span class="math notranslate nohighlight">\(O(n^2)\)</span> which is not good but postulated that there maybe a more clever way to do this give a proper choice of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Suppose were to choose a set of <span class="math notranslate nohighlight">\(2n\)</span> points that possess the following property: the first <span class="math notranslate nohighlight">\(n\)</span> points have the same magnitude but opposite sign of the last <span class="math notranslate nohighlight">\(n\)</span> points. This would mean for example that <span class="math notranslate nohighlight">\(-x_1 = x_{n+1}\)</span>, <span class="math notranslate nohighlight">\(-x_2 = x_{n+2}\)</span>, <span class="math notranslate nohighlight">\(-x_3 = x_{n+3}\)</span> and in general <span class="math notranslate nohighlight">\(-x_{i}=x_{n+i}\)</span>. Why might this be useful? Well if this property holds than that would mean that <span class="math notranslate nohighlight">\(A(x_{n+i})=A(-x_{i})\)</span>. Now let’s think about the odd power terms and the even power terms of <span class="math notranslate nohighlight">\(A(x)\)</span>. For the even power terms like <span class="math notranslate nohighlight">\(a_2x^{2}\)</span> we have <span class="math notranslate nohighlight">\(a_2x^{2}=a_2(-x)^{2}\)</span> and in general</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+a_{2k}x^{2k}=a_{2k}(-x)^{2k}
+$$. \\This means that we need not compute the value of the even power terms for both $x_i$ and $x_{n+i}$ since they would be the same!\\Now what about the odd power terms? Well in general we have \end{aligned}\end{align} \]</div>
+<p>-a_{2k+1}x^{2k+1}=a_{2k+1}(-x)^{2k+1}
+$$</p>
+<p>meaning the odd power terms have opposite sign for <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span>. So we also need not compute the value of the even power terms for both <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span> since they would only differ by a sign! So now we only need to</p>
 </section>
 </section>
 <section id="practice-problems">
@@ -1376,6 +1395,7 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-transformation">Naive transformation</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
