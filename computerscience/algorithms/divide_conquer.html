@@ -1041,12 +1041,13 @@ T(n) = T\left(bn\right) + O(n)
 \]</div>
 <p>we just need <span class="math notranslate nohighlight">\(b\)</span> to be less than 1 for this recurrence to solve to <span class="math notranslate nohighlight">\(O(n)\)</span>. So lets use this leeway to devise a way to find a good pivot that keeps us within this <span class="math notranslate nohighlight">\(b&lt;1\)</span> range. To this end we will devise an algorithm whose time complexity is described by the following recurrence</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}
+\[\begin{split}
 \begin{align*}
 T(n) &amp;= T\left(\frac{3n}{4}\right) + \left(T\left(\frac{n}{5}\right) + O(n)\right) + O(n) \\
-     &amp;= T\left(\frac{3n}{4}\right) + T\left(\frac{n}{5}\right) + O(n) \quad \text{Note that $O(n)+O(n)=O(n)$}\\
-     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n)\end{split}\\\end{align*}
-\end{aligned}\end{align} \]</div>
+     &amp;= T\left(\frac{3n}{4}\right) + T\left(\frac{n}{5}\right) + O(n) \quad \text{Recall $O(n)+O(n)=O(n)$}\\
+     &amp;= T\left(\left(\frac{3}{4}+\frac{1}{5}\right)n\right) +  O(n)
+\end{align*}
+\end{split}\]</div>
 <p>The extra terms <span class="math notranslate nohighlight">\(\left(T\left(\frac{n}{5}\right) + O(n)\right)\)</span> will account for the time taken to find a good pivot at each recursion level. And note that this still solves to <span class="math notranslate nohighlight">\(O(n)\)</span> since <span class="math notranslate nohighlight">\(\left(\frac{3}{4}+\frac{1}{5}\right)&lt;1\)</span>. But where does this extra term come from? Well the strategy we will use to find the pivot is we will create a list <span class="math notranslate nohighlight">\(S\)</span> of size <span class="math notranslate nohighlight">\(\frac{n}{5}\)</span> and recursively call our <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm <em>on it</em> to find it’s median which we will then us as out pivot.</p>
 <section id="median-of-medians">
 <h4>Median of medians<a class="headerlink" href="#median-of-medians" title="Link to this heading">#</a></h4>
