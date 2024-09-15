@@ -543,6 +543,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quicksort">Quicksort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
@@ -550,6 +551,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-unity">Roots of unity</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -557,15 +562,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.4</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.5</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.6</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.12</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.14</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-th-roots-of-unity">2.7 Sum of <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.15</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">2.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.22</a></li>
 </ul>
 </li>
 </ul>
@@ -1162,7 +1167,9 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 </section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing. <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> explains how one can</p>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h3>
+<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
 <p>The continuous time Fourier transform, Fourier transform for short, of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1180,7 +1187,8 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 X_k = \sum_{n=0}^{N-1}x_n e^{-i2\pi k n /N}.
 \]</div>
 <p>For the FFT we are interested in</p>
-<p>We first started by looking at how to multiply integers efficiently using a divide and conquer approach followed by how to multiply matrices. For the FFT we will extend this to the multiplication of <em>polynomials</em>.</p>
+<p>We first looked at how to multiply integers efficiently using a divide and conquer approach followed by how to multiply matrices. For the FFT we will extend this to the multiplication of <em>polynomials</em>.</p>
+</section>
 <section id="representations-of-polynomials">
 <h3>Representations of polynomials<a class="headerlink" href="#representations-of-polynomials" title="Link to this heading">#</a></h3>
 <p>First let’s go over two different ways we can represent polynomials.</p>
@@ -1232,14 +1240,88 @@ A(x_i) = a_0 + a_1x_i + \cdots + a_{n-1}x_i^{n-1}
 <section id="choosing-the-set-x">
 <h3>Choosing the set <span class="math notranslate nohighlight">\(X\)</span><a class="headerlink" href="#choosing-the-set-x" title="Link to this heading">#</a></h3>
 <p>So to quickly summarize our task thus far: Given a set of coefficients <span class="math notranslate nohighlight">\((a_0,a_1,...,a_{n-1})\)</span> for the polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> how quickly can we compute the set of values <span class="math notranslate nohighlight">\((A(x_0),...,A(x_{2n}))\)</span> for some set, <span class="math notranslate nohighlight">\(X = \{x_1,x_2,...,x_{2n}\}\)</span>, in the domain of the function. We saw the naive method results in a time complexity of <span class="math notranslate nohighlight">\(O(n^2)\)</span> which is not good but postulated that there maybe a more clever way to do this give a proper choice of <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p>Suppose were to choose a set of <span class="math notranslate nohighlight">\(2n\)</span> points that possess the following property: the first <span class="math notranslate nohighlight">\(n\)</span> points have the same magnitude but opposite sign of the last <span class="math notranslate nohighlight">\(n\)</span> points. This would mean for example that <span class="math notranslate nohighlight">\(-x_1 = x_{n+1}\)</span>, <span class="math notranslate nohighlight">\(-x_2 = x_{n+2}\)</span>, <span class="math notranslate nohighlight">\(-x_3 = x_{n+3}\)</span> and in general <span class="math notranslate nohighlight">\(-x_{i}=x_{n+i}\)</span>. Why might this be useful? Well if this property holds than that would mean that <span class="math notranslate nohighlight">\(A(x_{n+i})=A(-x_{i})\)</span>. Now let’s think about the odd power terms and the even power terms of <span class="math notranslate nohighlight">\(A(x)\)</span>. For the even power terms like <span class="math notranslate nohighlight">\(a_2x^{2}\)</span> we have <span class="math notranslate nohighlight">\(a_2x^{2}=a_2(-x)^{2}\)</span> and in general</p>
+<p>Suppose were to choose a set of <span class="math notranslate nohighlight">\(2n\)</span> points that possess the following property: the first <span class="math notranslate nohighlight">\(n\)</span> points have the same magnitude but opposite sign of the last <span class="math notranslate nohighlight">\(n\)</span> points. This would mean for example that <span class="math notranslate nohighlight">\(-x_1 = x_{n+1}\)</span>, <span class="math notranslate nohighlight">\(-x_2 = x_{n+2}\)</span>, <span class="math notranslate nohighlight">\(-x_3 = x_{n+3}\)</span> and in general <span class="math notranslate nohighlight">\(-x_{i}=x_{n+i}\)</span>. Why might this be useful? Well if this property holds then that would mean that <span class="math notranslate nohighlight">\(A(x_{n+i})=A(-x_{i})\)</span>. Now let’s think about the odd power terms and the even power terms of <span class="math notranslate nohighlight">\(A(x)\)</span>. For the even power terms like <span class="math notranslate nohighlight">\(a_2x^{2}\)</span> we have <span class="math notranslate nohighlight">\(a_2x^{2}=a_2(-x)^{2}\)</span> and in general</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}
+\[
 a_{2k}x^{2k}=a_{2k}(-x)^{2k}
-$$. \\This means that we need not compute the value of the even power terms for both $x_i$ and $x_{n+i}$ since they would be the same!\\Now what about the odd power terms? Well in general we have \end{aligned}\end{align} \]</div>
-<p>-a_{2k+1}x^{2k+1}=a_{2k+1}(-x)^{2k+1}
-$$</p>
-<p>meaning the odd power terms have opposite sign for <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span>. So we also need not compute the value of the even power terms for both <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span> since they would only differ by a sign! So now we only need to</p>
+\]</div>
+<p>This means that we need not compute the value of the even power terms for both <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span> since they would be the same!</p>
+<p>Now what about the odd power terms? Well in general we have</p>
+<div class="math notranslate nohighlight">
+\[
+-a_{2k+1}x^{2k+1}=a_{2k+1}(-x)^{2k+1}
+\]</div>
+<p>meaning the odd power terms have opposite sign for <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span>. So we also need not compute the value of the even power terms for both <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{n+i}\)</span> since they would only differ by a sign! So with this in mind let’s group the coefficients of the even power terms into one vector of coefficients</p>
+<div class="math notranslate nohighlight">
+\[
+a_E = (a_0,a_2,a_4,...,a_{n-2})
+\]</div>
+<p>and the odd power coefficients into another vector</p>
+<div class="math notranslate nohighlight">
+\[
+a_O = (a_1,a_3,a_5,...,a_{n-1})
+\]</div>
+</section>
+<section id="complex-numbers">
+<h3>Complex numbers<a class="headerlink" href="#complex-numbers" title="Link to this heading">#</a></h3>
+<p>Here I will list some facts about complex numbers that will be useful to know. A complex number is written as <span class="math notranslate nohighlight">\(z=a+ib\)</span>. And can be alternativly represented, using Euler’s formula, as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+z&amp;=a+ib \\
+&amp;=re^{i\theta} \\
+&amp;=r(\cos{(\theta)} + i\sin{(\theta)})
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r = |z|\)</span> and <span class="math notranslate nohighlight">\(\theta=\tan^{-1}{\left(\frac{b}{a}\right)}\)</span> is the angle made by the vector <span class="math notranslate nohighlight">\(a+ib\)</span> in the complex plane with the positive real number line.</p>
+<section id="roots-of-unity">
+<h4>Roots of unity<a class="headerlink" href="#roots-of-unity" title="Link to this heading">#</a></h4>
+<p>The <span class="math notranslate nohighlight">\(n\)</span>-th root of unity is the complex number <span class="math notranslate nohighlight">\(z\)</span> that satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+z^n = 1
+\]</div>
+<p>For example for <span class="math notranslate nohighlight">\(n=2\)</span> the (square) roots of unity are <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(-1\)</span> and for <span class="math notranslate nohighlight">\(n=4\)</span> the (fourth) roots of unity are <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(-1\)</span>, <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(-i\)</span>. Another way of saying this is what are the <span class="math notranslate nohighlight">\(n\)</span>-th roots of <span class="math notranslate nohighlight">\(1\)</span> since unity is just a fancy word for <span class="math notranslate nohighlight">\(1\)</span> here. As Dr. Vigoda explains in lecture the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unit lie on the circumference of the unit circle centered at the origin of the complex plane. And in general the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity are given by</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_n^k=\exp{\left(\frac{2k\pi i}{n}\right)} \quad \text{where} \quad k\in \{0,1,...,n-1\}.
+\]</div>
+<p>The roots of unity have two properties that make them useful for the FFT algorithm.</p>
+<p>Firstly for even values of <span class="math notranslate nohighlight">\(n\)</span> they possess the property we want numbers in our set <span class="math notranslate nohighlight">\(X\)</span> to have. That is to say the first <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity are equal in magnitude but opposite in sign to the last <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity e.g. <span class="math notranslate nohighlight">\(\omega_n^0=-\omega_n^{\frac{n}{2}}\)</span>. And in general we have</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_n^{k} = -\omega_n^{\frac{n}{2}+k}.
+\]</div>
+<p>Secondly when <span class="math notranslate nohighlight">\(n\)</span> is a power of <span class="math notranslate nohighlight">\(2\)</span> the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity <em>squared</em> are equal to the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-nd roots of unity so</p>
+<div class="math notranslate nohighlight">
+\[
+(\omega^k_n)^2 = \omega^k_{\frac{n}{2}}.
+\]</div>
+<div class="proof algorithm dropdown admonition" id="FFT">
+<p class="admonition-title"><span class="caption-number">Algorithm 9.10 </span> (Fast (Discrete) Fourier Transform)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{FFT}(a,\omega)\)</span>:</p>
+<p><strong>Inputs</strong> Given the coefficient representation <span class="math notranslate nohighlight">\(a=(a_0,a_1,...,a_{n-1})\)</span> of a <span class="math notranslate nohighlight">\(n-1\)</span> degree polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is power of <span class="math notranslate nohighlight">\(2\)</span>
+and <span class="math notranslate nohighlight">\(\omega\)</span> is a primitive <span class="math notranslate nohighlight">\(n\)</span>-th root of unity</p>
+<p><strong>Output</strong> The polynomial evaluated at the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity i.e. it’s value representation denoted <span class="math notranslate nohighlight">\(M_n(\omega)a\)</span></p>
+<ol class="arabic simple">
+<li><p>if <span class="math notranslate nohighlight">\(\omega=1\)</span>:</p>
+<ol class="arabic simple">
+<li><p>return <span class="math notranslate nohighlight">\(a\)</span></p></li>
+</ol>
+</li>
+<li><p><span class="math notranslate nohighlight">\((s_0,s_1,...,s_{\frac{n}{2}-1})= \text{FFT}((a_0,a_2,...,a_{n-2}), \omega^2)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Recursively evaluate <span class="math notranslate nohighlight">\(A_E(y)\)</span> on the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-nd roots of unity</p></li>
+<li><p><span class="math notranslate nohighlight">\((s_0',s_1',...,s_{\frac{n}{2}-1}')= \text{FFT}((a_1,a_3,...,a_{n-1}), \omega^2)\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Recursively evaluate <span class="math notranslate nohighlight">\(A_O(y)\)</span> on the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>-nd roots of unity</p></li>
+<li><p>for <span class="math notranslate nohighlight">\(j=0\)</span> to <span class="math notranslate nohighlight">\(\frac{n}{2}-1\)</span>: <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Combine evaluated <span class="math notranslate nohighlight">\(A_O(y)\)</span> and <span class="math notranslate nohighlight">\(A_E(y)\)</span> to create value rep. of <span class="math notranslate nohighlight">\(A(x)\)</span></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(r_j=s_j+\omega^js_j'\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(r_{j+\frac{n}{2}}=s_j-\omega^js_j'\)</span></p></li>
+</ol>
+</li>
+<li><p>return <span class="math notranslate nohighlight">\((r_0,r_1,...,r_{n-1})\)</span></p></li>
+</ol>
+</section>
+</div></section>
 </section>
 </section>
 <section id="practice-problems">
@@ -1256,32 +1338,36 @@ $$</p>
 <section id="id15">
 <h3>2.6<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 </section>
+<section id="sum-of-n-th-roots-of-unity">
+<h3>2.7 Sum of <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity<a class="headerlink" href="#sum-of-n-th-roots-of-unity" title="Link to this heading">#</a></h3>
+<!-- $$
+\sum_{k=0}^{n-1}\exp{\left(\frac{2k\pi i}{n}\right)} = \sum_{k=0}^{n-1}\left[\cos{\left(\frac{2k\pi}{n}\right)} + i\sin{\left(\frac{2k\pi}{n}\right)}\right]
+$$ -->
+<p>Recall that the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity have the property that the first <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> <span class="math notranslate nohighlight">\(n\)</span>-th roots are equal in magnitude but opposite in sign to the last <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span> <span class="math notranslate nohighlight">\(n\)</span>-th roots so the sum of the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity is <span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(n\)</span> is even. If <span class="math notranslate nohighlight">\(n\)</span> is odd then the sum equal to <span class="math notranslate nohighlight">\(w_n^{n-1}\)</span> as the first <span class="math notranslate nohighlight">\(n-1\)</span> roots still posses the property that the first <span class="math notranslate nohighlight">\(\frac{n-1}{2}\)</span> are equal in magnitude and opposite in sign to the <span class="math notranslate nohighlight">\(\frac{n-1}{2}\)</span>.</p>
+</section>
 <section id="id16">
-<h3>2.7<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<h3>2.12<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
 </section>
 <section id="id17">
-<h3>2.12<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<h3>2.14<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 </section>
 <section id="id18">
-<h3>2.14<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
-</section>
-<section id="id19">
-<h3>2.15<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<h3>2.15<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
 </section>
 <section id="a-i-i">
 <h3>2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span><a class="headerlink" href="#a-i-i" title="Link to this heading">#</a></h3>
 </section>
+<section id="id19">
+<h3>2.18<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+</section>
 <section id="id20">
-<h3>2.18<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<h3>2.19<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 </section>
 <section id="id21">
-<h3>2.19<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<h3>2.20<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
 </section>
 <section id="id22">
-<h3>2.20<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
-</section>
-<section id="id23">
-<h3>2.22<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<h3>2.22<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1392,6 +1478,7 @@ IPython version      : 8.22.2
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quicksort">Quicksort</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-fourier-transform">Fast Fourier transform</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representations-of-polynomials">Representations of polynomials</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-representation">Coefficient representation</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#value-representation">Value representation</a></li>
@@ -1399,6 +1486,10 @@ IPython version      : 8.22.2
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-unity">Roots of unity</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -1406,15 +1497,15 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.4</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.5</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.6</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.7</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.12</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.14</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-th-roots-of-unity">2.7 Sum of <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.15</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">2.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.22</a></li>
 </ul>
 </li>
 </ul>
