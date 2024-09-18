@@ -550,8 +550,8 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-transformation">Naive transformation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-unity">Roots of unity</a></li>
 </ul>
 </li>
@@ -1259,11 +1259,23 @@ a_E = (a_0,a_2,a_4,...,a_{n-2})
 <p>and the odd power coefficients into another vector</p>
 <div class="math notranslate nohighlight">
 \[
-a_O = (a_1,a_3,a_5,...,a_{n-1})
+a_O = (a_1,a_3,a_5,...,a_{n-1}).
 \]</div>
-</section>
+<p>We can then define two new polynomials, <span class="math notranslate nohighlight">\(A_E(y)\)</span> and <span class="math notranslate nohighlight">\(A_o(y)\)</span>, based on these two new vectors</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_E(y) = a_0 + a_2y + a_4y^2 + \cdots + a_{n-2}y^{\frac{n-2}{2}} \\
+A_O(y) = a_1 + a_3y + a_5y^2 + \cdots + a_{n-1}y^{\frac{n-2}{2}}
+\end{split}\]</div>
+<p>we use <span class="math notranslate nohighlight">\(y\)</span> to not create confusion for the explanation that follows later. Notice that we have <em>divided</em> this polynomial into two polynomials of degree <span class="math notranslate nohighlight">\(\frac{n-2}{2}=\frac{n}{2}-1\)</span>. So we have divided the problem into 2 subproblems of <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> the size.</p>
+<p>Now how do these polynomials relate to the original polynomial <span class="math notranslate nohighlight">\(A(x)\)</span>? Well if we evaluate <span class="math notranslate nohighlight">\(A_E(y)\)</span> with <span class="math notranslate nohighlight">\(y=x^2\)</span> we will get the even power terms of <span class="math notranslate nohighlight">\(A(x)\)</span>. We can see this if we notice that in <span class="math notranslate nohighlight">\(A_E(y)\)</span> the coefficients are associated with polynomials of half their original degree from <span class="math notranslate nohighlight">\(A(x)\)</span>.</p>
+<p>Now how do we recover the odd power terms of <span class="math notranslate nohighlight">\(A(x)\)</span>? By evaluating <span class="math notranslate nohighlight">\(xA_O(x^2)\)</span>. Now that we have a way of recovering both the even and odd power terms of <span class="math notranslate nohighlight">\(A(x)\)</span> we can write it in terms of <span class="math notranslate nohighlight">\(A_E(y)\)</span> and <span class="math notranslate nohighlight">\(A_o(y)\)</span> as follows</p>
+<div class="math notranslate nohighlight">
+\[
+A(x) = A_E(x^2) + xA_O(x^2)
+\]</div>
 <section id="complex-numbers">
-<h3>Complex numbers<a class="headerlink" href="#complex-numbers" title="Link to this heading">#</a></h3>
+<h4>Complex numbers<a class="headerlink" href="#complex-numbers" title="Link to this heading">#</a></h4>
 <p>Here I will list some facts about complex numbers that will be useful to know. A complex number is written as <span class="math notranslate nohighlight">\(z=a+ib\)</span>. And can be alternativly represented, using Euler’s formula, as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1274,6 +1286,7 @@ z&amp;=a+ib \\
 \end{align*}
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r = |z|\)</span> and <span class="math notranslate nohighlight">\(\theta=\tan^{-1}{\left(\frac{b}{a}\right)}\)</span> is the angle made by the vector <span class="math notranslate nohighlight">\(a+ib\)</span> in the complex plane with the positive real number line.</p>
+</section>
 <section id="roots-of-unity">
 <h4>Roots of unity<a class="headerlink" href="#roots-of-unity" title="Link to this heading">#</a></h4>
 <p>The <span class="math notranslate nohighlight">\(n\)</span>-th root of unity is the complex number <span class="math notranslate nohighlight">\(z\)</span> that satisfies</p>
@@ -1297,13 +1310,14 @@ z^n = 1
 \[
 (\omega^k_n)^2 = \omega^k_{\frac{n}{2}}.
 \]</div>
+<p>Note that if you intend to multiply two polynomials, <span class="math notranslate nohighlight">\(A(x)\)</span> and <span class="math notranslate nohighlight">\(B(x)\)</span>, of degree at most <span class="math notranslate nohighlight">\(n-1\)</span> you must use the <span class="math notranslate nohighlight">\(2n\)</span>-th roots of unity since the resulting polynomials <span class="math notranslate nohighlight">\(C(x)\)</span> will be of degree at most <span class="math notranslate nohighlight">\(2n-1\)</span>.</p>
 <div class="proof algorithm dropdown admonition" id="FFT">
 <p class="admonition-title"><span class="caption-number">Algorithm 9.10 </span> (Fast (Discrete) Fourier Transform)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{FFT}(a,\omega)\)</span>:</p>
 <p><strong>Inputs</strong> Given the coefficient representation <span class="math notranslate nohighlight">\(a=(a_0,a_1,...,a_{n-1})\)</span> of a <span class="math notranslate nohighlight">\(n-1\)</span> degree polynomial <span class="math notranslate nohighlight">\(A(x)\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is power of <span class="math notranslate nohighlight">\(2\)</span>
-and <span class="math notranslate nohighlight">\(\omega\)</span> is a primitive <span class="math notranslate nohighlight">\(n\)</span>-th root of unity</p>
-<p><strong>Output</strong> The polynomial evaluated at the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity i.e. it’s value representation denoted <span class="math notranslate nohighlight">\(M_n(\omega)a\)</span></p>
+and <span class="math notranslate nohighlight">\(\omega\)</span> is a primitive <span class="math notranslate nohighlight">\(n\)</span>-th root of unity.</p>
+<p><strong>Output</strong> The polynomial evaluated at the <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity i.e. it’s value representation <span class="math notranslate nohighlight">\((A(w_n^0),A(w_n^1),...,A(w_n^{n-1}))\)</span> denoted <span class="math notranslate nohighlight">\(M_n(\omega)a\)</span></p>
 <ol class="arabic simple">
 <li><p>if <span class="math notranslate nohighlight">\(\omega=1\)</span>:</p>
 <ol class="arabic simple">
@@ -1318,7 +1332,7 @@ and <span class="math notranslate nohighlight">\(\omega\)</span> is a primitive 
 <li><p><span class="math notranslate nohighlight">\(r_{j+\frac{n}{2}}=s_j-\omega^js_j'\)</span></p></li>
 </ol>
 </li>
-<li><p>return <span class="math notranslate nohighlight">\((r_0,r_1,...,r_{n-1})\)</span></p></li>
+<li><p>return <span class="math notranslate nohighlight">\((r_0,r_1,...,r_{n-1})\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> <span class="math notranslate nohighlight">\((r_0,r_1,...,r_{n-1})=(A(w_n^0),A(w_n^1),...,A(w_n^{n-1}))\)</span></p></li>
 </ol>
 </section>
 </div></section>
@@ -1485,8 +1499,8 @@ IPython version      : 8.22.2
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-transformation">Naive transformation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-set-x">Choosing the set <span class="math notranslate nohighlight">\(X\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">Complex numbers</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-unity">Roots of unity</a></li>
 </ul>
 </li>
