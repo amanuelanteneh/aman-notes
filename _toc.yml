@@ -95,6 +95,7 @@ parts:
       sections:
       - file: mathematics/abstract-algebra/group_theory
       - file: mathematics/abstract-algebra/representation_theory
+      - file: mathematics/abstract-algebra/bch
     
     - file: mathematics/linear-algebra/linear_algebra
       sections:
