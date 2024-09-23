@@ -755,8 +755,8 @@ r_{n_{\text{opt}}} = \max\left(p_n, r_{1_{\text{opt}}} + r_{(n-1)_{\text{opt}}},
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Where do we get the <span class="math notranslate nohighlight">\(O(2^n)\)</span> complexity from? It comes from the number of ways we can cut up the rod. It helps if we think of this in terms of integer compositions. For an integer <span class="math notranslate nohighlight">\(n\)</span> a composition is a way of writing <span class="math notranslate nohighlight">\(n\)</span> as a sum of <em>positive</em> integers i.e. integers greater than <span class="math notranslate nohighlight">\(0\)</span>. For example for  the number 3 the  possible compositions are <span class="math notranslate nohighlight">\(1+1+1\)</span>, <span class="math notranslate nohighlight">\(2+1\)</span>, <span class="math notranslate nohighlight">\(1+2\)</span> and <span class="math notranslate nohighlight">\(3\)</span>. It is clear that the number of compositions of the integer <span class="math notranslate nohighlight">\(n\)</span> are exactly equal to the number of ways we can cut up a rod of length <span class="math notranslate nohighlight">\(n\)</span>. So how can we derive the number of compositions of an integer <span class="math notranslate nohighlight">\(n\)</span>? From elementary combinatorics we know that the number of compositions of <span class="math notranslate nohighlight">\(n\)</span> into exactly <span class="math notranslate nohighlight">\(j\)</span> parts is <span class="math notranslate nohighlight">\({n-1 \choose j-1}\)</span>. To get the total number of compositions we can simply sum all values of <span class="math notranslate nohighlight">\(j\)</span> from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(n\)</span> and using the binomial theorem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-650e19ea-2dcb-479e-a0ee-27bde042b951">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-650e19ea-2dcb-479e-a0ee-27bde042b951" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3363c9af-bde9-48ae-8806-db5ef9b60a90">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-3363c9af-bde9-48ae-8806-db5ef9b60a90" title="Permalink to this equation">#</a></span>\[\begin{align}
 2^{n-1} &amp;= (1+1)^{n-1} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} 1^{n-1-k}1^{k} \\
 &amp;= \sum^{n-1}_{k=0}{n-1 \choose k} \\
@@ -1745,31 +1745,20 @@ Can &#39;ab&#39; be broken into a sequence of valid words from [&#39;a&#39;, &#3
 <p>Given a sequence</p>
 <div class="math notranslate nohighlight">
 \[
-s_n = a_1,a_2,a_3...,a_n
+X_n = a_1,a_2,a_3...,a_n
 \]</div>
-<p>The recurrence is thus</p>
+<p>let’s define <span class="math notranslate nohighlight">\(Y_n\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[
-T(i) = \max\left\{ \max_j\left\{1+T(j)| s_j=s_i\right\} ,\quad 1\right\}
+Y_n = a_n,a_{n-1},a_{n-2},...,a_1
 \]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p7</span><span class="p">():</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="longest-common-substring">
-<h3>6.8 Longest common substring<a class="headerlink" href="#longest-common-substring" title="Link to this heading">#</a></h3>
-<p>Since we must find the longest common <em>substring</em> this means the subsequences must be <em>contiguous</em>. This means when we encounter a pair of elements that don’t match we simply reset the length of the LCS to 0 instead of taking the max of one of the solutions to the two smaller subproblems <span class="math notranslate nohighlight">\(X_{1:i-1},Y_{1:j}\)</span> and <span class="math notranslate nohighlight">\(X_{1:i},Y_{1:j-1}\)</span>.</p>
-<p>The recurrence for this problem is thus:</p>
+<p>That is <span class="math notranslate nohighlight">\(Y_n\)</span> is the reverse of the string <span class="math notranslate nohighlight">\(X_n\)</span>. The longest common subsequence between <span class="math notranslate nohighlight">\(X_n\)</span> and <span class="math notranslate nohighlight">\(Y_n\)</span> will be our longest common palindromic subsequence of <span class="math notranslate nohighlight">\(X_n\)</span>. Think about it; it’s true.</p>
+<p>The recurrence is thus</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-L_{i,j}^s = \begin{cases}
-0 &amp;\quad \text{if} \quad x_i\not=y_j\\
-L_{i-1,j-1}^s+1 &amp;\quad \text{if} \quad x_i=y_j
+L_{i,j} = \begin{cases}
+\max\{L_{i,j-1}, L_{i-1,j}\} &amp;\quad \text{if} \quad x_i\not=y_j\\
+L_{i-1,j-1}+1 &amp;\quad \text{if} \quad x_i=y_j'
 \end{cases} \quad \text{where} \quad 1\leq i\leq n, \quad  1\leq j\leq m
 \end{split}\]</div>
 <p>The base cases are</p>
@@ -1778,6 +1767,34 @@ L_{i-1,j-1}^s+1 &amp;\quad \text{if} \quad x_i=y_j
 L_{i,0} = 0 \quad \text{where} \quad 1\leq i\leq n \\
 L_{0,j} = 0 \quad \text{where} \quad  1\leq j\leq m
 \end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p7</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The complexity is clearly <span class="math notranslate nohighlight">\(O(nm)\)</span> as there are <span class="math notranslate nohighlight">\(nm\)</span> table entries and it takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to fill in/compute each one.</p>
+</section>
+<section id="longest-common-substring">
+<h3>6.8 Longest common substring<a class="headerlink" href="#longest-common-substring" title="Link to this heading">#</a></h3>
+<p>Since we must find the longest common <em>substring</em> this means the subsequences must be <em>contiguous</em>. This means when we encounter a pair of elements that don’t match we simply reset the length of the LCS to 0 instead of taking the max of one of the solutions to the two smaller subproblems <span class="math notranslate nohighlight">\(X_{1:i-1},Y_{1:j}\)</span> and <span class="math notranslate nohighlight">\(X_{1:i},Y_{1:j-1}\)</span>.</p>
+<p>The recurrence for this problem is thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_{i,j} = \begin{cases}
+0 &amp;\quad \text{if} \quad x_i\not=y_j\\
+L_{i-1,j-1}+1 &amp;\quad \text{if} \quad x_i=y_j
+\end{cases} \quad \text{where} \quad 1\leq i\leq n, \quad  1\leq j\leq m
+\end{split}\]</div>
+<p>The base cases are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L_{i,0} = 0 \quad \text{where} \quad 1\leq i\leq n \\
+L_{0,j} = 0 \quad \text{where} \quad  1\leq j\leq m
+\end{split}\]</div>
+<p>Note that in this case we must return the maximum element in the table not just the bottom corner element of the table since we could have <span class="math notranslate nohighlight">\(x_n\not=y_n\)</span> in which case the bottom corner element would be 0 but there could be another element which is not <span class="math notranslate nohighlight">\(0\)</span> in the previous entries of the table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p8</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">):</span>
@@ -1796,11 +1813,12 @@ L_{0,j} = 0 \quad \text{where} \quad  1\leq j\leq m
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     
-    <span class="k">return</span> <span class="n">L</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">m</span><span class="p">]</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span> <span class="p">[</span> <span class="nb">max</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">]</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The complexity is clearly <span class="math notranslate nohighlight">\(O(nm)\)</span> as there are <span class="math notranslate nohighlight">\(nm\)</span> table entries and it takes <span class="math notranslate nohighlight">\(O(1)\)</span> time to fill in/compute each one.</p>
 </section>
 <section id="id15">
 <h3>6.11 Longest common subsequence<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
