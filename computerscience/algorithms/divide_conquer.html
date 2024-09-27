@@ -566,12 +566,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-th-roots-of-unity">2.7 Sum of <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.12</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.14</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-place-split">2.15 In-place split</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-with-two-sorted-lists">2.22 Selection with two sorted lists</a></li>
 </ul>
 </li>
 </ul>
@@ -699,7 +699,7 @@ T(n) = 4T\left(\frac{n}{2}\right) + O(n)
 <div class="proof algorithm dropdown admonition" id="gauss-int-mult">
 <p class="admonition-title"><span class="caption-number">Algorithm 9.4 </span> (Integer Multiplication)</p>
 <section class="algorithm-content" id="proof-content">
-<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{gauss_int_mult}(x,y,n)\)</span>:</p>
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{fast_int_mult}(x,y,n)\)</span>:</p>
 <p><strong>Inputs</strong> Given <span class="math notranslate nohighlight">\(n\)</span>-bit integers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span></p>
 <p><strong>Output</strong> Their integer product <span class="math notranslate nohighlight">\(xy\)</span></p>
 <ol class="arabic simple">
@@ -1366,23 +1366,26 @@ $$ -->
 <section id="id17">
 <h3>2.14<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
 </section>
-<section id="id18">
-<h3>2.15<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<section id="in-place-split">
+<h3>2.15 In-place split<a class="headerlink" href="#in-place-split" title="Link to this heading">#</a></h3>
 </section>
 <section id="a-i-i">
 <h3>2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span><a class="headerlink" href="#a-i-i" title="Link to this heading">#</a></h3>
 </section>
+<section id="id18">
+<h3>2.18<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+</section>
 <section id="id19">
-<h3>2.18<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<h3>2.19<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
 </section>
 <section id="id20">
-<h3>2.19<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<h3>2.20<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
 </section>
-<section id="id21">
-<h3>2.20<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
-</section>
-<section id="id22">
-<h3>2.22<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<section id="selection-with-two-sorted-lists">
+<h3>2.22 Selection with two sorted lists<a class="headerlink" href="#selection-with-two-sorted-lists" title="Link to this heading">#</a></h3>
+<p>We have two lists <span class="math notranslate nohighlight">\(A=a_1,...,a_n\)</span> and <span class="math notranslate nohighlight">\(B=b_1,...,b_m\)</span> that are sorted in non-descending order and we want to find the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element in the union (combination) of these two lists. The straightforward method is to simply concatenate the lists and use either FastSelect which is <span class="math notranslate nohighlight">\(\Theta(n+m)\)</span> time or QuickSelect which is <span class="math notranslate nohighlight">\(O(n+m)\)</span> expected time. But the problem wants us to do this in <span class="math notranslate nohighlight">\(O(\log(n)+\log(m))\)</span> time. This makes me think we need to use concepts from merge sorts merge step, since the arrays are sorted, and the concepts from the selection algorithm since we want to find the <span class="math notranslate nohighlight">\(k\)</span>-th smallest number.</p>
+<p>We’ll have to utilize the fact that the two lists are sorted to solve this problem. Let’s start by asking where the <em>smallest</em> element in the union would be. Well it’s going to either be <span class="math notranslate nohighlight">\(a_1\)</span> or <span class="math notranslate nohighlight">\(b_1\)</span> since those are the smallest elements from the two respective lists.</p>
+<p>Now let <span class="math notranslate nohighlight">\(M_m\)</span> and <span class="math notranslate nohighlight">\(M_n\)</span> be the index of the middle of list <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> respectively. If <span class="math notranslate nohighlight">\(M_m + M_n \geq k\)</span> what does that tell us? By extending our thought experiment from above we can conclude that the <span class="math notranslate nohighlight">\(k\)</span>-th smallest element must be</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1515,12 +1518,12 @@ IPython version      : 8.22.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-th-roots-of-unity">2.7 Sum of <span class="math notranslate nohighlight">\(n\)</span>-th roots of unity</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.12</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">2.14</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.15</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-place-split">2.15 In-place split</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-i-i">2.17 <span class="math notranslate nohighlight">\(A[i]=i\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.18</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.19</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">2.20</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">2.22</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">2.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">2.19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-with-two-sorted-lists">2.22 Selection with two sorted lists</a></li>
 </ul>
 </li>
 </ul>
