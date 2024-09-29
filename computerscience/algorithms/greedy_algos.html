@@ -58,12 +58,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/greedy_algos';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="10. Optimization" href="../optimization/optimization.html" />
-    <link rel="prev" title="Linear programming" href="linear_prog.html" />
+    <link rel="next" title="Max flow algorithms" href="max_flow.html" />
+    <link rel="prev" title="Graph algorithms" href="graph_algos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -203,29 +205,73 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">6. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">7. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/discrete-math/discrete_math.html">8. Discrete Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/sets.html">Set theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html">Graph theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">9. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/bch.html">Baker–Campbell–Hausdorff formula</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">10. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/matrix-calc/matrix_calc.html">11. Matrix Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/matrix-calc/vec_mat_deriv.html">Vector and matrix derivatives</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_calc.html">12. Stochastic Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_diff_eq.html">Stochastic differential equations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">13. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">15. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditional distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
+</ul>
+</details></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">6. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../data_structs.html">7. Data Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lazy_eval.html">8. Lazy Evaluation</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">9. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">16. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_structs.html">17. Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lazy_eval.html">18. Lazy Evaluation</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">19. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide &amp; conquer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Greedy algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Greedy algorithms</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">10. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">20. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../optimization/semidef_prog.html">Semidefinite programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../optimization/quad_prog.html">Quadratic programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../optimization/bayes_opt.html">Bayesian optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">21. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
@@ -236,84 +282,45 @@
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">12. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../deep-learning/conv_net.html">Convolutional neural network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deep-learning/rnn.html">Recurrent neural network</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement-learning/reinforcement_learning.html">13. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement-learning/reinforcement_learning.html">23. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reinforcement-learning/ppo.html">Proximal policy optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum-comp/quantum_comp.html">14. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum-comp/quantum_comp.html">24. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../quantum-comp/bern_vazirani.html">Bernstein–Vazirani algorithm</a></li>
-</ul>
-</details></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">15. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">16. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">17. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/bch.html">Baker–Campbell–Hausdorff formula</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">18. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/matrix-calc/matrix_calc.html">19. Matrix Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/matrix-calc/vec_mat_deriv.html">Vector and matrix derivatives</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_calc.html">20. Stochastic Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_diff_eq.html">Stochastic differential equations</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">21. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">22. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">23. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditional distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">24. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">25. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">25. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">26. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">26. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">27. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling_methods.html">27. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling_methods.html">28. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">28. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">29. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">29. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">30. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
 </ul>
@@ -321,7 +328,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">30. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">31. Bibliography</a></li>
 </ul>
 
     </div>
@@ -494,7 +501,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -510,6 +519,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-selection-problem">Activity-selection problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -521,6 +539,24 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="greedy-algorithms">
 <h1>Greedy algorithms<a class="headerlink" href="#greedy-algorithms" title="Link to this heading">#</a></h1>
+<p>Greedy algorithms are those which solve a problem by making <em>locally</em> optimal choices at each step of the algorithm. For example for the knapsack problem a greedy algorithm would scan the list of items and add the item with the highest value to weight ratio to the knapsack (assuming the item can fit). It would then repeat this process until there was no capacity left in the knapsack. This approach is pretty simple and straightforward but we shouldn’t be surprised that for the knapsack problem it does not work. Remarkably however there are many other problems where a greedy approach <em>does</em> work. The important part of devising a greedy algorithm is proving that the greedy choice is in fact the optimal choice not just locally but <em>globally</em> as well.</p>
+<section id="activity-selection-problem">
+<h2>Activity-selection problem<a class="headerlink" href="#activity-selection-problem" title="Link to this heading">#</a></h2>
+</section>
+<section id="kruskals-algorithm">
+<h2>Kruskal’s algorithm<a class="headerlink" href="#kruskals-algorithm" title="Link to this heading">#</a></h2>
+<p>An example of a greedy algorithm is Kruskal’s algorithm for finding a minimum spanning tree (MST) of an undirected graph <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<div class="proof definition admonition" id="mst-def">
+<p class="admonition-title"><span class="caption-number">Definition 19.1 </span></p>
+<section class="definition-content" id="proof-content">
+<p>The <em>minimum spanning tree</em> of an undirected weighted graph <span class="math notranslate nohighlight">\(G\)</span> is the a subset <span class="math notranslate nohighlight">\(E'\)</span> of the edges <span class="math notranslate nohighlight">\(E\)</span> that connects all vertices and contains no cycles and has the minium possible total edge weight i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{e\in E'} w(e)
+\]</div>
+<p>is minimized where <span class="math notranslate nohighlight">\(w(e)\)</span> denotes the weight of edge <span class="math notranslate nohighlight">\(e\)</span>.</p>
+</section>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -554,20 +590,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="linear_prog.html"
+       href="graph_algos.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Linear programming</p>
+        <p class="prev-next-title">Graph algorithms</p>
       </div>
     </a>
     <a class="right-next"
-       href="../optimization/optimization.html"
+       href="max_flow.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Optimization</p>
+        <p class="prev-next-title">Max flow algorithms</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -577,6 +613,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-selection-problem">Activity-selection problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

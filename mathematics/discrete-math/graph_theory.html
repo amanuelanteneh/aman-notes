@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>14. Complex Analysis &#8212; Amanuel&#39;s Notebook</title>
+    <title>Graph theory &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,12 +58,14 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'mathematics/complex-analysis/complex_analysis';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mathematics/discrete-math/graph_theory';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Contour integration" href="contour_int.html" />
-    <link rel="prev" title="Wave equation" href="../differential-equations/wave_eq.html" />
+    <link rel="next" title="9. Abstract Algebra" href="../abstract-algebra/algebra.html" />
+    <link rel="prev" title="Set theory" href="sets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -210,9 +212,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../vector-calc/gradient.html">Gradient</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../discrete-math/discrete_math.html">8. Discrete Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../discrete-math/sets.html">Set theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../discrete-math/graph_theory.html">Graph theory</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="discrete_math.html">8. Discrete Mathematics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sets.html">Set theory</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Graph theory</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../abstract-algebra/algebra.html">9. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -237,8 +239,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../differential-equations/wave_eq.html">Wave equation</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">14. Complex Analysis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="contour_int.html">Contour integration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../complex-analysis/contour_int.html">Contour integration</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../probability/probability.html">15. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -398,7 +400,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fmathematics/complex-analysis/complex_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fmathematics/discrete-math/graph_theory.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -428,7 +430,7 @@
       
       
       
-      <li><a href="../../_sources/mathematics/complex-analysis/complex_analysis.md" target="_blank"
+      <li><a href="../../_sources/mathematics/discrete-math/graph_theory.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -438,7 +440,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -499,7 +501,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -510,11 +514,34 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Complex Analysis</h1>
+    <h1>Graph theory</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix">Adjacency matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">Connectivity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graphs">Undirected graphs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graphs">Directed graphs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycles">Cycles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-graphs">Types of graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees">Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-acyclic-graph">Directed acyclic graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-graphs">Regular graphs</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -524,10 +551,217 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="complex-analysis">
-<h1><span class="section-number">14. </span>Complex Analysis<a class="headerlink" href="#complex-analysis" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="graph-theory">
+<h1>Graph theory<a class="headerlink" href="#graph-theory" title="Link to this heading">#</a></h1>
+<p>A graph <span class="math notranslate nohighlight">\(G\)</span> is a set of vertices (nodes) <span class="math notranslate nohighlight">\(V\)</span> together with a set of edges <span class="math notranslate nohighlight">\(E\)</span> that connect the nodes. So if a graph has two nodes <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> in it’s vertex set then we denote that there is an edge between <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> by having the element <span class="math notranslate nohighlight">\((v_1,v_2)\)</span> in the edge set <span class="math notranslate nohighlight">\(E\)</span>. For example for the vertex set <span class="math notranslate nohighlight">\(V=\{1,2,3,4\}\)</span> and the edge set <span class="math notranslate nohighlight">\(E=\{(1,2), (2,3), (1,3), (2,4)\}\)</span> the graph <span class="math notranslate nohighlight">\(G := \{V,E\}\)</span> looks like</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">syp</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;font_size&quot;</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+    <span class="s2">&quot;node_size&quot;</span><span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
+    <span class="s2">&quot;node_color&quot;</span><span class="p">:</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;edgecolors&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;linewidths&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;font_family&quot;</span><span class="p">:</span> <span class="s2">&quot;sans&quot;</span>
+<span class="p">}</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="c1"># explicitly set node positions</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/76d0d83ca3359103ec1897b06cacfe04ae20c335874817555aa7dd8e7a5d62db.png" src="../../_images/76d0d83ca3359103ec1897b06cacfe04ae20c335874817555aa7dd8e7a5d62db.png" />
+</div>
+</div>
+<p>Graphs can also be <em>direct</em> meaning the edges point from one node to another for example the edge <span class="math notranslate nohighlight">\((1,2)\)</span> denotes that there is an edge connecting nodes 1 and 2 that points from node 1 to node 2. The graph <span class="math notranslate nohighlight">\(G= {V, E}\)</span> where <span class="math notranslate nohighlight">\(V=\{1,2,3,4\}\)</span> and <span class="math notranslate nohighlight">\(E=\{(1,2), (2,3), (1,3), (2,4)\}\)</span> is shown below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DiG</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
+<span class="n">DiG</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">DiG</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">DiG</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/5b3dbaa7110e6ecb3d335595fcd917d90202a5c06d33d2ef0806ab83675e3826.png" src="../../_images/5b3dbaa7110e6ecb3d335595fcd917d90202a5c06d33d2ef0806ab83675e3826.png" />
+</div>
+</div>
+<p>The edges of graphs can also have an attribute associated with it. Most often this attribute is numerical and called the <em>weight</em> of an edge.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G_weighted</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">}),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.2</span><span class="p">}),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">4.4</span><span class="p">}),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">3.9</span><span class="p">})]</span>
+<span class="n">G_weighted</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">G_weighted</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+<span class="c1"># explicitly set node positions</span>
+<span class="c1"># G[i][j] returns edge data of edge (i,j)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span>
+    <span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> 
+    <span class="n">edge_labels</span><span class="o">=</span><span class="p">{</span> <span class="n">E</span> <span class="p">:</span> <span class="n">G_weighted</span><span class="p">[</span><span class="n">E</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">E</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>  <span class="k">for</span> <span class="n">E</span> <span class="ow">in</span> <span class="n">G_weighted</span><span class="o">.</span><span class="n">edges</span><span class="p">()},</span> <span class="c1"># loop trough edges and make dict { edge: weight }</span>
+    <span class="n">font_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/afd6c306651d84da4d72bd625b011eb746495267a6080bd45e0e2f42d751f1a8.png" src="../../_images/afd6c306651d84da4d72bd625b011eb746495267a6080bd45e0e2f42d751f1a8.png" />
+</div>
+</div>
+<section id="adjacency-matrix">
+<h2>Adjacency matrix<a class="headerlink" href="#adjacency-matrix" title="Link to this heading">#</a></h2>
+<p>While representing graphs pictorially is useful for visualization it is not straightforward to work with mathematically or in code. Thus it is important to have ways of representing graphs that are easier to work with in this regard. The main way of represent a graph we will go over is by an adjacency matrix.</p>
+<p>For a graph with <span class="math notranslate nohighlight">\(n\)</span> nodes the adjacency matrix <span class="math notranslate nohighlight">\(A\)</span> of an <em>undirected</em> graph <span class="math notranslate nohighlight">\(G\)</span> is a <span class="math notranslate nohighlight">\(n\times n\)</span> matrix where the element <span class="math notranslate nohighlight">\(A_{ij}=1\)</span> if there is an edge between node <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(0\)</span> if there is no edge. This immediately implies that the adjacency matrix of undirected graphs is symmetric i.e. <span class="math notranslate nohighlight">\(A_{ij}=A_{ji}\)</span>. For example the adjacency matrix of the undirected graph shown above is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">syp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 1.0 &amp; 1.0 &amp; 0\\1.0 &amp; 0 &amp; 1.0 &amp; 1.0\\1.0 &amp; 1.0 &amp; 0 &amp; 0\\0 &amp; 1.0 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>And the adjacency matrix of the directed graph shown above is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">DiG</span><span class="p">)</span>
+<span class="n">syp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 1.0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1.0 &amp; 0\\1.0 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 1.0 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>And the adjacency matrix of the weighted undirected graph shown above is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_numpy_array</span><span class="p">(</span><span class="n">G_weighted</span><span class="p">)</span>
+<span class="n">syp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \left[\begin{matrix}0 &amp; 2.5 &amp; 4.4 &amp; 0\\2.5 &amp; 0 &amp; 1.2 &amp; 3.9\\4.4 &amp; 1.2 &amp; 0 &amp; 0\\0 &amp; 3.9 &amp; 0 &amp; 0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="graph-properties">
+<h2>Graph properties<a class="headerlink" href="#graph-properties" title="Link to this heading">#</a></h2>
+<section id="connectivity">
+<h3>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">#</a></h3>
+<section id="undirected-graphs">
+<h4>Undirected graphs<a class="headerlink" href="#undirected-graphs" title="Link to this heading">#</a></h4>
+<p>For undirected graphs a graph is called connected if there is a path from node <span class="math notranslate nohighlight">\(u\)</span> to node <span class="math notranslate nohighlight">\(v\)</span> for all pairs <span class="math notranslate nohighlight">\((u,v)\in V\)</span>. It’s easy to visually see if a graph is not connected since there will be multiple (at least <span class="math notranslate nohighlight">\(2\)</span>) graphs that share no edge between them in the picture.</p>
+</section>
+<section id="directed-graphs">
+<h4>Directed graphs<a class="headerlink" href="#directed-graphs" title="Link to this heading">#</a></h4>
+<p>For directed graphs there are some nuances since it is possible for there to exist a path from node <span class="math notranslate nohighlight">\(u\)</span> to node <span class="math notranslate nohighlight">\(v\)</span> but <em>not</em> one that goes from <span class="math notranslate nohighlight">\(v\)</span> to <span class="math notranslate nohighlight">\(u\)</span>. A directed graph is called <em>weakly</em> connected if it’s undirected version is connected. The undirected version is created by simply swapping all the edges with undirected ones thereby creating an undirected graph. A directed graph is called <em>strongly</em> connected if there is a path from node <span class="math notranslate nohighlight">\(u\)</span> to node <span class="math notranslate nohighlight">\(v\)</span> <em>and</em> a path from node <span class="math notranslate nohighlight">\(v\)</span> to node <span class="math notranslate nohighlight">\(u\)</span> for all pairs <span class="math notranslate nohighlight">\((u,v)\in V\)</span>.</p>
+</section>
+</section>
+<section id="cycles">
+<h3>Cycles<a class="headerlink" href="#cycles" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="types-of-graphs">
+<h2>Types of graphs<a class="headerlink" href="#types-of-graphs" title="Link to this heading">#</a></h2>
+<section id="trees">
+<h3>Trees<a class="headerlink" href="#trees" title="Link to this heading">#</a></h3>
+<p>A tree is any connected acyclic graph and has the following properties:</p>
+<ol class="arabic simple">
+<li><p>A tree of <span class="math notranslate nohighlight">\(n\)</span> nodes has <span class="math notranslate nohighlight">\(n-1\)</span> edges</p></li>
+<li><p>There is exactly 1 path between any two nodes in the tree.</p></li>
+<li><p>Any connected graph with <span class="math notranslate nohighlight">\(|V|-1\)</span> edges is a tree.</p></li>
+</ol>
+</section>
+<section id="directed-acyclic-graph">
+<h3>Directed acyclic graph<a class="headerlink" href="#directed-acyclic-graph" title="Link to this heading">#</a></h3>
+<p>A directed acyclic graph (DAG) is</p>
+</section>
+<section id="regular-graphs">
+<h3>Regular graphs<a class="headerlink" href="#regular-graphs" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+Last updated: Sun Sep 29 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+matplotlib: 3.7.4
+networkx  : 3.2.1
+sympy     : 1.12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -543,7 +777,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./mathematics/complex-analysis"
+            path: "./mathematics/discrete-math"
         },
         predefinedOutput: true
     }
@@ -561,20 +795,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../differential-equations/wave_eq.html"
+       href="sets.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Wave equation</p>
+        <p class="prev-next-title">Set theory</p>
       </div>
     </a>
     <a class="right-next"
-       href="contour_int.html"
+       href="../abstract-algebra/algebra.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contour integration</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Abstract Algebra</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -584,6 +818,36 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix">Adjacency matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-properties">Graph properties</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connectivity">Connectivity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#undirected-graphs">Undirected graphs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graphs">Directed graphs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycles">Cycles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-graphs">Types of graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees">Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-acyclic-graph">Directed acyclic graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-graphs">Regular graphs</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
