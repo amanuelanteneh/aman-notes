@@ -33,6 +33,53 @@ parts:
       - file: physics/stat-mech/partition_func
       - file: physics/stat-mech/grand_can_ens
   
+
+  - caption: Mathematics
+    numbered: 1
+    chapters:
+    - file: mathematics/intro
+
+    - file: mathematics/vector-calc/vector_calc
+      sections:
+      - file: mathematics/vector-calc/gradient
+    
+    - file: mathematics/discrete-math/discrete_math
+      sections:
+      - file: mathematics/discrete-math/sets
+      - file: mathematics/discrete-math/graph_theory
+
+    - file: mathematics/abstract-algebra/algebra
+      sections:
+      - file: mathematics/abstract-algebra/group_theory
+      - file: mathematics/abstract-algebra/representation_theory
+      - file: mathematics/abstract-algebra/bch
+    
+    - file: mathematics/linear-algebra/linear_algebra
+      sections:
+      - file: mathematics/linear-algebra/change_basis
+    
+    - file: mathematics/matrix-calc/matrix_calc
+      sections:
+      - file: mathematics/matrix-calc/vec_mat_deriv
+    
+    - file: mathematics/stoc-calc/stoc_calc
+      sections:
+      - file: mathematics/stoc-calc/stoc_diff_eq
+    
+    - file: mathematics/differential-equations/diff_eq
+      sections:
+      - file: mathematics/differential-equations/wave_eq
+    
+    - file: mathematics/complex-analysis/complex_analysis
+      sections:
+      - file: mathematics/complex-analysis/contour_int
+    
+    - file: mathematics/probability/probability
+      sections:
+      - file:  mathematics/probability/conditioning
+      - file:  mathematics/probability/joint
+
+
   - caption: Computer Science
     numbered: 1
     chapters:
@@ -82,45 +129,6 @@ parts:
       sections:
       - file: computerscience/quantum-comp/bern_vazirani
 
-  - caption: Mathematics
-    numbered: 1
-    chapters:
-    - file: mathematics/intro
-    
-    - file: mathematics/vector-calc/vector_calc
-      sections:
-      - file: mathematics/vector-calc/gradient
-    
-    - file: mathematics/abstract-algebra/algebra
-      sections:
-      - file: mathematics/abstract-algebra/group_theory
-      - file: mathematics/abstract-algebra/representation_theory
-      - file: mathematics/abstract-algebra/bch
-    
-    - file: mathematics/linear-algebra/linear_algebra
-      sections:
-      - file: mathematics/linear-algebra/change_basis
-    
-    - file: mathematics/matrix-calc/matrix_calc
-      sections:
-      - file: mathematics/matrix-calc/vec_mat_deriv
-    
-    - file: mathematics/stoc-calc/stoc_calc
-      sections:
-      - file: mathematics/stoc-calc/stoc_diff_eq
-    
-    - file: mathematics/differential-equations/diff_eq
-      sections:
-      - file: mathematics/differential-equations/wave_eq
-    
-    - file: mathematics/complex-analysis/complex_analysis
-      sections:
-      - file: mathematics/complex-analysis/contour_int
-    
-    - file: mathematics/probability/probability
-      sections:
-      - file:  mathematics/probability/conditioning
-      - file:  mathematics/probability/joint
   
   - caption: Statistics
     numbered: 1
