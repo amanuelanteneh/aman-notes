@@ -552,7 +552,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-3-25-minimum-cost-node">DPV 3.25 Minimum cost node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-graph">3.5 Reverse a graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
 </ul>
 </li>
 </ul>
@@ -666,8 +668,9 @@ document.write(`
 <h2>Graph traversal<a class="headerlink" href="#graph-traversal" title="Link to this heading">#</a></h2>
 <section id="depth-first-search-dfs">
 <h3>Depth first search (DFS)<a class="headerlink" href="#depth-first-search-dfs" title="Link to this heading">#</a></h3>
-<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored edges from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored edges.</p>
-<p>Used to find connected components.</p>
+<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored edges from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored edges. Uses a stack.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
+<p>CAn be used to find connected components. Will label each node with it’s connected component number. When used on a DAG it returns a topological ordering of the nodes so can be used to topologically sort a graph.</p>
 <div class="proof algorithm dropdown admonition" id="explore">
 <p class="admonition-title"><span class="caption-number">Algorithm 19.11 </span> (Explore)</p>
 <section class="algorithm-content" id="proof-content">
@@ -718,20 +721,7 @@ document.write(`
 <h3>Breadth first search (BFS)<a class="headerlink" href="#breadth-first-search-bfs" title="Link to this heading">#</a></h3>
 <p>BFS explores the graph in layers.
 Returns the minimum number of edges one must traverse to get from a starting node <span class="math notranslate nohighlight">\(s\)</span> to all other nodes. If there is no path from <span class="math notranslate nohighlight">\(s\)</span> to a node <span class="math notranslate nohighlight">\(t\)</span> then the minimum number of edges one must traverse is set to <span class="math notranslate nohighlight">\(\infty\)</span>. BFS utilizes a min heap (also called a priority queue).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adj_lst</span> <span class="o">=</span> <span class="n">adjlist_as_dict</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">adj_lst</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;1&#39;: [&#39;2&#39;, &#39;3&#39;], &#39;2&#39;: [&#39;1&#39;, &#39;3&#39;, &#39;4&#39;], &#39;3&#39;: [&#39;2&#39;, &#39;1&#39;], &#39;4&#39;: [&#39;2&#39;]}
-</pre></div>
-</div>
-</div>
-</div>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
 </section>
 </section>
 <section id="shortest-paths">
@@ -739,18 +729,23 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 <section id="dijkstras-algorithm">
 <h3>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h3>
 <p>Sort of a generalization of BFS but works on weighted graphs where the edge weights are positive.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|\log{(|V|)}+|E|\log{(|V|)})\)</span></p>
 </section>
 <section id="bellman-ford-algorithm">
 <h3>Bellman-Ford algorithm<a class="headerlink" href="#bellman-ford-algorithm" title="Link to this heading">#</a></h3>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V||E|)\)</span></p>
 </section>
 <section id="floydwarshall-algorithm">
 <h3>Floyd–Warshall algorithm<a class="headerlink" href="#floydwarshall-algorithm" title="Link to this heading">#</a></h3>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span></p>
 </section>
 </section>
 <section id="strongly-connected-components">
 <h2>Strongly connected components<a class="headerlink" href="#strongly-connected-components" title="Link to this heading">#</a></h2>
 <section id="kosarajus-algorithm">
 <h3>Kosaraju’s algorithm<a class="headerlink" href="#kosarajus-algorithm" title="Link to this heading">#</a></h3>
+<p>This algorithm outputs a meta-graph where the nodes correspond to strongly connected components (SCCs) of the graph <span class="math notranslate nohighlight">\(G\)</span> and the edges <span class="math notranslate nohighlight">\((u,v)\)</span> denote that there is a path from all nodes in SCC <span class="math notranslate nohighlight">\(u\)</span> to all nodes in SCC <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span> which is the same as DFS/BFS since we simply run DFS on <span class="math notranslate nohighlight">\(G^R\)</span> and DFS on <span class="math notranslate nohighlight">\(G\)</span>.</p>
 </section>
 </section>
 <section id="minimum-spanning-trees">
@@ -758,9 +753,11 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 <p>The definition of a minimum spanning tree is covered <a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html"><span class="std std-doc">here</span></a> but how can we find the MST of an arbitrary weighted undirected graph?</p>
 <section id="kruskals-algorithm">
 <h3>Kruskal’s algorithm<a class="headerlink" href="#kruskals-algorithm" title="Link to this heading">#</a></h3>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|E|\log{(|V|)})\)</span></p>
 </section>
 <section id="prims-algorithm">
 <h3>Prim’s algorithm<a class="headerlink" href="#prims-algorithm" title="Link to this heading">#</a></h3>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|\log{(|V|)}+|E|\log{(|V|)})\)</span></p>
 </section>
 </section>
 <section id="max-flow">
@@ -774,8 +771,23 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<section id="dpv-3-25-minimum-cost-node">
-<h3>DPV 3.25 Minimum cost node<a class="headerlink" href="#dpv-3-25-minimum-cost-node" title="Link to this heading">#</a></h3>
+<section id="reverse-a-graph">
+<h3>3.5 Reverse a graph<a class="headerlink" href="#reverse-a-graph" title="Link to this heading">#</a></h3>
+<p>Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span></p>
+<ol class="arabic simple">
+<li><p>Create a new empty adjacency list <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+<li><p>Iterate over the nodes in the <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+<li><p>When on node <span class="math notranslate nohighlight">\(u\)</span> check all of its neighbors. For a given neighbor <span class="math notranslate nohighlight">\(w\)</span> add <span class="math notranslate nohighlight">\(u\)</span> to the edge list of <span class="math notranslate nohighlight">\(w\)</span> in the new adjacency list <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
+</ol>
+<p>At the end <span class="math notranslate nohighlight">\(L\)</span> will have all edges of <span class="math notranslate nohighlight">\(G\)</span> but reversed. This takes <span class="math notranslate nohighlight">\(O(|E|+|V|)\)</span> time since we must iterate over all nodes and their respective edges. Not sure if there is a way to do this in-place at the moment.</p>
+</section>
+<section id="computopia">
+<h3>3.15 Computopia<a class="headerlink" href="#computopia" title="Link to this heading">#</a></h3>
+<p>a) To formulate this as a graph problem we represent the intersections in the city as nodes and the streets that connect them as <em>directed</em> edges. To solve this problem we just need to show that the graph has exactly 1 strongly connected component i.e. there is a path from intersection <span class="math notranslate nohighlight">\(u\)</span> to intersection <span class="math notranslate nohighlight">\(v\)</span> and path from intersection <span class="math notranslate nohighlight">\(v\)</span> to intersection <span class="math notranslate nohighlight">\(u\)</span> for all nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the graph. This can be checked using Kosaraju’s algorithm to get the meta-graph, which is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span>, and checking that it contains only one node which is <span class="math notranslate nohighlight">\(O(1)\)</span>.</p>
+<p>b) This is equivalent to saying no matter what node you are on in the graph there is a path to get to node <span class="math notranslate nohighlight">\(t\)</span> (the town hall).</p>
+</section>
+<section id="minimum-cost-node">
+<h3>3.25 Minimum cost node<a class="headerlink" href="#minimum-cost-node" title="Link to this heading">#</a></h3>
 <p>a)</p>
 <p>b)</p>
 <div class="cell docutils container">
@@ -896,7 +908,9 @@ sympy     : 1.12
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dpv-3-25-minimum-cost-node">DPV 3.25 Minimum cost node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-graph">3.5 Reverse a graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
 </ul>
 </li>
 </ul>
