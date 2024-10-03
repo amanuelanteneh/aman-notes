@@ -46,6 +46,7 @@ parts:
     - file: mathematics/discrete-math/discrete_math
       sections:
       - file: mathematics/discrete-math/sets
+      - file: mathematics/discrete-math/relations
       - file: mathematics/discrete-math/graph_theory
 
     - file: mathematics/abstract-algebra/algebra
@@ -94,10 +95,10 @@ parts:
       - file: computerscience/algorithms/divide_conquer
       - file: computerscience/algorithms/dynamic_prog
       - file: computerscience/algorithms/graph_algos
+      - file: computerscience/algorithms/greedy_algos
       - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
-      - file: computerscience/algorithms/greedy_algos
     
     - file: computerscience/optimization/optimization
       sections:
