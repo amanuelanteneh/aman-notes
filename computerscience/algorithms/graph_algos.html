@@ -547,14 +547,21 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow">Max flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-networks">Flow networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow-problem">Max-Flow problem</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ford-fulkerson-algorithm">Ford-Fulkerson algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edmonds-karp-algorithm">Edmonds-Karp algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-algorithms">Other algorithms</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-ordering-example">3.3 Topological ordering example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-graph">3.5 Reverse a graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pouring-water">3.8 Pouring water</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycle-containing-an-edge-e">3.11 Cycle containing an edge <span class="math notranslate nohighlight">\(e\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-through-a-given-vertex">4.14 Shortest path through a given vertex</a></li>
 </ul>
 </li>
 </ul>
@@ -584,6 +591,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="k">def</span> <span class="nf">get_full_adjlist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
      <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">nbrs</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">adjacency</span><span class="p">():</span>
@@ -668,9 +676,9 @@ document.write(`
 <h2>Graph traversal<a class="headerlink" href="#graph-traversal" title="Link to this heading">#</a></h2>
 <section id="depth-first-search-dfs">
 <h3>Depth first search (DFS)<a class="headerlink" href="#depth-first-search-dfs" title="Link to this heading">#</a></h3>
-<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored edges from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored edges. Uses a stack.</p>
+<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored edges from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored edges. In other words it recursively explores nodes until it reaches a leaf node at which point it backtracks. DFS uses a stack as it’s data structure.</p>
 <p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
-<p>CAn be used to find connected components. Will label each node with it’s connected component number. When used on a DAG it returns a topological ordering of the nodes so can be used to topologically sort a graph.</p>
+<p>DFS can be used to find connected components in undirected graphs since in an undirected graph DFS’s explore subroutine will explore all nodes reachable from the starting node and all nodes within the same connected component are reachable from any other node in the connected component in general for <em>undirected</em> graphs. Will label each node with it’s connected component number. When used on a DAG it returns a topological ordering of the nodes so can be used to topologically sort a graph.</p>
 <div class="proof algorithm dropdown admonition" id="explore">
 <p class="admonition-title"><span class="caption-number">Algorithm 19.11 </span> (Explore)</p>
 <section class="algorithm-content" id="proof-content">
@@ -720,7 +728,7 @@ document.write(`
 <section id="breadth-first-search-bfs">
 <h3>Breadth first search (BFS)<a class="headerlink" href="#breadth-first-search-bfs" title="Link to this heading">#</a></h3>
 <p>BFS explores the graph in layers.
-Returns the minimum number of edges one must traverse to get from a starting node <span class="math notranslate nohighlight">\(s\)</span> to all other nodes. If there is no path from <span class="math notranslate nohighlight">\(s\)</span> to a node <span class="math notranslate nohighlight">\(t\)</span> then the minimum number of edges one must traverse is set to <span class="math notranslate nohighlight">\(\infty\)</span>. BFS utilizes a min heap (also called a priority queue).</p>
+Returns the minimum number of edges one must traverse to get from a starting node <span class="math notranslate nohighlight">\(s\)</span> to all other nodes. If there is no path from <span class="math notranslate nohighlight">\(s\)</span> to a node <span class="math notranslate nohighlight">\(t\)</span> then the minimum number of edges one must traverse is set to <span class="math notranslate nohighlight">\(\infty\)</span>. BFS utilizes a min heap (also called a priority queue). Note that this means BFS will find the shortest paths in graphs that are <em>unweighted</em> but if the graph is weighted then the shortest path will in general not be found by BFS since each edge in general does not have the same weight.</p>
 <p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
 </section>
 </section>
@@ -728,16 +736,17 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 <h2>Shortest paths<a class="headerlink" href="#shortest-paths" title="Link to this heading">#</a></h2>
 <section id="dijkstras-algorithm">
 <h3>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h3>
-<p>Sort of a generalization of BFS but works on weighted graphs where the edge weights are positive.</p>
+<p>Sort of a generalization of BFS but works on weighted graphs where the edge weights are positive. If a negative edge weight exists Dijkstra’s will fail if this negative edge weight produces a <em>negative weight cycle</em>.</p>
 <p>Runtime is <span class="math notranslate nohighlight">\(O(|V|\log{(|V|)}+|E|\log{(|V|)})\)</span></p>
 </section>
 <section id="bellman-ford-algorithm">
 <h3>Bellman-Ford algorithm<a class="headerlink" href="#bellman-ford-algorithm" title="Link to this heading">#</a></h3>
+<p>Can be understood as a dynamic programming algorithm and works on graphs with edges weights that can be any real number so long as there are no <em>negative weight cycles</em> reachable from the starting node <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>Runtime is <span class="math notranslate nohighlight">\(O(|V||E|)\)</span></p>
 </section>
 <section id="floydwarshall-algorithm">
 <h3>Floyd–Warshall algorithm<a class="headerlink" href="#floydwarshall-algorithm" title="Link to this heading">#</a></h3>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span></p>
+<p>Can be understood as a dynamic programming algorithm. Runtime is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span></p>
 </section>
 </section>
 <section id="strongly-connected-components">
@@ -762,15 +771,65 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 </section>
 <section id="max-flow">
 <h2>Max flow<a class="headerlink" href="#max-flow" title="Link to this heading">#</a></h2>
+<section id="flow-networks">
+<h3>Flow networks<a class="headerlink" href="#flow-networks" title="Link to this heading">#</a></h3>
+<p>A flow network is a directed weighted graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> with start and end node, <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> respectively, where the edge weights <span class="math notranslate nohighlight">\(c_e&gt;0\)</span> denote edge capacity i.e. the maximum amount of something that can flow through the edge <span class="math notranslate nohighlight">\(e\in E\)</span>. For example in the flow network below if we were to imagine node <span class="math notranslate nohighlight">\(s\)</span> represented a water source and the edges denoted how much water in liters can flow along the edges, so <span class="math notranslate nohighlight">\(3\)</span> liters can flow form <span class="math notranslate nohighlight">\(s\)</span> to <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(2\)</span> liters from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(d\)</span> and so on, and node <span class="math notranslate nohighlight">\(t\)</span> is the node we wish to transport the water to.</p>
+<p>A <em>flow</em> in the network is an assignment of flows, denoted <span class="math notranslate nohighlight">\(f_e\)</span>, for each edge in the network such that <span class="math notranslate nohighlight">\(f_e\leq c_e\)</span> and the sum of flows <em>into</em> a node equals the sum of flows <em>out</em> of a node so the flow is conserved. For example in the flow depicted below we can see that a total of <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow from node <span class="math notranslate nohighlight">\(s\)</span> and a total amount <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow into node <span class="math notranslate nohighlight">\(t\)</span> the sink/target node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/flow_network.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png"><img alt="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" src="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" style="width: 600px;" /></a>
+</div>
+</div>
+</section>
+<section id="max-flow-problem">
+<h3>Max-Flow problem<a class="headerlink" href="#max-flow-problem" title="Link to this heading">#</a></h3>
+<p>The max-flow problem is the problem of finding an assignment of flows in the network such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_e \leq c_e \quad \forall e \in E\\
+\text{and} \\
+f_v^{in} = f_v^{out} \quad \forall v \in V \quad \text{except nodes $s$ and $t$}\end{split}\]</div>
+<p>and the total flow <em>out</em> of node <span class="math notranslate nohighlight">\(s\)</span>, the source node, and therefore the total flow <em>into</em> <span class="math notranslate nohighlight">\(t\)</span>, the sink node, is maximized (so the max flow is equal to both the total flow <em>out</em> of <span class="math notranslate nohighlight">\(s\)</span> and the total flow <em>into</em> <span class="math notranslate nohighlight">\(t\)</span>). Note that the max flow is clearly upper bounded by which ever is greater between the sum of capacities of edges incident to <span class="math notranslate nohighlight">\(s\)</span> or sum of capacities of edges incident to <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Also note that cycles in the flow network do not affect the problem.</p>
+</section>
 <section id="ford-fulkerson-algorithm">
 <h3>Ford-Fulkerson algorithm<a class="headerlink" href="#ford-fulkerson-algorithm" title="Link to this heading">#</a></h3>
+<p>The runtime is <span class="math notranslate nohighlight">\(O(C|E|)\)</span> where <span class="math notranslate nohighlight">\(C\)</span> is the size of the max flow. Note that this only holds if all edges have <em>integer</em> valued capacities so <span class="math notranslate nohighlight">\(c_e \in \mathbb{Z^+} \quad \forall e \in E\)</span>. Also not that this runtime is similar to that of knapsack as it depends on <span class="math notranslate nohighlight">\(C\)</span> so it is not truly polynomial.</p>
 </section>
 <section id="edmonds-karp-algorithm">
 <h3>Edmonds-Karp algorithm<a class="headerlink" href="#edmonds-karp-algorithm" title="Link to this heading">#</a></h3>
+<p>The runtime is <span class="math notranslate nohighlight">\(O(|V||E|^2)\)</span></p>
+</section>
+<section id="other-algorithms">
+<h3>Other algorithms<a class="headerlink" href="#other-algorithms" title="Link to this heading">#</a></h3>
+<p>There have been faster algorithms found by  James B. Orlin in 2013 which takes <span class="math notranslate nohighlight">\(O(|V||E|)\)</span> time and by Li Chen et al. which takes <span class="math notranslate nohighlight">\(O(|E|^{1+o(1)})\)</span> time. Cool.</p>
 </section>
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<section id="topological-ordering-example">
+<h3>3.3 Topological ordering example<a class="headerlink" href="#topological-ordering-example" title="Link to this heading">#</a></h3>
+<p>a)
+To get this we first start with node A which will have preorder number 1 since it was the first to be visited. We then follow the edge to C which will have preorder number 2 since it was the second to be visited. Then we have two choices for which node to explore next, D or E, the problem says pick the one that is alphabetically first so we explore D which will get preorder number 3. We do this until we get to node G which will be the 5th to be explored so it gets preorder number 5. Now we backtrack by going back to node F and leaving node G so node G gets <em>post</em>order number 6. From F we can now explore the other neighbor H which will get preorder number 7 and since it has no children we backtrack to node F and give node H postorder number 8. Since we explored all of F’s children we backtrack to D and give F postorder number 9 and so on until we get back to node A which gets post order number 14. Finally, we explore node B which gets preorder number 15 and since it has no children that haven’t been explored we stop the algorithm and give it postorder number 16.</p>
+<p>The pre and post order numbers are:</p>
+<p>Node A: pre-1, post-14</p>
+<p>Node B: pre-15, post-16</p>
+<p>Node C: pre-2, post-13</p>
+<p>Node D: pre-3, post-10</p>
+<p>Node E: pre-11, post-12</p>
+<p>Node F: pre-4, post-9</p>
+<p>Node G: pre-5, post-6</p>
+<p>Node H: pre-7, post-8</p>
+<p>b) sources are A and B. Sinks are G and H</p>
+<p>c) Per the lecture we just need to sort the vertices by decreasing post order number to get the topological ordering found by the algorithm which is
+B,A,C,E,D,F,H,G.</p>
+<p>d) There are <span class="math notranslate nohighlight">\(2^3=8\)</span> topological orderings for this graph. Since we have 2 choices for how to order A and B, two choices for how to order D and E and two choices for how to order G and H.</p>
+</section>
 <section id="reverse-a-graph">
 <h3>3.5 Reverse a graph<a class="headerlink" href="#reverse-a-graph" title="Link to this heading">#</a></h3>
 <p>Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span></p>
@@ -781,15 +840,25 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 </ol>
 <p>At the end <span class="math notranslate nohighlight">\(L\)</span> will have all edges of <span class="math notranslate nohighlight">\(G\)</span> but reversed. This takes <span class="math notranslate nohighlight">\(O(|E|+|V|)\)</span> time since we must iterate over all nodes and their respective edges. Not sure if there is a way to do this in-place at the moment.</p>
 </section>
+<section id="pouring-water">
+<h3>3.8 Pouring water<a class="headerlink" href="#pouring-water" title="Link to this heading">#</a></h3>
+</section>
+<section id="cycle-containing-an-edge-e">
+<h3>3.11 Cycle containing an edge <span class="math notranslate nohighlight">\(e\)</span><a class="headerlink" href="#cycle-containing-an-edge-e" title="Link to this heading">#</a></h3>
+<p>?</p>
+</section>
 <section id="computopia">
 <h3>3.15 Computopia<a class="headerlink" href="#computopia" title="Link to this heading">#</a></h3>
 <p>a) To formulate this as a graph problem we represent the intersections in the city as nodes and the streets that connect them as <em>directed</em> edges. To solve this problem we just need to show that the graph has exactly 1 strongly connected component i.e. there is a path from intersection <span class="math notranslate nohighlight">\(u\)</span> to intersection <span class="math notranslate nohighlight">\(v\)</span> and path from intersection <span class="math notranslate nohighlight">\(v\)</span> to intersection <span class="math notranslate nohighlight">\(u\)</span> for all nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the graph. This can be checked using Kosaraju’s algorithm to get the meta-graph, which is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span>, and checking that it contains only one node which is <span class="math notranslate nohighlight">\(O(1)\)</span>.</p>
-<p>b) This is equivalent to saying no matter what node you are on in the graph there is a path to get to node <span class="math notranslate nohighlight">\(t\)</span> (the town hall).</p>
+<p>b) This is equivalent to saying there is a strongly connected component in the graph from part a that includes node <span class="math notranslate nohighlight">\(t\)</span> (the town hall) adn that this SCC is a sink SCC since we can not arrive at a node that we can’t return to the SCC from. This can also be checked in linear time by using Kosaraju’s algorithm to get the meta-graph of SCCs and checking each meta vertex to see if node <span class="math notranslate nohighlight">\(t\)</span> is in that meta vertex (SCC).</p>
 </section>
 <section id="minimum-cost-node">
 <h3>3.25 Minimum cost node<a class="headerlink" href="#minimum-cost-node" title="Link to this heading">#</a></h3>
 <p>a)</p>
 <p>b)</p>
+</section>
+<section id="shortest-path-through-a-given-vertex">
+<h3>4.14 Shortest path through a given vertex<a class="headerlink" href="#shortest-path-through-a-given-vertex" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -798,17 +867,14 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
-  %reload_ext watermark
-Last updated: Sun Sep 29 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Oct 03 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
-matplotlib: 3.7.4
 networkx  : 3.2.1
-sympy     : 1.12
+matplotlib: 3.7.4
 </pre></div>
 </div>
 </div>
@@ -903,14 +969,21 @@ sympy     : 1.12
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow">Max flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-networks">Flow networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow-problem">Max-Flow problem</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ford-fulkerson-algorithm">Ford-Fulkerson algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edmonds-karp-algorithm">Edmonds-Karp algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-algorithms">Other algorithms</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-ordering-example">3.3 Topological ordering example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-graph">3.5 Reverse a graph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pouring-water">3.8 Pouring water</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycle-containing-an-edge-e">3.11 Cycle containing an edge <span class="math notranslate nohighlight">\(e\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-through-a-given-vertex">4.14 Shortest path through a given vertex</a></li>
 </ul>
 </li>
 </ul>
