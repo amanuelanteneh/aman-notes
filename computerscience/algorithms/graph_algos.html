@@ -775,12 +775,18 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 <h3>Flow networks<a class="headerlink" href="#flow-networks" title="Link to this heading">#</a></h3>
 <p>A flow network is a directed weighted graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> with start and end node, <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> respectively, where the edge weights <span class="math notranslate nohighlight">\(c_e&gt;0\)</span> denote edge capacity i.e. the maximum amount of something that can flow through the edge <span class="math notranslate nohighlight">\(e\in E\)</span>. For example in the flow network below if we were to imagine node <span class="math notranslate nohighlight">\(s\)</span> represented a water source and the edges denoted how much water in liters can flow along the edges, so <span class="math notranslate nohighlight">\(3\)</span> liters can flow form <span class="math notranslate nohighlight">\(s\)</span> to <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(2\)</span> liters from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(d\)</span> and so on, and node <span class="math notranslate nohighlight">\(t\)</span> is the node we wish to transport the water to.</p>
 <p>A <em>flow</em> in the network is an assignment of flows, denoted <span class="math notranslate nohighlight">\(f_e\)</span>, for each edge in the network such that <span class="math notranslate nohighlight">\(f_e\leq c_e\)</span> and the sum of flows <em>into</em> a node equals the sum of flows <em>out</em> of a node so the flow is conserved. For example in the flow depicted below we can see that a total of <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow from node <span class="math notranslate nohighlight">\(s\)</span> and a total amount <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow into node <span class="math notranslate nohighlight">\(t\)</span> the sink/target node.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/flow_network.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <a class="reference internal image-reference" href="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png"><img alt="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" src="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" style="width: 600px;" /></a>
 </div>
@@ -799,10 +805,12 @@ f_v^{in} = f_v^{out} \quad \forall v \in V \quad \text{except nodes $s$ and $t$}
 </section>
 <section id="ford-fulkerson-algorithm">
 <h3>Ford-Fulkerson algorithm<a class="headerlink" href="#ford-fulkerson-algorithm" title="Link to this heading">#</a></h3>
+<p>Find augmenting paths in the residual graph <span class="math notranslate nohighlight">\(G^f\)</span> for the current flow <span class="math notranslate nohighlight">\(f\)</span> using either BFS or DFS.</p>
 <p>The runtime is <span class="math notranslate nohighlight">\(O(C|E|)\)</span> where <span class="math notranslate nohighlight">\(C\)</span> is the size of the max flow. Note that this only holds if all edges have <em>integer</em> valued capacities so <span class="math notranslate nohighlight">\(c_e \in \mathbb{Z^+} \quad \forall e \in E\)</span>. Also not that this runtime is similar to that of knapsack as it depends on <span class="math notranslate nohighlight">\(C\)</span> so it is not truly polynomial.</p>
 </section>
 <section id="edmonds-karp-algorithm">
 <h3>Edmonds-Karp algorithm<a class="headerlink" href="#edmonds-karp-algorithm" title="Link to this heading">#</a></h3>
+<p>Find augmenting paths in the residual graph <span class="math notranslate nohighlight">\(G^f\)</span> for the current flow <span class="math notranslate nohighlight">\(f\)</span> using <em>BFS</em>. Edge capacities can now be <span class="math notranslate nohighlight">\(\in \mathbb{R}^+\)</span>.</p>
 <p>The runtime is <span class="math notranslate nohighlight">\(O(|V||E|^2)\)</span></p>
 </section>
 <section id="other-algorithms">
@@ -859,6 +867,9 @@ B,A,C,E,D,F,H,G.</p>
 </section>
 <section id="shortest-path-through-a-given-vertex">
 <h3>4.14 Shortest path through a given vertex<a class="headerlink" href="#shortest-path-through-a-given-vertex" title="Link to this heading">#</a></h3>
+<p>Use Floyd-Warshall to find the shortest paths between all nodes. Then for each node <span class="math notranslate nohighlight">\(v\in V\)</span> find the shortest path found by Floyd-Warshall from it to <span class="math notranslate nohighlight">\(v_0\)</span> and the shortest path from <span class="math notranslate nohighlight">\(v_0\)</span> to every other node besides <span class="math notranslate nohighlight">\(v\)</span> and concatenate the paths to the shortest path from <span class="math notranslate nohighlight">\(v\)</span> to <span class="math notranslate nohighlight">\(v_0\)</span>. Complexity is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span> since we used Floyd-Warshall and also have an additional <span class="math notranslate nohighlight">\(O(|V|^2)\)</span> component to create the shortest paths that pass through <span class="math notranslate nohighlight">\(v_0\)</span> for each node pair from the output of Floyd-Warshall.</p>
+<p>For a faster way we can run Dijkstra on the graph with the source node as <span class="math notranslate nohighlight">\(v_0\)</span> which will give use the shortest path from <span class="math notranslate nohighlight">\(v_0\)</span> to all other nodes. Now for each node in <span class="math notranslate nohighlight">\(G\)</span> besides <span class="math notranslate nohighlight">\(v_0\)</span> we will run Dijkstra with it as the source node</p>
+<p><span class="math notranslate nohighlight">\(O(|V|(|V|\log{(|V|)}+|E|\log{(|V|)}))= O(|V|^2\log{(|V|)}+|V||E|\log{(|V|)})\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
