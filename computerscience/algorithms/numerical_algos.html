@@ -617,6 +617,33 @@ x(y+z) \equiv (xy+xz) \mod N \qquad \text{Distributivity} \\
 \text{ and } \\ 
 xy \equiv x'y' \mod N \iff (xy) \bmod N = (x'y') \bmod N
 \end{split}\]</div>
+<p>This means for example if we want to compute</p>
+<div class="math notranslate nohighlight">
+\[
+321 \times 7 \mod 320
+\]</div>
+<p>we can substitute in <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(321\)</span> since <span class="math notranslate nohighlight">\(321 \equiv 1\mod 320\)</span> which gets us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;1\times 7 \mod 320 \\ 
+&amp;= 7 \mod 320  \\
+&amp;= 7
+\end{align*}
+\end{split}\]</div>
+<p>Another example is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+&amp; 2^{345} \mod 31 \\
+&amp;= (2^{5})^{69} \mod 31 \\
+&amp;= (32)^{69} \mod 31 \\
+&amp;= 1^{69} \mod 31 \\
+&amp;= 1 \mod 31 \\
+&amp;= 1 
+\end{align}
+\end{split}\]</div>
+<p>the simplification from Eq. <span class="math notranslate nohighlight">\(3\)</span> to Eq. <span class="math notranslate nohighlight">\(4\)</span> is made by subsituting <span class="math notranslate nohighlight">\(1\)</span> in for <span class="math notranslate nohighlight">\(32\)</span> since <span class="math notranslate nohighlight">\(32 \equiv 1\mod 31\)</span>.</p>
 <div class="dropdown admonition note">
 <p class="admonition-title">Note</p>
 <p>Modular addition has other interesting properties as well that we won’t make use of here. For example the set of integers <span class="math notranslate nohighlight">\(\{0,1,2,3,...,n-1\}\)</span> together with the operation of addition modulo <span class="math notranslate nohighlight">\(n\)</span>, i.e. you add any two elements in the set then take the modulo <span class="math notranslate nohighlight">\(n\)</span> of the result, form a <em>group</em> called the group of integers modulo <span class="math notranslate nohighlight">\(n\)</span> and is denoted as <span class="math notranslate nohighlight">\(\mathbb{Z}_n\)</span> and this group has the interesting property that any cyclic group of order <span class="math notranslate nohighlight">\(n\)</span> is isomorphic to it <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id31" title="Charles C Pinter. A book of abstract algebra. Courier Corporation, 2010.">Pinter, 2010</a>]</span>.</p>

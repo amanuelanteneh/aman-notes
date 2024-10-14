@@ -542,7 +542,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-spanning-trees">Minimum spanning trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-optimality-of-greedy-choice">Proof of optimality of greedy choice</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prims-algorithm">Prim’s algorithm</a></li>
 </ul>
 </li>
@@ -552,6 +555,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ford-fulkerson-algorithm">Ford-Fulkerson algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edmonds-karp-algorithm">Edmonds-Karp algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-algorithms">Other algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow-and-min-st-cut">Max flow and min <span class="math notranslate nohighlight">\(st\)</span> cut</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -562,6 +566,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-through-a-given-vertex">4.14 Shortest path through a given vertex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottleneck-edges-in-flow-networks">7.17 Bottleneck edges in flow networks</a></li>
 </ul>
 </li>
 </ul>
@@ -577,7 +582,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="graph-algorithms">
 <h1>Graph algorithms<a class="headerlink" href="#graph-algorithms" title="Link to this heading">#</a></h1>
-<p>Graphs are incredibly versatile data structures and due to this versatility they are ubiquitous in computing.</p>
+<p>Graphs are incredibly versatile data structures and due to this versatility they are ubiquitous in computing. Note that for simplicity I while use <span class="math notranslate nohighlight">\(n\)</span> to denote the number of nodes in a graph instead of <span class="math notranslate nohighlight">\(|V|\)</span> and <span class="math notranslate nohighlight">\(m\)</span> to denote the number of edges in a graph instead of <span class="math notranslate nohighlight">\(|E|\)</span>.</p>
 <section id="adjacency-list">
 <h2>Adjacency list<a class="headerlink" href="#adjacency-list" title="Link to this heading">#</a></h2>
 <p>Besides the adjacency matrix representation of a graph which we cover <a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html"><span class="std std-doc">here</span></a> the other common way of representing a graph is using an adjacency list which <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say is what most of the graph algorithms they present use to represent graphs. For example for the graph <span class="math notranslate nohighlight">\(G\)</span> shown below:</p>
@@ -676,8 +681,15 @@ document.write(`
 <h2>Graph traversal<a class="headerlink" href="#graph-traversal" title="Link to this heading">#</a></h2>
 <section id="depth-first-search-dfs">
 <h3>Depth first search (DFS)<a class="headerlink" href="#depth-first-search-dfs" title="Link to this heading">#</a></h3>
-<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored edges from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored edges. In other words it recursively explores nodes until it reaches a leaf node at which point it backtracks. DFS uses a stack as it’s data structure.</p>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
+<p>DFS explores the graph in a depth first manner meaning it explores all edges to unexplored nodes from a given node before backtracking to the node it started on once it reaches a node that has no edges that lead to unexplored nodes. In other words it recursively explores nodes until it reaches a leaf node at which point it backtracks. DFS uses a stack as it’s data structure. Essentially DFS operates like this</p>
+<ol class="arabic simple">
+<li><p>Pick a node <span class="math notranslate nohighlight">\(v\)</span> to start and push it onto the stack</p></li>
+<li><p>Now pick one of its neighbors <span class="math notranslate nohighlight">\(u\)</span> to explore that you haven’t explored yet and push that onto the stack</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(u\)</span> has no neighbors meaning it is a leaf node we pop it off the stack and go back to <span class="math notranslate nohighlight">\(v\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(u\)</span> does have neighbors pick one of its neighbors <span class="math notranslate nohighlight">\(t\)</span> to explore that you haven’t explored yet and push that onto the stack</p></li>
+</ol>
+<p>Repeat this until you return back to <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(n+m)\)</span></p>
 <p>DFS can be used to find connected components in undirected graphs since in an undirected graph DFS’s explore subroutine will explore all nodes reachable from the starting node and all nodes within the same connected component are reachable from any other node in the connected component in general for <em>undirected</em> graphs. Will label each node with it’s connected component number. When used on a DAG it returns a topological ordering of the nodes so can be used to topologically sort a graph.</p>
 <div class="proof algorithm dropdown admonition" id="explore">
 <p class="admonition-title"><span class="caption-number">Algorithm 19.11 </span> (Explore)</p>
@@ -728,25 +740,66 @@ document.write(`
 <section id="breadth-first-search-bfs">
 <h3>Breadth first search (BFS)<a class="headerlink" href="#breadth-first-search-bfs" title="Link to this heading">#</a></h3>
 <p>BFS explores the graph in layers.
-Returns the minimum number of edges one must traverse to get from a starting node <span class="math notranslate nohighlight">\(s\)</span> to all other nodes. If there is no path from <span class="math notranslate nohighlight">\(s\)</span> to a node <span class="math notranslate nohighlight">\(t\)</span> then the minimum number of edges one must traverse is set to <span class="math notranslate nohighlight">\(\infty\)</span>. BFS utilizes a min heap (also called a priority queue). Note that this means BFS will find the shortest paths in graphs that are <em>unweighted</em> but if the graph is weighted then the shortest path will in general not be found by BFS since each edge in general does not have the same weight.</p>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span></p>
+Returns the minimum number of edges one must traverse to get from a starting node <span class="math notranslate nohighlight">\(s\)</span> to all other nodes. If there is no path from <span class="math notranslate nohighlight">\(s\)</span> to a node <span class="math notranslate nohighlight">\(t\)</span> then the minimum number of edges one must traverse is set to <span class="math notranslate nohighlight">\(\infty\)</span>. BFS utilizes a min heap (also called a priority queue).</p>
+<p>Essentially BFS operates like this</p>
+<ol class="arabic simple">
+<li><p>Pick a node <span class="math notranslate nohighlight">\(v\)</span> to start and push it onto the stack</p></li>
+<li><p>Now explore <em>all</em> of it’s neighbors</p></li>
+<li><p>Then pick one of its neighbors and explore <em>all</em> of it’s neighbors and do this for the rest of the neighbors as well</p></li>
+<li><p>Continue until the whole graph has been explored</p></li>
+</ol>
+<p>This is why people say BFS explores the graph “in layers” the layers are the sets of neighbors in a sense.</p>
+<p>Note that this means BFS will find the shortest paths in graphs that are <em>unweighted</em> but if the graph is weighted then the shortest path will in general not be found by BFS since each edge in general does not have the same weight.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(n+m)\)</span></p>
+<div class="proof algorithm dropdown admonition" id="bfs">
+<p class="admonition-title"><span class="caption-number">Algorithm 19.13 </span> (Breadth First Search)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{BFS}(G, s)\)</span>:</p>
+<p><strong>Inputs</strong> Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> and node <span class="math notranslate nohighlight">\(s\in V\)</span></p>
+<p><strong>Output</strong> A list called dist which contains the distances from <span class="math notranslate nohighlight">\(s\)</span> to all nodes reachable from <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<ol class="arabic simple">
+<li><p>for each <span class="math notranslate nohighlight">\(v\in V\)</span>:</p>
+<ol class="arabic simple">
+<li><p>dist(<span class="math notranslate nohighlight">\(v\)</span>) = <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+</ol>
+</li>
+<li><p>dist(<span class="math notranslate nohighlight">\(s\)</span>)<span class="math notranslate nohighlight">\(=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Q=[s]\)</span> <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Create a queue holding just <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p>while <span class="math notranslate nohighlight">\(Q\)</span> is not empty:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(u=\)</span> dequeue(<span class="math notranslate nohighlight">\(Q\)</span>)</p></li>
+<li><p>for each <span class="math notranslate nohighlight">\((u,v) \in E\)</span>: <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Loop over all edges in graph</p>
+<ol class="arabic simple">
+<li><p>if dist(<span class="math notranslate nohighlight">\(v\)</span>) == <span class="math notranslate nohighlight">\(\infty\)</span></p>
+<ol class="arabic simple">
+<li><p>enqueue(<span class="math notranslate nohighlight">\(Q,v\)</span>)</p></li>
+<li><p>dist(<span class="math notranslate nohighlight">\(v\)</span>) = dist(<span class="math notranslate nohighlight">\(u\)</span>) + 1</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>return dist</p></li>
+</ol>
 </section>
+</div></section>
 </section>
 <section id="shortest-paths">
 <h2>Shortest paths<a class="headerlink" href="#shortest-paths" title="Link to this heading">#</a></h2>
 <section id="dijkstras-algorithm">
 <h3>Dijkstra’s algorithm<a class="headerlink" href="#dijkstras-algorithm" title="Link to this heading">#</a></h3>
 <p>Sort of a generalization of BFS but works on weighted graphs where the edge weights are positive. If a negative edge weight exists Dijkstra’s will fail if this negative edge weight produces a <em>negative weight cycle</em>.</p>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|\log{(|V|)}+|E|\log{(|V|)})\)</span></p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(n\log{(n)}+m\log{(n)})\)</span></p>
 </section>
 <section id="bellman-ford-algorithm">
 <h3>Bellman-Ford algorithm<a class="headerlink" href="#bellman-ford-algorithm" title="Link to this heading">#</a></h3>
 <p>Can be understood as a dynamic programming algorithm and works on graphs with edges weights that can be any real number so long as there are no <em>negative weight cycles</em> reachable from the starting node <span class="math notranslate nohighlight">\(s\)</span>.</p>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V||E|)\)</span></p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(nm)\)</span></p>
 </section>
 <section id="floydwarshall-algorithm">
 <h3>Floyd–Warshall algorithm<a class="headerlink" href="#floydwarshall-algorithm" title="Link to this heading">#</a></h3>
-<p>Can be understood as a dynamic programming algorithm. Runtime is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span></p>
+<p>Can be understood as a dynamic programming algorithm. Runtime is <span class="math notranslate nohighlight">\(O(n^3)\)</span></p>
 </section>
 </section>
 <section id="strongly-connected-components">
@@ -754,19 +807,61 @@ Returns the minimum number of edges one must traverse to get from a starting nod
 <section id="kosarajus-algorithm">
 <h3>Kosaraju’s algorithm<a class="headerlink" href="#kosarajus-algorithm" title="Link to this heading">#</a></h3>
 <p>This algorithm outputs a meta-graph where the nodes correspond to strongly connected components (SCCs) of the graph <span class="math notranslate nohighlight">\(G\)</span> and the edges <span class="math notranslate nohighlight">\((u,v)\)</span> denote that there is a path from all nodes in SCC <span class="math notranslate nohighlight">\(u\)</span> to all nodes in SCC <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span> which is the same as DFS/BFS since we simply run DFS on <span class="math notranslate nohighlight">\(G^R\)</span> and DFS on <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(n+m)\)</span> which is the same as DFS/BFS since we simply run DFS on <span class="math notranslate nohighlight">\(G^R\)</span> and DFS on <span class="math notranslate nohighlight">\(G\)</span>.</p>
 </section>
 </section>
 <section id="minimum-spanning-trees">
 <h2>Minimum spanning trees<a class="headerlink" href="#minimum-spanning-trees" title="Link to this heading">#</a></h2>
-<p>The definition of a minimum spanning tree is covered <a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html"><span class="std std-doc">here</span></a> but how can we find the MST of an arbitrary weighted undirected graph?</p>
+<p>For an undirected weighted graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> a spanning tree is a (acyclic) subset of the edges <span class="math notranslate nohighlight">\(T \subset E\)</span> that connects all nodes
+and whose total weight is</p>
+<div class="math notranslate nohighlight">
+\[
+w(T) = \sum_{e\in T}w(e) \quad \text{where $e=(u,v)$}
+\]</div>
+<p>i.e. the sum of the weights of each edge in the spanning tree <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>It is said to “span” the graph <span class="math notranslate nohighlight">\(G\)</span> since it connects all vertices.
+The <em>minimum</em> spanning tree is a spanning tree for which <span class="math notranslate nohighlight">\(w(T)\)</span> is the minimal possible value for the graph <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<p>Finding such an object for a given graph is useful for several applications such as electronic circuit design <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. Can we find the MST of an arbitrary weighted undirected graph efficiently? The answer is yes using a greedy algorithm. Note that the graph must also be connected or else there is no spanning tree by definition.</p>
 <section id="kruskals-algorithm">
 <h3>Kruskal’s algorithm<a class="headerlink" href="#kruskals-algorithm" title="Link to this heading">#</a></h3>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|E|\log{(|V|)})\)</span></p>
+<p>The basic idea is to build the MST of the graph edge by edge while ensuring the edge you add at each step does not create any cycles (since we are building a tree).</p>
+<div class="proof algorithm dropdown admonition" id="kruskal">
+<p class="admonition-title"><span class="caption-number">Algorithm 19.14 </span> (Kruskal’s Algorithm)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>procedure</strong> <span class="math notranslate nohighlight">\(\text{Kruskal}(G, w)\)</span>:</p>
+<p><strong>Inputs</strong> Given a connected undirected weighted graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> with edge weights <span class="math notranslate nohighlight">\(w(e)\)</span></p>
+<p><strong>Output</strong> A minimum spanning tree given by the edges in <span class="math notranslate nohighlight">\(T\)</span></p>
+<ol class="arabic simple">
+<li><p>for <span class="math notranslate nohighlight">\(v \in V\)</span>:</p>
+<ol class="arabic simple">
+<li><p>make-set(<span class="math notranslate nohighlight">\(v\)</span>) <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Create a singleton set containing just node <span class="math notranslate nohighlight">\(v\)</span></p></li>
+</ol>
+</li>
+<li><p>Create <span class="math notranslate nohighlight">\(E'\)</span> which is a list of edges in <span class="math notranslate nohighlight">\(G\)</span> sorted in ascending order by edge weight</p></li>
+<li><p><span class="math notranslate nohighlight">\(T = \{\}\)</span></p></li>
+<li><p>for each edge <span class="math notranslate nohighlight">\((u,v) \in E'\)</span>: <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Iterate over edges in sorted order</p>
+<ol class="arabic simple">
+<li><p>if find-set(<span class="math notranslate nohighlight">\(u\)</span>) != find-set(<span class="math notranslate nohighlight">\(u\)</span>): <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Ensure <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> do not reside in the same set (to avoid cycles)</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(T = T \cup \{(u,v)\}\)</span></p></li>
+<li><p>union(<span class="math notranslate nohighlight">\(u\)</span>,<span class="math notranslate nohighlight">\(v\)</span>) <span class="math notranslate nohighlight">\(\quad \triangleright\)</span> Merge the sets containing <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span></p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>return <span class="math notranslate nohighlight">\(T\)</span></p></li>
+</ol>
+</section>
+</div><p>Sorting the edges by weight takes <span class="math notranslate nohighlight">\(O(m\log{(m)})\)</span> time. Checking if an edge will create a cycle using the union-find data structure takes <span class="math notranslate nohighlight">\(O(\log{n})\)</span> time and we do this for all edges we iterate over so the loop in line 4 has time complexity <span class="math notranslate nohighlight">\(O(m\log{(n)})\)</span>.
+Runtime is <span class="math notranslate nohighlight">\(O(m\log{(n)})\)</span> if <span class="math notranslate nohighlight">\(n\geq m\)</span>.</p>
+<section id="proof-of-optimality-of-greedy-choice">
+<h4>Proof of optimality of greedy choice<a class="headerlink" href="#proof-of-optimality-of-greedy-choice" title="Link to this heading">#</a></h4>
+<p>To show that the greedy algorithm is optimal we can use what is known as the cut property.</p>
+</section>
 </section>
 <section id="prims-algorithm">
 <h3>Prim’s algorithm<a class="headerlink" href="#prims-algorithm" title="Link to this heading">#</a></h3>
-<p>Runtime is <span class="math notranslate nohighlight">\(O(|V|\log{(|V|)}+|E|\log{(|V|)})\)</span></p>
+<p>Runtime is <span class="math notranslate nohighlight">\(O(n\log{(n)}+m\log{(n)})\)</span></p>
 </section>
 </section>
 <section id="max-flow">
@@ -806,17 +901,31 @@ f_v^{in} = f_v^{out} \quad \forall v \in V \quad \text{except nodes $s$ and $t$}
 <section id="ford-fulkerson-algorithm">
 <h3>Ford-Fulkerson algorithm<a class="headerlink" href="#ford-fulkerson-algorithm" title="Link to this heading">#</a></h3>
 <p>Find augmenting paths in the residual graph <span class="math notranslate nohighlight">\(G^f\)</span> for the current flow <span class="math notranslate nohighlight">\(f\)</span> using either BFS or DFS.</p>
-<p>The runtime is <span class="math notranslate nohighlight">\(O(C|E|)\)</span> where <span class="math notranslate nohighlight">\(C\)</span> is the size of the max flow. Note that this only holds if all edges have <em>integer</em> valued capacities so <span class="math notranslate nohighlight">\(c_e \in \mathbb{Z^+} \quad \forall e \in E\)</span>. Also not that this runtime is similar to that of knapsack as it depends on <span class="math notranslate nohighlight">\(C\)</span> so it is not truly polynomial.</p>
+<p>The runtime is <span class="math notranslate nohighlight">\(O(Cm)\)</span> where <span class="math notranslate nohighlight">\(C\)</span> is the size of the max flow. Note that this only holds if all edges have <em>integer</em> valued capacities so <span class="math notranslate nohighlight">\(c_e \in \mathbb{Z^+} \quad \forall e \in E\)</span>. Also not that this runtime is similar to that of knapsack as it depends on <span class="math notranslate nohighlight">\(C\)</span> so it is not truly polynomial.</p>
 </section>
 <section id="edmonds-karp-algorithm">
 <h3>Edmonds-Karp algorithm<a class="headerlink" href="#edmonds-karp-algorithm" title="Link to this heading">#</a></h3>
 <p>Find augmenting paths in the residual graph <span class="math notranslate nohighlight">\(G^f\)</span> for the current flow <span class="math notranslate nohighlight">\(f\)</span> using <em>BFS</em>. Edge capacities can now be <span class="math notranslate nohighlight">\(\in \mathbb{R}^+\)</span>.</p>
-<p>The runtime is <span class="math notranslate nohighlight">\(O(|V||E|^2)\)</span></p>
+<p>The runtime is <span class="math notranslate nohighlight">\(O(nm^2)\)</span></p>
 </section>
 <section id="other-algorithms">
 <h3>Other algorithms<a class="headerlink" href="#other-algorithms" title="Link to this heading">#</a></h3>
-<p>There have been faster algorithms found by  James B. Orlin in 2013 which takes <span class="math notranslate nohighlight">\(O(|V||E|)\)</span> time and by Li Chen et al. which takes <span class="math notranslate nohighlight">\(O(|E|^{1+o(1)})\)</span> time. Cool.</p>
+<p>There have been faster algorithms found by  James B. Orlin in 2013 which takes <span class="math notranslate nohighlight">\(O(nm)\)</span> time and by Li Chen et al. which takes <span class="math notranslate nohighlight">\(O(m^{1+o(1)})\)</span> time. Cool.</p>
 </section>
+<section id="max-flow-and-min-st-cut">
+<h3>Max flow and min <span class="math notranslate nohighlight">\(st\)</span> cut<a class="headerlink" href="#max-flow-and-min-st-cut" title="Link to this heading">#</a></h3>
+<p>An <span class="math notranslate nohighlight">\(st\)</span> cut  is a partition of the vertex set of a graph into two sets <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(R\)</span> such that node <span class="math notranslate nohighlight">\(s\)</span> is in one set and node <span class="math notranslate nohighlight">\(t\)</span> is in the other. The <em>capacity</em> of such a cut is the sum of capacities of the edges that cross this cut i.e. the edges in the graph where one end resides on <span class="math notranslate nohighlight">\(L\)</span> and the other end resides in <span class="math notranslate nohighlight">\(R\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+capacity(L,R) = \sum_{(u,v)\in E| u \in L \text{ } \wedge \text{ } v \in R }c_{uv}
+\]</div>
+<p>A min <span class="math notranslate nohighlight">\(st\)</span> cut is a cut that minimizes this capacity.</p>
+<div class="proof theorem admonition" id="maxflow_mincut">
+<p class="admonition-title"><span class="caption-number">Theorem 19.4 </span> (Max-flow:min-cut theorem)</p>
+<section class="theorem-content" id="proof-content">
+<p>The minimum capacity of a cut in a flow network <span class="math notranslate nohighlight">\(G\)</span> is <em><strong>equal</strong></em> to the maximum flow in the flow network <span class="math notranslate nohighlight">\(G\)</span>.</p>
+</section>
+</div></section>
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
@@ -846,7 +955,7 @@ B,A,C,E,D,F,H,G.</p>
 <li><p>Iterate over the nodes in the <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
 <li><p>When on node <span class="math notranslate nohighlight">\(u\)</span> check all of its neighbors. For a given neighbor <span class="math notranslate nohighlight">\(w\)</span> add <span class="math notranslate nohighlight">\(u\)</span> to the edge list of <span class="math notranslate nohighlight">\(w\)</span> in the new adjacency list <span class="math notranslate nohighlight">\(L\)</span>.</p></li>
 </ol>
-<p>At the end <span class="math notranslate nohighlight">\(L\)</span> will have all edges of <span class="math notranslate nohighlight">\(G\)</span> but reversed. This takes <span class="math notranslate nohighlight">\(O(|E|+|V|)\)</span> time since we must iterate over all nodes and their respective edges. Not sure if there is a way to do this in-place at the moment.</p>
+<p>At the end <span class="math notranslate nohighlight">\(L\)</span> will have all edges of <span class="math notranslate nohighlight">\(G\)</span> but reversed. This takes <span class="math notranslate nohighlight">\(O(m+n)\)</span> time since we must iterate over all nodes and their respective edges. Not sure if there is a way to do this in-place at the moment.</p>
 </section>
 <section id="pouring-water">
 <h3>3.8 Pouring water<a class="headerlink" href="#pouring-water" title="Link to this heading">#</a></h3>
@@ -857,8 +966,8 @@ B,A,C,E,D,F,H,G.</p>
 </section>
 <section id="computopia">
 <h3>3.15 Computopia<a class="headerlink" href="#computopia" title="Link to this heading">#</a></h3>
-<p>a) To formulate this as a graph problem we represent the intersections in the city as nodes and the streets that connect them as <em>directed</em> edges. To solve this problem we just need to show that the graph has exactly 1 strongly connected component i.e. there is a path from intersection <span class="math notranslate nohighlight">\(u\)</span> to intersection <span class="math notranslate nohighlight">\(v\)</span> and path from intersection <span class="math notranslate nohighlight">\(v\)</span> to intersection <span class="math notranslate nohighlight">\(u\)</span> for all nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the graph. This can be checked using Kosaraju’s algorithm to get the meta-graph, which is <span class="math notranslate nohighlight">\(O(|V|+|E|)\)</span>, and checking that it contains only one node which is <span class="math notranslate nohighlight">\(O(1)\)</span>.</p>
-<p>b) This is equivalent to saying there is a strongly connected component in the graph from part a that includes node <span class="math notranslate nohighlight">\(t\)</span> (the town hall) adn that this SCC is a sink SCC since we can not arrive at a node that we can’t return to the SCC from. This can also be checked in linear time by using Kosaraju’s algorithm to get the meta-graph of SCCs and checking each meta vertex to see if node <span class="math notranslate nohighlight">\(t\)</span> is in that meta vertex (SCC).</p>
+<p>a) To formulate this as a graph problem we represent the intersections in the city as nodes and the streets that connect them as <em>directed</em> edges. To solve this problem we just need to show that the graph has exactly 1 strongly connected component i.e. there is a path from intersection <span class="math notranslate nohighlight">\(u\)</span> to intersection <span class="math notranslate nohighlight">\(v\)</span> and path from intersection <span class="math notranslate nohighlight">\(v\)</span> to intersection <span class="math notranslate nohighlight">\(u\)</span> for all nodes <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in the graph. This can be checked using Kosaraju’s algorithm to get the meta-graph, which is <span class="math notranslate nohighlight">\(O(n+m)\)</span>, and checking that it contains only one node which is <span class="math notranslate nohighlight">\(O(1)\)</span>.</p>
+<p>b) This is equivalent to saying there is a strongly connected component in the graph from part a that includes node <span class="math notranslate nohighlight">\(t\)</span> (the town hall) and that this SCC is a sink SCC since we can not arrive at a node that we can’t return to the SCC from. This can also be checked in linear time by using Kosaraju’s algorithm to get the meta-graph of SCCs and checking each meta vertex to see if node <span class="math notranslate nohighlight">\(t\)</span> is in that meta vertex (SCC).</p>
 </section>
 <section id="minimum-cost-node">
 <h3>3.25 Minimum cost node<a class="headerlink" href="#minimum-cost-node" title="Link to this heading">#</a></h3>
@@ -867,9 +976,17 @@ B,A,C,E,D,F,H,G.</p>
 </section>
 <section id="shortest-path-through-a-given-vertex">
 <h3>4.14 Shortest path through a given vertex<a class="headerlink" href="#shortest-path-through-a-given-vertex" title="Link to this heading">#</a></h3>
-<p>Use Floyd-Warshall to find the shortest paths between all nodes. Then for each node <span class="math notranslate nohighlight">\(v\in V\)</span> find the shortest path found by Floyd-Warshall from it to <span class="math notranslate nohighlight">\(v_0\)</span> and the shortest path from <span class="math notranslate nohighlight">\(v_0\)</span> to every other node besides <span class="math notranslate nohighlight">\(v\)</span> and concatenate the paths to the shortest path from <span class="math notranslate nohighlight">\(v\)</span> to <span class="math notranslate nohighlight">\(v_0\)</span>. Complexity is <span class="math notranslate nohighlight">\(O(|V|^3)\)</span> since we used Floyd-Warshall and also have an additional <span class="math notranslate nohighlight">\(O(|V|^2)\)</span> component to create the shortest paths that pass through <span class="math notranslate nohighlight">\(v_0\)</span> for each node pair from the output of Floyd-Warshall.</p>
+<p>Use Floyd-Warshall to find the shortest paths between all nodes. Then for each node <span class="math notranslate nohighlight">\(v\in V\)</span> find the shortest path found by Floyd-Warshall from it to <span class="math notranslate nohighlight">\(v_0\)</span> and the shortest path from <span class="math notranslate nohighlight">\(v_0\)</span> to every other node besides <span class="math notranslate nohighlight">\(v\)</span> and concatenate the paths to the shortest path from <span class="math notranslate nohighlight">\(v\)</span> to <span class="math notranslate nohighlight">\(v_0\)</span>. Complexity is <span class="math notranslate nohighlight">\(O(n^3)\)</span> since we used Floyd-Warshall and also have an additional <span class="math notranslate nohighlight">\(O(m^2)\)</span> component to create the shortest paths that pass through <span class="math notranslate nohighlight">\(v_0\)</span> for each node pair from the output of Floyd-Warshall.</p>
 <p>For a faster way we can run Dijkstra on the graph with the source node as <span class="math notranslate nohighlight">\(v_0\)</span> which will give use the shortest path from <span class="math notranslate nohighlight">\(v_0\)</span> to all other nodes. Now for each node in <span class="math notranslate nohighlight">\(G\)</span> besides <span class="math notranslate nohighlight">\(v_0\)</span> we will run Dijkstra with it as the source node</p>
-<p><span class="math notranslate nohighlight">\(O(|V|(|V|\log{(|V|)}+|E|\log{(|V|)}))= O(|V|^2\log{(|V|)}+|V||E|\log{(|V|)})\)</span></p>
+<p><span class="math notranslate nohighlight">\(O(n(n\log{(n)}+m\log{(n)}))= O(n^2\log{(n)}+nm\log{(n)})\)</span></p>
+</section>
+<section id="bottleneck-edges-in-flow-networks">
+<h3>7.17 Bottleneck edges in flow networks<a class="headerlink" href="#bottleneck-edges-in-flow-networks" title="Link to this heading">#</a></h3>
+<p>a)</p>
+<p>Min-cut: L={S,A,B}, R={T,C,D} has capacity: 4+2+2+3=11</p>
+<p>Max-flow: flow from S-&gt;A is 6 and from S-&gt;B is 5. You can do the rest. Max flow is thus 11.</p>
+<p>b)</p>
+<p>c) Bottleneck edges are (s,b), (b,c), (a,d)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -878,7 +995,7 @@ B,A,C,E,D,F,H,G.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Oct 03 2024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Oct 13 2024
 
 Python implementation: CPython
 Python version       : 3.10.12
@@ -975,7 +1092,10 @@ matplotlib: 3.7.4
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-spanning-trees">Minimum spanning trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kruskals-algorithm">Kruskal’s algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#proof-of-optimality-of-greedy-choice">Proof of optimality of greedy choice</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prims-algorithm">Prim’s algorithm</a></li>
 </ul>
 </li>
@@ -985,6 +1105,7 @@ matplotlib: 3.7.4
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ford-fulkerson-algorithm">Ford-Fulkerson algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edmonds-karp-algorithm">Edmonds-Karp algorithm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-algorithms">Other algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#max-flow-and-min-st-cut">Max flow and min <span class="math notranslate nohighlight">\(st\)</span> cut</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
@@ -995,6 +1116,7 @@ matplotlib: 3.7.4
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computopia">3.15 Computopia</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-cost-node">3.25 Minimum cost node</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortest-path-through-a-given-vertex">4.14 Shortest path through a given vertex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottleneck-edges-in-flow-networks">7.17 Bottleneck edges in flow networks</a></li>
 </ul>
 </li>
 </ul>
