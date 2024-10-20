@@ -70,6 +70,7 @@ parts:
     - file: mathematics/differential-equations/diff_eq
       sections:
       - file: mathematics/differential-equations/wave_eq
+      - file: mathematics/differential-equations/laplace_eq
     
     - file: mathematics/complex-analysis/complex_analysis
       sections:
@@ -96,7 +97,6 @@ parts:
       - file: computerscience/algorithms/dynamic_prog
       - file: computerscience/algorithms/graph_algos
       - file: computerscience/algorithms/greedy_algos
-      - file: computerscience/algorithms/max_flow
       - file: computerscience/algorithms/np_problems
       - file: computerscience/algorithms/linear_prog
     
@@ -116,7 +116,8 @@ parts:
       - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/cross_ent_loss
       - file: computerscience/machine-learning/attention
-    
+      - file: computerscience/machine-learning/physical_learning
+
     - file: computerscience/deep-learning/deep_learning
       sections:
       - file: computerscience/deep-learning/conv_net
