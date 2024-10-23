@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Max flow algorithms" href="max_flow.html" />
+    <link rel="next" title="NP-completeness" href="np_problems.html" />
     <link rel="prev" title="Graph algorithms" href="graph_algos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -238,6 +238,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">13. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/laplace_eq.html">Lapalace’s equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -261,7 +262,6 @@
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Greedy algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
 </ul>
@@ -281,6 +281,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -324,6 +325,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">30. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/missing_data.html">Missing data</a></li>
 </ul>
 </details></li>
 </ul>
@@ -547,17 +549,7 @@ document.write(`
 <section id="kruskals-algorithm">
 <h2>Kruskal’s algorithm<a class="headerlink" href="#kruskals-algorithm" title="Link to this heading">#</a></h2>
 <p>An example of a greedy algorithm is Kruskal’s algorithm for finding a minimum spanning tree (MST) of an undirected graph <span class="math notranslate nohighlight">\(G\)</span>.</p>
-<div class="proof definition admonition" id="mst-def">
-<p class="admonition-title"><span class="caption-number">Definition 19.1 </span></p>
-<section class="definition-content" id="proof-content">
-<p>The <em>minimum spanning tree</em> of an undirected weighted graph <span class="math notranslate nohighlight">\(G\)</span> is the a subset <span class="math notranslate nohighlight">\(E'\)</span> of the edges <span class="math notranslate nohighlight">\(E\)</span> that connects all vertices and contains no cycles and has the minium possible total edge weight i.e.</p>
-<div class="math notranslate nohighlight">
-\[
-\sum_{e\in E'} w(e)
-\]</div>
-<p>is minimized where <span class="math notranslate nohighlight">\(w(e)\)</span> denotes the weight of edge <span class="math notranslate nohighlight">\(e\)</span>.</p>
 </section>
-</div></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -600,11 +592,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="max_flow.html"
+       href="np_problems.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Max flow algorithms</p>
+        <p class="prev-next-title">NP-completeness</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

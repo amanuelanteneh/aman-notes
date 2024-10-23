@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Max flow algorithms &#8212; Amanuel&#39;s Notebook</title>
+    <title>Physical learning &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/max_flow';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/physical_learning';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="NP-completeness" href="np_problems.html" />
-    <link rel="prev" title="Greedy algorithms" href="greedy_algos.html" />
+    <link rel="next" title="22. Deep Learning" href="../deep-learning/deep_learning.html" />
+    <link rel="prev" title="Attention" href="attention.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -236,6 +236,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">13. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/laplace_eq.html">Lapalace’s equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -253,15 +254,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">16. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_structs.html">17. Data Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lazy_eval.html">18. Lazy Evaluation</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="algorithms.html">19. Algorithms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="divide_conquer.html">Divide &amp; conquer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="greedy_algos.html">Greedy algorithms</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Max flow algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/algorithms.html">19. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/greedy_algos.html">Greedy algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/np_problems.html">NP-completeness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_prog.html">Linear programming</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">20. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -270,15 +270,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../optimization/bayes_opt.html">Bayesian optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">21. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">21. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lin_reg.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_based.html">Tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_machines.html">Kernel machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative.html">Generative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_ent_loss.html">Cross entropy loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Physical learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -322,6 +323,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">30. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/missing_data.html">Missing data</a></li>
 </ul>
 </details></li>
 </ul>
@@ -399,7 +401,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/algorithms/max_flow.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/physical_learning.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -429,7 +431,7 @@
       
       
       
-      <li><a href="../../_sources/computerscience/algorithms/max_flow.ipynb" target="_blank"
+      <li><a href="../../_sources/computerscience/machine-learning/physical_learning.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -500,9 +502,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -513,19 +513,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Max flow algorithms</h1>
+    <h1>Physical learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -535,11 +527,45 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="max-flow-algorithms">
-<h1>Max flow algorithms<a class="headerlink" href="#max-flow-algorithms" title="Link to this heading">#</a></h1>
-<section id="practice-problems">
-<h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="physical-learning">
+<h1>Physical learning<a class="headerlink" href="#physical-learning" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">scatter</span><span class="o">.</span><span class="n">legend_elements</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Classes&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e95ce3bc68ca356f279d2c988487a936bc475d649893eb23be81e34fb1bcfc41.png" src="../../_images/e95ce3bc68ca356f279d2c988487a936bc475d649893eb23be81e34fb1bcfc41.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#print(iris[&#39;data&#39;])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ 2 2]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -555,7 +581,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./computerscience/algorithms"
+            path: "./computerscience/machine-learning"
         },
         predefinedOutput: true
     }
@@ -573,20 +599,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="greedy_algos.html"
+       href="attention.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Greedy algorithms</p>
+        <p class="prev-next-title">Attention</p>
       </div>
     </a>
     <a class="right-next"
-       href="np_problems.html"
+       href="../deep-learning/deep_learning.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">NP-completeness</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>Deep Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -596,21 +622,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

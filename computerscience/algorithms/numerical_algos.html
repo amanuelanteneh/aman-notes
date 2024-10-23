@@ -238,6 +238,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">13. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/laplace_eq.html">Lapalace’s equation</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -261,7 +262,6 @@
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="greedy_algos.html">Greedy algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="max_flow.html">Max flow algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="np_problems.html">NP-completeness</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
 </ul>
@@ -281,6 +281,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -324,6 +325,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">30. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/missing_data.html">Missing data</a></li>
 </ul>
 </details></li>
 </ul>
@@ -543,7 +545,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">1.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.20</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -813,6 +822,52 @@ a^{p-1}\equiv 1 \pmod p \iff a^{p-1}\bmod p &amp;= 1\bmod p \\
 </section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h3>1.11<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>Does <span class="math notranslate nohighlight">\((4^{1536}-9^{2824}) \mod 35 = 0\)</span>?</p>
+</section>
+<section id="id8">
+<h3>1.12<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;2^{2^{2006}} \mod 3 \\
+&amp;=\left(\prod_{i=1}^{2^{2006}}2\right) \mod 3 \\
+&amp;=\left(\prod_{i=1}^{2^{2006}}1\right) \mod 3  \quad \text{Use substitution rule since $2\equiv 1 \mod 3$}\\ 
+&amp;=1 \mod 3 \\
+&amp;=1
+\end{align*}
+\end{split}\]</div>
+</section>
+<section id="id9">
+<h3>1.13<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>Does <span class="math notranslate nohighlight">\((5^{30,000}-6^{123,456}) \mod 31 = 0\)</span>?</p>
+</section>
+<section id="id10">
+<h3>1.18<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>a) Using Euclid’s algorithm, <span class="math notranslate nohighlight">\(\gcd{(x,y)}=\gcd{(x\mod y,y)}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp;\gcd{(210,588)} \\
+&amp;=\gcd{(588,210)} \quad \text{Switch order of arguments; $\gcd$ is symmetric} \\
+&amp;=\gcd{(588\mod 210,210)} \quad \text{Apply Euclid's rule} \\
+&amp;= \gcd{(168,210)}  \\
+&amp;= \gcd{(210,168)} \quad \text{Switch order of arguments; $\gcd$ is symmetric} \\
+&amp;= \gcd{(210 \mod 168,168)} \quad \text{Apply Euclid's rule} \\
+&amp;= \gcd{(42,168)} \\
+&amp;= \gcd{(168, 42)} \quad \text{Switch order of arguments; $\gcd$ is symmetric} \\
+&amp;= \gcd{(168 \mod 42,42)} \quad \text{Apply Euclid's rule} \\
+&amp;= \gcd{(0,42)} \quad \text{Base case: $\gcd{(0,x)}=x$} \\
+&amp;= 42 \\
+\end{align*}
+\end{split}\]</div>
+<p>so <span class="math notranslate nohighlight">\(\gcd{(210,588)}=42\)</span>.</p>
+</section>
+<section id="id11">
+<h3>1.20<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>Find the inverse of: <span class="math notranslate nohighlight">\(20 \mod 79\)</span>, <span class="math notranslate nohighlight">\(3 \mod 62\)</span>, <span class="math notranslate nohighlight">\(21 \mod 91\)</span>, <span class="math notranslate nohighlight">\(5 \mod 23\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -898,7 +953,14 @@ a^{p-1}\equiv 1 \pmod p \iff a^{p-1}\bmod p &amp;= 1\bmod p \\
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cryptography-rsa">Cryptography (RSA)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.11</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1.12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">1.13</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.18</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.20</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
