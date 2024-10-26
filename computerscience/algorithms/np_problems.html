@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/np_problems';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -525,7 +527,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesperson-optimization-vs-search-variant">8.1 Traveling salesperson - Optimization vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-rudrata-path-decision-vs-search-variant">8.2 Hamiltonian (Rudrata) path - Decision vs search variant</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -541,6 +547,23 @@ document.write(`
 <h1>NP-completeness<a class="headerlink" href="#np-completeness" title="Link to this heading">#</a></h1>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<section id="traveling-salesperson-optimization-vs-search-variant">
+<h3>8.1 Traveling salesperson - Optimization vs search variant<a class="headerlink" href="#traveling-salesperson-optimization-vs-search-variant" title="Link to this heading">#</a></h3>
+<p>Suppose we have a black box that can solve TSP in polynomial time <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of cities in the input. Now take the the largest distance in the matrix <span class="math notranslate nohighlight">\(D\)</span> and compute <span class="math notranslate nohighlight">\(nD\)</span>. To find the shortest tour which passes through all the cities (TSP-OPT) we can use a binary search on the domain of real number <span class="math notranslate nohighlight">\([0,nD]\)</span>.</p>
+<p>So first start by seeing if there is a solution to TSP for <span class="math notranslate nohighlight">\(b=\frac{nD}{2}\)</span> if not then we look on the new range <span class="math notranslate nohighlight">\([0,\frac{nD}{2})\)</span>. We do this until we reach an array with a right bound <span class="math notranslate nohighlight">\([0,x]\)</span> that is less than the <em>smallest</em> distance in the matrix <span class="math notranslate nohighlight">\(D_{min}\)</span> because clearly there can’t be a tour that visits all cities that is shorter than that. This binary search will need to be done <span class="math notranslate nohighlight">\(\log{(nD)}\)</span> times and each time we use our black box algorithm for TSP which has complexity <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> so our overall complexity is <span class="math notranslate nohighlight">\(O(\log{(nD)}\times \text{poly}(n))\)</span> which is polynomial in the input size.</p>
+</section>
+<section id="hamiltonian-rudrata-path-decision-vs-search-variant">
+<h3>8.2 Hamiltonian (Rudrata) path - Decision vs search variant<a class="headerlink" href="#hamiltonian-rudrata-path-decision-vs-search-variant" title="Link to this heading">#</a></h3>
+<p>Suppose we have a black box that given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> will return True if there is a Hamiltonian path in <span class="math notranslate nohighlight">\(G\)</span> and False if there isn’t one in polynomial time <span class="math notranslate nohighlight">\(O(\text{poly}(m+n))\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes in <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(m\)</span> is the number of edges in <span class="math notranslate nohighlight">\(G\)</span>.</p>
+<p>To find the Hamiltonian path we can do the following. First run the black box algorithm on <span class="math notranslate nohighlight">\(G\)</span> if it returns False we return the empty set as there is no Hamiltonian path. If it returns True we do the following:</p>
+<ol class="arabic simple">
+<li><p>Iterate over the edges of <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
+<li><p>For each edge <span class="math notranslate nohighlight">\(e\)</span> remove it from <span class="math notranslate nohighlight">\(G\)</span>. Then run our black box algorithm on <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
+<li><p>If the black box returns False that means <span class="math notranslate nohighlight">\(e\)</span> is part of a Hamiltonian path in <span class="math notranslate nohighlight">\(G\)</span> so we will keep it. If it returns True that means <span class="math notranslate nohighlight">\(e\)</span> is not part of a Hamiltonian path in <span class="math notranslate nohighlight">\(G\)</span> so we keep it removed from <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
+<li><p>Do this for all edges of <span class="math notranslate nohighlight">\(G\)</span> and at the end only edges that are part of a Hamiltonian path in <span class="math notranslate nohighlight">\(G\)</span> will remain in <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
+</ol>
+<p>This algorithm requires we run the black box for each edge in the graph so our time complexity is <span class="math notranslate nohighlight">\(O(m\times\text{poly}(m+n))\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -608,7 +631,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesperson-optimization-vs-search-variant">8.1 Traveling salesperson - Optimization vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-rudrata-path-decision-vs-search-variant">8.2 Hamiltonian (Rudrata) path - Decision vs search variant</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
