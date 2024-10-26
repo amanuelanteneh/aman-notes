@@ -162,6 +162,7 @@ parts:
       sections:
       - file: statistics/bayesian-statistics/cred_int
       - file: statistics/bayesian-statistics/hierarchical_models
+      - file: statistics/bayesian-statistics/missing_data
   
   - caption: Back Matter
     numbered: 1
