@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>NP-completeness &#8212; Amanuel&#39;s Notebook</title>
+    <title>Computational complexity &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -262,7 +262,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dynamic_prog.html">Dynamic programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_algos.html">Graph algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="greedy_algos.html">Greedy algorithms</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">NP-completeness</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Computational complexity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_prog.html">Linear programming</a></li>
 </ul>
 </details></li>
@@ -517,7 +517,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>NP-completeness</h1>
+    <h1>Computational complexity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,9 +527,37 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-problems">Types of problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-problems">Decision problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-problems">Search problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-problems">Optimization problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-complete-problems">NP-complete problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sat">SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-sets">Independent Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variant">Decision variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#search-variant">Search variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-variant">Optimization variant</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clique">Clique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-cover">Vertex Cover</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesperson-optimization-vs-search-variant">8.1 Traveling salesperson - Optimization vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesman-problem-optimization-vs-search-variant">8.1 Traveling salesman problem - Optimization vs search variant</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-rudrata-path-decision-vs-search-variant">8.2 Hamiltonian (Rudrata) path - Decision vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stingy-sat">8.3 Stingy-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clique-3">8.4 Clique-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-4-sat">8.8 Exact 4-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-completeness-proof-by-generalization">8.10 NP-completeness proof by generalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-isomorphism">Subgraph isomorphism</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.19</a></li>
 </ul>
 </li>
 </ul>
@@ -543,14 +571,70 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="np-completeness">
-<h1>NP-completeness<a class="headerlink" href="#np-completeness" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="computational-complexity">
+<h1>Computational complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">#</a></h1>
+<p>There are various complexity classes in computer science that problems can be said to belong in. The most famous of these classes are the classes <span class="math notranslate nohighlight">\(\textrm{P}\)</span> and <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>, for a rigorous treatment of computational complexity theory see <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id34" title="Sanjeev Arora and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.">Arora and Barak, 2009</a>]</span> and <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id35" title="Michael Sipser. Introduction to the Theory of Computation. Cengage Learning, 2013.">Sipser, 2013</a>]</span>.</p>
+<p>The complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> contains problems whose <em>solutions</em> can be verified in polynomial time. Equivalently this is the class of problems that can be solved in polynomial time using a non-deterministic (that’s what the <span class="math notranslate nohighlight">\(\textrm{N}\)</span> in <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> stands for) Turing machine.</p>
+<p>The famous open question is whether <span class="math notranslate nohighlight">\(\textrm{P}=\textrm{NP}\)</span> or <span class="math notranslate nohighlight">\(\textrm{P}\subsetneq \textrm{P}\)</span> that is, if the complexity class <span class="math notranslate nohighlight">\(\textrm{P}\)</span> and <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> in fact contain the same problems <em>or</em> if <span class="math notranslate nohighlight">\(\textrm{P}\)</span> is a proper subset of <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> meaning there are problems that can be solved in polynomial time by a non-deterministic Turing machine but <strong>not</strong> in polynomial time by a deterministic Turing machine. Or equivalently we can say if <span class="math notranslate nohighlight">\(\textrm{P}=\textrm{NP}\)</span> then <em>any</em> problem whose solution can be verified in polynomial time <em>also</em> can be solved in polynomial time by a <em>deterministic</em> Turing machine.</p>
+<p>We say that a problem <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>-complete if it satisfies the following criteria</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P} \in \text{NP}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>-hard</p></li>
+</ol>
+<p>What does it mean to for a problem to belong to the complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>? It means that given a particular instance of that problem and a solution to that problem we can <em>verify</em> that solution is correct or incorrect in time <em>polynomial</em> in the input problem size.</p>
+<p>What does it mean for a problem to be <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>-hard? It means that there is a <em>polynomial</em> time reduction of an instance of <em>any</em> problem that is in the complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> to an instance of the problem <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
+<section id="types-of-problems">
+<h2>Types of problems<a class="headerlink" href="#types-of-problems" title="Link to this heading">#</a></h2>
+<section id="decision-problems">
+<h3>Decision problems<a class="headerlink" href="#decision-problems" title="Link to this heading">#</a></h3>
+</section>
+<section id="search-problems">
+<h3>Search problems<a class="headerlink" href="#search-problems" title="Link to this heading">#</a></h3>
+</section>
+<section id="optimization-problems">
+<h3>Optimization problems<a class="headerlink" href="#optimization-problems" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="np-complete-problems">
+<h2>NP-complete problems<a class="headerlink" href="#np-complete-problems" title="Link to this heading">#</a></h2>
+<section id="sat">
+<h3>SAT<a class="headerlink" href="#sat" title="Link to this heading">#</a></h3>
+<p>This is proven by the Cook-Levin theorem.</p>
+</section>
+<section id="id3">
+<h3>3-SAT<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+</section>
+<section id="independent-sets">
+<h3>Independent Sets<a class="headerlink" href="#independent-sets" title="Link to this heading">#</a></h3>
+<section id="decision-variant">
+<h4>Decision variant<a class="headerlink" href="#decision-variant" title="Link to this heading">#</a></h4>
+<p>Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> does there exist a subset <span class="math notranslate nohighlight">\(S \subseteq V\)</span> of vertices of the graph such that none of the vertices are adjacent to each other.</p>
+<p>That is <span class="math notranslate nohighlight">\(\forall u \in S,  \nexists v \mid (u,v)\in E\)</span>.</p>
+</section>
+<section id="search-variant">
+<h4>Search variant<a class="headerlink" href="#search-variant" title="Link to this heading">#</a></h4>
+<p>Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> and a natural number <span class="math notranslate nohighlight">\(k\)</span> find a subset <span class="math notranslate nohighlight">\(S \subseteq V\)</span>, of size <span class="math notranslate nohighlight">\(|S|=k\)</span>, of vertices of the graph such that none of the vertices are adjacent to each other.</p>
+<p>That is <span class="math notranslate nohighlight">\(\forall u \in S,  \nexists v \mid (u,v)\in E\)</span>.</p>
+</section>
+<section id="optimization-variant">
+<h4>Optimization variant<a class="headerlink" href="#optimization-variant" title="Link to this heading">#</a></h4>
+<p>Given a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> find a subset <span class="math notranslate nohighlight">\(S \subseteq V\)</span>, of maximum size, of vertices of the graph such that none of the vertices are adjacent to each other.</p>
+<p>That is <span class="math notranslate nohighlight">\(\forall u \in S,  \nexists v \mid (u,v)\in E\)</span>.</p>
+</section>
+</section>
+<section id="clique">
+<h3>Clique<a class="headerlink" href="#clique" title="Link to this heading">#</a></h3>
+</section>
+<section id="vertex-cover">
+<h3>Vertex Cover<a class="headerlink" href="#vertex-cover" title="Link to this heading">#</a></h3>
+</section>
+</section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
-<section id="traveling-salesperson-optimization-vs-search-variant">
-<h3>8.1 Traveling salesperson - Optimization vs search variant<a class="headerlink" href="#traveling-salesperson-optimization-vs-search-variant" title="Link to this heading">#</a></h3>
-<p>Suppose we have a black box that can solve TSP in polynomial time <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of cities in the input. Now take the the largest distance in the matrix <span class="math notranslate nohighlight">\(D\)</span> and compute <span class="math notranslate nohighlight">\(nD\)</span>. To find the shortest tour which passes through all the cities (TSP-OPT) we can use a binary search on the domain of real number <span class="math notranslate nohighlight">\([0,nD]\)</span>.</p>
-<p>So first start by seeing if there is a solution to TSP for <span class="math notranslate nohighlight">\(b=\frac{nD}{2}\)</span> if not then we look on the new range <span class="math notranslate nohighlight">\([0,\frac{nD}{2})\)</span>. We do this until we reach an array with a right bound <span class="math notranslate nohighlight">\([0,x]\)</span> that is less than the <em>smallest</em> distance in the matrix <span class="math notranslate nohighlight">\(D_{min}\)</span> because clearly there can’t be a tour that visits all cities that is shorter than that. This binary search will need to be done <span class="math notranslate nohighlight">\(\log{(nD)}\)</span> times and each time we use our black box algorithm for TSP which has complexity <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> so our overall complexity is <span class="math notranslate nohighlight">\(O(\log{(nD)}\times \text{poly}(n))\)</span> which is polynomial in the input size.</p>
+<section id="traveling-salesman-problem-optimization-vs-search-variant">
+<h3>8.1 Traveling salesman problem - Optimization vs search variant<a class="headerlink" href="#traveling-salesman-problem-optimization-vs-search-variant" title="Link to this heading">#</a></h3>
+<p>Suppose we have a black box that can solve TSP in polynomial time <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of cities in the input. Compute <span class="math notranslate nohighlight">\(D\)</span> the sum of the distances in the matrix. To find the shortest tour which passes through all the cities (TSP-OPT) we can use a binary search on the domain of real number <span class="math notranslate nohighlight">\([0,D]\)</span> since <span class="math notranslate nohighlight">\(D\)</span> is the maximum length of any path on the set of cities.</p>
+<p>So first start by seeing if there is a solution to TSP for <span class="math notranslate nohighlight">\(b=\frac{D}{2}\)</span> if not then we look on the new range <span class="math notranslate nohighlight">\([0,\frac{D}{2})\)</span>. We do this until we reach a range with a right bound <span class="math notranslate nohighlight">\([0,x]\)</span> that is less than the <em>smallest</em> distance in the matrix <span class="math notranslate nohighlight">\(d_{min}\)</span> because clearly there can’t be a tour that visits all cities that is shorter than that. This binary search will need to be done <span class="math notranslate nohighlight">\(\log{(D)}\)</span> times and each time we use our black box algorithm for TSP which has complexity <span class="math notranslate nohighlight">\(O(\text{poly}(n))\)</span> so our overall complexity is <span class="math notranslate nohighlight">\(O(\log{(D)}\times \text{poly}(n))\)</span> which is polynomial in the input size.</p>
 </section>
 <section id="hamiltonian-rudrata-path-decision-vs-search-variant">
 <h3>8.2 Hamiltonian (Rudrata) path - Decision vs search variant<a class="headerlink" href="#hamiltonian-rudrata-path-decision-vs-search-variant" title="Link to this heading">#</a></h3>
@@ -563,6 +647,33 @@ document.write(`
 <li><p>Do this for all edges of <span class="math notranslate nohighlight">\(G\)</span> and at the end only edges that are part of a Hamiltonian path in <span class="math notranslate nohighlight">\(G\)</span> will remain in <span class="math notranslate nohighlight">\(G\)</span>.</p></li>
 </ol>
 <p>This algorithm requires we run the black box for each edge in the graph so our time complexity is <span class="math notranslate nohighlight">\(O(m\times\text{poly}(m+n))\)</span>.</p>
+</section>
+<section id="stingy-sat">
+<h3>8.3 Stingy-SAT<a class="headerlink" href="#stingy-sat" title="Link to this heading">#</a></h3>
+<p>First we show Stingy-SAT is in NP. Suppose we have a solution to an instance of the Stingy SAT problem. We can iterate over the CNF boolean expression and count the number of variables in the expression, denote it as <span class="math notranslate nohighlight">\(n\)</span>, this takes <span class="math notranslate nohighlight">\(O(n)\)</span> time. Now we can count the number of variables that are set to True in the solution, denote this as <span class="math notranslate nohighlight">\(r\)</span>. Now we just need to check if <span class="math notranslate nohighlight">\(r\leq k\)</span> to see if the stingy constraint is satisfied. This takes <span class="math notranslate nohighlight">\(O(1)\)</span> time. Finally, we can evaluate the CNF expression with the variable assignments in the solution and see if it evaluates to True as we would for the regular SAT problem which takes <span class="math notranslate nohighlight">\(O(n)\)</span> time. So this whole process of verifying the solution takes polynomial time so Stingy SAT is in NP.</p>
+<p>Second we need to show Stingy-SAT is NP-hard which means all problems in NP can be reduced to this problem. We can straightforwardly show this by showing SAT, which is known to be NP-hard, can be reduced to Stingy-SAT. This can be done by computing the number of variables, <span class="math notranslate nohighlight">\(n\)</span>, in a CNF expression for the SAT problem and setting <span class="math notranslate nohighlight">\(k=n\)</span>. Now this is an instance of the Stingy-SAT problem and the solution to this problem is a solution to the original SAT problem with no need of modification.</p>
+</section>
+<section id="clique-3">
+<h3>8.4 Clique-3<a class="headerlink" href="#clique-3" title="Link to this heading">#</a></h3>
+<p>a)</p>
+<p>b)</p>
+<p>c)</p>
+</section>
+<section id="exact-4-sat">
+<h3>8.8 Exact 4-SAT<a class="headerlink" href="#exact-4-sat" title="Link to this heading">#</a></h3>
+</section>
+<section id="np-completeness-proof-by-generalization">
+<h3>8.10 NP-completeness proof by generalization<a class="headerlink" href="#np-completeness-proof-by-generalization" title="Link to this heading">#</a></h3>
+<section id="subgraph-isomorphism">
+<h4>Subgraph isomorphism<a class="headerlink" href="#subgraph-isomorphism" title="Link to this heading">#</a></h4>
+<p>We</p>
+</section>
+</section>
+<section id="id4">
+<h3>8.14<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+</section>
+<section id="id5">
+<h3>8.19<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 </section>
 </section>
 </section>
@@ -631,9 +742,37 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-problems">Types of problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-problems">Decision problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-problems">Search problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-problems">Optimization problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#np-complete-problems">NP-complete problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sat">SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#independent-sets">Independent Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-variant">Decision variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#search-variant">Search variant</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-variant">Optimization variant</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clique">Clique</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-cover">Vertex Cover</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesperson-optimization-vs-search-variant">8.1 Traveling salesperson - Optimization vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traveling-salesman-problem-optimization-vs-search-variant">8.1 Traveling salesman problem - Optimization vs search variant</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-rudrata-path-decision-vs-search-variant">8.2 Hamiltonian (Rudrata) path - Decision vs search variant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stingy-sat">8.3 Stingy-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clique-3">8.4 Clique-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-4-sat">8.8 Exact 4-SAT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#np-completeness-proof-by-generalization">8.10 NP-completeness proof by generalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#subgraph-isomorphism">Subgraph isomorphism</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.19</a></li>
 </ul>
 </li>
 </ul>
