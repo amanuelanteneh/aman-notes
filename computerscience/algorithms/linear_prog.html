@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/algorithms/linear_prog';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -525,6 +527,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-manufacturing">Example: Manufacturing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplex-algorithm">Simplex Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duality">Duality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-example">7.1 Linear programming example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duckwheat">7.2 Duckwheat</a></li>
@@ -551,21 +559,88 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <blockquote class="epigraph">
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-programming">
+<h1>Linear programming<a class="headerlink" href="#linear-programming" title="Link to this heading">#</a></h1>
+<blockquote class="epigraph">
 <div><p><em>Linear programming can be viewed as part of a great revolutionary development which has given mankind the ability to state
 general goals and to lay out a path of detailed decisions to take
 in order to “best” achieve its goals when faced with practical situations of great complexity.</em></p>
 <p class="attribution">—George Dantzig, mathematician and inventor of the simplex algorithm</p>
 </div></blockquote>
-<section class="tex2jax_ignore mathjax_ignore" id="linear-programming">
-<h1>Linear programming<a class="headerlink" href="#linear-programming" title="Link to this heading">#</a></h1>
-<p>Linear programming is an optimization method for solving optimization problems whose objective function and constraints/requirements can be expressed as <em>linear</em> functions or constraints.</p>
-<p>\begin{aligned}
-\max_{x_1,…,x_n} \quad &amp; J(x_1,…,x_n)\
-\textrm{subject to} \quad &amp; y_{i}(w\phi(x_{i}+b))+\xi_{i}-1\
-&amp;x_i\geq0 \quad\forall x_i \in {x_1,…,x_n}    \
-\end{aligned}</p>
-<p>The <em>feasible region (or feasible set)</em> is the region of the parameter space where all the constraints are satisfied.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Linear programming is an optimization method for solving a class of optimization problems called linear programs (LPs) which are problems whose objective function and constraints can be expressed as <em>linear</em> functions and inequalities.</p>
+<p>A general optimization problem that can be solved using linear programming can be expressed as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\max_{x_1,..,x_n} \quad &amp; J(x_1,...,x_n)\\
+\textrm{subject to} \quad &amp; a_{11}x_1 + a_{12}x_2 + \dots a_{1n}x_n \leq b_1\\
+  &amp; a_{21}x_1 + a_{22}x_2 + \dots a_{2n}x_n \leq b_2 \\
+  &amp; \qquad \qquad \qquad \vdots \\
+  &amp; a_{m1}x_1 + a_{m2}x_2 + \dots a_{mn}x_n \leq b_m \\
+  &amp; x_1,\dots, x_n \geq 0
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(J(x_1,...,x_n)\)</span> is a linear function of the parameters/variables <span class="math notranslate nohighlight">\(x_1,...,x_n\)</span> meaning it has the form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+J(x_1,...,x_n) = c_1x_1+\dots+c_nx_n
+\end{align*}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(c_i\)</span>’s are constants.</p>
+<p>This can be expressed compactly using linear algebra as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\max_{x_1,..,x_n} \quad &amp; \vec{c}^T\vec{x}\\
+\textrm{subject to} \quad &amp; A\vec{x} \leq \vec{b}\\
+  &amp; \vec{x} \geq 0\\
+\end{align*}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\vec{c} = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}, \quad \vec{x} = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}, \quad \vec{b} = \begin{bmatrix} b_1 \\ \vdots \\ b_n \end{bmatrix}
+\\
+\\ &amp; \qquad \qquad \qquad \qquad \textrm{and} \\ \\
+
+&amp;A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\
+                    a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\
+                    \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+                    a_{m1} &amp; a_{m2} &amp; \dots &amp; a_{mn}
+ \end{bmatrix}
+\end{align*}\]</div>
+<p>The <em>feasible region</em> is the region of the parameter space where all the constraints are satisfied. There is also the <em>feasible set</em> which is just the set of points in the parameter space contained in the feasible region. If there is no feasible region and thus the feasible set is empty then we say the LP is infeasible.</p>
+<section id="example-manufacturing">
+<h3>Example: Manufacturing<a class="headerlink" href="#example-manufacturing" title="Link to this heading">#</a></h3>
+<p>Suppose a company is trying to figure out how much of two products <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> they should manufacture (and thus sell) to maximize revenue. Suppose that one unit of <span class="math notranslate nohighlight">\(A\)</span> generates <span class="math notranslate nohighlight">\(\$1\)</span> of revenue while one unit generates <span class="math notranslate nohighlight">\(\$6\)</span> of revenue. Further, suppose that the current manufacturing facility can produce up to <span class="math notranslate nohighlight">\(300\)</span> units of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(200\)</span> units of <span class="math notranslate nohighlight">\(B\)</span> per day and the workers can cumulatively only work <span class="math notranslate nohighlight">\(700\)</span> hours per day and it takes <span class="math notranslate nohighlight">\(1\)</span> hour to manufacture <span class="math notranslate nohighlight">\(1\)</span> unit of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(3\)</span> hours to manufacture <span class="math notranslate nohighlight">\(1\)</span> unit of <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>The objective function we want to maximize is the revenue which can be expressed as <span class="math notranslate nohighlight">\(J(x_A,x_B)=x_A+6x_B\)</span> where <span class="math notranslate nohighlight">\(x_A\)</span> is the number of units of product <span class="math notranslate nohighlight">\(A\)</span> that are created and <span class="math notranslate nohighlight">\(x_B\)</span> are the number of units of product <span class="math notranslate nohighlight">\(B\)</span> which are created. This along with the constraints can be expressed as the following LP</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\max_{x_A,x_B} \quad &amp; x_A+6x_B\\
+\textrm{subject to} \quad &amp; x_A \leq 300\\
+  \quad &amp; x_B \leq 200 \\
+  &amp; x_A+3x_B \leq 700 \\
+  &amp; x_A,x_B \geq 0
+\end{align*}\]</div>
+</section>
+</section>
+<section id="simplex-algorithm">
+<h2>Simplex Algorithm<a class="headerlink" href="#simplex-algorithm" title="Link to this heading">#</a></h2>
+</section>
+<section id="duality">
+<h2>Duality<a class="headerlink" href="#duality" title="Link to this heading">#</a></h2>
+<p>The dual LP of a LP of the standard/canonical form</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\max_{x_1,..,x_n} \quad &amp; \vec{c}^T\vec{x}\\
+\textrm{subject to} \quad &amp; A\vec{x} \leq \vec{b}\\
+  &amp; \vec{x} \geq \vec{0}\\
+\end{align*}\]</div>
+<p>is given by</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{y_1,..,y_m} \quad &amp; \vec{b}^T\vec{y}\\
+\textrm{subject to} \quad &amp; A^T\vec{y} \geq \vec{c}\\
+  &amp; \vec{y}\geq \vec{0}\\
+\end{align*}\]</div>
+</section>
 <section id="practice-problems">
 <h2>Practice problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <section id="linear-programming-example">
@@ -673,6 +748,12 @@ in order to “best” achieve its goals when faced with practical situations of
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-manufacturing">Example: Manufacturing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplex-algorithm">Simplex Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duality">Duality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-programming-example">7.1 Linear programming example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duckwheat">7.2 Duckwheat</a></li>

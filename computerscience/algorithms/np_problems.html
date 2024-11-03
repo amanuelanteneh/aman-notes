@@ -527,6 +527,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-problems">Types of problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-problems">Decision problems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-problems">Search problems</a></li>
@@ -572,7 +573,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <blockquote class="epigraph">
+  <section class="tex2jax_ignore mathjax_ignore" id="computational-complexity">
+<h1>Computational complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">#</a></h1>
+<blockquote class="epigraph">
 <div><p><em>If</em> <span class="math notranslate nohighlight">\(\textrm{P} = \textrm{NP}\)</span>, <em>then the world would be a profoundly different place
 than we usually assume it to be. There would be no special value
 in ‘creative leaps,’ no fundamental gap between solving a problem and recognizing the solution once it’s found. Everyone who
@@ -580,10 +583,10 @@ could appreciate a symphony would be Mozart; everyone who
 could follow a step-by-step argument would be Gauss; everyone
 who could recognize a good investment strategy would be Warren
 Buffett.</em></p>
-<p class="attribution">—Scott Anderson, computer scientist and co-discoverer of the Boson sampler model of quantum computation</p>
+<p class="attribution">—Scott Aaronson, computer scientist and co-discoverer of the Boson sampler model of quantum computation</p>
 </div></blockquote>
-<section class="tex2jax_ignore mathjax_ignore" id="computational-complexity">
-<h1>Computational complexity<a class="headerlink" href="#computational-complexity" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>There are various complexity classes in computer science that problems can be said to belong in. The most famous of these classes are the classes <span class="math notranslate nohighlight">\(\textrm{P}\)</span> and <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>, for a rigorous treatment of computational complexity theory see <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id34" title="Sanjeev Arora and Boaz Barak. Computational complexity: a modern approach. Cambridge University Press, 2009.">Arora and Barak, 2009</a>]</span> and <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id35" title="Michael Sipser. Introduction to the Theory of Computation. Cengage Learning, 2013.">Sipser, 2013</a>]</span>.</p>
 <p>The complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> contains problems whose <em>solutions</em> can be verified in polynomial time. Equivalently this is the class of problems that can be solved in polynomial time using a non-deterministic (that’s what the <span class="math notranslate nohighlight">\(\textrm{N}\)</span> in <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> stands for) Turing machine.</p>
 <p>The famous open question is whether <span class="math notranslate nohighlight">\(\textrm{P}=\textrm{NP}\)</span> or <span class="math notranslate nohighlight">\(\textrm{P}\subsetneq \textrm{P}\)</span> that is, if the complexity class <span class="math notranslate nohighlight">\(\textrm{P}\)</span> and <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> in fact contain the same problems <em>or</em> if <span class="math notranslate nohighlight">\(\textrm{P}\)</span> is a proper subset of <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> meaning there are problems that can be solved in polynomial time by a non-deterministic Turing machine but <strong>not</strong> in polynomial time by a deterministic Turing machine. Or equivalently we can say if <span class="math notranslate nohighlight">\(\textrm{P}=\textrm{NP}\)</span> then <em>any</em> problem whose solution can be verified in polynomial time <em>also</em> can be solved in polynomial time by a <em>deterministic</em> Turing machine.</p>
@@ -594,6 +597,7 @@ Buffett.</em></p>
 </ol>
 <p>What does it mean to for a problem to belong to the complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>? It means that given a particular instance of that problem and a solution to that problem we can <em>verify</em> that solution is correct or incorrect in time <em>polynomial</em> in the input problem size.</p>
 <p>What does it mean for a problem to be <span class="math notranslate nohighlight">\(\textrm{NP}\)</span>-hard? It means that there is a <em>polynomial</em> time reduction of an instance of <em>any</em> problem that is in the complexity class <span class="math notranslate nohighlight">\(\textrm{NP}\)</span> to an instance of the problem <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
+</section>
 <section id="types-of-problems">
 <h2>Types of problems<a class="headerlink" href="#types-of-problems" title="Link to this heading">#</a></h2>
 <section id="decision-problems">
@@ -756,6 +760,7 @@ Buffett.</em></p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-problems">Types of problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-problems">Decision problems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-problems">Search problems</a></li>
