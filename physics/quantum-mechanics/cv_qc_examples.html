@@ -1,0 +1,1117 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CV QC simulations &#8212; Amanuel&#39;s Notebook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/quantum-mechanics/cv_qc_examples';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Classical Mechanics" href="../classical-mech/classical_mech.html" />
+    <link rel="prev" title="Lindblad master equation" href="lindblad_eq.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Amanuel's Notebook</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="quantum_mechanics.html">2. Quantum Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="entanglement.html">Entanglement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partial_trace.html">Partial trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="photon_number_detection.html">Photon number detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lindblad_eq.html">Lindblad master equation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">CV QC simulations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../classical-mech/calc_of_var.html">Calculus of variations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../e-and-m/gauss_law.html">Gauss’s law</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../stat-mech/stat_mech.html">5. Statistical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stat-mech/partition_func.html">Partition function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stat-mech/grand_can_ens.html">Grand canonical ensemble</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">6. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">7. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/discrete-math/discrete_math.html">8. Discrete Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/sets.html">Set theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/relations.html">Relations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html">Graph theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">9. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/bch.html">Baker–Campbell–Hausdorff formula</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">10. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/matrix-calc/matrix_calc.html">11. Matrix Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/matrix-calc/vec_mat_deriv.html">Vector and matrix derivatives</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_calc.html">12. Stochastic Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_diff_eq.html">Stochastic differential equations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">13. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/laplace_eq.html">Lapalace’s equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">14. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">15. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditional distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">16. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/data_structs.html">17. Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/lazy_eval.html">18. Lazy Evaluation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">19. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/greedy_algos.html">Greedy algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/np_problems.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/linear_prog.html">Linear programming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/optimization/optimization.html">20. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/semidef_prog.html">Semidefinite programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/quad_prog.html">Quadratic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/bayes_opt.html">Bayesian optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">21. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/lin_reg.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/tree_based.html">Tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/kernel_machines.html">Kernel machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/generative.html">Generative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/cross_ent_loss.html">Cross entropy loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/physical_learning.html">Physical learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/conv_net.html">Convolutional neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/rnn.html">Recurrent neural network</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/reinforcement-learning/reinforcement_learning.html">23. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/reinforcement-learning/ppo.html">Proximal policy optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/quantum-comp/quantum_comp.html">24. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/quantum-comp/bern_vazirani.html">Bernstein–Vazirani algorithm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">25. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">26. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">27. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling_methods.html">28. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">29. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">30. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/missing_data.html">Missing data</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">31. Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/quantum-mechanics/cv_qc_examples.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/physics/quantum-mechanics/cv_qc_examples.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CV QC simulations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-necessary-cv-quantum-operations">Defining necessary CV quantum operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fock-basis">The Fock basis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beamsplitter">Beamsplitter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hong-ou-mandel-effect">Example 1: Hong-Ou-Mandel effect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-squeezed-cat-state-generation">Example 2: Squeezed cat state generation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cv-qc-simulations">
+<h1>CV QC simulations<a class="headerlink" href="#cv-qc-simulations" title="Link to this heading">#</a></h1>
+<p>In this notebook I will go over two simple examples of continuous variable quantum circuits: one that simulates the Hong-Ou-Mandel effect and one that prepares a special type of quantum state called a squeezed cat state. These circuits work with qumodes, which are essentially quantum harmonic oscillators, instead of qubits.</p>
+<p>We will do everything in terms of the Fock basis which allows us to simulate any quantum system albeit with exponential scaling in the number of qumodes.</p>
+<section id="defining-necessary-cv-quantum-operations">
+<h2>Defining necessary CV quantum operations<a class="headerlink" href="#defining-necessary-cv-quantum-operations" title="Link to this heading">#</a></h2>
+<section id="quadratures">
+<h3>Quadratures<a class="headerlink" href="#quadratures" title="Link to this heading">#</a></h3>
+<p>In CV QC we define two dimensionless operators called the quadrature field operators, <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, which are analogs of the position and momentum operators, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> respectively and behave very similarly.</p>
+</section>
+<section id="the-fock-basis">
+<h3>The Fock basis<a class="headerlink" href="#the-fock-basis" title="Link to this heading">#</a></h3>
+<p>First we implement a function, <code class="docutils literal notranslate"><span class="pre">fock_ket</span></code>, to create the kets corresponding to the Fock state <span class="math notranslate nohighlight">\(\ket{n}\)</span> where <span class="math notranslate nohighlight">\(n \in \{0,1,2,3,...\}\)</span>. The Fock states are the energy eignestates of the quantum Harmonic oscillator.</p>
+<p>We will specify how the Fock states are represneted in most simulation tools like StrawberryFields and QuTiP. It is a simple extension of the definition of the computational basis states, <span class="math notranslate nohighlight">\(\ket{0}\)</span> and <span class="math notranslate nohighlight">\(\ket{1}\)</span>, for qubits to higher dimensional systems. For the first 3 Fock states with a Hilbert space cutoff of <span class="math notranslate nohighlight">\(3\)</span> (so the vectors are 3 dimensional) the states are given by the vector</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\ket{0} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}, \ket{1} = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \ket{2} = \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}.
+\end{split}\]</div>
+<p>The extension of this to higher cutoffs is straightforward e.g. for the first 4 Fock states with a cutoff of 4 we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\ket{0} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}, \ket{1} = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}, \ket{2} = \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \end{bmatrix}, \ket{3} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}.
+\end{split}\]</div>
+<p>The choice of the cutoff for the simulated Hilbert space is dependent on what you anticipate the energy of your system will be. For example in the Hong-Ou-Mandel example we show later our system consists of two qumodes each of which contain a single photon. Since we only apply unitaries (the beamsplitter) that are passive, i.e. unitaries that preserve the photon number (energy) of the system, it is sufficient to use a cutoff of <span class="math notranslate nohighlight">\(3\)</span> because the highest energy Fock state we will be able to reach is the Fock state containing <span class="math notranslate nohighlight">\(2\)</span> photons <span class="math notranslate nohighlight">\(\ket{2}\)</span>.
+However, if we were to use unitaries that are not passive like the squeezing unitary operation then the choice of cutoff becomes more tricky as the photon number of the system scales exponentially with the squeezing strength.</p>
+</section>
+<section id="squeezing">
+<h3>Squeezing<a class="headerlink" href="#squeezing" title="Link to this heading">#</a></h3>
+<p>Next we define the squeezing operator <span class="math notranslate nohighlight">\(S(\zeta)\)</span> which mathematically is given by</p>
+<div class="math notranslate nohighlight">
+\[
+S(\zeta) = e^{ \frac{1}{2}(\zeta^* aa - \zeta a^\dagger a^\dagger) }
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the annihilation and creation (ladder) operators for the qumode and <span class="math notranslate nohighlight">\(\zeta=re^{i\phi}\)</span> is a complex number that defines the magnitude, <span class="math notranslate nohighlight">\(r\)</span>, and direction of the squeezing, <span class="math notranslate nohighlight">\(\phi\)</span>. This operation changes the <em>variance</em> of the quadrature operators, <span class="math notranslate nohighlight">\((\Delta q)^2\)</span> and <span class="math notranslate nohighlight">\((\Delta p)^2\)</span> respectively, of the qumode. Specifically, when <span class="math notranslate nohighlight">\(r &gt; 0\)</span> and is real the squeezing operation increases the variance of the momentum quadrature operator of the qumode. Note that since <span class="math notranslate nohighlight">\([q,p]=i\hbar\)</span> the operators <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> obey Heisenberg’s uncertainty principle <span class="math notranslate nohighlight">\(\Delta p \Delta q \geq \frac{\hbar}{2}\)</span> so an increase in the variance of the momentum quadrature operator induces a decrease in the variance of the position quadrature operator.</p>
+<p>Below we show two functions that compute the matrix representation of the squeezing operator in the Fock basis. <code class="docutils literal notranslate"><span class="pre">squeeze_matexp</span></code> computes the matrix by first creating the matrix representation of the ladder operators and computing the matrix exponential using <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code> which is not exact. <code class="docutils literal notranslate"><span class="pre">squeeze_recursive</span></code> computes the matrix by filling out it’s elements using the recurrence relation presented in the work <a class="reference external" href="https://quantum-journal.org/papers/q-2020-11-30-366/">Fast optimization of parametrized quantum optical circuits</a> which gives the exact matrix elements.</p>
+</section>
+<section id="beamsplitter">
+<h3>Beamsplitter<a class="headerlink" href="#beamsplitter" title="Link to this heading">#</a></h3>
+<p>Next we define the beamsplitter operator <span class="math notranslate nohighlight">\(B(\theta,\phi)\)</span> which is a two-qumode operator that produces entaglment between two modes.
+The beamsplitter can also be defined by two complex scalar parameters <span class="math notranslate nohighlight">\(\tau\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> which are the transmittivity and reflectivity of the beamsplitter and are related to <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> by the equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\tau = \cos\theta \\
+\rho = e^{i\phi}\sin\theta
+\end{split}\]</div>
+<p>and satsify the equation</p>
+<div class="math notranslate nohighlight">
+\[
+|\tau|^2 + |\rho|^2 = 1.
+\]</div>
+<p>Essentially the transmittivity determines how much of the light incident onto the beamplsitter is transmitted and the reflectivity determines how much is reflected.</p>
+<p>The unitary is given by the expression</p>
+<div class="math notranslate nohighlight">
+\[
+B(\theta,\phi) = e^{ \theta(e^{i\phi} a_1 \otimes a_2^\dagger - e^{-i\phi} a_1^\dagger \otimes a_2 ) }
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> are the annihilation operators for qumodes 1 and 2 respectively. Below we show two functions that compute the matrix representation of the beamsplitter operator in the Fock basis. <code class="docutils literal notranslate"><span class="pre">beamsplitter_recursive</span></code> computes the matrix by filling out it’s elements using the recurrence relation presented in the work <a class="reference external" href="https://quantum-journal.org/papers/q-2020-11-30-366/">Fast optimization of parametrized quantum optical circuits</a> which gives the exact matrix elements.</p>
+<p>Below we will define the Python functions to implement the qumode based operations we talked about above along with some helper functions to implement standard quantum operations like projective measurement that should be the same as in qubit based QC.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span> <span class="k">as</span> <span class="nn">th</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">complex128</span><span class="p">,</span> <span class="n">tensor</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">cosh</span><span class="p">,</span> <span class="n">tanh</span>
+<span class="kn">from</span> <span class="nn">cmath</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">phase</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">latex</span><span class="p">,</span> <span class="n">Matrix</span>
+<span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">plot_wigner</span><span class="p">,</span> <span class="n">Qobj</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Math</span><span class="p">,</span> <span class="n">Image</span>
+
+<span class="k">def</span> <span class="nf">sech</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">fock_ket</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the ket of the Fock state</span>
+<span class="sd">    |Ψ⟩ = |n⟩</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    dim: The Hilbert space truncation</span>
+<span class="sd">    n: The Fock state number</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    Tensor: The ket vector of the Fock state |n⟩</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="n">psi</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="n">psi</span>
+
+
+<span class="k">def</span> <span class="nf">squeeze_matexp</span><span class="p">(</span><span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">zeta</span><span class="p">:</span> <span class="nb">complex</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple implementation of the squeezing unitary: S(ζ) = exp( 0.5(aaζ* - a†a†ζ) )</span>
+<span class="sd">    where ζ = r*exp(iφ) is the complex squeezing parameter. This method is not the most optimal</span>
+<span class="sd">    as it involves matrix exponentiation of finite dimensional matrix representations of </span>
+<span class="sd">    the infinite dimensional annihilation and creation operators.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dim: the Hilbert space cutoff</span>
+<span class="sd">        zeta: The squeezing parameter</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tensor: The unitary matrix representation of the squeezing operator S(ζ) in the Fock basis</span>
+<span class="sd">                up to the cutoff dimension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">diag</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">([</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">complex128</span><span class="p">)</span>  <span class="c1"># create diagonal</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># create matrix with diagonal shifted up by 1</span>
+    <span class="n">a_dag</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># create matrix with diagonal shifted down by 1</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">matrix_exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">zeta</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span> <span class="o">*</span> <span class="n">a</span><span class="nd">@a</span>  <span class="o">-</span>  <span class="n">zeta</span><span class="o">*</span> <span class="n">a_dag</span><span class="nd">@a_dag</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span>
+
+
+<span class="k">def</span> <span class="nf">squeeze_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">zeta</span><span class="p">:</span> <span class="nb">complex</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A recursive implementation of the squeezing unitary: S(ζ) = exp( 0.5(aaζ* - a†a†ζ) )</span>
+<span class="sd">    where ζ = r*exp(iφ) is the complex squeezing parameter. Unlike the implementations</span>
+<span class="sd">    based on matrix exponentiation of the ladder operators this approach </span>
+<span class="sd">    computes the exact matrix elements.</span>
+<span class="sd">    Based on the work: https://quantum-journal.org/papers/q-2020-11-30-366/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dim: the Hilbert space cutoff</span>
+<span class="sd">        zeta: The squeezing parameter</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tensor: The unitary matrix representation of the squeezing operator S(ζ) in the Fock basis</span>
+<span class="sd">                up to the cutoff dimension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">complex128</span><span class="p">)</span>
+
+    <span class="n">zeta</span> <span class="o">=</span> <span class="n">zeta</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">zeta</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">phase</span><span class="p">(</span><span class="n">zeta</span><span class="p">)</span>
+
+    <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sech</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>  <span class="c1"># see Equation 50 from the paper in doc string</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># see Equation 51 from the paper in doc string</span>
+        <span class="n">S</span><span class="p">[</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">sqrt</span><span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">tanh</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># see Equation 52 from the paper in doc string</span>
+            <span class="n">S</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span>
+                    <span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">sech</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+                    <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">tanh</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">S</span>
+
+
+<span class="k">def</span> <span class="nf">beamsplitter_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">phi</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A recursive implementation of the beamsplitter unitary:</span>
+<span class="sd">    B(θ,φ) = exp( θ(exp(iφ)ab† - exp(-iφ)a†b) )</span>
+<span class="sd">    where a is the annihilation operator of mode 1 and</span>
+<span class="sd">    b annihilation operator of mode 2. Unlike the implementations</span>
+<span class="sd">    based on matrix exponentiation of the ladder operators this approach </span>
+<span class="sd">    computes the exact matrix elements.</span>
+<span class="sd">    Based on the work: https://quantum-journal.org/papers/q-2020-11-30-366/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dim: the Hilbert space cutoff</span>
+<span class="sd">        theta: The transmittivity angle. The transmission amplitude</span>
+<span class="sd">                       of the beamsplitter is t=cos(θ).</span>
+<span class="sd">                       θ=pi/4 gives the 50/50 beamsplitter</span>
+<span class="sd">        phi: The phase angle. The reflection amplitude</span>
+<span class="sd">                     of the beamsplitter is r=exp(iφ)sin(θ)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tensor: The unitary matrix representation of the beamsplitter operator</span>
+<span class="sd">        B(θ,φ) in the Fock basis up to the cutoff dimension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">B</span> <span class="o">=</span>  <span class="n">th</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">tensor</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="o">-</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)],</span> 
+                     <span class="p">[</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span> <span class="p">]</span> <span class="p">)</span>  <span class="c1"># see Equation 60 from the paper in doc string</span>
+    
+    <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># see Equation 73 from the paper in doc string</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">+</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">dim</span><span class="p">:</span>
+                <span class="c1"># see Equation 74 from the paper in doc string</span>
+                <span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">dim</span><span class="p">:</span>
+                    <span class="c1"># see Equation 75 from the paper in doc string</span>
+                    <span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">B</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">m</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">B</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dim</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">partial_trace</span><span class="p">(</span><span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Keeps qumode specified by &#39;mode&#39; by tracing over other mode</span>
+<span class="sd">    This is a PyTorch implementation of the numpy based partial trace</span>
+<span class="sd">    presented in: https://www.peijun.me/reduced-density-matrix-and-partial-trace.html</span>
+<span class="sd">    Needs to be generalized to more than two modes but is sufficient for the demonstrations </span>
+<span class="sd">    below.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">dim</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">reduced_dm</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">dim1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim2</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">reduced_dm</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">dim1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">reduced_dm</span>
+
+
+<span class="k">def</span> <span class="nf">measure_pnr</span><span class="p">(</span><span class="n">S</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">projector</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform projective PNR measurement on mode 1 using the formula from Appendix A of:</span>
+<span class="sd">    https://iopscience.iop.org/article/10.1088/1367-2630/ab5330/meta</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    S: The 2-qumode density matrix of the state </span>
+<span class="sd">    projector: The projector for the measurement</span>
+<span class="sd">    identity: The identity matrix (operator)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    Tensor:</span>
+<span class="sd">    The renormalized density matrix after the projector</span>
+<span class="sd">    has been applied to it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">projector</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">projector</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>  <span class="c1"># compute tensor product: P = P ⊗ I</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">projector</span> <span class="o">@</span> <span class="n">S</span>  <span class="c1"># apply projector: Pρ</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="n">th</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  <span class="c1"># normalize density matrix Pρ / Tr[Pρ]</span>
+    <span class="k">return</span> <span class="n">S</span>
+
+
+<span class="k">def</span> <span class="nf">ket_2_dm</span><span class="p">(</span><span class="n">psi</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the density matrix representation of</span>
+<span class="sd">    a ket state `psi`:</span>
+<span class="sd">    ρ = |Ψ⟩⟨Ψ|</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    psi: The complex ket/vector |Ψ⟩</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    Tesnor: The density matrix of the quantum state represented by psi</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">th</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">psi</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">rho</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below we show two examples of performing quantum simulation/computation in CV QC in the Fock basis. First we simulate the famous <a class="reference external" href="https://en.wikipedia.org/wiki/Hong%E2%80%93Ou%E2%80%93Mandel_effect">Hong-Ou-Mandel effect</a> and for our second example we simulate a state preparation scheme discovered by a reinfrocment learning agent from the paper <a class="reference external" href="https://opg.optica.org/opticaq/fulltext.cfm?uri=opticaq-2-4-296&amp;amp;id=554736">Machine learning for efficient generation of universal photonic quantum computing resources</a> for preparing a squeezed cat state.</p>
+</section>
+</section>
+<section id="example-1-hong-ou-mandel-effect">
+<h2>Example 1: Hong-Ou-Mandel effect<a class="headerlink" href="#example-1-hong-ou-mandel-effect" title="Link to this heading">#</a></h2>
+<p>The Hong-Ou-Mandel effect can be observed when sending two identical photons through a 50-50 beamsplitter i.e. a beamsplitter whose reflectivity and transmitivity are equal. The resulting quantum state is entangled and one finds that <em>both</em> photons always end up in the same mode when measuring both modes with a photon number detector.</p>
+<p>To simulate this we will begin with a two qumode system written as</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\psi_{\text{in}}} = \ket{1}_1 \otimes \ket{1}_2 = \ket{1,1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\ket{1}_1\)</span> denotes the state of qumode 1 and <span class="math notranslate nohighlight">\(\ket{1}_2\)</span> denotes the state of qumode 2. Both qumodes are in the Fock state <span class="math notranslate nohighlight">\(\ket{1}\)</span> indicating that there is one photon in each mode.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\ket{\psi_{\text{in}}} &amp;= \ket{1}_1 \otimes \ket{1}_2 \\
+&amp;= \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \otimes \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \\
+&amp;= \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+\end{align*}
+\end{split}\]</div>
+<p>We then evolve the state by applying the beamsplitter unitary <span class="math notranslate nohighlight">\(B(\theta, \phi)\)</span> with <span class="math notranslate nohighlight">\(\theta=\frac{\pi}{4}\)</span>, which gives the 50-50 beamsplitter, and <span class="math notranslate nohighlight">\(\phi=0\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\ket{\psi_{\text{out}}} &amp;= B\left(\frac{\pi}{4},0\right) \ket{\psi_{\text{in}}} \\
+&amp;=  \frac{1}{\sqrt{2}}\ket{0}_1 \otimes \ket{2}_2 - \frac{1}{\sqrt{2}}\ket{2}_1\otimes\ket{0}_2 \\
+&amp;=  \frac{1}{\sqrt{2}}\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \otimes \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} -  \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \otimes \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \\
+&amp;=  \begin{bmatrix} 0 \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix} - \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \\ 0 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \frac{1}{\sqrt{2}} \\ 0 \\ 0 \\ 0 \\ \frac{-1}{\sqrt{2}} \\ 0 \\ 0 \end{bmatrix}
+\end{align*}
+\end{split}\]</div>
+<p>I won’t go over the rigorous derivation of this output state but we will verify it by running the simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># The Hilbert space cutoff we will use. 3 is fine since the system only contains 2 photons and the beamsplitter is a passive operation (preserves photon number/energy)</span>
+<span class="n">psi1</span> <span class="o">=</span> <span class="n">fock_ket</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># |1⟩</span>
+<span class="n">psi2</span> <span class="o">=</span> <span class="n">fock_ket</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># |1⟩</span>
+<span class="n">psi_in</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">psi1</span><span class="p">,</span> <span class="n">psi2</span><span class="p">)</span>  <span class="c1"># create the initial 2-qumode state: |1⟩ ⊗ |1⟩ = |1,1⟩</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">beamsplitter_recursive</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># create the beamsplitter unitary B(θ=pi/4, φ=0)</span>
+<span class="n">psi_out</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">psi_in</span> <span class="c1"># Apply the beamsplitter unitary to the state: B(θ=pi/4, φ=0) |1,1⟩</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_in</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">psi_in</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\ket{\psi_{\text</span><span class="si">{in}</span><span class="s1">}} = &#39;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">psi_in</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \ket{\psi_{\text{in}}} = \left[\begin{matrix}0\\0\\0\\0\\1.0\\0\\0\\0\\0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>Now lets look at the output state from the simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">psi_out</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">psi_out</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\ket{\psi_{\text</span><span class="si">{out}</span><span class="s1">}} = &#39;</span> <span class="o">+</span> <span class="n">latex</span><span class="p">(</span><span class="n">psi_out</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\begin{split}\displaystyle \ket{\psi_{\text{out}}} = \left[\begin{matrix}0\\0\\0.707106726938083\\0\\0\\0\\-0.707106726938083\\0\\0\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>As we can see this vector is in fact what we stated above.</p>
+</section>
+<section id="example-2-squeezed-cat-state-generation">
+<h2>Example 2: Squeezed cat state generation<a class="headerlink" href="#example-2-squeezed-cat-state-generation" title="Link to this heading">#</a></h2>
+<p>A Schrödinger cat state (cat state for short) is a quantum state of a quantum harmonic oscillator that is a superposition of two coherent states that have amplitudes of opposite sign defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\text{cat}} = \mathcal{N}(\ket{\alpha} + \ket{-\alpha})
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{N}\)</span> is a normalization constant and the coherent state <span class="math notranslate nohighlight">\(\ket{\alpha}\)</span> is defined as a superposition of Fock states given by</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\alpha} = e^{-\frac{|\alpha|^2}{2}} \sum_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\ket{n}.
+\]</div>
+<p>with amplitude <span class="math notranslate nohighlight">\(\alpha \in \mathbb{C}\)</span>.</p>
+<p>A <em>squeezed</em> cat state is simply a cat state that has had a squeezing operation <span class="math notranslate nohighlight">\(S(\zeta)\)</span> applied to it</p>
+<div class="math notranslate nohighlight">
+\[
+\ket{\text{sq. cat}} = S(\zeta)\ket{\text{cat}}
+\]</div>
+<p>and they are of interest in CV QC as they can be used to deterministically prepare GKP states which are error correcting quantum states for CV QC implementations.</p>
+<p>In the work <a class="reference external" href="https://opg.optica.org/opticaq/fulltext.cfm?uri=opticaq-2-4-296&amp;amp;id=554736">Machine learning for efficient generation of universal photonic quantum computing resources</a> we utilized reinforcement learning to discover strategies for preparing a squeezed cat state using CV quantum circuit displayed below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/loop_circ.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png"><img alt="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" src="../../_images/5a86b5af51043ae0ba40f27e847ceb6427a9ef72ff683c72e51005e09a64beb9.png" style="width: 600px;" /></a>
+</div>
+</div>
+<p>The circuit consists of two qumodes. The first qumode is an arbitrary input state <span class="math notranslate nohighlight">\(\rho_j\)</span> and the second qumode is a vacuum state <span class="math notranslate nohighlight">\(\ket{0}\bra{0}\)</span> which is transformed into a squeezed vacuum state by the squeezing operation <span class="math notranslate nohighlight">\(S(r_j)\)</span>. The two qumodes are then acted on by the beamsplitter operation <span class="math notranslate nohighlight">\(B(\tau_j)\)</span> and afterwards the first qumode is measured in the photon number (Fock) basis. After this we take the non-measured qumode denoted as <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> and feed it back into the circuit to repeat the process again. The hope was that we could train a reinforcement learning agent to learn what beamsplitter and squeezing parameters, <span class="math notranslate nohighlight">\(\tau_j\)</span> and <span class="math notranslate nohighlight">\(r_j\)</span> respectively, to select such that the output qumode <span class="math notranslate nohighlight">\(\rho_{j+1}\)</span> would approximate a squeezed cat state over a finite number of iterations of the circuit.</p>
+<p>We found that the agent could in fact discover adaptive strategies for setting the beamsplitter and squeezing parameters such that it produced a squeezed cat state. Below we simulate an example of one such strategy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">35</span>
+
+<span class="c1"># Steps to create squeezed cat state</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>  <span class="p">{</span><span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="mf">0.335</span><span class="p">,</span> <span class="s2">&quot;zeta&quot;</span><span class="p">:</span> <span class="mf">1.38</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span><span class="mi">2</span> <span class="p">},</span>
+           <span class="p">{</span><span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="mf">0.948</span><span class="p">,</span> <span class="s2">&quot;zeta&quot;</span><span class="p">:</span> <span class="mf">1.38</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span><span class="mi">10</span> <span class="p">},</span>
+           <span class="p">{</span><span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="mf">0.709</span><span class="p">,</span> <span class="s2">&quot;zeta&quot;</span><span class="p">:</span> <span class="mf">1.38</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span><span class="mi">4</span> <span class="p">}</span> <span class="p">]</span>
+
+
+<span class="n">vac</span> <span class="o">=</span> <span class="n">ket_2_dm</span><span class="p">(</span> <span class="n">fock_ket</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="p">)</span>  <span class="c1"># |0⟩⟨0|</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">vac</span><span class="p">,</span> <span class="n">vac</span><span class="p">)</span>  <span class="c1"># ρ = |0⟩⟨0| ⊗ |0⟩⟨0|</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>  <span class="c1"># I</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">squeeze_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.38</span><span class="p">),</span> <span class="n">I</span><span class="p">)</span>  <span class="c1"># U = S(ζ=-1.38) ⊗ I</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">rho</span> <span class="o">@</span> <span class="n">th</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># ρ =  UρU†</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)):</span> 
+    <span class="n">t_i</span> <span class="o">=</span> <span class="n">steps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;tau&quot;</span><span class="p">]</span> 
+    <span class="n">zeta_i</span> <span class="o">=</span> <span class="n">steps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;zeta&quot;</span><span class="p">]</span> 
+    <span class="n">n_i</span> <span class="o">=</span> <span class="n">steps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;n&quot;</span><span class="p">]</span> 
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">dm_in</span><span class="p">,</span> <span class="n">vac</span><span class="p">)</span> <span class="c1"># create the composite quantum system</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">beamsplitter_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">acos</span><span class="p">(</span><span class="n">t_i</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># create the beamsplitter unitary B(θ=arccos(t_i), φ=0)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">squeeze_recursive</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">zeta_i</span><span class="p">))</span>  <span class="c1"># create the squeezing unitary S(ζ=zeta_i)</span>
+    
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">rho</span> <span class="o">@</span> <span class="n">th</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># apply squeezing unitary to mode 2 </span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">B</span> <span class="o">@</span> <span class="n">rho</span> <span class="o">@</span> <span class="n">th</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># apply beamsplitter unitary to system </span>
+    
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">ket_2_dm</span><span class="p">(</span> <span class="n">fock_ket</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">n_i</span><span class="p">)</span> <span class="p">)</span>  <span class="c1"># create Fock state projector |n_i⟩⟨n_i| </span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">measure_pnr</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>  <span class="c1"># apply projective measurement on mode 1 onto Fock state |n_i⟩</span>
+    
+    <span class="n">dm_out</span> <span class="o">=</span> <span class="n">partial_trace</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># compute partial trace over qumode 1 to recover reduced density matrix of qumode 2</span>
+    <span class="n">dm_in</span> <span class="o">=</span> <span class="n">dm_out</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now show the Wigner function of the prepared quantum state after the 3 rounds/steps of our quantum circuit. The Wigner function is in fact that of a squeezed cat state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dm_np</span> <span class="o">=</span> <span class="n">dm_in</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">plot_wigner</span><span class="p">(</span><span class="n">Qobj</span><span class="p">(</span><span class="n">dm_np</span><span class="p">))</span>  <span class="c1"># Use QuTiP wigner plotting function</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 600x600 with 1 Axes&gt;,
+ &lt;Axes: title={&#39;center&#39;: &#39;Wigner function&#39;}, xlabel=&#39;$\\rm{Re}(\\alpha)$&#39;, ylabel=&#39;$\\rm{Im}(\\alpha)$&#39;&gt;)
+</pre></div>
+</div>
+<img alt="../../_images/70a7f2e098947c1f9344132d4e3627a25cf5e76800ae234a98188efff25711a7.png" src="../../_images/70a7f2e098947c1f9344132d4e3627a25cf5e76800ae234a98188efff25711a7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Dec 12 2024
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+torch: 2.2.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./physics/quantum-mechanics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lindblad_eq.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lindblad master equation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../classical-mech/classical_mech.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Classical Mechanics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-necessary-cv-quantum-operations">Defining necessary CV quantum operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fock-basis">The Fock basis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beamsplitter">Beamsplitter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hong-ou-mandel-effect">Example 1: Hong-Ou-Mandel effect</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-squeezed-cat-state-generation">Example 2: Squeezed cat state generation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Amanuel Anteneh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
