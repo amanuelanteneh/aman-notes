@@ -19,6 +19,7 @@ parts:
       - file: physics/quantum-mechanics/homodyne_detection
       - file: physics/quantum-mechanics/photon_number_detection
       - file: physics/quantum-mechanics/lindblad_eq
+      - file: physics/quantum-mechanics/cv_qc_examples
     
     - file: physics/classical-mech/classical_mech
       sections:
