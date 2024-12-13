@@ -529,7 +529,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-necessary-cv-quantum-operations">Defining necessary CV quantum operations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadrature-and-ladder-operators">Quadrature and ladder operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fock-basis">The Fock basis</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beamsplitter">Beamsplitter</a></li>
@@ -554,9 +554,40 @@ document.write(`
 <p>We will do everything in terms of the Fock basis which allows us to simulate any quantum system albeit with exponential scaling in the number of qumodes.</p>
 <section id="defining-necessary-cv-quantum-operations">
 <h2>Defining necessary CV quantum operations<a class="headerlink" href="#defining-necessary-cv-quantum-operations" title="Link to this heading">#</a></h2>
-<section id="quadratures">
-<h3>Quadratures<a class="headerlink" href="#quadratures" title="Link to this heading">#</a></h3>
-<p>In CV QC we define two dimensionless operators called the quadrature field operators, <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, which are analogs of the position and momentum operators, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> respectively and behave very similarly.</p>
+<section id="quadrature-and-ladder-operators">
+<h3>Quadrature and ladder operators<a class="headerlink" href="#quadrature-and-ladder-operators" title="Link to this heading">#</a></h3>
+<p>In CV QC we define two dimensionless operators called the quadrature field operators, <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span>, which are analogs of the position and momentum operators <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> respectively, and behave very similarly. The dimensionless quadrature operators <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span> are explicitly defined in terms of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    Q = \beta x
+\end{align*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    P = \frac{p}{\beta \hbar},
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> has dimensions of inverse length and is defined as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    \beta = \sqrt{ \frac{m\omega}{\hbar} }
+\end{align*}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\omega = \sqrt{\frac{k}{m}}\)</span> being the resonance frequency of the quantum harmonic oscillator. We also define the non-Hermitian annihilation and creation ladder operators <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^{\dagger}\)</span> as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    a =  \frac{1}{\sqrt{2}} (Q + iP)
+\end{align*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   a^{\dagger} =  \frac{1}{\sqrt{2}} (Q - iP)
+\end{align*}\]</div>
+<p>The quadrature operators can also be written in terms of the ladder operators as</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    Q = \frac{1}{\sqrt{2}}(a + a^{\dagger})
+\end{align*}\]</div>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+    P = \frac{1}{i\sqrt{2}} (a - a^{\dagger})
+\end{align*}\]</div>
 </section>
 <section id="the-fock-basis">
 <h3>The Fock basis<a class="headerlink" href="#the-fock-basis" title="Link to this heading">#</a></h3>
@@ -581,7 +612,7 @@ However, if we were to use unitaries that are not passive, like the squeezing un
 \[
 S(\zeta) = e^{ \frac{1}{2}(\zeta^* aa - \zeta a^\dagger a^\dagger) }
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the annihilation and creation (ladder) operators for the qumode and <span class="math notranslate nohighlight">\(\zeta=re^{i\phi}\)</span> is a complex number that defines the magnitude, <span class="math notranslate nohighlight">\(r\)</span>, and direction of the squeezing, <span class="math notranslate nohighlight">\(\phi\)</span>. This operation changes the <em>variance</em> of the position and momentum quadrature operators, <span class="math notranslate nohighlight">\((\Delta q)^2\)</span> and <span class="math notranslate nohighlight">\((\Delta p)^2\)</span> respectively, of the qumode. Specifically, when <span class="math notranslate nohighlight">\(r &gt; 0\)</span> and is real the squeezing operation increases the variance of the momentum quadrature operator of the qumode. Note that since <span class="math notranslate nohighlight">\([q,p]=i\hbar\)</span> the operators <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> obey Heisenberg’s uncertainty principle <span class="math notranslate nohighlight">\(\Delta p \Delta q \geq \frac{\hbar}{2}\)</span> so an increase in the variance of the momentum quadrature operator induces a decrease in the variance of the position quadrature operator.</p>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span> are the annihilation and creation (ladder) operators for the qumode and <span class="math notranslate nohighlight">\(\zeta=re^{i\phi}\)</span> is a complex number that defines the magnitude, <span class="math notranslate nohighlight">\(r\)</span>, and direction of the squeezing, <span class="math notranslate nohighlight">\(\phi\)</span>. This operation changes the <em>variance</em> of the position and momentum quadrature operators, <span class="math notranslate nohighlight">\((\Delta Q)^2\)</span> and <span class="math notranslate nohighlight">\((\Delta P)^2\)</span> respectively, of the qumode. Specifically, when <span class="math notranslate nohighlight">\(r &gt; 0\)</span> and is real the squeezing operation increases the variance of the momentum quadrature operator of the qumode. Note that since <span class="math notranslate nohighlight">\([Q,P]=i\)</span> the operators <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span> obey Heisenberg’s uncertainty principle <span class="math notranslate nohighlight">\(\Delta P \Delta Q \geq \frac{1}{2}\)</span> so an increase in the variance of the momentum quadrature operator induces a decrease in the variance of the position quadrature operator.</p>
 <p>Below we show two functions that compute the matrix representation of the squeezing operator in the Fock basis. <code class="docutils literal notranslate"><span class="pre">squeeze_matexp</span></code> computes the matrix by first creating the matrix representation of the ladder operators and computing the matrix exponential from above using <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>. This method is not exact but works fine in many cases. <code class="docutils literal notranslate"><span class="pre">squeeze_recursive</span></code> computes the matrix by filling out it’s elements using the recurrence relation presented in the work <a class="reference external" href="https://quantum-journal.org/papers/q-2020-11-30-366/">Fast optimization of parametrized quantum optical circuits</a> which gives the exact matrix elements.</p>
 </section>
 <section id="beamsplitter">
@@ -1052,7 +1083,7 @@ torch: 2.2.1
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-necessary-cv-quantum-operations">Defining necessary CV quantum operations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadrature-and-ladder-operators">Quadrature and ladder operators</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fock-basis">The Fock basis</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#squeezing">Squeezing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beamsplitter">Beamsplitter</a></li>
