@@ -528,8 +528,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions">Conventions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-q-thing">What is this <span class="math notranslate nohighlight">\(q\)</span> thing?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions">Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hbar">Computing <span class="math notranslate nohighlight">\(\hbar\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-these-quadratures-exactly">What are these quadratures exactly?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -546,16 +552,18 @@ document.write(`
 <p>These are notes I made while learning about new aspects of quantum mechanics and information while doing my research work with the Quantum Fields and Quantum Information research lab. To get the most out of these notes I suggest having an undergraduate level understanding of quantum mechanics but I may go over some fundamentals when appropriate.</p>
 <section id="conventions">
 <h2>Conventions<a class="headerlink" href="#conventions" title="Link to this heading">#</a></h2>
-<p>When working with the position and momentum (quadrature) operators, <span class="math notranslate nohighlight">\(q\)</span> (or more commonly <span class="math notranslate nohighlight">\(x\)</span>) and <span class="math notranslate nohighlight">\(p\)</span> respectively, we will define them as</p>
+<section id="computing-hbar">
+<h3>Computing <span class="math notranslate nohighlight">\(\hbar\)</span><a class="headerlink" href="#computing-hbar" title="Link to this heading">#</a></h3>
+<p>Given the canonical position and momentum operators <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> in terms of the the annihaltion and creations operatrs, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^\dagger\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[
-x = q = \frac{1}{\sqrt{2}} (a+ a^\dagger), \quad p = \frac{1}{\sqrt{2}i}(a - a^\dagger)
+x = \frac{1}{\sqrt{2}} (a+ a^\dagger), \quad p = \frac{1}{\sqrt{2}i}(a - a^\dagger)
 \]</div>
-<p>solving for <span class="math notranslate nohighlight">\(\hbar\)</span> using the canonical commutation relations <span class="math notranslate nohighlight">\([q,p] = i\hbar\)</span> and <span class="math notranslate nohighlight">\([a, a^\dagger]=1\)</span> we get <span class="math notranslate nohighlight">\(\hbar=1\)</span> <span id="id1">[<a class="reference internal" href="../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span>. As a refresher let’s do this calculation.</p>
+<p>we can solve for <span class="math notranslate nohighlight">\(\hbar\)</span> using the canonical commutation relations <span class="math notranslate nohighlight">\([x,p] = i\hbar\)</span> and <span class="math notranslate nohighlight">\([a, a^\dagger]=1\)</span> to get <span class="math notranslate nohighlight">\(\hbar=1\)</span> <span id="id1">[<a class="reference internal" href="../backmatter/bibliography.html#id8" title="David H McIntyre. Quantum mechanics: A paradigms approach. Cambridge University Press, 2022.">McIntyre, 2022</a>]</span>. As a refresher let’s do this calculation.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-i\hbar=[q,p] &amp;= qp - pq\\
+i\hbar=[x,p] &amp;= xp - px\\
 &amp;= \left( \frac{-i}{2}(a+a^\dagger)(a-a^\dagger) + \frac{i}{2}(a-a^\dagger)(a+a^\dagger)  \right)\\ 
 &amp;=  \left(\frac{-i}{2}\left(a^2 -aa^\dagger + a^\dagger a - {a^\dagger}^2 )  + \frac{i}{2}(a^2+aa^\dagger - a^\dagger a - {a^\dagger}^2\right)\right) \\
 &amp;= \frac{i}{2}\left( -a^2 + aa^\dagger - a^\dagger a + {a^\dagger}^2 + a^2 +aa^\dagger - a^\dagger a - {a^{\dagger}}^2 \right) \\
@@ -565,11 +573,44 @@ i\hbar=[q,p] &amp;= qp - pq\\
 &amp;= i  \quad \text{Since we know $[a,a^\dagger]$=1}
 \end{align*}
 \end{split}\]</div>
-<p>This means <span class="math notranslate nohighlight">\(i\hbar=i\)</span> and so <span class="math notranslate nohighlight">\(\hbar=1\)</span>. I’ve seen others use conventions like <span class="math notranslate nohighlight">\(\hbar=2\)</span>, you can always check what value someone is working with by doing the above calculation with the definition of <span class="math notranslate nohighlight">\(q\)</span> (or <span class="math notranslate nohighlight">\(x\)</span>) and <span class="math notranslate nohighlight">\(p\)</span> that they give.</p>
+<p>This means <span class="math notranslate nohighlight">\(i\hbar=i\)</span> and so <span class="math notranslate nohighlight">\(\hbar=1\)</span>. I’ve seen others use conventions like <span class="math notranslate nohighlight">\(\hbar=2\)</span>, you can always check what value someone is working with by doing the above calculation with the definition of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> that they give.</p>
 </section>
-<section id="what-is-this-q-thing">
-<h2>What is this <span class="math notranslate nohighlight">\(q\)</span> thing?<a class="headerlink" href="#what-is-this-q-thing" title="Link to this heading">#</a></h2>
-<p>So this is a question I had when I first saw this being used to denote the position operator. I think it comes from</p>
+<section id="quadratures">
+<h3>Quadratures<a class="headerlink" href="#quadratures" title="Link to this heading">#</a></h3>
+<p>When working with the dimensionless position and momentum quadrature operators in quantum optics, <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span> respectively, they are explicitly defined in terms of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(p\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+    Q = \beta x \\
+    P = \frac{p}{\beta \hbar},
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta\)</span> has dimensions of inverse length and is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align*}
+    \beta = \sqrt{ \frac{m\omega}{\hbar} }
+\end{align*}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\omega = \sqrt{\frac{k}{m}}\)</span> being the resonance frequency of the quantum harmonic oscillator. We also define the non-Hermitian annihilation and creation ladder operators <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(a^{\dagger}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+    a =  \frac{1}{\sqrt{2}} (Q + iP) \\ 
+    a^{\dagger} =  \frac{1}{\sqrt{2}} (Q - iP)
+\end{align*}
+\end{split}\]</div>
+<p>The quadrature operators can also be written in terms of the ladder operators as</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \frac{1}{\sqrt{2}} (a+ a^\dagger), \quad P = \frac{1}{\sqrt{2}i}(a - a^\dagger)
+\]</div>
+<p>Often times I have seen people just use <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(p\)</span> to denote these instead of the capital letters <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span> and I will do the same in any section of the notes that deals with continuous variable quantum information processing &amp; computing. Note that unlike the <span class="math notranslate nohighlight">\([x,p]\)</span> the commutator of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(P\)</span> is equal to just <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<section id="what-are-these-quadratures-exactly">
+<h4>What are these quadratures exactly?<a class="headerlink" href="#what-are-these-quadratures-exactly" title="Link to this heading">#</a></h4>
+<p>I think these terms come from electrical engineering.</p>
+</section>
+</section>
 </section>
 </section>
 
@@ -637,8 +678,14 @@ i\hbar=[q,p] &amp;= qp - pq\\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions">Conventions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-q-thing">What is this <span class="math notranslate nohighlight">\(q\)</span> thing?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conventions">Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-hbar">Computing <span class="math notranslate nohighlight">\(\hbar\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quadratures">Quadratures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-these-quadratures-exactly">What are these quadratures exactly?</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
