@@ -1,5 +1,5 @@
 # Introduction
-This is a Jupyter Book of notes I create when self-studying topics related to physics, computer science, mathematics and statistic. 
+This is a Jupyter Book of notes I create when self-studying topics related to physics, computer science, mathematics and statistics. 
 
 ## Purpose
 
