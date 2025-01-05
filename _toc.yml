@@ -115,7 +115,8 @@ parts:
       - file: computerscience/machine-learning/kernel_machines
       - file: computerscience/machine-learning/discriminative
       - file: computerscience/machine-learning/generative
-      - file: computerscience/machine-learning/cross_ent_loss
+      - file: computerscience/machine-learning/performance_metrics
+      - file: computerscience/machine-learning/loss_funcs
       - file: computerscience/machine-learning/attention
       - file: computerscience/machine-learning/physical_learning
 
