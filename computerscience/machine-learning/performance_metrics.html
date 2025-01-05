@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Grand canonical ensemble &#8212; Amanuel&#39;s Notebook</title>
+    <title>Performance metrics &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/stat-mech/grand_can_ens';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/performance_metrics';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="6. Introduction" href="../../mathematics/intro.html" />
-    <link rel="prev" title="Partition function" href="partition_func.html" />
+    <link rel="next" title="Loss functions" href="loss_funcs.html" />
+    <link rel="prev" title="Generative models" href="generative.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,31 +176,31 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">1. Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/entanglement.html">Entanglement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/density_matrix.html">Density matrix</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/partial_trace.html">Partial trace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/wigner_function.html">Wigner function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quantum-mechanics/cv_qc_examples.html">CV QC simulations</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/entanglement.html">Entanglement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/cv_qc_examples.html">CV QC simulations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../classical-mech/calc_of_var.html">Calculus of variations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/classical-mech/calc_of_var.html">Calculus of variations</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../e-and-m/gauss_law.html">Gauss’s law</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/e-and-m/gauss_law.html">Gauss’s law</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="stat_mech.html">5. Statistical Mechanics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="partition_func.html">Partition function</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Grand canonical ensemble</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/stat-mech/stat_mech.html">5. Statistical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/partition_func.html">Partition function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/grand_can_ens.html">Grand canonical ensemble</a></li>
 </ul>
 </details></li>
 </ul>
@@ -251,50 +251,50 @@
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">16. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/data_structs.html">17. Data Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../computerscience/lazy_eval.html">18. Lazy Evaluation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">19. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/graph_algos.html">Graph algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/greedy_algos.html">Greedy algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/np_problems.html">Computational complexity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/linear_prog.html">Linear programming</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">16. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_structs.html">17. Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lazy_eval.html">18. Lazy Evaluation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/algorithms.html">19. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/greedy_algos.html">Greedy algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/np_problems.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_prog.html">Linear programming</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/optimization/optimization.html">20. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/semidef_prog.html">Semidefinite programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/quad_prog.html">Quadratic programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/bayes_opt.html">Bayesian optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../optimization/optimization.html">20. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../optimization/semidef_prog.html">Semidefinite programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimization/quad_prog.html">Quadratic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimization/bayes_opt.html">Bayesian optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">21. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/lin_reg.html">Linear regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/boosting.html">Boosting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/kernel_machines.html">Kernel machines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/generative.html">Generative models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/performance_metrics.html">Performance metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/loss_funcs.html">Loss functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/physical_learning.html">Physical learning</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">21. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lin_reg.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tree_based.html">Tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_machines.html">Kernel machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative.html">Generative models</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Performance metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="physical_learning.html">Physical learning</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/conv_net.html">Convolutional neural network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/rnn.html">Recurrent neural network</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../deep-learning/deep_learning.html">22. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deep-learning/conv_net.html">Convolutional neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deep-learning/rnn.html">Recurrent neural network</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/reinforcement-learning/reinforcement_learning.html">23. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/reinforcement-learning/ppo.html">Proximal policy optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reinforcement-learning/reinforcement_learning.html">23. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reinforcement-learning/ppo.html">Proximal policy optimization</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/quantum-comp/quantum_comp.html">24. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../computerscience/quantum-comp/bern_vazirani.html">Bernstein–Vazirani algorithm</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../quantum-comp/quantum_comp.html">24. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quantum-comp/bern_vazirani.html">Bernstein–Vazirani algorithm</a></li>
 </ul>
 </details></li>
 </ul>
@@ -403,7 +403,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fphysics/stat-mech/grand_can_ens.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/performance_metrics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -433,7 +433,7 @@
       
       
       
-      <li><a href="../../_sources/physics/stat-mech/grand_can_ens.ipynb" target="_blank"
+      <li><a href="../../_sources/computerscience/machine-learning/performance_metrics.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -504,7 +504,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -515,11 +517,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Grand canonical ensemble</h1>
+    <h1>Performance metrics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">Recall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1-Score</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -529,8 +542,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="grand-canonical-ensemble">
-<h1>Grand canonical ensemble<a class="headerlink" href="#grand-canonical-ensemble" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="performance-metrics">
+<h1>Performance metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">#</a></h1>
+<section id="accuracy">
+<h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
+</section>
+<section id="precision">
+<h2>Precision<a class="headerlink" href="#precision" title="Link to this heading">#</a></h2>
+</section>
+<section id="recall">
+<h2>Recall<a class="headerlink" href="#recall" title="Link to this heading">#</a></h2>
+</section>
+<section id="f1-score">
+<h2>F1-Score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -546,7 +571,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./physics/stat-mech"
+            path: "./computerscience/machine-learning"
         },
         predefinedOutput: true
     }
@@ -564,20 +589,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="partition_func.html"
+       href="generative.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Partition function</p>
+        <p class="prev-next-title">Generative models</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../mathematics/intro.html"
+       href="loss_funcs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Introduction</p>
+        <p class="prev-next-title">Loss functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -587,6 +612,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">Recall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1-Score</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

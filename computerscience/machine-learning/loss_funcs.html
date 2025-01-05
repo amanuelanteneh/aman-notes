@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cross entropy loss &#8212; Amanuel&#39;s Notebook</title>
+    <title>Loss functions &#8212; Amanuel&#39;s Notebook</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/cross_ent_loss';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/loss_funcs';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Attention" href="attention.html" />
-    <link rel="prev" title="Generative models" href="generative.html" />
+    <link rel="prev" title="Performance metrics" href="performance_metrics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -278,7 +278,8 @@
 <li class="toctree-l2"><a class="reference internal" href="kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generative.html">Generative models</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Cross entropy loss</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_metrics.html">Performance metrics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Loss functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="physical_learning.html">Physical learning</a></li>
 </ul>
@@ -402,7 +403,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/cross_ent_loss.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/loss_funcs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -432,7 +433,7 @@
       
       
       
-      <li><a href="../../_sources/computerscience/machine-learning/cross_ent_loss.ipynb" target="_blank"
+      <li><a href="../../_sources/computerscience/machine-learning/loss_funcs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -503,7 +504,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -514,11 +517,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Cross entropy loss</h1>
+    <h1>Loss functions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-absolute-error-mae-loss">Mean absolute error (MAE) loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse-loss">Mean squared error (MSE) loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross entropy loss</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -528,8 +541,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="cross-entropy-loss">
-<h1>Cross entropy loss<a class="headerlink" href="#cross-entropy-loss" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="loss-functions">
+<h1>Loss functions<a class="headerlink" href="#loss-functions" title="Link to this heading">#</a></h1>
+<section id="mean-absolute-error-mae-loss">
+<h2>Mean absolute error (MAE) loss<a class="headerlink" href="#mean-absolute-error-mae-loss" title="Link to this heading">#</a></h2>
+</section>
+<section id="mean-squared-error-mse-loss">
+<h2>Mean squared error (MSE) loss<a class="headerlink" href="#mean-squared-error-mse-loss" title="Link to this heading">#</a></h2>
+</section>
+<section id="cross-entropy-loss">
+<h2>Cross entropy loss<a class="headerlink" href="#cross-entropy-loss" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -563,12 +585,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="generative.html"
+       href="performance_metrics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Generative models</p>
+        <p class="prev-next-title">Performance metrics</p>
       </div>
     </a>
     <a class="right-next"
@@ -586,6 +608,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-absolute-error-mae-loss">Mean absolute error (MAE) loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse-loss">Mean squared error (MSE) loss</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-entropy-loss">Cross entropy loss</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
