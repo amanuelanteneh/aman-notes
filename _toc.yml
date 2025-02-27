@@ -127,6 +127,7 @@ parts:
     
     - file: computerscience/reinforcement-learning/reinforcement_learning
       sections:
+      - file: computerscience/reinforcement-learning/dqn
       - file: computerscience/reinforcement-learning/ppo
 
     - file: computerscience/quantum-comp/quantum_comp
