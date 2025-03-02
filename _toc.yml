@@ -35,6 +35,93 @@ parts:
       - file: physics/stat-mech/grand_can_ens
   
 
+  - caption: Computer Science
+    numbered: 1
+    chapters:
+    - file: computerscience/intro
+    
+    - file: computerscience/data_structs
+    - file: computerscience/lazy_eval
+    
+    - file: computerscience/algorithms/algorithms
+      sections:
+      - file: computerscience/algorithms/numerical_algos
+      - file: computerscience/algorithms/divide_conquer
+      - file: computerscience/algorithms/dynamic_prog
+      - file: computerscience/algorithms/graph_algos
+      - file: computerscience/algorithms/greedy_algos
+      - file: computerscience/algorithms/np_problems
+      - file: computerscience/algorithms/linear_prog
+    
+    - file: computerscience/optimization/optimization
+      sections:
+      - file: computerscience/optimization/semidef_prog
+      - file: computerscience/optimization/quad_prog
+      - file: computerscience/optimization/bayes_opt
+    
+    - file: computerscience/machine-learning/machine_learning
+      sections:
+      - file: computerscience/machine-learning/lin_reg
+      - file: computerscience/machine-learning/tree_based
+      - file: computerscience/machine-learning/boosting
+      - file: computerscience/machine-learning/kernel_machines
+      - file: computerscience/machine-learning/discriminative
+      - file: computerscience/machine-learning/generative
+      - file: computerscience/machine-learning/performance_metrics
+      - file: computerscience/machine-learning/loss_funcs
+      - file: computerscience/machine-learning/attention
+      - file: computerscience/machine-learning/physical_learning
+
+    - file: computerscience/deep-learning/deep_learning
+      sections:
+      - file: computerscience/deep-learning/conv_net
+      - file: computerscience/deep-learning/rnn
+      - file: computerscience/deep-learning/proto_net
+      - file: computerscience/deep-learning/autoencoders
+    
+    - file: computerscience/reinforcement-learning/reinforcement_learning
+      sections:
+      - file: computerscience/reinforcement-learning/dqn
+      - file: computerscience/reinforcement-learning/ppo
+
+    - file: computerscience/quantum-comp/quantum_comp
+      sections:
+      - file: computerscience/quantum-comp/bern_vazirani
+
+  
+  - caption: Statistics
+    numbered: 1
+    chapters:
+    - file: statistics/intro
+    
+    - file: statistics/classic-stats/classic_stats
+      sections:
+      - file: statistics/classic-stats/conf_int
+      - file: statistics/classic-stats/pca
+      - file: statistics/classic-stats/bootstrap
+    
+    - file: statistics/hypo-testing/hypo_testing
+      sections:
+      - file: statistics/hypo-testing/1_samp_t_test
+    
+    - file: statistics/sampling/sampling_methods
+      sections:
+      - file: statistics/sampling/inv_trans_sampling
+      - file: statistics/sampling/rejection_sampling
+      - file: statistics/sampling/mcmc
+    
+    - file: statistics/high-dim-stats/high_dim
+      sections:
+      - file: statistics/high-dim-stats/robust_pca
+      - file: statistics/high-dim-stats/compress_sense
+    
+    - file: statistics/bayesian-statistics/bayesian_statistics
+      sections:
+      - file: statistics/bayesian-statistics/cred_int
+      - file: statistics/bayesian-statistics/hierarchical_models
+      - file: statistics/bayesian-statistics/missing_data
+  
+
   - caption: Mathematics
     numbered: 1
     chapters:
@@ -83,90 +170,6 @@ parts:
       - file:  mathematics/probability/joint
 
 
-  - caption: Computer Science
-    numbered: 1
-    chapters:
-    - file: computerscience/intro
-    
-    - file: computerscience/data_structs
-    - file: computerscience/lazy_eval
-    
-    - file: computerscience/algorithms/algorithms
-      sections:
-      - file: computerscience/algorithms/numerical_algos
-      - file: computerscience/algorithms/divide_conquer
-      - file: computerscience/algorithms/dynamic_prog
-      - file: computerscience/algorithms/graph_algos
-      - file: computerscience/algorithms/greedy_algos
-      - file: computerscience/algorithms/np_problems
-      - file: computerscience/algorithms/linear_prog
-    
-    - file: computerscience/optimization/optimization
-      sections:
-      - file: computerscience/optimization/semidef_prog
-      - file: computerscience/optimization/quad_prog
-      - file: computerscience/optimization/bayes_opt
-    
-    - file: computerscience/machine-learning/machine_learning
-      sections:
-      - file: computerscience/machine-learning/lin_reg
-      - file: computerscience/machine-learning/tree_based
-      - file: computerscience/machine-learning/boosting
-      - file: computerscience/machine-learning/kernel_machines
-      - file: computerscience/machine-learning/discriminative
-      - file: computerscience/machine-learning/generative
-      - file: computerscience/machine-learning/performance_metrics
-      - file: computerscience/machine-learning/loss_funcs
-      - file: computerscience/machine-learning/attention
-      - file: computerscience/machine-learning/physical_learning
-
-    - file: computerscience/deep-learning/deep_learning
-      sections:
-      - file: computerscience/deep-learning/conv_net
-      - file: computerscience/deep-learning/rnn
-    
-    - file: computerscience/reinforcement-learning/reinforcement_learning
-      sections:
-      - file: computerscience/reinforcement-learning/dqn
-      - file: computerscience/reinforcement-learning/ppo
-
-    - file: computerscience/quantum-comp/quantum_comp
-      sections:
-      - file: computerscience/quantum-comp/bern_vazirani
-
-  
-  - caption: Statistics
-    numbered: 1
-    chapters:
-    - file: statistics/intro
-    
-    - file: statistics/classic-stats/classic_stats
-      sections:
-      - file: statistics/classic-stats/conf_int
-      - file: statistics/classic-stats/pca
-      - file: statistics/classic-stats/bootstrap
-    
-    - file: statistics/hypo-testing/hypo_testing
-      sections:
-      - file: statistics/hypo-testing/1_samp_t_test
-    
-    - file: statistics/sampling/sampling_methods
-      sections:
-      - file: statistics/sampling/inv_trans_sampling
-      - file: statistics/sampling/rejection_sampling
-      - file: statistics/sampling/mcmc
-    
-    - file: statistics/high-dim-stats/high_dim
-      sections:
-      - file: statistics/high-dim-stats/robust_pca
-      - file: statistics/high-dim-stats/compress_sense
-    
-    - file: statistics/bayesian-statistics/bayesian_statistics
-      sections:
-      - file: statistics/bayesian-statistics/cred_int
-      - file: statistics/bayesian-statistics/hierarchical_models
-      - file: statistics/bayesian-statistics/missing_data
-  
   - caption: Back Matter
     numbered: 1
     chapters:
