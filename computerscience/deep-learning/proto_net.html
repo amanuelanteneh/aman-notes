@@ -234,6 +234,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/dim_red.html">Dimensionality Reduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/loss_funcs.html">Loss functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
@@ -576,6 +577,39 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PrototypicalNetwork</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Mar 02 2025
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+optuna: 4.2.1
 </pre></div>
 </div>
 </div>
