@@ -88,6 +88,10 @@ parts:
     - file: computerscience/quantum-comp/quantum_comp
       sections:
       - file: computerscience/quantum-comp/bern_vazirani
+    
+    - file: computerscience/distributed-comp/distributed_computing
+      sections:
+      - file: computerscience/distributed-comp/spark
 
   
   - caption: Statistics
