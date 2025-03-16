@@ -535,6 +535,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-basics">Spark Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-udfs">User Defined Functions (UDFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-udf">Python UDF</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-udf">Pandas UDF</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-architecture">Spark Architecture</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 </ul>
@@ -555,8 +563,106 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="apache-spark">
+  <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="apache-spark">
 <h1>Apache Spark<a class="headerlink" href="#apache-spark" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Intro_spark&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.bindAddress&quot;</span><span class="p">,</span><span class="s2">&quot;localhost&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.ui.port&quot;</span><span class="p">,</span><span class="s2">&quot;4050&quot;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="mi">35</span><span class="p">)]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+<span class="c1"># print(df.rdd.getNumPartitions())</span>
+<span class="c1"># df.count()</span>
+<span class="c1"># df.explain()</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">toPandas</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>your 131072x1 screen size is bogus. expect trouble
+25/03/15 21:07:53 WARN Utils: Your hostname, Amaneul-PC resolves to a loopback address: 127.0.1.1; using 10.255.255.254 instead (on interface lo)
+25/03/15 21:07:53 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to &quot;WARN&quot;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/03/15 21:07:54 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+                                                                                
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Alice</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bob</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Charlie</td>
+      <td>35</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="spark-basics">
+<h2>Spark Basics<a class="headerlink" href="#spark-basics" title="Link to this heading">#</a></h2>
+<section id="user-defined-functions-udfs">
+<h3>User Defined Functions (UDFs)<a class="headerlink" href="#user-defined-functions-udfs" title="Link to this heading">#</a></h3>
+<section id="python-udf">
+<h4>Python UDF<a class="headerlink" href="#python-udf" title="Link to this heading">#</a></h4>
+<p>Generally the slowest kind of UDF as it applies the function to one row at a time.</p>
+</section>
+</section>
+<section id="pandas-udf">
+<h3>Pandas UDF<a class="headerlink" href="#pandas-udf" title="Link to this heading">#</a></h3>
+<p>Faster than Python UDFs as they apply the function to <em>batches</em> of rows (block retrieval) at a time and also because it leverages Apache Arrow for faster serialization (converting the transformed rows back into Java objects to pass back to the JVM).</p>
+</section>
+</section>
 <section id="spark-architecture">
 <h2>Spark Architecture<a class="headerlink" href="#spark-architecture" title="Link to this heading">#</a></h2>
 <p>In Spark computations are broken into to two rough categories: transformations and actions.</p>
@@ -564,13 +670,12 @@ document.write(`
 <h3>Transformations<a class="headerlink" href="#transformations" title="Link to this heading">#</a></h3>
 <p>An important thing to note about transformations in Spark is that, generally, they are <em>lazy</em> operations; meaning they aren’t accualy performed/computed until the resulting dataframe/result set is needed. Generally this means the transformation isn’t applied until an <em>action</em> is specified.</p>
 <p>There are two types of transformations: narrow and wide transformations. The difference between the two is that <em>wide</em> transformations induce what is called a <em>shuffle</em> (also called an <em>exchange</em>). A shuffle is when a <em>repartitioning</em> of the dataset is required. Spark basically works by partitioning the dataset into subsets and having each worker perform the specified computation on a partition of the data. It’s easy to think of transformations that would require a shuffle such as the <code class="docutils literal notranslate"><span class="pre">sort()</span></code> operation. Clearly this will require an exchange/shuffle since one needs to compare rows from different partitions to perform a sort. And example of a narrow transformation is the <code class="docutils literal notranslate"><span class="pre">filter()</span></code> transformation. Clearly there is no need to compare rows across partitions to accomplish this operation since we just need to check if a row fulfills the criteria in the filter clause to compute the result set.</p>
-<p>Heirarchy</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Driver 
-     |___Workers
-               |___Executors
-                           |____Cores
-</pre></div>
-</div>
+<p>Shuffle vs memory partitions</p>
+<p>Heirarchy
+Driver
+├── Workers
+├── Executors
+├── Cores</p>
 </section>
 </section>
 <section id="structured-streaming">
@@ -649,6 +754,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-basics">Spark Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-udfs">User Defined Functions (UDFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-udf">Python UDF</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-udf">Pandas UDF</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-architecture">Spark Architecture</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 </ul>
