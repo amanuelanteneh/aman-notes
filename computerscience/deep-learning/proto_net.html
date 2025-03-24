@@ -543,7 +543,7 @@ document.write(`
 <h1>Prototypical neural networks<a class="headerlink" href="#prototypical-neural-networks" title="Link to this heading">#</a></h1>
 <p>Prototypical networks are a type of neural network proposed for the task of few-shot learning i.e. the task of learning to classify examples from classes not seen during training after being given only a few examples of the new classes.</p>
 <div class="proof remark dropdown admonition" id="remark-0">
-<p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Squared Euclidean distance is Bregman divergence)</p>
+<p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Squared Euclidean distance is a Bregman divergence)</p>
 <section class="remark-content" id="proof-content">
 <p>As stated in the paper a regular Bregman divergence is any distance function <span class="math notranslate nohighlight">\(d(\vec{z}, \vec{z}')\)</span> that can be written as</p>
 <div class="math notranslate nohighlight">
@@ -585,7 +585,12 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 \end{align}\end{split}\]</div>
 <p>We have thus proven that the squared Euclidean distance is in fact a regular Bregman divergence.</p>
 </section>
-</div><div class="cell docutils container">
+</div><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
@@ -594,11 +599,13 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># set random seeds for reproducibility</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -638,7 +645,7 @@ Size of dataset: 200
 Shape of image is (28, 28)
 </pre></div>
 </div>
-<img alt="../../_images/3e33b79825a8186e366199c96418119f8b33c3c42dbb11b24994263a099e8f8e.png" src="../../_images/3e33b79825a8186e366199c96418119f8b33c3c42dbb11b24994263a099e8f8e.png" />
+<img alt="../../_images/e777f48b706cc1ac20e4f74640f723f56bdd6f72cdb32498e199c9166c08cdea.png" src="../../_images/e777f48b706cc1ac20e4f74640f723f56bdd6f72cdb32498e199c9166c08cdea.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -858,20 +865,24 @@ In Algorithm 1 the prototypes are computed as</p>
     <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)),</span>
 <span class="p">)</span>
-
-
-<span class="n">losses</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training device: cuda
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">losses</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">mnist_dataset</span><span class="p">,</span>
     <span class="n">num_labels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
     <span class="n">n_support_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">n_query_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
     <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training device: cuda
 </pre></div>
 </div>
 </div>
