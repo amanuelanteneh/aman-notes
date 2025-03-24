@@ -542,6 +542,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-dimensionality-reduction-methods">Nonlinear dimensionality reduction methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isometric-feature-mapping-isomap">Isometric feature mapping (Isomap)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne-t-distributed-stochastic-neighbor-embedding">t-SNE (t-distributed stochastic neighbor embedding)</a></li>
 </ul>
 </li>
@@ -563,12 +564,22 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 <span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">Isomap</span><span class="p">,</span> <span class="n">TSNE</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">ModernBertModel</span>
+<span class="kn">from</span> <span class="nn">torchtext.datasets</span> <span class="kn">import</span> <span class="n">MNLI</span>
+<span class="kn">from</span> <span class="nn">torchtext.data</span> <span class="kn">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">BucketIterator</span>
 </pre></div>
 </div>
 </div>
 </details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modern_bert_model</span> <span class="o">=</span> <span class="n">ModernBertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;tasksource/ModernBERT-base-nli&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="dimensionality-reduction">
 <h1>Dimensionality reduction<a class="headerlink" href="#dimensionality-reduction" title="Link to this heading">#</a></h1>
@@ -581,6 +592,9 @@ document.write(`
 </section>
 <section id="nonlinear-dimensionality-reduction-methods">
 <h2>Nonlinear dimensionality reduction methods<a class="headerlink" href="#nonlinear-dimensionality-reduction-methods" title="Link to this heading">#</a></h2>
+<section id="isometric-feature-mapping-isomap">
+<h3>Isometric feature mapping (Isomap)<a class="headerlink" href="#isometric-feature-mapping-isomap" title="Link to this heading">#</a></h3>
+</section>
 <section id="t-sne-t-distributed-stochastic-neighbor-embedding">
 <h3>t-SNE (t-distributed stochastic neighbor embedding)<a class="headerlink" href="#t-sne-t-distributed-stochastic-neighbor-embedding" title="Link to this heading">#</a></h3>
 </section>
@@ -656,6 +670,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-dimensionality-reduction-methods">Nonlinear dimensionality reduction methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isometric-feature-mapping-isomap">Isometric feature mapping (Isomap)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-sne-t-distributed-stochastic-neighbor-embedding">t-SNE (t-distributed stochastic neighbor embedding)</a></li>
 </ul>
 </li>

@@ -542,9 +542,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="prototypical-neural-networks">
 <h1>Prototypical neural networks<a class="headerlink" href="#prototypical-neural-networks" title="Link to this heading">#</a></h1>
 <p>Prototypical networks are a type of neural network proposed for the task of few-shot learning i.e. the task of learning to classify examples from classes not seen during training after being given only a few examples of the new classes.</p>
-<div class="proof observation dropdown admonition" id="observation-0">
-<p class="admonition-title"><span class="caption-number">Observation 12.1 </span> (Squared Euclidean distance is a regular Bregman divergence)</p>
-<section class="observation-content" id="proof-content">
+<div class="proof remark dropdown admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Squared Euclidean distance is Bregman divergence)</p>
+<section class="remark-content" id="proof-content">
+<p>As stated in the paper a regular Bregman divergence is any distance function <span class="math notranslate nohighlight">\(d(\vec{z}, \vec{z}')\)</span> that can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+d(\vec{z}, \vec{z}') = \varphi(\vec{z}) - \varphi(\vec{z}') - (\vec{z}-\vec{z}')^T \nabla \varphi(\vec{z}')
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varphi(\cdot)\)</span> is a differentiable, strictly convex function of the Legendre type.</p>
+<p>We can rigorously prove the squared Euclidean distance satisfies this as follows.</p>
 <p>The squared Euclidean distance of two vectors <span class="math notranslate nohighlight">\(\vec{x}, \vec{y} \in \mathbb{R}^N\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -557,12 +564,12 @@ document.write(`
 <p>Letting <span class="math notranslate nohighlight">\(\varphi(\vec{y})=\sum_{i=1}^{N}y_i^2\)</span>, which is clearly differentiable and strictly convex as it is the sum of strictly convex differentiable functions, we have</p>
 <div class="math notranslate nohighlight">
 \[
-\nabla\varphi(\vec{y})=[2y_1,...,2y_N].
+\nabla\varphi(\vec{y})=[2y_1,...,2y_N]
 \]</div>
-<p>And of course</p>
+<p>and of course</p>
 <div class="math notranslate nohighlight">
 \[
-(\vec{x}-\vec{y})=[x_1-y_1,...,x_N-y_N]
+(\vec{x}-\vec{y})=[x_1-y_1,...,x_N-y_N].
 \]</div>
 <p>Plugging all of this into Eq. 3 from the paper we have</p>
 <div class="math notranslate nohighlight">
@@ -580,23 +587,308 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 </section>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optuna</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
 <span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span> 
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PrototypicalNetwork</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mnist</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;../../../datasets/&quot;</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
-        <span class="k">pass</span>
+
+<span class="n">dataset_size</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="c1"># randomly sample `dataset_size` indices</span>
+<span class="n">sampled_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="n">dataset_size</span><span class="p">]</span>
+
+<span class="n">mnist</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">sampled_indices</span><span class="p">]</span>
+<span class="n">mnist</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">sampled_indices</span><span class="p">]</span>
+
+
+<span class="n">unique_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mnist</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels in dataset: </span><span class="si">{</span><span class="n">unique_labels</span><span class="si">}</span><span class="s2">. </span><span class="se">\n</span><span class="s2">Size of dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">class_7_idx</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">targets</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="n">dataset_7</span> <span class="o">=</span> <span class="n">mnist</span>
+<span class="n">dataset_7</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">dataset_7</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">class_7_idx</span><span class="p">]</span>
+<span class="n">dataset_7</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">dataset_7</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">class_7_idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of image is </span><span class="si">{</span><span class="n">dataset_7</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;First image in filtered dataset&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dataset_7</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">);</span>  <span class="c1"># add &#39;;&#39; to suppress object output for matplotlib </span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Labels in dataset: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]. 
+Size of dataset: 200
+Shape of image is (28, 28)
+</pre></div>
+</div>
+<img alt="../../_images/3e33b79825a8186e366199c96418119f8b33c3c42dbb11b24994263a099e8f8e.png" src="../../_images/3e33b79825a8186e366199c96418119f8b33c3c42dbb11b24994263a099e8f8e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolutional_block</span><span class="p">(</span><span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a block conv-bn-relu-maxpool layer a described in the paper.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        in_channels: the number of input channels to the conv layer</span>
+<span class="sd">        out_channels: the number of output channels from the conv layer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="c1"># in the paper 64 out_channels (feature maps) were used with a kernel of size 3x3</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+        <span class="c1"># in the paper a 2x2 max pooling layer was used</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PrototypicalNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">convolutional_block</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">convolutional_block</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">convolutional_block</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">convolutional_block</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># flatten last conv layer output</span>
+        <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="dropdown admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If using Algorithm 1 to implement the loss computation for an episode note that both the
+preprint and the published version of the prototypical networks paper appear to have a typo.
+In Algorithm 1 the prototypes are computed as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{c}_k \leftarrow \frac{1}{N_C} \sum_{(\mathbf{x}_i,y_i)\in S_k} f_\phi(\mathbf{x}_i)
+\]</div>
+<p>which appears to directly contradict Equation 1 in the paper which divides the sum by the cardinality of the support set (which is correct).</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PrototypicalNetworkTrainer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">distance_func</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+        <span class="c1"># handle case where device is selected is cuda but no gpu is available</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="ow">and</span> <span class="n">device</span> <span class="o">==</span> <span class="s2">&quot;cuda&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distance_func</span> <span class="o">=</span> <span class="n">distance_func</span>
+
+    <span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">query_sets</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span>
+        <span class="n">prototypes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span>
+        <span class="n">num_labels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_query_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">V</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the loss for prototypical network training which</span>
+<span class="sd">        is the log softmax where the logits are the negative distances</span>
+<span class="sd">        of the query point to all `num_labels` class prototypes</span>
+<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">query_point</span> <span class="ow">in</span> <span class="n">query_sets</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="c1"># add batch dimension</span>
+                <span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">query_point</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="c1"># compute f_\phi(x)</span>
+                <span class="n">embedded_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+                <span class="c1"># compute second term in loss equation</span>
+                <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+                    <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_func</span><span class="p">(</span><span class="n">embedded_point</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span><span class="p">)</span>
+
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+                <span class="c1"># compute first term in loss equation</span>
+                <span class="n">loss</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_func</span><span class="p">(</span><span class="n">embedded_point</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+                <span class="n">loss</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_labels</span> <span class="o">*</span> <span class="n">n_query_points</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">VisionDataset</span><span class="p">,</span>
+        <span class="n">num_labels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_support_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_query_points</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">num_episodes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            model:</span>
+<span class="sd">            dataset: The training set, \mathcal{D} in the paper</span>
+<span class="sd">            num_labels: N_C in the paper</span>
+<span class="sd">            n_support_points: N_S in the paper</span>
+<span class="sd">            n_query_points: N_Q in the paper</span>
+<span class="sd">            num_episodes: the number of episodes to train for</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            a list of the losses per episode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training device: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+        <span class="c1"># move data to proper device and cast to float and normalize</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">/</span> <span class="mi">255</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c1"># add color channel dimension after batch dimension if there isn&#39;t one (MNIST)</span>
+            <span class="c1"># assuming dimension 0 is a batch dimension</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_episodes</span><span class="p">):</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">)</span>
+
+            <span class="n">query_sets</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">prototypes</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># prototypes shape will be &#39;num classes&#39; x &#39;embedding dimension&#39;</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+                <span class="n">class_indices</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">targets</span> <span class="o">==</span> <span class="n">k</span>
+                <span class="n">labeled_k</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">class_indices</span><span class="p">]</span>
+                <span class="n">all_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labeled_k</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                <span class="c1"># randomly sample N_S support examples</span>
+                <span class="n">support_indices</span> <span class="o">=</span> <span class="n">all_indices</span><span class="p">[:</span><span class="n">n_support_points</span><span class="p">]</span>
+                <span class="n">support_set</span> <span class="o">=</span> <span class="n">labeled_k</span><span class="p">[</span><span class="n">support_indices</span><span class="p">]</span>
+
+                <span class="c1"># randomly sample N_Q support examples from set D_{V_k}\S_k (i.e. support examples removed)</span>
+                <span class="n">remaining_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">labeled_k</span><span class="p">[</span><span class="n">n_support_points</span><span class="p">:])</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+                <span class="n">query_indices</span> <span class="o">=</span> <span class="n">remaining_indices</span><span class="p">[:</span><span class="n">n_query_points</span><span class="p">]</span>
+
+                <span class="n">query_sets</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">labeled_k</span><span class="p">[</span><span class="n">query_indices</span><span class="p">]</span>
+
+                <span class="n">prototypes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">support_set</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">prototypes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/=</span> <span class="n">n_support_points</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_loss</span><span class="p">(</span><span class="n">query_sets</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">n_query_points</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">losses</span>
+
+
+<span class="k">def</span> <span class="nf">squared_euclidean_distance</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the squared Euclidean distance between two tensors</span>
+<span class="sd">    Args:</span>
+<span class="sd">        x: a tensor of size (N,)</span>
+<span class="sd">        y: a tensor of size (N,)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The squared Euclidean distance between the two tensors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">PrototypicalNetwork</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">PrototypicalNetworkTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">distance_func</span><span class="o">=</span><span class="n">squared_euclidean_distance</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">mnist_dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s2">&quot;../../../datasets/&quot;</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)),</span>
+<span class="p">)</span>
+
+
+<span class="n">losses</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">mnist_dataset</span><span class="p">,</span>
+    <span class="n">num_labels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">n_support_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">n_query_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training device: cuda
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Episode number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbe46ab4f10&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/7bc779c6064514c35605243dfab1d7796d11c6dd10ef85b6d1624f1b616ec00d.png" src="../../_images/7bc779c6064514c35605243dfab1d7796d11c6dd10ef85b6d1624f1b616ec00d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -607,13 +899,15 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Mar 02 2025
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Mar 24 2025
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
-optuna: 4.2.1
+torchvision: 0.21.0
+matplotlib : 3.7.4
+torch      : 2.6.0
 </pre></div>
 </div>
 </div>

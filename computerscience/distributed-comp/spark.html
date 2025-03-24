@@ -571,6 +571,7 @@ document.write(`
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 </pre></div>
 </div>
 </div>
@@ -580,74 +581,34 @@ document.write(`
 <h1>Apache Spark<a class="headerlink" href="#apache-spark" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Intro_spark&quot;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.bindAddress&quot;</span><span class="p">,</span><span class="s2">&quot;localhost&quot;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.ui.port&quot;</span><span class="p">,</span><span class="s2">&quot;4050&quot;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Intro_spark&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span> \
+        <span class="c1">#.config(&quot;spark.driver.bindAddress&quot;,&quot;localhost&quot;) \</span>
+        <span class="c1">#.config(&quot;spark.ui.port&quot;,&quot;4050&quot;) \</span>
+        
 
-<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="mi">35</span><span class="p">)]</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">]</span>
+<span class="c1"># check if Adaptive Query Execution (AQE) is enabled</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.enabled&quot;</span><span class="p">))</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+<span class="c1"># df = spark.read.parquet(&quot;yellow_tripdata_2023-05.parquet&quot;)</span>
 <span class="c1"># print(df.rdd.getNumPartitions())</span>
 <span class="c1"># df.count()</span>
 <span class="c1"># df.explain()</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">toPandas</span><span class="p">())</span>
+<span class="c1"># display(df.toPandas())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">defaultParallelism</span><span class="si">}</span><span class="s2"> cores available&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>your 131072x1 screen size is bogus. expect trouble
-25/03/15 21:07:53 WARN Utils: Your hostname, Amaneul-PC resolves to a loopback address: 127.0.1.1; using 10.255.255.254 instead (on interface lo)
-25/03/15 21:07:53 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
-Setting default log level to &quot;WARN&quot;.
-To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-25/03/15 21:07:54 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-                                                                                
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24 cores available
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Age</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Alice</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Bob</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Charlie</td>
-      <td>35</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+</div>
 </div>
 <section id="spark-basics">
 <h2>Spark Basics<a class="headerlink" href="#spark-basics" title="Link to this heading">#</a></h2>
