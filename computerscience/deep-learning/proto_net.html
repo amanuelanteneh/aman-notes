@@ -542,6 +542,15 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="prototypical-neural-networks">
 <h1>Prototypical neural networks<a class="headerlink" href="#prototypical-neural-networks" title="Link to this heading">#</a></h1>
 <p>Prototypical networks are a type of neural network proposed for the task of few-shot learning i.e. the task of learning to classify examples from classes not seen during training after being given only a few examples of the new classes.</p>
+<p>The training of a prototypical network consists of minimizing the loss function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+J(\mathbf{x}, y; \phi) &amp;= -\log\left( \frac{\exp{(-d(f_\phi(\mathbf{x})), \mathbf{c}_y )}} {\sum_{l}\exp{(-d(f_\phi(\mathbf{x})), \mathbf{c}_{l} )}} \right) \\
+&amp;= d(f_\phi(\mathbf{x}), \mathbf{c}_k) + \log{\left({\sum_{l \in \mathcal{L}}\exp{(-d(f_\phi(\mathbf{x})), \mathbf{c}_{l} )}} \right)}
+\end{align*} 
+\end{split}\]</div>
+<p>which is simply the <em>negative log-softmax</em> where the logits are the distances between the point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and the class prototypes <span class="math notranslate nohighlight">\(\mathbf{c}_l\)</span> in the embedding space learned by the network, <span class="math notranslate nohighlight">\(\phi\)</span> represents the network parameters and <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> represents the set of unique labels in the dateset.</p>
 <div class="proof remark dropdown admonition" id="remark-0">
 <p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Squared Euclidean distance is a Bregman divergence)</p>
 <section class="remark-content" id="proof-content">
@@ -697,6 +706,11 @@ In Algorithm 1 the prototypes are computed as</p>
 \mathbf{c}_k \leftarrow \frac{1}{N_C} \sum_{(\mathbf{x}_i,y_i)\in S_k} f_\phi(\mathbf{x}_i)
 \]</div>
 <p>which appears to directly contradict Equation 1 in the paper which divides the sum by the cardinality of the support set (which is correct).</p>
+<p>Also not that, likely for clarity, the authors expressed the negative log-softmax loss slightly differently in Algorithm 1 than in Equation 2 using the <span class="math notranslate nohighlight">\(\log\)</span> property</p>
+<div class="math notranslate nohighlight">
+\[
+\log(\frac{a}{b}) = \log{(a)} - \log{(b)}
+\]</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
