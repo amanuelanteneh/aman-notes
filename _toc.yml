@@ -68,10 +68,13 @@ parts:
       - file: computerscience/machine-learning/discriminative
       - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/dim_red
+      - file: computerscience/machine-learning/model_selection
       - file: computerscience/machine-learning/performance_metrics
       - file: computerscience/machine-learning/loss_funcs
       - file: computerscience/machine-learning/attention
       - file: computerscience/machine-learning/physical_learning
+      - file: computerscience/machine-learning/semi_supervised
+      - file: computerscience/machine-learning/self_supervised
 
     - file: computerscience/deep-learning/deep_learning
       sections:
