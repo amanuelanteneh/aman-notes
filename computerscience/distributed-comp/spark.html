@@ -550,7 +550,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming-aggregations">Streaming aggregations</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
 </ul>
@@ -635,7 +638,7 @@ document.write(`
 <p>An important thing to note about transformations in Spark is that, generally, they are <em>lazy</em> operations; meaning they aren’t accualy performed/computed until the resulting dataframe/result set is needed. Generally this means the transformation isn’t applied until an <em>action</em> is specified.</p>
 <p>There are two types of transformations: narrow and wide transformations. The difference between the two is that <em>wide</em> transformations induce what is called a <em>shuffle</em> (also called an <em>exchange</em>). A shuffle is when a <em>repartitioning</em> of the dataset is required. Spark basically works by partitioning the dataset into subsets and having each worker perform the specified computation on a partition of the data. It’s easy to think of transformations that would require a shuffle such as the <code class="docutils literal notranslate"><span class="pre">sort()</span></code> operation. Clearly this will require an exchange/shuffle since one needs to compare rows from different partitions to perform a sort. And example of a narrow transformation is the <code class="docutils literal notranslate"><span class="pre">filter()</span></code> transformation. Clearly there is no need to compare rows across partitions to accomplish this operation since we just need to check if a row fulfills the criteria in the filter clause to compute the result set.</p>
 <p>Shuffle vs memory partitions</p>
-<p>Heirarchy
+<p>Hierarchy
 Driver
 ├── Workers
 ├── Executors
@@ -644,6 +647,11 @@ Driver
 </section>
 <section id="structured-streaming">
 <h2>Structured Streaming<a class="headerlink" href="#structured-streaming" title="Link to this heading">#</a></h2>
+<p>Structured streaming is near real-time streaming since the records are processed in microbatches.</p>
+<section id="streaming-aggregations">
+<h3>Streaming aggregations<a class="headerlink" href="#streaming-aggregations" title="Link to this heading">#</a></h3>
+<p>Streaming aggregation is used to mitigate out-of-memory errors</p>
+</section>
 </section>
 <section id="practice-questions">
 <h2>Practice questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
@@ -730,7 +738,10 @@ Driver
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming-aggregations">Streaming aggregations</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
 </ul>

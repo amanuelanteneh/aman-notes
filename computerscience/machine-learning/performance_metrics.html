@@ -558,6 +558,24 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="performance-metrics">
 <h1>Performance metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
 </section>
@@ -582,11 +600,67 @@ F_1 = 2\left( \frac{\text{precision} \times \text{recall}}{\text{precision} + \t
 </section>
 <section id="area-under-curve-auc">
 <h2>Area under curve (AUC)<a class="headerlink" href="#area-under-curve-auc" title="Link to this heading">#</a></h2>
-<p>The area under the curve, where the curve refers to the receiver operating characteristic (ROC) curve,</p>
+<p>The area under the curve, where the curve refers to the receiver operating characteristic (ROC) curve, is a popular performance metric for, usually binary also multiclass, classification models. The ROC curves plots the true positive rate versus the false positive rate at all possible values of the model’s probability threshold for prediction. For example for a logistic regression model if the model’s threshold is <span class="math notranslate nohighlight">\(0.7\)</span> then the model will predict an input belongs to the default of the two possible classes if the output probablity from the model exceeds <span class="math notranslate nohighlight">\(0.7\)</span> i.e. if <span class="math notranslate nohighlight">\(P(Y=\text{default}|X=x) &gt; 0.7\)</span> for an input, <span class="math notranslate nohighlight">\(x\)</span>, to the model.</p>
+<p>The area under this curve (AUC) gives a summary of the model’s performance at all possible threshold values and ranges from <span class="math notranslate nohighlight">\([0,1]\)</span> with <span class="math notranslate nohighlight">\(1\)</span> indicating a perfect classifier on the test set. The AUC of a model that simply assigns labels uniformly at random would be <span class="math notranslate nohighlight">\(0.5\)</span> and the ROC curve would simply be a straight line. Naturally a model with an ROC curve which hugs the top left corner of the plot is better.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
+
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+
+<span class="n">class_scores</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>  <span class="c1"># get class probabilities from model</span>
+<span class="n">positive_label_scores</span> <span class="o">=</span> <span class="n">class_scores</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># get probabilities for class 1</span>
+
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">positive_label_scores</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">auc_score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">positive_label_scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC score: </span><span class="si">{</span><span class="n">auc_score</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False positive rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True positive rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC curve for logistic regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trained classifier&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Random classifier&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC score: 0.9856
+</pre></div>
+</div>
+<img alt="../../_images/da8a8db6b689979f3fb405a706741078cc8d520c1677605a3602dab6adfd92b1.png" src="../../_images/da8a8db6b689979f3fb405a706741078cc8d520c1677605a3602dab6adfd92b1.png" />
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">watermark</span>
-<span class="o">%</span><span class="n">watermark</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="n">u</span> <span class="o">-</span><span class="n">v</span> <span class="o">-</span><span class="n">iv</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Apr 12 2025
+
+Python implementation: CPython
+Python version       : 3.10.12
+IPython version      : 8.22.2
+
+matplotlib: 3.7.4
+numpy     : 1.26.2
 </pre></div>
 </div>
 </div>

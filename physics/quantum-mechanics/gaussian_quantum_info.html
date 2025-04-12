@@ -541,7 +541,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hardness-of-simulating-arbitrary-quantum-systems">Classical hardness of simulating arbitrary quantum systems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#not-all-quantum-systems-are-classically-hard-to-simulate">Not all quantum systems are classically hard to simulate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quantum-systems">Gaussian quantum systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vacuum-state">Vacuum state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-gaussian-operations">Examples of Gaussian operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement">Displacement</a></li>
@@ -557,6 +557,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-state">Thermal state</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ground-states-of-gaussian-hamiltonians">Ground states of Gaussian Hamiltonians</a></li>
 </ul>
             </nav>
         </div>
@@ -628,13 +629,13 @@ document.write(`
 <section id="classical-hardness-of-simulating-arbitrary-quantum-systems">
 <h2>Classical hardness of simulating arbitrary quantum systems<a class="headerlink" href="#classical-hardness-of-simulating-arbitrary-quantum-systems" title="Link to this heading">#</a></h2>
 <p>Those that are familiar with the field of quantum computing know that the goal of building a quantum computer
-is to have a computer capable of performing computations that are intractable for a classical computer, modeled as a deterministic Turing machine, to compute. This is due to the exponential size of the matrices required to
+is to have a computer capable of performing computations that are intractable for a classical computer, modeled as a deterministic Turing machine, to perform. This is due to the exponential size of the matrices required to
 describe the dynamics of quantum systems. For instance for a two-level quantum system (a qubit), such as the polarization of a photon, the states of the photon are described by <span class="math notranslate nohighlight">\(2\)</span>-dimensional vectors and the evolution of the state of the photon is described by matrices of size <span class="math notranslate nohighlight">\(2 \times 2\)</span>.
 However we wish to study systems of arbitrarily many particles and for a quantum system of <span class="math notranslate nohighlight">\(M\)</span> qubits the state of the system is now described by <span class="math notranslate nohighlight">\(2^M\)</span>-dimensional vectors and their evolution is described by matrices of size <span class="math notranslate nohighlight">\(2^M \times 2^M\)</span>. Clearly this implies the memory overhead of classically simulating such a system is <span class="math notranslate nohighlight">\(O(2^{2M})\)</span> which is exponential in the size of the system. The time complexity of performing such a calculation, using the standard fast matrix multiplication algorithm (Strassen), is even worse at <span class="math notranslate nohighlight">\(O(2^{2.8074M})\)</span>.</p>
 </section>
-<section id="not-all-quantum-systems-are-classically-hard-to-simulate">
-<h2>Not all quantum systems are classically hard to simulate<a class="headerlink" href="#not-all-quantum-systems-are-classically-hard-to-simulate" title="Link to this heading">#</a></h2>
-<p>Remarkably there are some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">Bartlett <em>et al.</em>, 2002</a>]</span>. These are systems of quantum harmonic oscillators whose states are all initially Gaussian states and evolve under Gaussian operations and measurements. In this context Gaussian states are quantum states whose Wigner function is a Gaussian and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
+<section id="gaussian-quantum-systems">
+<h2>Gaussian quantum systems<a class="headerlink" href="#gaussian-quantum-systems" title="Link to this heading">#</a></h2>
+<p>Remarkably there are some classes of quantum systems that <strong>can</strong> be simulated efficiently with a classical computer. One of these is the class of so called Gaussian quantum systems <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id4" title="Stephen D Bartlett, Barry C Sanders, Samuel L Braunstein, and Kae Nemoto. Efficient classical simulation of continuous variable quantum information processes. Physical Review Letters, 88(9):097904, 2002.">Bartlett <em>et al.</em>, 2002</a>]</span>. These are systems of quantum harmonic oscillators whose states are all initially Gaussian states and evolve under Gaussian operations and measurements. In this context Gaussian states are quantum states whose Wigner function is a Gaussian (or equivalently non-negative everywhere in phase space) and Gaussian operations and measurements are those that preserve the Gaussianity of the Gaussian quantum states they act on <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id5" title="Christian Weedbrook, Stefano Pirandola, Raúl García-Patrón, Nicolas J Cerf, Timothy C Ralph, Jeffrey H Shapiro, and Seth Lloyd. Gaussian quantum information. Reviews of Modern Physics, 84(2):621–669, 2012.">Weedbrook <em>et al.</em>, 2012</a>]</span>.</p>
 <p>These processes can be simulated classically because the covariances of the position and momentum of the harmonic oscillators, which can be compactly written as a covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>, and the expectation values of position and momentum of the harmonic oscillators, which can be compactly written as a vector of means <span class="math notranslate nohighlight">\(\mu\)</span>, provide <em>complete information</em> about the system. For a system of <span class="math notranslate nohighlight">\(M\)</span> oscillators <span class="math notranslate nohighlight">\(\Sigma\)</span> is of size <span class="math notranslate nohighlight">\(2M \times 2M\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is of size <span class="math notranslate nohighlight">\(2M\)</span>. The evolution of this system under Gaussian operations is described by <span class="math notranslate nohighlight">\(2M \times 2M\)</span> symplectic matrices and given by the evolution rules <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id7" title="Jonatan Bohr Brask. Gaussian states and operations–a quick reference. arXiv preprint arXiv:2102.05748, 2021.">Brask, 2021</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
@@ -696,7 +697,7 @@ p_1\\
 p_M\\
 \end{bmatrix} 
 \end{split}\]</div>
-<p>and to when converting a matrix for an operator <span class="math notranslate nohighlight">\(O\)</span> we apply the basis change matrix as <span class="math notranslate nohighlight">\(O = BOB^T\)</span> to from the first convention to the second and <span class="math notranslate nohighlight">\(O = B^TOB\)</span> to go from the second convention to the first.</p>
+<p>and when converting a matrix for an operator <span class="math notranslate nohighlight">\(O\)</span> we apply the basis change matrix as <span class="math notranslate nohighlight">\(O = BOB^T\)</span> to go from the first convention to the second and <span class="math notranslate nohighlight">\(O = B^TOB\)</span> to go from the second convention to the first.</p>
 </section>
 <section id="vacuum-state">
 <h2>Vacuum state<a class="headerlink" href="#vacuum-state" title="Link to this heading">#</a></h2>
@@ -970,6 +971,11 @@ measuring the quadrature <span class="math notranslate nohighlight">\(q\)</span>
 <img alt="../../_images/6160ca49a8dcd2016cee6e356476b639a4e5c66a57a250e3e2634353bc316eeb.png" src="../../_images/6160ca49a8dcd2016cee6e356476b639a4e5c66a57a250e3e2634353bc316eeb.png" />
 </div>
 </div>
+</section>
+</section>
+<section id="ground-states-of-gaussian-hamiltonians">
+<h2>Ground states of Gaussian Hamiltonians<a class="headerlink" href="#ground-states-of-gaussian-hamiltonians" title="Link to this heading">#</a></h2>
+<p>In continuous variable quantum information science the Hamiltonian describing a system of quantum harmonic oscillators is called <em>Gaussian</em> if it contains terms that are <em>at most</em> quadratic in the field operators <span class="math notranslate nohighlight">\(\hat{q}\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> so for example the Hamiltonian describing the self-Kerr interaction <span class="math notranslate nohighlight">\(\hat{H} = (\hat{a}^\dagger\hat{a})^2\)</span> or a cubic evolution <span class="math notranslate nohighlight">\(\hat{H}=\hat{q}^3\)</span> would <em>not</em> be Gaussian as the contains terms that are cubic or greater in the field quadratures.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -992,7 +998,6 @@ numpy     : 1.26.2
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -1061,7 +1066,7 @@ numpy     : 1.26.2
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hardness-of-simulating-arbitrary-quantum-systems">Classical hardness of simulating arbitrary quantum systems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#not-all-quantum-systems-are-classically-hard-to-simulate">Not all quantum systems are classically hard to simulate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-quantum-systems">Gaussian quantum systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vacuum-state">Vacuum state</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-gaussian-operations">Examples of Gaussian operations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#displacement">Displacement</a></li>
@@ -1077,6 +1082,7 @@ numpy     : 1.26.2
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-state">Thermal state</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ground-states-of-gaussian-hamiltonians">Ground states of Gaussian Hamiltonians</a></li>
 </ul>
   </nav></div>
 
