@@ -543,7 +543,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">Recall</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1 Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score"><span class="math notranslate nohighlight">\(F_1\)</span> score</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-curve-auc">Area under curve (AUC)</a></li>
 </ul>
             </nav>
@@ -556,9 +556,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="performance-metrics">
-<h1>Performance metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">#</a></h1>
-<div class="cell tag_hide-input docutils container">
+  <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
@@ -576,18 +574,34 @@ document.write(`
 </div>
 </details>
 </div>
+<section class="tex2jax_ignore mathjax_ignore" id="performance-metrics">
+<h1>Performance metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">#</a></h1>
 <section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
+<p>This is perhaps the simplest classification metric and the easist to generalize to a multiclass setting the accuracy is simply given by</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Accuracy} = \frac{\text{Number of correctly predicted samples}}{\text{Total number of samples}}.
+\]</div>
+<p>However, this metric, like any other, can be uninformative or even deceptive without proper context. For example if one has a highly unbalanced dataset where <span class="math notranslate nohighlight">\(99\%\)</span> of samples belong to the negative class and only <span class="math notranslate nohighlight">\(1\%\)</span> belong to the positive class, which can naturally arise in anomaly detection problems, then a classifier which simply predicts every sample belongs to the negative class will give a <span class="math notranslate nohighlight">\(99\%\)</span> accuracy but is clearly useless.</p>
 </section>
 <section id="precision">
 <h2>Precision<a class="headerlink" href="#precision" title="Link to this heading">#</a></h2>
+<p>For a binary classifier the <em>precision</em> is mathematical given by</p>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = {\frac{\text{True Positive}}{\text{True Positive} + \text{False Positive}}}\]</div>
+<p>Intuitively we can think of precision as a metric that measures how often the classifier is correct <em>when it predicts a sample belongs to the positive class</em>. Put another way it answers the question: “Of all the samples the classifier said were positive, how many actually were?”</p>
 </section>
 <section id="recall">
 <h2>Recall<a class="headerlink" href="#recall" title="Link to this heading">#</a></h2>
+<p>For a binary classifier the <em>recall</em> is mathematical given by</p>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = {\frac{\text{True Positive}}{\text{True Positive} + \text{False Negative}}}\]</div>
+<p>Intuitively we can think of recall as a metric that measures how good the classifier is at finding <em>all</em> the actual positive examples. Put another way it answers the question: “Of all the samples that <em>are actually positive</em>, how many did the classifier correctly identify as positive?”</p>
 </section>
-<section id="f1-score">
-<h2>F1 Score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h2>
-<p>The F1 score is the harmonic mean, where the harmonic mean <span class="math notranslate nohighlight">\(\bar{x}_H\)</span> of <span class="math notranslate nohighlight">\(n\)</span> real numbers, <span class="math notranslate nohighlight">\(x_1,x_2,...,x_n\)</span> is given by</p>
+<section id="f-1-score">
+<h2><span class="math notranslate nohighlight">\(F_1\)</span> score<a class="headerlink" href="#f-1-score" title="Link to this heading">#</a></h2>
+<p>The <span class="math notranslate nohighlight">\(F_1\)</span> score is the harmonic mean, where the harmonic mean <span class="math notranslate nohighlight">\(\bar{x}_H\)</span> of <span class="math notranslate nohighlight">\(n\)</span> real numbers, <span class="math notranslate nohighlight">\(x_1,x_2,...,x_n\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
 \bar{x}_H = \frac{n}{x_1^{-1} + x_2^{-1} + \cdots + x_n^{-1}},
@@ -600,7 +614,7 @@ F_1 = 2\left( \frac{\text{precision} \times \text{recall}}{\text{precision} + \t
 </section>
 <section id="area-under-curve-auc">
 <h2>Area under curve (AUC)<a class="headerlink" href="#area-under-curve-auc" title="Link to this heading">#</a></h2>
-<p>The area under the curve, where the curve refers to the receiver operating characteristic (ROC) curve, is a popular performance metric for, usually binary also multiclass, classification models. The ROC curves plots the true positive rate versus the false positive rate at all possible values of the model’s probability threshold for prediction. For example for a logistic regression model if the model’s threshold is <span class="math notranslate nohighlight">\(0.7\)</span> then the model will predict an input belongs to the default of the two possible classes if the output probablity from the model exceeds <span class="math notranslate nohighlight">\(0.7\)</span> i.e. if <span class="math notranslate nohighlight">\(P(Y=\text{default}|X=x) &gt; 0.7\)</span> for an input, <span class="math notranslate nohighlight">\(x\)</span>, to the model.</p>
+<p>The area under the curve, where the curve refers to the receiver operating characteristic (ROC) curve, is a popular performance metric for, usually binary also multiclass, classification models. The ROC curves plots the true positive rate versus the false positive rate at all possible values of the model’s probability threshold for prediction. For example for a logistic regression model if the model’s threshold is <span class="math notranslate nohighlight">\(0.7\)</span> then the model will predict an input belongs to the default (negative class) of the two possible classes if the output probability from the model exceeds <span class="math notranslate nohighlight">\(0.7\)</span> i.e. if <span class="math notranslate nohighlight">\(P(Y=\text{negative}|X=x) &gt; 0.7\)</span> for an input, <span class="math notranslate nohighlight">\(x\)</span>, to the model.</p>
 <p>The area under this curve (AUC) gives a summary of the model’s performance at all possible threshold values and ranges from <span class="math notranslate nohighlight">\([0,1]\)</span> with <span class="math notranslate nohighlight">\(1\)</span> indicating a perfect classifier on the test set. The AUC of a model that simply assigns labels uniformly at random would be <span class="math notranslate nohighlight">\(0.5\)</span> and the ROC curve would simply be a straight line. Naturally a model with an ROC curve which hugs the top left corner of the plot is better.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -614,7 +628,7 @@ F_1 = 2\left( \frac{\text{precision} \times \text{recall}}{\text{precision} + \t
 <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
 
 
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -625,12 +639,11 @@ F_1 = 2\left( \frac{\text{precision} \times \text{recall}}{\text{precision} + \t
 
 <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">positive_label_scores</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">auc_score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">positive_label_scores</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AUC score: </span><span class="si">{</span><span class="n">auc_score</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False positive rate&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True positive rate&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC curve for logistic regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROC curve for logistic regression model </span><span class="se">\n</span><span class="s2"> AUC for blue ROC curve: </span><span class="si">{</span><span class="n">auc_score</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trained classifier&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Random classifier&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fancybox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">.85</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">));</span>
@@ -639,10 +652,7 @@ F_1 = 2\left( \frac{\text{precision} \times \text{recall}}{\text{precision} + \t
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AUC score: 0.9856
-</pre></div>
-</div>
-<img alt="../../_images/da8a8db6b689979f3fb405a706741078cc8d520c1677605a3602dab6adfd92b1.png" src="../../_images/da8a8db6b689979f3fb405a706741078cc8d520c1677605a3602dab6adfd92b1.png" />
+<img alt="../../_images/cbb0cf1d8a3ad2a1d1095c9777d2770501415c64229ec6c3ba27ffb61519d13f.png" src="../../_images/cbb0cf1d8a3ad2a1d1095c9777d2770501415c64229ec6c3ba27ffb61519d13f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -735,7 +745,7 @@ numpy     : 1.26.2
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">Recall</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1 Score</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-1-score"><span class="math notranslate nohighlight">\(F_1\)</span> score</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area-under-curve-auc">Area under curve (AUC)</a></li>
 </ul>
   </nav></div>
