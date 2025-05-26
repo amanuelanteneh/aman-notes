@@ -61,6 +61,7 @@ parts:
     
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/data_preprocessing
       - file: computerscience/machine-learning/lin_reg
       - file: computerscience/machine-learning/tree_based
       - file: computerscience/machine-learning/ensembles
@@ -105,6 +106,7 @@ parts:
     - file: statistics/classic-stats/classic_stats
       sections:
       - file: statistics/classic-stats/conf_int
+      - file: statistics/classic-stats/point_estimate
       - file: statistics/classic-stats/pca
       - file: statistics/classic-stats/bootstrap
     
