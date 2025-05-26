@@ -70,6 +70,7 @@ parts:
       - file: computerscience/machine-learning/generative
       - file: computerscience/machine-learning/dim_red
       - file: computerscience/machine-learning/model_selection
+      - file: computerscience/machine-learning/hyperparam_tune
       - file: computerscience/machine-learning/performance_metrics
       - file: computerscience/machine-learning/loss_funcs
       - file: computerscience/machine-learning/attention
