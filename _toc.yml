@@ -108,6 +108,7 @@ parts:
     - file: statistics/classic-stats/classic_stats
       sections:
       - file: statistics/classic-stats/point_estimate
+      - file: statistics/classic-stats/mle
       - file: statistics/classic-stats/conf_int
       - file: statistics/classic-stats/pred_int
       - file: statistics/classic-stats/pca
