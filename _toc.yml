@@ -61,6 +61,7 @@ parts:
     
     - file: computerscience/machine-learning/machine_learning
       sections:
+      - file: computerscience/machine-learning/bias_var_decomp
       - file: computerscience/machine-learning/data_preprocessing
       - file: computerscience/machine-learning/lin_reg
       - file: computerscience/machine-learning/tree_based
