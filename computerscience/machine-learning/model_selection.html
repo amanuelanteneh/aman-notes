@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Model selection &#8212; Amanuel&#39;s Notebook \(\nabla^2\)</title>
+    <title>Model selection &amp; assessment &#8212; Amanuel&#39;s Notebook \(\nabla^2\)</title>
   
   
   
@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -58,11 +58,13 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/model_selection';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Performance metrics" href="performance_metrics.html" />
+    <link rel="next" title="Hyperparameter tuning" href="hyperparam_tune.html" />
     <link rel="prev" title="Dimensionality reduction" href="dim_red.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -226,16 +228,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">11. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Model selection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semi_supervised.html">Semi-supervised learning</a></li>
@@ -267,7 +273,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -528,7 +537,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Model selection</h1>
+    <h1>Model selection & assessment</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -538,7 +547,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-set-approach">The Test Set Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-validation-set-approach">The Validation Set Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">Leave-One-Out Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation"><span class="math notranslate nohighlight">\(k\)</span>-Fold Cross-Validation</a></li>
 </ul>
             </nav>
         </div>
@@ -550,10 +562,45 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="model-selection">
-<h1>Model selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h1>
-<section id="cross-validation">
-<h2>Cross validation<a class="headerlink" href="#cross-validation" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="model-selection-assessment">
+<h1>Model selection &amp; assessment<a class="headerlink" href="#model-selection-assessment" title="Link to this heading">#</a></h1>
+<p>Model selection is the process of selecting the proper level of flexibility for a model (tuning hyperparameters for example) <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span> or equivalently the process of estimating the performance of different models in order to choose the best one <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id39" title="Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. The elements of statistical learning: data mining, inference, and prediction. Volume 2. Springer, 2009.">Hastie <em>et al.</em>, 2009</a>]</span>. Model assessment is the process of estimating the test/generalization error of the <em>selected</em> model on new/unseen data <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id39" title="Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. The elements of statistical learning: data mining, inference, and prediction. Volume 2. Springer, 2009.">Hastie <em>et al.</em>, 2009</a>]</span>. Note that we cannot use the training error rate to estimate the test error rate as the former often can dramatically underestimate the later <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span>.</p>
+<section id="the-test-set-approach">
+<h2>The Test Set Approach<a class="headerlink" href="#the-test-set-approach" title="Link to this heading">#</a></h2>
+<p>When one has ample amounts of training data the best option is usually to randomly split the data into training, validation and testing sets <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id39" title="Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. The elements of statistical learning: data mining, inference, and prediction. Volume 2. Springer, 2009.">Hastie <em>et al.</em>, 2009</a>]</span>. The training set is used to train/fit the model, the validation set is used to estimate the prediction/generalization error for model selection and hyperparameter tuning and the test set (also called a hold-out set) is treated as a ‘hold out’ set which is used to evaluate the performance (generalization error) of the <em>selected</em> model. Often times however we are not in this data rich regime and collecting more data is prohibitively expensive so alternative methods must be used for model selection. Three such methods are discussed below that are also discussed in the chapter <em>Resampling Methods</em> of <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span>.</p>
+</section>
+<section id="the-validation-set-approach">
+<h2>The Validation Set Approach<a class="headerlink" href="#the-validation-set-approach" title="Link to this heading">#</a></h2>
+<p>In the absence of enough data to form training, validation and testing sets one could <em>randomly</em> divide the data into only training and validation sets. We then fit the model to the training set, which typically contains around <span class="math notranslate nohighlight">\(50\%-60\%\)</span> of the observations in the original dataset, and use the fitted models’ error rate on the validation set (validation error rate) as <em>an estimate of the test error rate</em> <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span>. There are two drawbacks with this method.</p>
+<ol class="arabic simple">
+<li><p>The resulting validation errors can have high variance, as shown in Figure 5.2 of <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span>, depending on which samples are in the training and the validation set.</p></li>
+<li><p>This method can <em>overestimate</em> the test error of a model that is fit to the whole dataset since we are using a substantial amount of the data in the validation set instead of using that data for training and statistical methods tend to perform worse when trained on fewer samples than more.</p></li>
+</ol>
+</section>
+<section id="leave-one-out-cross-validation">
+<h2>Leave-One-Out Cross-Validation<a class="headerlink" href="#leave-one-out-cross-validation" title="Link to this heading">#</a></h2>
+<p>Leave-One-Out Cross-Validation (LOOCV) addresses some of the drawbacks of the validation set approach. With LOOCV we take the original dataset of size <span class="math notranslate nohighlight">\(n\)</span> and create a training set of size <span class="math notranslate nohighlight">\(n-1\)</span> and a validation set of size <span class="math notranslate nohighlight">\(1\)</span>. We then proceed as we did for the validation set approach by fitting the model to the training set and computing the validation error rate, denoted <span class="math notranslate nohighlight">\(\textrm{VER}_1\)</span> here, on the validation set. Clearly the variance of <span class="math notranslate nohighlight">\(\textrm{VER}_1\)</span> will be large since we only have one sample in our validation set <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id38" title="Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor. Statistical learning. Springer, 2023.">James <em>et al.</em>, 2023</a>]</span>. So what we will do instead is repeat this process <span class="math notranslate nohighlight">\(n\)</span> times each time using a different sample for the validation set. We will then have <span class="math notranslate nohighlight">\(n\)</span> values for the validation error which we can average to get</p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{CV}_{(n)} = \frac{1}{n}\sum_{i=1}^{n} \textrm{VER}_i
+\]</div>
+<p>which is the LOOCV estimate of the <em>test</em> error rate.
+LOOCV has two advantages over the validation set approach.</p>
+<ol class="arabic simple">
+<li><p>It’s estimate of the test error has less bias since we use <span class="math notranslate nohighlight">\(n-1\)</span> samples to fit the model unlike the validation set approach which typically uses only <span class="math notranslate nohighlight">\(\approx50\%\)</span> of the available data for training. Therefore, LOOCV tends to not overestimate the test error like the validation set approach does.</p></li>
+<li><p>Unlike the validation set approach no randomness is involved in LOOCV as we simply leave exactly one sample out of the training set at each step. Thus LOOCV always gives the same result for <span class="math notranslate nohighlight">\(\textrm{CV}_{(n)}\)</span> given a particular dataset and model.</p></li>
+</ol>
+<p>Although this method does come with a time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> as we have to fit the model <span class="math notranslate nohighlight">\(n\)</span> times unlike the validation set approach where we just need to fit the model once i.e. it has a time complexity <span class="math notranslate nohighlight">\(O(1)\)</span>.</p>
+</section>
+<section id="k-fold-cross-validation">
+<h2><span class="math notranslate nohighlight">\(k\)</span>-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Link to this heading">#</a></h2>
+<p>Another alternative to the validation set approach is <span class="math notranslate nohighlight">\(k\)</span>-fold cross validation (<span class="math notranslate nohighlight">\(k\)</span>-fold CV). In this method we split the dataset into <span class="math notranslate nohighlight">\(k\)</span> groups (folds) of roughly equal size. We use the data in <span class="math notranslate nohighlight">\(k-1\)</span> of the groups as the training set and the data in remaining group as our validation set. We do this <span class="math notranslate nohighlight">\(k\)</span> times which gives us <span class="math notranslate nohighlight">\(k\)</span> values of the validation error rate <span class="math notranslate nohighlight">\(\textrm{VER}_1, \textrm{VER}_2,\dots, \textrm{VER}_k\)</span>.
+We will then average these values to get</p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{CV}_{(k)} = \frac{1}{k}\sum_{i=1}^{k} \textrm{VER}_i
+\]</div>
+<p>which is the <span class="math notranslate nohighlight">\(k\)</span>-fold CV estimate of the <em>test</em> error rate. Clearly LOOCV is a special case of <span class="math notranslate nohighlight">\(k\)</span>-fold CV in which <span class="math notranslate nohighlight">\(k=n\)</span>. The advatange of this method over LOOCV is that it’s complexity is <span class="math notranslate nohighlight">\(O(k)\)</span> as we only need to fit the model <span class="math notranslate nohighlight">\(k\)</span> times and <span class="math notranslate nohighlight">\(k\)</span> is typically taken to be <span class="math notranslate nohighlight">\(5\)</span> or <span class="math notranslate nohighlight">\(10\)</span> this is extremely useful for models which may have high complexity to train, such as neural networks or SVMs, as our model selection strategies time complexity no longer scales linearly with the dataset size but is in fact constant in the size of the dataset.</p>
 </section>
 </section>
 
@@ -597,11 +644,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="performance_metrics.html"
+       href="hyperparam_tune.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Performance metrics</p>
+        <p class="prev-next-title">Hyperparameter tuning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -621,7 +668,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-test-set-approach">The Test Set Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-validation-set-approach">The Validation Set Approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">Leave-One-Out Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation"><span class="math notranslate nohighlight">\(k\)</span>-Fold Cross-Validation</a></li>
 </ul>
   </nav></div>
 

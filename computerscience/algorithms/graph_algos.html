@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -228,16 +228,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
@@ -269,7 +273,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -603,20 +610,20 @@ document.write(`
 <p>Graphs are incredibly versatile data structures and due to this versatility they are ubiquitous in computing. Note that for simplicity I while use <span class="math notranslate nohighlight">\(n\)</span> to denote the number of nodes in a graph instead of <span class="math notranslate nohighlight">\(|V|\)</span> and <span class="math notranslate nohighlight">\(m\)</span> to denote the number of edges in a graph instead of <span class="math notranslate nohighlight">\(|E|\)</span>.</p>
 <section id="adjacency-list">
 <h2>Adjacency list<a class="headerlink" href="#adjacency-list" title="Link to this heading">#</a></h2>
-<p>Besides the adjacency matrix representation of a graph which we cover <a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html"><span class="std std-doc">here</span></a> the other common way of representing a graph is using an adjacency list which <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say is what most of the graph algorithms they present use to represent graphs. For example for the graph <span class="math notranslate nohighlight">\(G\)</span> shown below:</p>
+<p>Besides the adjacency matrix representation of a graph which we cover <a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html"><span class="std std-doc">here</span></a> the other common way of representing a graph is using an adjacency list which <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say is what most of the graph algorithms they present use to represent graphs. For example for the graph <span class="math notranslate nohighlight">\(G\)</span> shown below:</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 
-<span class="k">def</span> <span class="nf">get_full_adjlist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_full_adjlist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
      <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">nbrs</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">adjacency</span><span class="p">():</span>
         <span class="n">line</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="n">delimiter</span>
         <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -624,7 +631,7 @@ document.write(`
         <span class="k">yield</span> <span class="n">line</span><span class="p">[:</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)]</span>
 
 
-<span class="k">def</span> <span class="nf">adjlist_as_dict</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">adjlist_as_dict</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
     <span class="n">adj_lst</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">get_full_adjlist</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
         <span class="n">nodes</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -667,10 +674,10 @@ document.write(`
 </div>
 <p>The adjacency list is given by</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adj_lst</span> <span class="o">=</span> <span class="n">adjlist_as_dict</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
@@ -842,7 +849,7 @@ w(T) = \sum_{e\in T}w(e) \quad \text{where $e=(u,v)$}
 <p>i.e. the sum of the weights of each edge in the spanning tree <span class="math notranslate nohighlight">\(T\)</span>.</p>
 <p>It is said to “span” the graph <span class="math notranslate nohighlight">\(G\)</span> since it connects all vertices.
 The <em>minimum</em> spanning tree is a spanning tree for which <span class="math notranslate nohighlight">\(w(T)\)</span> is the minimal possible value for the graph <span class="math notranslate nohighlight">\(G\)</span>.</p>
-<p>Finding such an object for a given graph is useful for several applications such as electronic circuit design <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. Can we find the MST of an arbitrary weighted undirected graph efficiently? The answer is yes using a greedy algorithm. Note that the graph must also be connected or else there is no spanning tree by definition.</p>
+<p>Finding such an object for a given graph is useful for several applications such as electronic circuit design <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>. Can we find the MST of an arbitrary weighted undirected graph efficiently? The answer is yes using a greedy algorithm. Note that the graph must also be connected or else there is no spanning tree by definition.</p>
 </section>
 </div><section id="kruskals-algorithm">
 <h3>Kruskal’s algorithm<a class="headerlink" href="#kruskals-algorithm" title="Link to this heading">#</a></h3>
@@ -893,10 +900,10 @@ Runtime is <span class="math notranslate nohighlight">\(O(m\log{(n)})\)</span> i
 <p>A flow network is a directed weighted graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> with start and end node, <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> respectively, where the edge weights <span class="math notranslate nohighlight">\(c_e&gt;0\)</span> denote edge capacity i.e. the maximum amount of something that can flow through the edge <span class="math notranslate nohighlight">\(e\in E\)</span>. For example in the flow network below if we were to imagine node <span class="math notranslate nohighlight">\(s\)</span> represented a water source and the edges denoted how much water in liters can flow along the edges, so <span class="math notranslate nohighlight">\(3\)</span> liters can flow form <span class="math notranslate nohighlight">\(s\)</span> to <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(2\)</span> liters from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(d\)</span> and so on, and node <span class="math notranslate nohighlight">\(t\)</span> is the node we wish to transport the water to.</p>
 <p>A <em>flow</em> in the network is an assignment of flows, denoted <span class="math notranslate nohighlight">\(f_e\)</span>, for each edge in the network such that <span class="math notranslate nohighlight">\(f_e\leq c_e\)</span> and the sum of flows <em>into</em> a node equals the sum of flows <em>out</em> of a node so the flow is conserved. For example in the flow depicted below we can see that a total of <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow from node <span class="math notranslate nohighlight">\(s\)</span> and a total amount <span class="math notranslate nohighlight">\(2+1+4\)</span> units flow into node <span class="math notranslate nohighlight">\(t\)</span> the sink/target node.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/flow_network.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
@@ -905,7 +912,8 @@ Runtime is <span class="math notranslate nohighlight">\(O(m\log{(n)})\)</span> i
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png"><img alt="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" src="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png"><img alt="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" src="../../_images/7792e7a4b74c03dea96f4371ef69a456cf75c2bfac0478c7ae097db9de18df03.png" style="width: 600px;" />
+</a>
 </div>
 </div>
 </section>

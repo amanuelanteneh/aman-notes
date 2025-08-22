@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -228,16 +228,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
@@ -269,7 +273,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -544,7 +551,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="algorithms">
 <h1><span class="section-number">9. </span>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">#</a></h1>
-<p>This section is comprised of notes I made while taking my graduate algorithms course during my time studying for my masters in computer science degree at Georgia Tech. The two main books I cite will be <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> and <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. The former was used in my undergraduate algorithms course at UVA and the latter was used in the graduate algorithms course at Georgia Tech.</p>
+<p>This section is comprised of notes I made while taking my graduate algorithms course during my time studying for my masters in computer science degree at Georgia Tech. The two main books I cite will be <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> and <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. The former was used in my undergraduate algorithms course at UVA and the latter was used in the graduate algorithms course at Georgia Tech.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="numerical_algos.html">Number-theoretic algorithms</a></li>

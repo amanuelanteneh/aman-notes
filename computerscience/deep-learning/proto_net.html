@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -228,16 +228,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
@@ -269,7 +273,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -570,10 +577,10 @@ J(\mathbf{x}, y; \phi) &amp;= -\log\left( \frac{\exp{(-d(f_\phi(\mathbf{x})), \m
 \end{align*} 
 \end{split}\]</div>
 <p>which is simply the <em>negative log-softmax</em> where the logits are the distances between the point <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and the class prototypes <span class="math notranslate nohighlight">\(\mathbf{c}_l\)</span> in the embedding space learned by the network, <span class="math notranslate nohighlight">\(\phi\)</span> represents the network parameters and <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> represents the set of unique labels in the dateset.</p>
-<div class="proof remark dropdown admonition" id="remark-0">
+<div class="proof remark dropdown admonition" id="Euclidean">
 <p class="admonition-title"><span class="caption-number">Remark 12.1 </span> (Squared Euclidean distance is a Bregman divergence)</p>
 <section class="remark-content" id="proof-content">
-<p>As stated in the paper a regular Bregman divergence <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id36" title="Arindam Banerjee, Srujana Merugu, Inderjit S Dhillon, and Joydeep Ghosh. Clustering with bregman divergences. Journal of machine learning research, 6(Oct):1705–1749, 2005.">Banerjee <em>et al.</em>, 2005</a>]</span> is any distance function <span class="math notranslate nohighlight">\(d(\vec{z}, \vec{z}')\)</span> that can be written as</p>
+<p>As stated in the paper a regular Bregman divergence <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id37" title="Arindam Banerjee, Srujana Merugu, Inderjit S Dhillon, and Joydeep Ghosh. Clustering with bregman divergences. Journal of machine learning research, 6(Oct):1705–1749, 2005.">Banerjee <em>et al.</em>, 2005</a>]</span> is any distance function <span class="math notranslate nohighlight">\(d(\vec{z}, \vec{z}')\)</span> that can be written as</p>
 <div class="math notranslate nohighlight">
 \[
 d(\vec{z}, \vec{z}') = \varphi(\vec{z}) - \varphi(\vec{z}') - (\vec{z}-\vec{z}')^T \nabla \varphi(\vec{z}')
@@ -614,18 +621,18 @@ d_\varphi(\vec{x}, \vec{y}) &amp;= \varphi(\vec{x})-\varphi(\vec{y})-(\vec{x}-\v
 <p>We have thus proven that the squared Euclidean distance is in fact a regular Bregman divergence.</p>
 </section>
 </div><div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
-<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">Tensor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># set random seeds for reproducibility</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -677,7 +684,7 @@ Size of dataset: 50000
 Shape of image is (32, 32)
 </pre></div>
 </div>
-<img alt="../../_images/3344aa697cc5b44c4c2301e8332fc44952724be5fcc189bda0c3bb1be0645f36.png" src="../../_images/3344aa697cc5b44c4c2301e8332fc44952724be5fcc189bda0c3bb1be0645f36.png" />
+<img alt="../../_images/3c6dceed229fe63675a772df21f1b4bc5e4a0473d8b2600d8810e643d71f245b.png" src="../../_images/3c6dceed229fe63675a772df21f1b4bc5e4a0473d8b2600d8810e643d71f245b.png" />
 </div>
 </div>
 </section>
@@ -687,7 +694,7 @@ Shape of image is (32, 32)
 <h3>Prototypical network<a class="headerlink" href="#prototypical-network" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolutional_block</span><span class="p">(</span><span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">convolutional_block</span><span class="p">(</span><span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a block conv-bn-relu-maxpool layer a described in the paper.</span>
 <span class="sd">    Args:</span>
@@ -705,8 +712,8 @@ Shape of image is (32, 32)
     <span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">PrototypicalNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrototypicalNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
@@ -716,7 +723,7 @@ Shape of image is (32, 32)
             <span class="n">convolutional_block</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">),</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
         <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># flatten last conv layer output</span>
         <span class="k">return</span> <span class="n">output</span>
@@ -745,12 +752,13 @@ In Algorithm 1 the prototypes are computed as</p>
 <h3>Trainer<a class="headerlink" href="#trainer" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PrototypicalNetworkTrainer</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PrototypicalNetworkTrainer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
         <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">weight_decay</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">distance_func</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
@@ -763,10 +771,11 @@ In Algorithm 1 the prototypes are computed as</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span> <span class="o">=</span> <span class="n">weight_decay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="n">weight_decay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distance_func</span> <span class="o">=</span> <span class="n">distance_func</span>
 
-    <span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_loss</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">query_sets</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span>
         <span class="n">prototypes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">],</span>
@@ -804,7 +813,7 @@ In Algorithm 1 the prototypes are computed as</p>
                 <span class="n">loss</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_labels</span> <span class="o">*</span> <span class="n">n_query_points</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">loss</span>
 
-    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dataset</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">VisionDataset</span><span class="p">,</span>
         <span class="n">num_labels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -826,6 +835,12 @@ In Algorithm 1 the prototypes are computed as</p>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training device: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_support_points</span> <span class="o">+</span> <span class="n">n_query_points</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Number of support and query points (</span><span class="si">{</span><span class="n">n_support_points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n_query_points</span><span class="si">}</span><span class="s2">) &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;cannot be larger than the dataset D size (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2">).&quot;</span>
+            <span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 
         <span class="c1"># move data to proper device and cast to float and normalize</span>
@@ -870,7 +885,7 @@ In Algorithm 1 the prototypes are computed as</p>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_loss</span><span class="p">(</span><span class="n">query_sets</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">n_query_points</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
-
+           
             <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
@@ -879,7 +894,7 @@ In Algorithm 1 the prototypes are computed as</p>
         <span class="k">return</span> <span class="n">losses</span>
 
 
-<span class="k">def</span> <span class="nf">squared_euclidean_distance</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">squared_euclidean_distance</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the squared Euclidean distance between two tensors</span>
 <span class="sd">    Args:</span>
@@ -889,6 +904,58 @@ In Algorithm 1 the prototypes are computed as</p>
 <span class="sd">        The squared Euclidean distance between the two tensors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_protonet</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">train_set</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">VisionDataset</span><span class="p">,</span> <span class="n">test_set</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">VisionDataset</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validates the Prototypical Network on a test set.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        model: the trained Prototypical Network model</span>
+<span class="sd">        train_set: the training set used for training the model</span>
+<span class="sd">        test_set: the test set to validate the model on</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The accuracy of the model on the test set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">test_set</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">/</span> <span class="mi">255</span>
+    <span class="n">test_set</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">test_set</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_set</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="c1"># add color channel dimension after batch dimension if there isn&#39;t one (MNIST)</span>
+        <span class="c1"># assuming dimension 0 is a batch dimension</span>
+        <span class="n">test_set</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">test_set</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+
+        <span class="n">prototypes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">targets</span><span class="p">):</span>
+            <span class="n">class_indices</span> <span class="o">=</span> <span class="n">train_set</span><span class="o">.</span><span class="n">targets</span> <span class="o">==</span> <span class="n">k</span>
+            <span class="n">support_set</span> <span class="o">=</span> <span class="n">train_set</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">class_indices</span><span class="p">]</span>
+            <span class="n">prototypes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">support_set</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">support_set</span><span class="p">)</span>
+            
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_set</span><span class="p">)):</span>
+            <span class="nb">input</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">test_set</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># add batch dimension and move to device</span>
+            <span class="n">embedded_input</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+            <span class="c1"># compute distances to all prototypes</span>
+            <span class="n">distances</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">prototypes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">distances</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span> <span class="o">=</span> <span class="n">squared_euclidean_distance</span><span class="p">(</span><span class="n">embedded_input</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+            <span class="c1"># find the class with the minimum distance</span>
+            <span class="n">predicted_label</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distances</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">predicted_label</span> <span class="o">==</span> <span class="n">label</span><span class="o">.</span><span class="n">item</span><span class="p">():</span>
+                <span class="n">correct</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span> <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 </div>
@@ -903,7 +970,8 @@ In Algorithm 1 the prototypes are computed as</p>
 <span class="n">trainer</span> <span class="o">=</span> <span class="n">PrototypicalNetworkTrainer</span><span class="p">(</span>
     <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
     <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">distance_func</span><span class="o">=</span><span class="n">squared_euclidean_distance</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -916,8 +984,46 @@ In Algorithm 1 the prototypes are computed as</p>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="c1"># Group sample indices by class</span>
+<span class="n">class_to_indices</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mnist_dataset</span><span class="p">):</span>
+    <span class="n">class_to_indices</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+<span class="c1"># Sample E random indices per class</span>
+<span class="n">selected_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># number of samples per class</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">class_to_indices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">selected_indices</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">E</span><span class="p">))</span>
+
+
+<span class="n">mnist_test_set</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>  <span class="c1"># Clone the original data</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist_dataset</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+<span class="n">mask</span><span class="p">[</span><span class="n">selected_indices</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">mnist_test_set</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">][:</span><span class="mi">1000</span><span class="p">]</span>  <span class="c1"># Select all indices not in selected_indices</span>
+<span class="n">mnist_test_set</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">][:</span><span class="mi">1000</span><span class="p">]</span>
+
+<span class="n">mnist_dataset</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">selected_indices</span><span class="p">)]</span>
+<span class="n">mnist_dataset</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">selected_indices</span><span class="p">)]</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">mnist_dataset</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">labels_counts</span> <span class="o">=</span> <span class="p">{</span> <span class="n">label</span><span class="p">:</span> <span class="n">labels</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span> <span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels in train dataset: </span><span class="si">{</span><span class="n">labels_counts</span><span class="si">}</span><span class="s2">. </span><span class="se">\n</span><span class="s2">Size of dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist_dataset</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Labels in test dataset: </span><span class="si">{</span><span class="n">mnist_test_set</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="si">}</span><span class="s2">. </span><span class="se">\n</span><span class="s2">Size of dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist_test_set</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training device: cuda
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Labels in train dataset: {5: 50, 0: 50, 4: 50, 1: 50, 9: 50, 2: 50, 3: 50, 6: 50, 7: 50, 8: 50}. 
+Size of dataset: 500
+Labels in test dataset: torch.Size([1000, 28, 28]). 
+Size of dataset: 1000
 </pre></div>
 </div>
 </div>
@@ -926,11 +1032,16 @@ In Algorithm 1 the prototypes are computed as</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">losses</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">mnist_dataset</span><span class="p">,</span>
-    <span class="n">num_labels</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">n_support_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">n_query_points</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">num_labels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">n_support_points</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span>
+    <span class="n">n_query_points</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">num_episodes</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training device: cuda
 </pre></div>
 </div>
 </div>
@@ -944,10 +1055,22 @@ In Algorithm 1 the prototypes are computed as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fbe46ab4f10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x769149badc90&gt;]
 </pre></div>
 </div>
-<img alt="../../_images/7bc779c6064514c35605243dfab1d7796d11c6dd10ef85b6d1624f1b616ec00d.png" src="../../_images/7bc779c6064514c35605243dfab1d7796d11c6dd10ef85b6d1624f1b616ec00d.png" />
+<img alt="../../_images/99df5f013864f7bd05dd39c657e69cef279e8744f95c3487113acff84f5d1ce7.png" src="../../_images/99df5f013864f7bd05dd39c657e69cef279e8744f95c3487113acff84f5d1ce7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">validate_protonet</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">mnist_dataset</span><span class="p">,</span> <span class="n">mnist_test_set</span><span class="p">,</span> <span class="n">trainer</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.779
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -958,15 +1081,15 @@ In Algorithm 1 the prototypes are computed as</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Mar 24 2025
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jun 10 2025
 
 Python implementation: CPython
 Python version       : 3.10.12
 IPython version      : 8.22.2
 
+torch      : 2.6.0
 torchvision: 0.21.0
 matplotlib : 3.7.4
-torch      : 2.6.0
 </pre></div>
 </div>
 </div>

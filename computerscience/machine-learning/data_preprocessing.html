@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Boosting &#8212; Amanuel&#39;s Notebook \(\nabla^2\)</title>
+    <title>Data preprocessing &#8212; Amanuel&#39;s Notebook \(\nabla^2\)</title>
   
   
   
@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -58,12 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/boosting';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/data_preprocessing';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Kernel machines" href="kernel_machines.html" />
-    <link rel="prev" title="Tree-based models" href="tree_based.html" />
+    <link rel="next" title="Linear regression" href="lin_reg.html" />
+    <link rel="prev" title="Bias-variance decomposition" href="bias_var_decomp.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -226,16 +226,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="machine_learning.html">11. Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semi_supervised.html">Semi-supervised learning</a></li>
@@ -267,7 +271,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -414,7 +421,7 @@
       
       
       
-      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/boosting.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Fcomputerscience/machine-learning/data_preprocessing.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -444,7 +451,7 @@
       
       
       
-      <li><a href="../../_sources/computerscience/machine-learning/boosting.ipynb" target="_blank"
+      <li><a href="../../_sources/computerscience/machine-learning/data_preprocessing.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -515,7 +522,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -526,11 +535,25 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Boosting</h1>
+    <h1>Data preprocessing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data">Missing data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-completely-at-random-mcar">Missing Completely at Random (MCAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-at-random-mar">Missing at Random (MAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-not-at-random-mnar">Missing Not At Random (MNAR)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One-hot encoding</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -540,8 +563,23 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="boosting">
-<h1>Boosting<a class="headerlink" href="#boosting" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-preprocessing">
+<h1>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h1>
+<section id="missing-data">
+<h2>Missing data<a class="headerlink" href="#missing-data" title="Link to this heading">#</a></h2>
+<section id="missing-completely-at-random-mcar">
+<h3>Missing Completely at Random (MCAR)<a class="headerlink" href="#missing-completely-at-random-mcar" title="Link to this heading">#</a></h3>
+</section>
+<section id="missing-at-random-mar">
+<h3>Missing at Random (MAR)<a class="headerlink" href="#missing-at-random-mar" title="Link to this heading">#</a></h3>
+</section>
+<section id="missing-not-at-random-mnar">
+<h3>Missing Not At Random (MNAR)<a class="headerlink" href="#missing-not-at-random-mnar" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="one-hot-encoding">
+<h2>One-hot encoding<a class="headerlink" href="#one-hot-encoding" title="Link to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -575,20 +613,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="tree_based.html"
+       href="bias_var_decomp.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tree-based models</p>
+        <p class="prev-next-title">Bias-variance decomposition</p>
       </div>
     </a>
     <a class="right-next"
-       href="kernel_machines.html"
+       href="lin_reg.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Kernel machines</p>
+        <p class="prev-next-title">Linear regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -598,6 +636,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data">Missing data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-completely-at-random-mcar">Missing Completely at Random (MCAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-at-random-mar">Missing at Random (MAR)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-not-at-random-mnar">Missing Not At Random (MNAR)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One-hot encoding</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

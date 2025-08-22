@@ -28,14 +28,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -228,16 +228,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
@@ -269,7 +273,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -660,7 +667,7 @@ T(n) = T\left(\frac{n}{2}\right) + O(1)
 </section>
 <section id="integer-multiplication">
 <h2>Integer multiplication<a class="headerlink" href="#integer-multiplication" title="Link to this heading">#</a></h2>
-<p>The first problem divide &amp; conquer methods are applied to in <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> is integer multiplication.</p>
+<p>The first problem divide &amp; conquer methods are applied to in <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> is integer multiplication.</p>
 <p>To multiple two complex numbers <span class="math notranslate nohighlight">\(g=a+ib\)</span> and <span class="math notranslate nohighlight">\(h=c+id\)</span> we compute</p>
 <div class="math notranslate nohighlight">
 \[
@@ -748,7 +755,7 @@ T(n) = 3T\left(\frac{n}{2}\right) + O(n)
 </section>
 <section id="solving-recurrence-relations">
 <h2>Solving recurrence relations<a class="headerlink" href="#solving-recurrence-relations" title="Link to this heading">#</a></h2>
-<p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. To solve these recurrences there are three main methods described below <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>A recurrence relation, which we’ll call recurrence for short from now on, is an equation that describes a function in terms of it’s values on other, usually smaller, arguments. To solve these recurrences there are three main methods described below <span id="id2">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 <section id="substitution">
 <h3>Substitution<a class="headerlink" href="#substitution" title="Link to this heading">#</a></h3>
 <p>Given a recursion based algorithm we guess the solution and use induction to prove it is correct. For example for the recurrence relation</p>
@@ -759,7 +766,7 @@ T(n) = T\left(\frac{4n}{5}\right) + O(n)
 </section>
 <section id="recursion-tree">
 <h3>Recursion-tree<a class="headerlink" href="#recursion-tree" title="Link to this heading">#</a></h3>
-<p>Given a recursion based algorithm you draw out a the recursion as a tree with with the number of branches at each node being the number of subproblems being created, the depth being the levels of recursion and the nodes of the tree representing the cost of an operation at that level of recursion. By examining the tree you then attempt to write out the expression for the time complexity by summing up the nodes.</p>
+<p>Given a recursion based algorithm you draw out the recursion as a tree with the number of branches at each node being the number of subproblems being created, the depth being the levels of recursion and the nodes of the tree representing the cost of an operation at that level of recursion. By examining the tree you then attempt to write out the expression for the time complexity by summing up the nodes.</p>
 </section>
 <section id="master-method">
 <h3>Master method<a class="headerlink" href="#master-method" title="Link to this heading">#</a></h3>
@@ -786,7 +793,7 @@ T(n) = \begin{cases}
   O(n^{\log_b(a)})  &amp; \text{if } d &lt; \log_b(a)\\
 \end{cases}
 \end{split}\]</div>
-<p>which is very useful. The proof along with the theorem is given in <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
+<p>which is very useful. The proof along with the theorem is given in <span id="id3">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
 </section>
 </div></section>
 </section>
@@ -794,7 +801,7 @@ T(n) = \begin{cases}
 <h2>Square matrix multiplication<a class="headerlink" href="#square-matrix-multiplication" title="Link to this heading">#</a></h2>
 <section id="naive-matrix-multiplication">
 <h3>Naive matrix multiplication<a class="headerlink" href="#naive-matrix-multiplication" title="Link to this heading">#</a></h3>
-<p>Let’s go over an example from <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> now. Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be <span class="math notranslate nohighlight">\(n\times n\)</span> matrices. Their product <span class="math notranslate nohighlight">\(C=AB\)</span> is given by (recall that this is equivalent to taking the dot product between the rows of <span class="math notranslate nohighlight">\(A\)</span> with the columns of <span class="math notranslate nohighlight">\(B\)</span>)</p>
+<p>Let’s go over an example from <span id="id4">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> now. Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be <span class="math notranslate nohighlight">\(n\times n\)</span> matrices. Their product <span class="math notranslate nohighlight">\(C=AB\)</span> is given by (recall that this is equivalent to taking the dot product between the rows of <span class="math notranslate nohighlight">\(A\)</span> with the columns of <span class="math notranslate nohighlight">\(B\)</span>)</p>
 <div class="math notranslate nohighlight">
 \[
 C_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj}
@@ -889,16 +896,16 @@ C_{22} = A_{21}B_{12} + A_{22}B_{22}
 </ol>
 </section>
 </div><div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">dc_mat_mult</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dc_mat_mult</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
        <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
        <span class="k">return</span> <span class="n">C</span>
@@ -938,10 +945,10 @@ C_{22} = A_{21}B_{12} + A_{22}B_{22}
 </div>
 </div>
 </details>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Are the matrices the same? Yes
@@ -959,7 +966,7 @@ T(n) = 8T\left(\frac{n}{2}\right) + O(1).
 </section>
 <section id="strassens-algorithm">
 <h3>Strassen’s algorithm<a class="headerlink" href="#strassens-algorithm" title="Link to this heading">#</a></h3>
-<p>Strassen’s algorithm achieves a speed up over both the prior methods by utilizing a clever trick akin to the one found by Gauss for integer multiplication. Specifically the algorithm reduces the number of matrix multiplications that need to be computed at each recursion level from 8 to 7! This is done by computing the product as <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span></p>
+<p>Strassen’s algorithm achieves a speed up over both the prior methods by utilizing a clever trick akin to the one found by Gauss for integer multiplication. Specifically the algorithm reduces the number of matrix multiplications that need to be computed at each recursion level from 8 to 7! This is done by computing the product as <span id="id5">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 AB = \begin{bmatrix}
@@ -1040,7 +1047,7 @@ T(n) = 7T\left(\frac{n}{2}\right) + O(1).
 \[
 T(n) = 2T\left(\frac{n}{2}\right) + O(n)
 \]</div>
-<p>from the master theorem we have that the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n\log(n))\)</span> which means we can sort a list in time that is log-linear in the size of the list. Not bad and in fact this is, provably, the best we can do for a <em>comparison based</em> sorting algorithm <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. See radix sort for a non-comparison based sorting algorithm with complexity <span class="math notranslate nohighlight">\(O(n)\)</span> <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>from the master theorem we have that the solution to this recurrence is <span class="math notranslate nohighlight">\(T(n)=O(n\log(n))\)</span> which means we can sort a list in time that is log-linear in the size of the list. Not bad and in fact this is, provably, the best we can do for a <em>comparison based</em> sorting algorithm <span id="id6">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>. See radix sort for a non-comparison based sorting algorithm with complexity <span class="math notranslate nohighlight">\(O(n)\)</span> <span id="id7">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 </section>
 <section id="medians">
 <h2>Medians<a class="headerlink" href="#medians" title="Link to this heading">#</a></h2>
@@ -1113,11 +1120,11 @@ T(n) = T\left(\frac{3n}{4}\right) + O(n)
 T(n) = T\left(bn\right) + O(n)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(b&lt;1\)</span>! So this means we have some leeway in picking <span class="math notranslate nohighlight">\(w\)</span>. If we can find a way to pick a <span class="math notranslate nohighlight">\(w\)</span> that is less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest we will have an <span class="math notranslate nohighlight">\(O(n)\)</span> algorithm for finding the median of an unsorted list.</p>
-<p>How many elements are there in the list that are less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element (note that it doesn’t matter if the list is sorted)? Well thats <span class="math notranslate nohighlight">\(\frac{3n}{4}-\frac{n}{4}=\frac{n}{2}\)</span> elements. So if we pick a pivot randomly that means we have a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> chance of picking a pivot that is one of these elements. This means that on average we have to randomly select an element twice to get a good pivot. This is akin to flipping a fair coin where <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> show that on average we must flip the coin two times before we see a heads. Note that once we randomly select a candiadate for the pivot we must check to see it satisfies the condition of being less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element in the list which will take <span class="math notranslate nohighlight">\(O(n)\)</span> time. So on average we will need to do this twice before we have a good pivot so on average we can expect a time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> when choosing the pivot in this way and thus our recurrence form earlier will describe the runtime of our algorithm.</p>
+<p>How many elements are there in the list that are less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element (note that it doesn’t matter if the list is sorted)? Well thats <span class="math notranslate nohighlight">\(\frac{3n}{4}-\frac{n}{4}=\frac{n}{2}\)</span> elements. So if we pick a pivot randomly that means we have a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> chance of picking a pivot that is one of these elements. This means that on average we have to randomly select an element twice to get a good pivot. This is akin to flipping a fair coin where <span id="id8">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> show that on average we must flip the coin two times before we see a heads. Note that once we randomly select a candiadate for the pivot we must check to see it satisfies the condition of being less than the <span class="math notranslate nohighlight">\(\frac{3n}{4}\)</span>-th largest element and greater than the <span class="math notranslate nohighlight">\(\frac{n}{4}\)</span>-th largest element in the list which will take <span class="math notranslate nohighlight">\(O(n)\)</span> time. So on average we will need to do this twice before we have a good pivot so on average we can expect a time complexity of <span class="math notranslate nohighlight">\(O(n)\)</span> when choosing the pivot in this way and thus our recurrence form earlier will describe the runtime of our algorithm.</p>
 </section>
 <section id="tighter-bound">
 <h3>Tighter bound<a class="headerlink" href="#tighter-bound" title="Link to this heading">#</a></h3>
-<p>But this is just the <em>expected/average</em> runtime of the algorithm. Can we modify the algorithm to get an even tighter bound that shows that in the <em>worst</em> case we have a complexity of <span class="math notranslate nohighlight">\(O(n)\)</span>? Well it turns out we can by modifying how we select the pivot which is explained by Dr. Vigoda in lecture and in chapter 9 of <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>But this is just the <em>expected/average</em> runtime of the algorithm. Can we modify the algorithm to get an even tighter bound that shows that in the <em>worst</em> case we have a complexity of <span class="math notranslate nohighlight">\(O(n)\)</span>? Well it turns out we can by modifying how we select the pivot which is explained by Dr. Vigoda in lecture and in chapter 9 of <span id="id9">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 <p>So recall that for our recurrence which is of the form</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1141,7 +1148,7 @@ T(n) &amp;= T\left(\frac{3n}{4}\right) + \left(T\left(\frac{n}{5}\right) + O(n)\
 \[
 T(n) = T\left(\frac{n}{5}\right) +  O(n)
 \]</div>
-<p>which were the extra terms we added to the recurrence of the expected time <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm above. The new algorithm is given below and as we can see by solving this recurrence has a worst case time complexity that is linear. This is a pretty impressive algorithm and complexity and it took quite a bit of work to find it. Unfortunately as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say it is not as practical as the earlier randomized version of this algorithm but is still of great theoretical interest.</p>
+<p>which were the extra terms we added to the recurrence of the expected time <span class="math notranslate nohighlight">\(\text{selection}\)</span> algorithm above. The new algorithm is given below and as we can see by solving this recurrence has a worst case time complexity that is linear. This is a pretty impressive algorithm and complexity and it took quite a bit of work to find it. Unfortunately as <span id="id10">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span> say it is not as practical as the earlier randomized version of this algorithm but is still of great theoretical interest.</p>
 <div class="proof algorithm dropdown admonition" id="selection $O(n)$ Worst Case Time">
 <p class="admonition-title"><span class="caption-number">Algorithm 9.9 </span> (Selection - <span class="math notranslate nohighlight">\(O(n)\)</span> Worst Case Time)</p>
 <section class="algorithm-content" id="proof-content">
@@ -1189,10 +1196,10 @@ T(n) = T\left(\frac{n}{5}\right) +  O(n)
 </section>
 <section id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Link to this heading">#</a></h2>
-<p>This algorithm is covered by both <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and <span id="id12">[<a class="reference internal" href="../../backmatter/bibliography.html#id28" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
+<p>This algorithm is covered by both <span id="id11">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span> and <span id="id12">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Thomas H Cormen, Charles E Leiserson, Ronald L Rivest, and Clifford Stein. Introduction to algorithms. MIT press, 2022.">Cormen <em>et al.</em>, 2022</a>]</span>.</p>
 <section id="background">
 <h3>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h3>
-<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing <span id="id13">[<a class="reference internal" href="../../backmatter/bibliography.html#id29" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
+<p>The fast (discrete) Fourier transform (FFT) is an algorithm that has revolutionized signal processing <span id="id13">[<a class="reference internal" href="../../backmatter/bibliography.html#id30" title="Sanjoy Dasgupta, Christos H Papadimitriou, and Umesh Virkumar Vazirani. Algorithms. McGraw-Hill Higher Education New York, 2008.">Dasgupta <em>et al.</em>, 2008</a>]</span>.</p>
 <p>The continuous time Fourier transform, Fourier transform for short, of a function <span class="math notranslate nohighlight">\(x(t)\)</span>, denoted as <span class="math notranslate nohighlight">\(\hat{x}(f)\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[

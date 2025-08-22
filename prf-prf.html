@@ -27,14 +27,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -232,16 +232,20 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="computerscience/machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/data_preprocessing.html">Data preprocessing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/lin_reg.html">Linear regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/tree_based.html">Tree-based models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/boosting.html">Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/ensembles.html">Ensemble methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/kernel_machines.html">Kernel machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/generative.html">Generative models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/dim_red.html">Dimensionality reduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/model_selection.html">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/performance_metrics.html">Performance metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/model_drift.html">Model drift</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/attention.html">Attention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/physical_learning.html">Physical learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computerscience/machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
@@ -273,7 +277,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="statistics/intro.html">16. Introduction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/pca.html">Principal component analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
 </ul>
@@ -502,6 +509,8 @@ document.write(`
    <h1>Proof Index</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-Bonferroni"><strong>Bonferroni</strong></a> | 
+   <a href="#cap-Euclidean"><strong>Euclidean</strong></a> | 
    <a href="#cap-FFT"><strong>FFT</strong></a> | 
    <a href="#cap-bfs"><strong>bfs</strong></a> | 
    <a href="#cap-bin-search"><strong>bin-search</strong></a> | 
@@ -516,8 +525,8 @@ document.write(`
    <a href="#cap-merge-sort"><strong>merge-sort</strong></a> | 
    <a href="#cap-mst-def"><strong>mst-def</strong></a> | 
    <a href="#cap-naive-mat-mult"><strong>naive-mat-mult</strong></a> | 
+   <a href="#cap-point-estimator"><strong>point-estimator</strong></a> | 
    <a href="#cap-primality"><strong>primality</strong></a> | 
-   <a href="#cap-remark-0"><strong>remark-0</strong></a> | 
    <a href="#cap-sb3-ppo"><strong>sb3-ppo</strong></a> | 
    <a href="#cap-selection $O(n)$ Worst Case Time"><strong>selection $O(n)$ Worst Case Time</strong></a> | 
    <a href="#cap-selection (Linear Expected Case Time)"><strong>selection (Linear Expected Case Time)</strong></a> | 
@@ -526,6 +535,22 @@ document.write(`
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-Bonferroni"><td></td><td>
+       <strong>Bonferroni</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="computerscience/machine-learning/model_drift.html#Bonferroni"><code class="xref">Bonferroni</code></a> <em>(computerscience/machine-learning/model_drift)</em></td><td>
+       <em>remark</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-Euclidean"><td></td><td>
+       <strong>Euclidean</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="computerscience/deep-learning/proto_net.html#Euclidean"><code class="xref">Euclidean</code></a> <em>(computerscience/deep-learning/proto_net)</em></td><td>
+       <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-FFT"><td></td><td>
        <strong>FFT</strong></td><td></td></tr>
@@ -639,6 +664,14 @@ document.write(`
        <a href="computerscience/algorithms/divide_conquer.html#naive-mat-mult"><code class="xref">naive-mat-mult</code></a> <em>(computerscience/algorithms/divide_conquer)</em></td><td>
        <em>algorithm</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-point-estimator"><td></td><td>
+       <strong>point-estimator</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="statistics/classic-stats/point_estimate.html#point-estimator"><code class="xref">point-estimator</code></a> <em>(statistics/classic-stats/point_estimate)</em></td><td>
+       <em>definition</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-primality"><td></td><td>
        <strong>primality</strong></td><td></td></tr>
      <tr>
@@ -646,14 +679,6 @@ document.write(`
        <td>
        <a href="computerscience/algorithms/numerical_algos.html#primality"><code class="xref">primality</code></a> <em>(computerscience/algorithms/numerical_algos)</em></td><td>
        <em>algorithm</em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-remark-0"><td></td><td>
-       <strong>remark-0</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="computerscience/deep-learning/proto_net.html#remark-0"><code class="xref">remark-0</code></a> <em>(computerscience/deep-learning/proto_net)</em></td><td>
-       <em>remark</em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-sb3-ppo"><td></td><td>
        <strong>sb3-ppo</strong></td><td></td></tr>
