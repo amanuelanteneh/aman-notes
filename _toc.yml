@@ -98,7 +98,7 @@ parts:
     
     - file: computerscience/distributed-comp/distributed_computing
       sections:
-      - file: computerscience/distributed-comp/spark
+      - file: computerscience/distributed-comp/consensus
 
   
   - caption: Statistics
@@ -183,6 +183,17 @@ parts:
       sections:
       - file:  mathematics/probability/conditioning
       - file:  mathematics/probability/joint
+
+
+  - caption: Industry Applications
+    numbered: 1
+    chapters:
+    - file: industry/intro
+
+    - file: industry/databricks/databricks
+      sections:
+      - file: industry/databricks/spark
+  
 
 
   - caption: Back Matter

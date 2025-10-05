@@ -1,1 +1,1 @@
-rm -r _build/ && jupyter-book build .
+rm -rf _build && jupyter-book build .
