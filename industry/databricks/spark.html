@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Apache Spark &#8212; Amanuel&#39;s Notebook \(\nabla^2\)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'industry/databricks/spark';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="34. Bibliography" href="../../backmatter/bibliography.html" />
+    <link rel="prev" title="33. Databricks" href="databricks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Amanuel's Notebook \(\nabla^2\)</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Physics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../physics/intro.html">1. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/quantum-mechanics/quantum_mechanics.html">2. Quantum Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/entanglement.html">Entanglement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/density_matrix.html">Density matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/partial_trace.html">Partial trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/wigner_function.html">Wigner function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/gaussian_quantum_info.html">Gaussian quantum information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/homodyne_detection.html">Homodyne detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/photon_number_detection.html">Photon number detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/lindblad_eq.html">Lindblad master equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/quantum-mechanics/cv_qc_examples.html">CV QC simulations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/classical-mech/classical_mech.html">3. Classical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/classical-mech/calc_of_var.html">Calculus of variations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/e-and-m/e_and_m.html">4. Electricity &amp; Magnetism</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/e-and-m/gauss_law.html">Gauss’s law</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/stat-mech/stat_mech.html">5. Statistical Mechanics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/partition_func.html">Partition function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/stat-mech/grand_can_ens.html">Grand canonical ensemble</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computer Science</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/intro.html">6. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/data_structs.html">7. Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../computerscience/lazy_eval.html">8. Lazy Evaluation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/algorithms/algorithms.html">9. Algorithms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/numerical_algos.html">Number-theoretic algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/divide_conquer.html">Divide &amp; conquer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/dynamic_prog.html">Dynamic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/graph_algos.html">Graph algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/greedy_algos.html">Greedy algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/np_problems.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/algorithms/linear_prog.html">Linear programming</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/optimization/optimization.html">10. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/semidef_prog.html">Semidefinite programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/quad_prog.html">Quadratic programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/optimization/bayes_opt.html">Bayesian optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/machine-learning/machine_learning.html">11. Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/bias_var_decomp.html">Bias-variance decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/data_preprocessing.html">Data preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/lin_reg.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/tree_based.html">Tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/ensembles.html">Ensemble methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/kernel_machines.html">Kernel machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/discriminative.html">Discriminative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/generative.html">Generative models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/dim_red.html">Dimensionality reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/model_selection.html">Model selection &amp; assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/hyperparam_tune.html">Hyperparameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/performance_metrics.html">Performance metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/loss_funcs.html">Loss functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/model_drift.html">Model drift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/physical_learning.html">Physical learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/semi_supervised.html">Semi-supervised learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/machine-learning/self_supervised.html">Self-supervised learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/deep-learning/deep_learning.html">12. Deep Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/conv_net.html">Convolutional neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/rnn.html">Recurrent neural network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/proto_net.html">Prototypical neural networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/deep-learning/autoencoders.html">Autoencoders</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/reinforcement-learning/reinforcement_learning.html">13. Reinforcement Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/reinforcement-learning/dqn.html">Deep <span class="math notranslate nohighlight">\(Q\)</span>-learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/reinforcement-learning/ppo.html">Proximal policy optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/quantum-comp/quantum_comp.html">14. Quantum Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/quantum-comp/bern_vazirani.html">Bernstein–Vazirani algorithm</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../computerscience/distributed-comp/distributed_computing.html">15. Distributed Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../computerscience/distributed-comp/consensus.html">Consensus</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/intro.html">16. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/classic-stats/classic_stats.html">17. Classical Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/point_estimate.html">Point estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/mle.html">Maximum likelihood estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/conf_int.html">Confidence intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pred_int.html">Prediction intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/pca.html">Principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/classic-stats/bootstrap.html">Bootstrapping</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/hypo-testing/hypo_testing.html">18. Hypothesis Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/hypo-testing/1_samp_t_test.html">One sample <span class="math notranslate nohighlight">\(t\)</span>-test</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/sampling/sampling_methods.html">19. Sampling Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/inv_trans_sampling.html">Inverse transform sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/rejection_sampling.html">Rejection sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/sampling/mcmc.html">Markov chain monte carlo</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/high-dim-stats/high_dim.html">20. High-Dimensional Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/robust_pca.html">Robust principal component analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/high-dim-stats/compress_sense.html">Compressed sensing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../statistics/bayesian-statistics/bayesian_statistics.html">21. Bayesian Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/cred_int.html">Credible interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/hierarchical_models.html">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/bayesian-statistics/missing_data.html">Missing data</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mathematics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../mathematics/intro.html">22. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/vector-calc/vector_calc.html">23. Vector Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/vector-calc/gradient.html">Gradient</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/discrete-math/discrete_math.html">24. Discrete Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/sets.html">Set theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/relations.html">Relations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/discrete-math/graph_theory.html">Graph theory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/abstract-algebra/algebra.html">25. Abstract Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/group_theory.html">Group theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/representation_theory.html">Representation theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/abstract-algebra/bch.html">Baker–Campbell–Hausdorff formula</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/linear-algebra/linear_algebra.html">26. Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra/change_basis.html">Change of basis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/matrix-calc/matrix_calc.html">27. Matrix Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/matrix-calc/vec_mat_deriv.html">Vector and matrix derivatives</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_calc.html">28. Stochastic Calculus</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/stoc-calc/stoc_diff_eq.html">Stochastic differential equations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/differential-equations/diff_eq.html">29. Differential Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/wave_eq.html">Wave equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/differential-equations/laplace_eq.html">Lapalace’s equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/complex-analysis/complex_analysis.html">30. Complex Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/complex-analysis/contour_int.html">Contour integration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/probability/probability.html">31. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/conditioning.html">Conditional distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/probability/joint.html">Joint distributions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Industry Applications</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">32. Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="databricks.html">33. Databricks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Apache Spark</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">34. Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/amanuelanteneh/aman-notes/issues/new?title=Issue%20on%20page%20%2Findustry/databricks/spark.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/industry/databricks/spark.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Apache Spark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-basics">Spark Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o">I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data">Reading Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-data">Writing Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-udfs">User Defined Functions (UDFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-udf">Python UDF</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-udf">Pandas UDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-architecture">Spark Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actions">Actions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-architecture">Runtime architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#driver">Driver</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#worker">Worker</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#executor">Executor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-manager">Cluster manager</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#job-diagram">Job diagram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-modes">Deployment modes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-api">Spark API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rdds">RDDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catalyst-optimizer">Catalyst optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#photon-engine">Photon engine</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-sinks">Sources and sinks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stateful-and-stateless-operations">Stateful and stateless operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming-aggregations">Streaming aggregations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#late-arriving-data">Late arriving data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-optimization">Spark Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-spark-job-bottlenecks">Common Spark Job Bottlenecks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning">Partitioning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skew">Skew</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-time">Task time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shuffle-operations">Shuffle operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-caching">DataFrame caching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-optimization">Query optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Catalyst optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-query-execution-aqe">Adaptive query execution (AQE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-join-strategies">Physical join strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast-hash-join-bhj">Broadcast Hash Join (BHJ)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shuffle-sort-merge-join-smj">Shuffle Sort-Merge Join (SMJ)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-connect">Spark connect</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spark-connect">What is Spark Connect?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters">Why it Matters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-vs-cluster-mode">Client vs Cluster Mode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-mode">Client mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-mode">Cluster mode</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="apache-spark">
+<h1>Apache Spark<a class="headerlink" href="#apache-spark" title="Link to this heading">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;intro_spark&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+        
+<span class="c1"># check if Adaptive Query Execution (AQE) is enabled</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.enabled&quot;</span><span class="p">))</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;yellow_tripdata_2023-05.parquet&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">defaultParallelism</span><span class="si">}</span><span class="s2"> cores available&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24 cores available
+</pre></div>
+</div>
+</div>
+</div>
+<section id="spark-basics">
+<h2>Spark Basics<a class="headerlink" href="#spark-basics" title="Link to this heading">#</a></h2>
+<p>Note that the <a class="reference external" href="https://spark.apache.org/docs/latest/index.html">Spark Docs</a> are probably the best source of information about Spark</p>
+<section id="i-o">
+<h3>I/O<a class="headerlink" href="#i-o" title="Link to this heading">#</a></h3>
+<section id="reading-data">
+<h4>Reading Data<a class="headerlink" href="#reading-data" title="Link to this heading">#</a></h4>
+<p>Object: <code class="docutils literal notranslate"><span class="pre">pyspark.sql.DataFrameReader</span></code></p>
+<p>Entry point: spark.read (batch) or spark.readStream (streaming).</p>
+<p>Formats: csv, json, parquet, orc, avro, jdbc, delta, etc.</p>
+<p>Common options:</p>
+<p>“header”=“true|false” (CSV/JSON)</p>
+<p>“inferSchema”=“true|false”</p>
+<p>“delimiter”=“,” (CSV)</p>
+<p>“path”=“…”</p>
+</section>
+<section id="writing-data">
+<h4>Writing Data<a class="headerlink" href="#writing-data" title="Link to this heading">#</a></h4>
+<p>Object: <code class="docutils literal notranslate"><span class="pre">pyspark.sql.DataFrameWriter</span></code></p>
+<p>Entry point: df.write (batch) or df.writeStream (streaming).</p>
+<p>Need format, mode, and options.</p>
+<p>Save options:</p>
+<ol class="arabic simple">
+<li><p>append: Append contents of this DataFrame to existing data.</p></li>
+<li><p>overwrite: Overwrite existing data.</p></li>
+<li><p>error or errorifexists: Throw an exception if data already exists.</p></li>
+<li><p>ignore: Silently ignore this operation if data already exists.</p></li>
+</ol>
+</section>
+</section>
+<section id="user-defined-functions-udfs">
+<h3>User Defined Functions (UDFs)<a class="headerlink" href="#user-defined-functions-udfs" title="Link to this heading">#</a></h3>
+<p>In Spark, it is generally best to use built-in functions before resorting to UDFs. Built-in functions are implemented in the Spark engine itself, benefit from the Catalyst optimizer (e.g., predicate pushdown, whole-stage code generation, vectorized execution), and therefore execute efficiently at scale. UDFs, on the other hand, are opaque to the Catalyst optimizer and often force row-by-row execution, which prevents Spark from applying many of its standard optimizations. In addition, UDFs incur extra overhead from serialization and deserialization, and in the case of PySpark UDFs, from crossing the JVM–Python boundary. These factors can make UDFs significantly slower. For these reasons, UDFs should be used only when the required logic cannot be expressed with the rich set of Spark’s native functions.</p>
+<section id="python-udf">
+<h4>Python UDF<a class="headerlink" href="#python-udf" title="Link to this heading">#</a></h4>
+<p>These are generally the slowest kind of UDF as it applies the function to one row at a time.</p>
+</section>
+</section>
+<section id="pandas-udf">
+<h3>Pandas UDF<a class="headerlink" href="#pandas-udf" title="Link to this heading">#</a></h3>
+<p>These are faster than Python UDFs as they apply the function to <em>batches</em> of rows (block retrieval) at a time and also because it leverages Apache Arrow for faster serialization (converting the transformed rows back into Java objects to pass back to the JVM).</p>
+</section>
+</section>
+<section id="spark-architecture">
+<h2>Spark Architecture<a class="headerlink" href="#spark-architecture" title="Link to this heading">#</a></h2>
+<p>In Spark computations are broken into to two rough categories: transformations and actions.</p>
+<section id="transformations">
+<h3>Transformations<a class="headerlink" href="#transformations" title="Link to this heading">#</a></h3>
+<p>An important thing to note about transformations in Spark is that, generally, they are <em>lazy</em> operations; meaning they aren’t accualy performed/computed until the resulting dataframe/result set is needed. Generally this means the transformation isn’t applied until an <em>action</em> is specified.</p>
+<p>There are two types of transformations: narrow and wide transformations. The difference between the two is that <em>wide</em> transformations induce what is called a <em>shuffle</em> (also called an <em>exchange</em>). A shuffle is when a <em>repartitioning</em> of the dataset is required and this is the most expensive basic operation in Spark. Spark basically works by partitioning the dataset into subsets and having each worker perform the specified computation on a partition of the data. It’s easy to think of transformations that would require a shuffle such as the <code class="docutils literal notranslate"><span class="pre">sort()</span></code> operation. Clearly this will require an exchange/shuffle since one needs to compare rows from different partitions to perform a sort. Another example of a wide transformation are aggregations. And example of a narrow transformation is the <code class="docutils literal notranslate"><span class="pre">filter()</span></code> transformation. Clearly there is no need to compare rows across partitions to accomplish this operation since we just need to check if a row fulfills the criteria in the filter clause to compute the result set <span id="id1">[<a class="reference internal" href="../../backmatter/bibliography.html#id43" title="Bill Chambers and Matei Zaharia. Spark: The definitive guide: Big data processing made simple. &quot; O'Reilly Media, Inc.&quot;, 2018.">Chambers and Zaharia, 2018</a>]</span>.</p>
+<p>Shuffle vs memory partitions</p>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading">#</a></h3>
+<p>An action is what triggers the computation that has been specified by the transformations to actually occur. An example is the <code class="docutils literal notranslate"><span class="pre">count()</span></code> operation or the <code class="docutils literal notranslate"><span class="pre">display()</span></code> command.</p>
+</section>
+<section id="runtime-architecture">
+<h3>Runtime architecture<a class="headerlink" href="#runtime-architecture" title="Link to this heading">#</a></h3>
+<p>The following is the hierarchy of Spark runtime architecture.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Driver
+      ├── Workers
+                 ├── Executors
+                              ├── Cores
+</pre></div>
+</div>
+<section id="driver">
+<h4>Driver<a class="headerlink" href="#driver" title="Link to this heading">#</a></h4>
+<p>The driver node via the driver <strong>process</strong> (which is hosted on the driver node): analyzes, distributes and schedules work across the multiple worker nodes. The driver node is where the <code class="docutils literal notranslate"><span class="pre">main()</span></code> function is executed. The <code class="docutils literal notranslate"><span class="pre">SparkSession</span></code> (and <code class="docutils literal notranslate"><span class="pre">SparkContext</span></code>) objects live on this node.</p>
+</section>
+<section id="worker">
+<h4>Worker<a class="headerlink" href="#worker" title="Link to this heading">#</a></h4>
+<p>The workers are nodes, within the cluster of computers that host the executor processes.</p>
+</section>
+<section id="executor">
+<h4>Executor<a class="headerlink" href="#executor" title="Link to this heading">#</a></h4>
+<p>These are <strong>processes</strong> on the worker nodes that actually perform the computations (Tasks) assigned to the worker by the driver process.</p>
+</section>
+<section id="cluster-manager">
+<h4>Cluster manager<a class="headerlink" href="#cluster-manager" title="Link to this heading">#</a></h4>
+<p>The cluster manager manages the <em>resources</em> of the compute cluster.</p>
+</section>
+<section id="job-diagram">
+<h4>Job diagram<a class="headerlink" href="#job-diagram" title="Link to this heading">#</a></h4>
+<p>The following is the hierarchy of Spark application execution along with a diagram.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Spark program/application 
+                         ├── Job
+                               ├── Stages
+                                         ├── Tasks
+</pre></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;img/spark_app.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="../../_images/998fe73cb9363735b5b35130ebcc6f9a8961ca1cdcc5a322cddedaef98f51901.png"><img alt="../../_images/998fe73cb9363735b5b35130ebcc6f9a8961ca1cdcc5a322cddedaef98f51901.png" src="../../_images/998fe73cb9363735b5b35130ebcc6f9a8961ca1cdcc5a322cddedaef98f51901.png" style="width: 600px;" />
+</a>
+</div>
+</div>
+<p>So a Spark program, via an <em>action</em>, spawns multiple Jobs. Each job has multiple Stages and during each stage there are Tasks which run in <em>parallel</em> using a “Shared Nothing” architecture. Each partition is managed by a single task so the number of tasks should correspond to the number of partitions.</p>
+<div class="proof definition dropdown admonition" id="def1">
+<p class="admonition-title"><span class="caption-number">Definition 33.1 </span> (Shared-Nothing Architecture)</p>
+<section class="definition-content" id="proof-content">
+<p>From Wikipedia:</p>
+<p>“A shared-nothing architecture (SN) is a distributed computing architecture in which each update request is satisfied by a single node (processor/memory/storage unit) in a computer cluster. The intent is to eliminate contention among nodes. Nodes do not share (independently access) the same memory or storage.</p>
+<p>One alternative architecture is shared everything, in which requests are satisfied by arbitrary combinations of nodes. This may introduce contention, as multiple nodes may seek to update the same data at the same time. It also contrasts with shared-disk and shared-memory architectures.”</p>
+</section>
+</div></section>
+<section id="deployment-modes">
+<h4>Deployment modes<a class="headerlink" href="#deployment-modes" title="Link to this heading">#</a></h4>
+<p>Spark has three deployment modes: cluster, client and local.</p>
+<ol class="arabic simple">
+<li><p>Local deployment: All computation, so the driver and executor processes, is run locally on the machine submitting the Spark job.</p></li>
+<li><p>Client deployment: The driver process is run on the machine that submitted the Spark job while the executor processes run on worker nodes in a cluster.</p></li>
+<li><p>Cluster mode: Differs from client mode in that the driver process is launched on a node inside the cluster. This means both the execution (executors) and the management of that execution (driver) happen within the cluster, making it better suited for production workloads.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="spark-api">
+<h2>Spark API<a class="headerlink" href="#spark-api" title="Link to this heading">#</a></h2>
+<section id="rdds">
+<h3>RDDs<a class="headerlink" href="#rdds" title="Link to this heading">#</a></h3>
+<p>Resilient Distributed Datasets (RDDs) are the basis of most things in Spark such as the higher-level DataFrames API. RDDs are lower level than DataFrames since they expose physical execution characteristics, such as partitions, to the user.</p>
+</section>
+<section id="dataframe">
+<h3>DataFrame<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h3>
+<p>DataFrames are higher-level abstractions of RDDs that provide SQL-like interface for manipulating the underlying RDDs.</p>
+</section>
+<section id="catalyst-optimizer">
+<h3>Catalyst optimizer<a class="headerlink" href="#catalyst-optimizer" title="Link to this heading">#</a></h3>
+<p>This optimizes the execution plan for a query on a dataframe using rule-based and cost-based optimizations</p>
+</section>
+<section id="photon-engine">
+<h3>Photon engine<a class="headerlink" href="#photon-engine" title="Link to this heading">#</a></h3>
+<p>This is <code class="docutils literal notranslate"><span class="pre">Databricks</span></code>’s query execution engine which optimizes the actual execution of the plan generated by the Catalyst optimizer.</p>
+</section>
+</section>
+<section id="structured-streaming">
+<h2>Structured Streaming<a class="headerlink" href="#structured-streaming" title="Link to this heading">#</a></h2>
+<p><em>Spark streaming</em> was the first streaming capability introduced in Spark in 2013 based on Sparks RDD API. It’s records are processed in <em>microbatches</em> (DStream - discretized streams) of RDDs.</p>
+<p><em>Spark <strong>structured</strong> streaming</em> API was introduced in 2016 and can be thought of an extension of the DataFrame API to streaming data since it allows you to essentially reuse the code written for batch processing jobs, on DataFrames for example, to work with streaming DataFrames which are treated as tables of unbounded size. Spark structured streaming provides exactly-once guarantees meaning each record will be processed exactly once regardless of things such as stream failure.</p>
+<div class="proof definition dropdown admonition" id="def2">
+<p class="admonition-title"><span class="caption-number">Definition 33.2 </span> (Streaming)</p>
+<section class="definition-content" id="proof-content">
+<p>Roughly speaking streaming jobs work with data that is unbounded i.e. has no fixed end or beginning, unlike a batch job which works with data of fixed size. Most streaming process process data in time-based microbatches.</p>
+</section>
+</div><section id="sources-and-sinks">
+<h3>Sources and sinks<a class="headerlink" href="#sources-and-sinks" title="Link to this heading">#</a></h3>
+<p>You can read data into your <em>source</em> table from various locations such as from a directory of files or from a streaming data service like Apache Kafka. Similarly, you can write your output data to <em>sink</em> locations such as file directories, Apache Kafka or even the console (not recommended for production applications). If using Databricks Autoloader via <code class="docutils literal notranslate"><span class="pre">cloudFiles</span></code> format then autoloader can automatically track new files in storage for ingestion and automatically evolve the schema of the downstream source table based on the schema of the new files.</p>
+</section>
+<section id="stateful-and-stateless-operations">
+<h3>Stateful and stateless operations<a class="headerlink" href="#stateful-and-stateless-operations" title="Link to this heading">#</a></h3>
+<p><em>Stateless</em> operations, on streaming DataFrames, process each record/row independently with no memory of previous records. Examples include <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">select</span></code> and more.</p>
+<p><em>Stateful</em> operations maintain information across micro-batches. Examples include <code class="docutils literal notranslate"><span class="pre">groupBy</span></code>, <code class="docutils literal notranslate"><span class="pre">join</span></code>, <code class="docutils literal notranslate"><span class="pre">dropDuplicates</span></code> and more. This makes sense since grouping necessarily requires information across batches. This is very loosely similar to the distinction between narrow and wide transformations discussed above. To maintain the state checkpointing is used which is part of the exactly-once guarantee of Spark structured streaming.</p>
+<p>Spark structured streaming uses <code class="docutils literal notranslate"><span class="pre">RocksDB</span></code> as the backend for storing the state of the stream for stateful operations as it provides efficient storage and retrieval, automatic compaction and supports large state sizes.</p>
+</section>
+<section id="streaming-aggregations">
+<h3>Streaming aggregations<a class="headerlink" href="#streaming-aggregations" title="Link to this heading">#</a></h3>
+<p>Aggregations when working with streaming datasets are well-defined only when looking at <em>time windows</em> of the stream. The three types of windowing strategies are:</p>
+<ol class="arabic simple">
+<li><p>Tumbling window (fixed size windows that don’t overlap)</p></li>
+<li><p>Sliding window (windows can overlap meaning a record can belong to more than one window)</p></li>
+<li><p>Session window</p></li>
+</ol>
+</section>
+<section id="late-arriving-data">
+<h3>Late arriving data<a class="headerlink" href="#late-arriving-data" title="Link to this heading">#</a></h3>
+<p>Data can sometimes arrive late due to issues such as network latency or issues arising from having multiple streaming sources. Spark structured streaming uses a <em>watermark</em> to determine how long to wait for late arriving data before beginning to process the window for the micro-batch the data is late to arrive for.</p>
+<div class="proof example admonition" id="ex1">
+<p class="admonition-title"><span class="caption-number">Example 33.1 </span> (Watermarking for late arriving data)</p>
+<section class="example-content" id="proof-content">
+<p>Suppose you’re computing a 1-minute windowed count with a watermark of 10 minutes:</p>
+<p>Window [12:00–12:01] will stay “open” in memory until 12:11.</p>
+<p>If an event with timestamp 12:00:30 arrives at 12:09 → ✅ still accepted.</p>
+<p>If it arrives at 12:12 → ❌ too late, dropped.</p>
+</section>
+</div></section>
+</section>
+<section id="spark-optimization">
+<h2>Spark Optimization<a class="headerlink" href="#spark-optimization" title="Link to this heading">#</a></h2>
+<section id="common-spark-job-bottlenecks">
+<h3>Common Spark Job Bottlenecks<a class="headerlink" href="#common-spark-job-bottlenecks" title="Link to this heading">#</a></h3>
+<p>Shuffles – heavy groupBy/join, high disk + network I/O.</p>
+<p>Data Skew – uneven key distribution → straggler tasks.</p>
+<p>Serialization – costly object (de)serialization, especially with Java serializer.</p>
+<p>Garbage Collection – executors stuck in GC due to poor memory use.</p>
+<p>I/O – slow sources/sinks, too many small files.</p>
+<p>Driver Bottleneck – large .collect() / .toPandas() overloads driver.</p>
+<p>Resource Misconfig – wrong executor/partition sizing → under/overutilization.</p>
+<p>Python UDFs – JVM↔Python overhead, GIL limits performance.</p>
+</section>
+<section id="partitioning">
+<h3>Partitioning<a class="headerlink" href="#partitioning" title="Link to this heading">#</a></h3>
+<p>The initial partitions for the data when it is first read by the Spark program, called the initial memory partitions, are determined by the structure of the underlying files that comprise the data being read in e.g. the number of files will influence the number of initial partitions. These number of these partitions is also determined by Spark configuration values like <code class="docutils literal notranslate"><span class="pre">Spark.sql.files.maxPartitionBytes</span></code> or <code class="docutils literal notranslate"><span class="pre">Spark.default.parallelism</span></code></p>
+<p>These partitions are then modified, into shuffle partitions, when wide transformation are performed or the user explicitly repartitions the data with something like <code class="docutils literal notranslate"><span class="pre">.repartition()</span></code>. The number of these partitions is controlled by <code class="docutils literal notranslate"><span class="pre">Spark.sql.shuffle.partitions</span></code>.</p>
+<p>One should target partitions of size 100-200 MB and the number of partitions should not be less than the number of available cores. When choosing a partition column it is best to use columns with high cardinality to even out partition distribution.</p>
+<section id="skew">
+<h4>Skew<a class="headerlink" href="#skew" title="Link to this heading">#</a></h4>
+<p>Partition skew occurs when your partitions are of uneven size. If some partitions are much larger than others, tasks processing them take longer.
+This causes stragglers so some tasks finish quickly, but Spark has to wait for the slow ones, reducing parallelism.</p>
+<div class="proof example admonition" id="ex2">
+<p class="admonition-title"><span class="caption-number">Example 33.2 </span> (Partition skew)</p>
+<section class="example-content" id="proof-content">
+<p>Imagine a join on country:</p>
+<p>90% of rows belong to “US”.</p>
+<p>Spark partitions by country.</p>
+<p>The “US” partition becomes huge, while other partitions are tiny.</p>
+<p>That’s data skew — one task works way harder than the rest.</p>
+</section>
+</div></section>
+</section>
+<section id="task-time">
+<h3>Task time<a class="headerlink" href="#task-time" title="Link to this heading">#</a></h3>
+<p>One should aim for 50-200ms task time which can be checked via Spark UI.</p>
+</section>
+<section id="shuffle-operations">
+<h3>Shuffle operations<a class="headerlink" href="#shuffle-operations" title="Link to this heading">#</a></h3>
+<p>Shuffles are the most expensive operation in Spark due to the network I/O latency incurred by requiring sending data over the network between workers to redistribute the data. One can minimize the cost of shuffle operations by filtering early and often, using broadcast joins for small tables and configuring shuffle partitions based on data size.</p>
+</section>
+<section id="dataframe-caching">
+<h3>DataFrame caching<a class="headerlink" href="#dataframe-caching" title="Link to this heading">#</a></h3>
+<p>If a dataframe is accessed often it can be useful to cache it via <code class="docutils literal notranslate"><span class="pre">df.cache()</span></code> or <code class="docutils literal notranslate"><span class="pre">df.persist()</span></code> (<code class="docutils literal notranslate"><span class="pre">df.unpersist()</span></code> to uncache) so that the dataframe doesn’t get recomputed every time (recall Spark is lazy) one wishes to access it.</p>
+</section>
+<section id="broadcasting">
+<h3>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h3>
+<p>What it is: A technique to send a small dataset to all executors, so it doesn’t need to be shuffled during joins, lookups or other operations.</p>
+<p>Why: Reduces shuffle I/O, speeds up joins with a small table + a large table (a broadcast join).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="c1"># Large dataset</span>
+<span class="n">sales</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;s3://bucket/sales&quot;</span><span class="p">)</span>
+
+<span class="c1"># Small dataset (e.g., product categories)</span>
+<span class="n">products</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;s3://bucket/products.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Broadcast join: products is small enough to fit in memory</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">sales</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">products</span><span class="p">),</span> <span class="s2">&quot;product_id&quot;</span><span class="p">)</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="query-optimization">
+<h3>Query optimization<a class="headerlink" href="#query-optimization" title="Link to this heading">#</a></h3>
+</section>
+<section id="id2">
+<h3>Catalyst optimizer<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Catalyst Optimizer is Spark SQL’s query optimization engine.</p>
+<p>It takes your SQL/DataFrame query → builds a logical plan.</p>
+<p>Applies rule-based optimizations (predicate pushdown, constant folding, column pruning, etc.).</p>
+<p>Optionally uses cost-based optimization (with stats).</p>
+<p>Produces an efficient physical plan to execute on the cluster.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SQL / DataFrame API
+        │
+        ▼
+  Unresolved Logical Plan
+        │   (syntax only, not yet resolved)
+        ▼
+  Analyzed Logical Plan
+        │   (names, types, relations resolved)
+        ▼
+  Optimized Logical Plan
+        │   (rule-based + cost-based optimizations applied)
+        ▼
+  Physical Plan
+        │   (concrete execution strategy chosen)
+        ▼
+  Execution
+</pre></div>
+</div>
+</section>
+<section id="adaptive-query-execution-aqe">
+<h3>Adaptive query execution (AQE)<a class="headerlink" href="#adaptive-query-execution-aqe" title="Link to this heading">#</a></h3>
+<p>This is an optimization method that optimizes query execution, i.e. the physical plan created by Catalyst, at <em>runtime</em> based on actually metrics collected during runtime unlike the catalyst optimizer which optimizes queries at <em>compile time</em>.</p>
+</section>
+<section id="physical-join-strategies">
+<h3>Physical join strategies<a class="headerlink" href="#physical-join-strategies" title="Link to this heading">#</a></h3>
+<section id="broadcast-hash-join-bhj">
+<h4>Broadcast Hash Join (BHJ)<a class="headerlink" href="#broadcast-hash-join-bhj" title="Link to this heading">#</a></h4>
+<p>One side of the join (the “small” table) is broadcast to all worker nodes.</p>
+<p>The large table is streamed and matched against the broadcasted hash map.</p>
+<p>Very fast if one dataset is small enough to fit in memory.</p>
+</section>
+<section id="shuffle-sort-merge-join-smj">
+<h4>Shuffle Sort-Merge Join (SMJ)<a class="headerlink" href="#shuffle-sort-merge-join-smj" title="Link to this heading">#</a></h4>
+<p>Both tables are shuffled on the join key.</p>
+<p>Data is then sorted and merged in each partition.</p>
+<p>Works well for large-to-large joins, but more expensive due to shuffle + sort.</p>
+</section>
+</section>
+</section>
+<section id="spark-connect">
+<h2>Spark connect<a class="headerlink" href="#spark-connect" title="Link to this heading">#</a></h2>
+<section id="what-is-spark-connect">
+<h3>What is Spark Connect?<a class="headerlink" href="#what-is-spark-connect" title="Link to this heading">#</a></h3>
+<p>A new client-server interface for Apache Spark (introduced in Spark 3.4).</p>
+<p>Decouples the client (where you write code) from the Spark driver (where execution happens).</p>
+<p>Instead of running Spark code inside the driver JVM, you use a thin client that communicates via gRPC.</p>
+</section>
+<section id="how-it-works">
+<h3>How it Works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h3>
+<p>Client (your notebook, IDE, or app)</p>
+<p>Imports the Spark Connect client library.</p>
+<p>Builds a logical plan locally (df.filter(…).groupBy(…)).</p>
+<p>Sends the logical plan over gRPC to the Spark Connect server.</p>
+<p>Spark Connect Server (on cluster)</p>
+<p>Runs inside the Spark driver.</p>
+<p>Optimizes the logical plan with Catalyst and AQE.</p>
+<p>Executes the query on the cluster and streams results back to the client.</p>
+</section>
+<section id="why-it-matters">
+<h3>Why it Matters<a class="headerlink" href="#why-it-matters" title="Link to this heading">#</a></h3>
+<p>Decoupling → client is lightweight and doesn’t need Spark runtime.</p>
+<p>Multi-language support → Python, Scala, Java, R, SQL, REST/gRPC.</p>
+<p>Interactivity → like a database client connection, great for notebooks/IDEs.</p>
+<p>Version flexibility → clients don’t need to tightly match Spark cluster internals.</p>
+<p>Deploy anywhere → connect from laptops, containers, or cloud services.</p>
+</section>
+</section>
+<section id="client-vs-cluster-mode">
+<h2>Client vs Cluster Mode<a class="headerlink" href="#client-vs-cluster-mode" title="Link to this heading">#</a></h2>
+<p>These apply to Spark’s traditional deployment modes (when you use spark-submit):</p>
+<section id="client-mode">
+<h3>Client mode<a class="headerlink" href="#client-mode" title="Link to this heading">#</a></h3>
+<p>The Spark driver runs on the machine where you launch the job (e.g., your laptop or an edge node).</p>
+<p>Executors run on the cluster.</p>
+<p>Driver↔Executors communicate over the network.</p>
+</section>
+<section id="cluster-mode">
+<h3>Cluster mode<a class="headerlink" href="#cluster-mode" title="Link to this heading">#</a></h3>
+<p>Both the Spark driver and executors run inside the cluster.</p>
+<p>The cluster manager (YARN, Kubernetes, standalone) launches the driver.</p>
+<p>Your machine just submits the job and can disconnect after.</p>
+</section>
+</section>
+<section id="practice-questions">
+<h2>Practice questions<a class="headerlink" href="#practice-questions" title="Link to this heading">#</a></h2>
+<p>These are practice exam questions from the March 2025 practice exam provided by Databricks for the ‘Databricks Certified Associate Developer for Apache Spark 3.0 - Python’ certification exam. The pdf of the exam is available in the <code class="docutils literal notranslate"><span class="pre">pdfs/</span></code> folder of this section in the JupyterBook.</p>
+<p>NOTE: These practice questions may not be as relevant for the new version of the exam as of October 2025.</p>
+<section id="question-1">
+<h3>Question 1<a class="headerlink" href="#question-1" title="Link to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./industry/databricks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="databricks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">33. </span>Databricks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../backmatter/bibliography.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">34. </span>Bibliography</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-basics">Spark Basics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-o">I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-data">Reading Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-data">Writing Data</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions-udfs">User Defined Functions (UDFs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#python-udf">Python UDF</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-udf">Pandas UDF</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-architecture">Spark Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformations">Transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actions">Actions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-architecture">Runtime architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#driver">Driver</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#worker">Worker</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#executor">Executor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-manager">Cluster manager</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#job-diagram">Job diagram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-modes">Deployment modes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-api">Spark API</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rdds">RDDs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catalyst-optimizer">Catalyst optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#photon-engine">Photon engine</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-streaming">Structured Streaming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-and-sinks">Sources and sinks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stateful-and-stateless-operations">Stateful and stateless operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#streaming-aggregations">Streaming aggregations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#late-arriving-data">Late arriving data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-optimization">Spark Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-spark-job-bottlenecks">Common Spark Job Bottlenecks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning">Partitioning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skew">Skew</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-time">Task time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shuffle-operations">Shuffle operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-caching">DataFrame caching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-optimization">Query optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Catalyst optimizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-query-execution-aqe">Adaptive query execution (AQE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-join-strategies">Physical join strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcast-hash-join-bhj">Broadcast Hash Join (BHJ)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shuffle-sort-merge-join-smj">Shuffle Sort-Merge Join (SMJ)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spark-connect">Spark connect</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-spark-connect">What is Spark Connect?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters">Why it Matters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#client-vs-cluster-mode">Client vs Cluster Mode</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client-mode">Client mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-mode">Cluster mode</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions">Practice questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-1">Question 1</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Amanuel Anteneh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

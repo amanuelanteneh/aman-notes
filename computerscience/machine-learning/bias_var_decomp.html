@@ -58,6 +58,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'computerscience/machine-learning/bias_var_decomp';</script>
     <link rel="icon" href="../../_static/favicon.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -263,7 +265,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../distributed-comp/distributed_computing.html">15. Distributed Computing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../distributed-comp/spark.html">Apache Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed-comp/consensus.html">Consensus</a></li>
 </ul>
 </details></li>
 </ul>
@@ -347,9 +349,17 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Industry Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../industry/intro.html">32. Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../industry/databricks/databricks.html">33. Databricks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../industry/databricks/spark.html">Apache Spark</a></li>
+</ul>
+</details></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Back Matter</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">32. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../backmatter/bibliography.html">34. Bibliography</a></li>
 </ul>
 
     </div>
@@ -549,6 +559,32 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="bias-variance-decomposition">
 <h1>Bias-variance decomposition<a class="headerlink" href="#bias-variance-decomposition" title="Link to this heading">#</a></h1>
+<p>It is instructive to analyze the generalization error of a model in terms of bias and variance from first principles.
+Suppose we have regression problem in which we wish to predict a scalar response/output <span class="math notranslate nohighlight">\(y\)</span> given input variables (also often called features, covariates or predictors) <span class="math notranslate nohighlight">\(x=(x_1,...,x_p)\)</span>. We assume there is some relationship or function between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> which we can write as</p>
+<div class="math notranslate nohighlight">
+\[
+y = f(x) + \epsilon
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x)\)</span> is a fixed but unknown function of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\epsilon\)</span> is an error term that is independent of <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(\mathbb{E}[\epsilon]=0\)</span>.</p>
+<p>Here <span class="math notranslate nohighlight">\(f(x)\)</span> represent the systematic information the input features provide about the output <span class="math notranslate nohighlight">\(y\)</span> and is the function we wish to estimate with our models.</p>
+<p>Why is there this error term <span class="math notranslate nohighlight">\(\epsilon\)</span>? The error term quantifies errors such as… The presence of this error term implies that there will in generally be some error in all our models even if we manage to learn <span class="math notranslate nohighlight">\(f(x)\)</span> perfectly.</p>
+<p>If we choose our error function to be the mean squared error, <span class="math notranslate nohighlight">\(\mathcal{L}(y, \hat{y})=(y-\hat{y})^2\)</span>, we can decompose the <span class="math notranslate nohighlight">\(\textit{expected}\)</span> generalization error as so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\mathbb{E}[(y-\hat{y})^2] &amp;= \mathbb{E}[(f(x)+\epsilon-\hat{f}(x))^2] \\
+&amp;= \mathbb{E}[(f(x)-\hat{f}(x))^2 + 2\epsilon\bigl(f(x)-\hat{f}(x)\bigr) + \epsilon^2] \\
+&amp;= \mathbb{E}[(f(x)-\hat{f}(x))^2] + \mathbb{E}[2\epsilon\bigl(f(x)-\hat{f}(x)\bigr)] + \mathbb{E}[\epsilon^2] \quad  \textrm{Apply linearity of $\mathbb{E}$} \\
+&amp;= (f(x)-\hat{f}(x))^2 + 2\bigl(f(x)-\hat{f}(x)\bigr)\mathbb{E}[\epsilon] + \mathbb{E}[\epsilon^2] \quad \textrm{Recall that $f(x)$ and $\hat{f}(x)$ are not random variables so $\mathbb{E}$ has no affect on them} \\
+&amp;= (f(x)-\hat{f}(x))^2 + \mathbb{E}[\epsilon^2]  \quad  \textrm{Recall that $\mathbb{E}[\epsilon]=0$ by assumption} \\
+&amp;= \underbrace{(f(x)-\hat{f}(x))^2}_{\substack{\text{Reducible} \\ \text{error}}} + \underbrace{\textrm{Var}[\epsilon^2]}_{\substack{\text{Irreducible} \\ \text{error}}}  \quad  \textrm{Recall that $\textrm{Var}[Z^2] = \mathbb{E}[Z^2] -  (\mathbb{E}[Z])^2$ for a random variable $Z$ and $\mathbb{E}[\epsilon]=0$ } \\
+\end{align*}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+(f(x)-\hat{f}(x))^2
+= f^2(x) - 2f(x)\hat{f}(x) + \hat{f}^2(x)
+\]</div>
 </section>
 
     <script type="text/x-thebe-config">

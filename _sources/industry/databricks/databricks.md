@@ -1,0 +1,3 @@
+# Databricks
+
+Databricks is a unified, cloud-based analytics platform for data engineering, data science, machine learning, and AI, built on Apache Spark and Delta Lake. It provides a collaborative environment to build, deploy, and share enterprise-grade data solutions by combining data lake and data warehouse capabilities into a single platform, known as a Lakehouse. Databricks supports various data types and workloads, offering tools for data preparation, large-scale analytics, and the development and deployment of AI and generative AI applications at scale.
